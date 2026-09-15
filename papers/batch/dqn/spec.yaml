@@ -1,0 +1,1682 @@
+paper:
+  title: Playing Atari with Deep Reinforcement Learning
+  authors:
+  - Volodymyr Mnih
+  - Koray Kavukcuoglu
+  - David Silver
+  - Alex Graves
+  - Ioannis Antonoglou
+  - Daan Wierstra
+  - Martin Riedmiller
+  year: 2013
+  arxiv_id: '1312.5602'
+  version: v1
+  track: cs
+  family: train_and_eval
+claims:
+- id: c_dqn_breakout
+  where: Table 1 (p.8), upper block, row 'DQN', column 'Breakout'
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 168.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: dqn_avg_eps_greedy
+  priority: headline
+- id: c_dqn_seaquest
+  where: Table 1 (p.8), upper block, row 'DQN', column 'Seaquest'
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 1705.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: dqn_avg_eps_greedy
+  priority: headline
+- id: c_dqn_pong
+  where: Table 1 (p.8), upper block, row 'DQN', column 'Pong'
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 20.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: dqn_avg_eps_greedy
+  priority: headline
+- id: c_dqn_brider
+  where: Table 1 (p.8), upper block, row 'DQN', column 'B. Rider'
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 4092.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: dqn_avg_eps_greedy
+  priority: headline
+- id: c_dqn_enduro
+  where: Table 1 (p.8), upper block, row 'DQN', column 'Enduro'
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 470.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: dqn_avg_eps_greedy
+  priority: headline
+- id: c_dqn_qbert
+  where: Table 1 (p.8), upper block, row 'DQN', column 'Q*bert'
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 1952.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: dqn_avg_eps_greedy
+  priority: headline
+- id: c_dqn_sinvaders
+  where: Table 1 (p.8), upper block, row 'DQN', column 'S. Invaders'
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 581.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: dqn_avg_eps_greedy_k3
+  priority: headline
+- id: c_rand_brider
+  where: Table 1 (p.8), upper block, row 'Random', column 'B. Rider'
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 354.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: random_policy
+  priority: secondary
+- id: c_rand_breakout
+  where: Table 1 (p.8), upper block, row 'Random', column 'Breakout'
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 1.2
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: random_policy
+  priority: secondary
+- id: c_rand_enduro
+  where: Table 1 (p.8), upper block, row 'Random', column 'Enduro'
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 0.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: random_policy
+  priority: secondary
+- id: c_rand_pong
+  where: Table 1 (p.8), upper block, row 'Random', column 'Pong'
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: -20.4
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: random_policy
+  priority: secondary
+- id: c_rand_qbert
+  where: Table 1 (p.8), upper block, row 'Random', column 'Q*bert'
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 157.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: random_policy
+  priority: secondary
+- id: c_rand_seaquest
+  where: Table 1 (p.8), upper block, row 'Random', column 'Seaquest'
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 110.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: random_policy
+  priority: secondary
+- id: c_rand_sinvaders
+  where: Table 1 (p.8), upper block, row 'Random', column 'S. Invaders'
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 179.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: random_policy
+  priority: secondary
+- id: c_sarsa_brider
+  where: Table 1 (p.8), upper block, row 'Sarsa [3]', column 'B. Rider' (value reproduced
+    from Bellemare et al. 2013, not re-run here)
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 996.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: sarsa_linear_best_features
+  priority: descriptive
+- id: c_sarsa_breakout
+  where: Table 1 (p.8), upper block, row 'Sarsa [3]', column 'Breakout' (value reproduced
+    from Bellemare et al. 2013)
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 5.2
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: sarsa_linear_best_features
+  priority: descriptive
+- id: c_sarsa_enduro
+  where: Table 1 (p.8), upper block, row 'Sarsa [3]', column 'Enduro' (value reproduced
+    from Bellemare et al. 2013)
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 129.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: sarsa_linear_best_features
+  priority: descriptive
+- id: c_sarsa_pong
+  where: Table 1 (p.8), upper block, row 'Sarsa [3]', column 'Pong' (value reproduced
+    from Bellemare et al. 2013)
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: -19.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: sarsa_linear_best_features
+  priority: descriptive
+- id: c_sarsa_qbert
+  where: Table 1 (p.8), upper block, row 'Sarsa [3]', column 'Q*bert' (value reproduced
+    from Bellemare et al. 2013)
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 614.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: sarsa_linear_best_features
+  priority: descriptive
+- id: c_sarsa_seaquest
+  where: Table 1 (p.8), upper block, row 'Sarsa [3]', column 'Seaquest' (value reproduced
+    from Bellemare et al. 2013)
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 665.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: sarsa_linear_best_features
+  priority: descriptive
+- id: c_sarsa_sinvaders
+  where: Table 1 (p.8), upper block, row 'Sarsa [3]', column 'S. Invaders' (value
+    reproduced from Bellemare et al. 2013)
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 271.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: sarsa_linear_best_features
+  priority: descriptive
+- id: c_cont_brider
+  where: Table 1 (p.8), upper block, row 'Contingency [4]', column 'B. Rider' (value
+    reproduced from Bellemare et al. 2012)
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 1743.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: contingency_awareness
+  priority: descriptive
+- id: c_cont_breakout
+  where: Table 1 (p.8), upper block, row 'Contingency [4]', column 'Breakout' (value
+    reproduced from Bellemare et al. 2012)
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 6.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: contingency_awareness
+  priority: descriptive
+- id: c_cont_enduro
+  where: Table 1 (p.8), upper block, row 'Contingency [4]', column 'Enduro' (value
+    reproduced from Bellemare et al. 2012)
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 159.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: contingency_awareness
+  priority: descriptive
+- id: c_cont_pong
+  where: Table 1 (p.8), upper block, row 'Contingency [4]', column 'Pong' (value reproduced
+    from Bellemare et al. 2012)
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: -17.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: contingency_awareness
+  priority: descriptive
+- id: c_cont_qbert
+  where: Table 1 (p.8), upper block, row 'Contingency [4]', column 'Q*bert' (value
+    reproduced from Bellemare et al. 2012)
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 960.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: contingency_awareness
+  priority: descriptive
+- id: c_cont_seaquest
+  where: Table 1 (p.8), upper block, row 'Contingency [4]', column 'Seaquest' (value
+    reproduced from Bellemare et al. 2012)
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 723.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: contingency_awareness
+  priority: descriptive
+- id: c_cont_sinvaders
+  where: Table 1 (p.8), upper block, row 'Contingency [4]', column 'S. Invaders' (value
+    reproduced from Bellemare et al. 2012)
+  evidence_page: 8
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 268.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: contingency_awareness
+  priority: descriptive
+- id: c_human_brider
+  where: Table 1 (p.8), upper block, row 'Human', column 'B. Rider' (median reward,
+    Section 5.3 p.7)
+  evidence_page: 8
+  metric: median_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 7456.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: human_expert
+  priority: descriptive
+- id: c_human_breakout
+  where: Table 1 (p.8), upper block, row 'Human', column 'Breakout' (median reward,
+    Section 5.3 p.7)
+  evidence_page: 8
+  metric: median_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 31.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: human_expert
+  priority: descriptive
+- id: c_human_enduro
+  where: Table 1 (p.8), upper block, row 'Human', column 'Enduro' (median reward,
+    Section 5.3 p.7)
+  evidence_page: 8
+  metric: median_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 368.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: human_expert
+  priority: descriptive
+- id: c_human_pong
+  where: Table 1 (p.8), upper block, row 'Human', column 'Pong' (median reward, Section
+    5.3 p.7)
+  evidence_page: 8
+  metric: median_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: -3.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: human_expert
+  priority: descriptive
+- id: c_human_qbert
+  where: Table 1 (p.8), upper block, row 'Human', column 'Q*bert' (median reward,
+    Section 5.3 p.7)
+  evidence_page: 8
+  metric: median_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 18900.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: human_expert
+  priority: descriptive
+- id: c_human_seaquest
+  where: Table 1 (p.8), upper block, row 'Human', column 'Seaquest' (median reward,
+    Section 5.3 p.7)
+  evidence_page: 8
+  metric: median_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 28010.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: human_expert
+  priority: descriptive
+- id: c_human_sinvaders
+  where: Table 1 (p.8), upper block, row 'Human', column 'S. Invaders' (median reward,
+    Section 5.3 p.7)
+  evidence_page: 8
+  metric: median_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 3690.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: human_expert
+  priority: descriptive
+- id: c_hnbest_brider
+  where: Table 1 (p.8), lower block, row 'HNeat Best [8]', column 'B. Rider'
+  evidence_page: 8
+  metric: best_episode_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 3616.0
+  reported_precision: 0.5
+  n_periods: 1
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: hneat_best
+  priority: descriptive
+- id: c_hnbest_breakout
+  where: Table 1 (p.8), lower block, row 'HNeat Best [8]', column 'Breakout'
+  evidence_page: 8
+  metric: best_episode_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 52.0
+  reported_precision: 0.5
+  n_periods: 1
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: hneat_best
+  priority: descriptive
+- id: c_hnbest_enduro
+  where: Table 1 (p.8), lower block, row 'HNeat Best [8]', column 'Enduro'
+  evidence_page: 8
+  metric: best_episode_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 106.0
+  reported_precision: 0.5
+  n_periods: 1
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: hneat_best
+  priority: descriptive
+- id: c_hnbest_pong
+  where: Table 1 (p.8), lower block, row 'HNeat Best [8]', column 'Pong'
+  evidence_page: 8
+  metric: best_episode_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 19.0
+  reported_precision: 0.5
+  n_periods: 1
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: hneat_best
+  priority: descriptive
+- id: c_hnbest_qbert
+  where: Table 1 (p.8), lower block, row 'HNeat Best [8]', column 'Q*bert'
+  evidence_page: 8
+  metric: best_episode_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 1800.0
+  reported_precision: 0.5
+  n_periods: 1
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: hneat_best
+  priority: descriptive
+- id: c_hnbest_seaquest
+  where: Table 1 (p.8), lower block, row 'HNeat Best [8]', column 'Seaquest'
+  evidence_page: 8
+  metric: best_episode_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 920.0
+  reported_precision: 0.5
+  n_periods: 1
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: hneat_best
+  priority: descriptive
+- id: c_hnbest_sinvaders
+  where: Table 1 (p.8), lower block, row 'HNeat Best [8]', column 'S. Invaders'
+  evidence_page: 8
+  metric: best_episode_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 1720.0
+  reported_precision: 0.5
+  n_periods: 1
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: hneat_best
+  priority: descriptive
+- id: c_hnpix_brider
+  where: Table 1 (p.8), lower block, row 'HNeat Pixel [8]', column 'B. Rider'
+  evidence_page: 8
+  metric: best_episode_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 1332.0
+  reported_precision: 0.5
+  n_periods: 1
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: hneat_pixel
+  priority: descriptive
+- id: c_hnpix_breakout
+  where: Table 1 (p.8), lower block, row 'HNeat Pixel [8]', column 'Breakout'
+  evidence_page: 8
+  metric: best_episode_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 4.0
+  reported_precision: 0.5
+  n_periods: 1
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: hneat_pixel
+  priority: descriptive
+- id: c_hnpix_enduro
+  where: Table 1 (p.8), lower block, row 'HNeat Pixel [8]', column 'Enduro'
+  evidence_page: 8
+  metric: best_episode_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 91.0
+  reported_precision: 0.5
+  n_periods: 1
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: hneat_pixel
+  priority: descriptive
+- id: c_hnpix_pong
+  where: Table 1 (p.8), lower block, row 'HNeat Pixel [8]', column 'Pong'
+  evidence_page: 8
+  metric: best_episode_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: -16.0
+  reported_precision: 0.5
+  n_periods: 1
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: hneat_pixel
+  priority: descriptive
+- id: c_hnpix_qbert
+  where: Table 1 (p.8), lower block, row 'HNeat Pixel [8]', column 'Q*bert'
+  evidence_page: 8
+  metric: best_episode_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 1325.0
+  reported_precision: 0.5
+  n_periods: 1
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: hneat_pixel
+  priority: descriptive
+- id: c_hnpix_seaquest
+  where: Table 1 (p.8), lower block, row 'HNeat Pixel [8]', column 'Seaquest'
+  evidence_page: 8
+  metric: best_episode_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 800.0
+  reported_precision: 0.5
+  n_periods: 1
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: hneat_pixel
+  priority: descriptive
+- id: c_hnpix_sinvaders
+  where: Table 1 (p.8), lower block, row 'HNeat Pixel [8]', column 'S. Invaders'
+  evidence_page: 8
+  metric: best_episode_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 1145.0
+  reported_precision: 0.5
+  n_periods: 1
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: hneat_pixel
+  priority: descriptive
+- id: c_dqnbest_brider
+  where: Table 1 (p.8), lower block, row 'DQN Best', column 'B. Rider'
+  evidence_page: 8
+  metric: best_episode_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 5184.0
+  reported_precision: 0.5
+  n_periods: 1
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: dqn_best_episode
+  priority: secondary
+- id: c_dqnbest_breakout
+  where: Table 1 (p.8), lower block, row 'DQN Best', column 'Breakout'
+  evidence_page: 8
+  metric: best_episode_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 225.0
+  reported_precision: 0.5
+  n_periods: 1
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: dqn_best_episode
+  priority: secondary
+- id: c_dqnbest_enduro
+  where: Table 1 (p.8), lower block, row 'DQN Best', column 'Enduro'
+  evidence_page: 8
+  metric: best_episode_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 661.0
+  reported_precision: 0.5
+  n_periods: 1
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: dqn_best_episode
+  priority: secondary
+- id: c_dqnbest_pong
+  where: Table 1 (p.8), lower block, row 'DQN Best', column 'Pong'
+  evidence_page: 8
+  metric: best_episode_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 21.0
+  reported_precision: 0.5
+  n_periods: 1
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: dqn_best_episode
+  priority: secondary
+- id: c_dqnbest_qbert
+  where: Table 1 (p.8), lower block, row 'DQN Best', column 'Q*bert'
+  evidence_page: 8
+  metric: best_episode_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 4500.0
+  reported_precision: 0.5
+  n_periods: 1
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: dqn_best_episode
+  priority: secondary
+- id: c_dqnbest_seaquest
+  where: Table 1 (p.8), lower block, row 'DQN Best', column 'Seaquest'
+  evidence_page: 8
+  metric: best_episode_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 1740.0
+  reported_precision: 0.5
+  n_periods: 1
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: dqn_best_episode
+  priority: secondary
+- id: c_dqnbest_sinvaders
+  where: Table 1 (p.8), lower block, row 'DQN Best', column 'S. Invaders'
+  evidence_page: 8
+  metric: best_episode_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 1075.0
+  reported_precision: 0.5
+  n_periods: 1
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: dqn_best_episode_k3
+  priority: secondary
+data:
+  sources:
+  - canonical: arcade_learning_environment
+    description: 'Atari 2600 games via ALE (Bellemare et al. 2013): 210x160 RGB video
+      at 60Hz, 128 colour palette; seven games used (Beam Rider, Breakout, Enduro,
+      Pong, Q*bert, Seaquest, Space Invaders). No offline dataset: data are generated
+      by agent-environment interaction. Paper does not state ALE version, ROM versions,
+      or emulator seeding.'
+    substitute: gymnasium_cartpole_v1 (CPU-feasible control task; 4-dim state vector,
+      2 discrete actions) standing in for ALE pixel environments; with this substitute
+      none of the Table 1 numbers are reproducible and all Atari claims are untested
+  - canonical: human_expert_scores
+    description: Median reward of an expert human game player after around two hours
+      of playing each game (Table 1, row 'Human', p.8; Section 5.3, p.7). Paper notes
+      these human scores are much higher than those in Bellemare et al. [3]. Not reproducible.
+    substitute: null
+  - canonical: published_baseline_scores
+    description: Sarsa [3], Contingency [4], HNeat Best and HNeat Pixel [8] scores
+      are quoted from the cited papers, not re-run by the authors. Not reproducible
+      here.
+    substitute: null
+  universe:
+    environments: 7 Atari 2600 games (Beam Rider, Breakout, Enduro, Pong, Q*bert,
+      Seaquest, Space Invaders)
+    action_space: legal game actions per game; between 4 and 18 valid actions (Section
+      4.1 architecture paragraph, p.6)
+    observation_space: raw 210x160 RGB frames (128 colour palette) preprocessed to
+      an 84x84x4 grayscale stack produced by phi
+    substitute_environment: 'CartPole-v1: 4-dim continuous state, 2 actions, max episode
+      length 500 (substitute only; not in the paper)'
+  frequency: per-environment-step, where the agent sees and selects actions on every
+    k-th frame and repeats its last action on skipped frames (k=4 for all games except
+    Space Invaders, k=3)
+  preprocessing:
+    grayscale_downsample: RGB -> grayscale, down-sampled to 110x84 (down-sampling
+      filter/method not stated)
+    crop: crop an 84x84 region roughly capturing the playing area (crop offsets not
+      stated; required only because the GPU conv implementation of [11] expects square
+      inputs)
+    frame_stack: phi applies the preprocessing to the last 4 frames of a history and
+      stacks them -> 84x84x4 input
+    frame_skip: k=4 (k=3 for Space Invaders); last action repeated on skipped frames;
+      this k is the only hyperparameter differing between games
+    reward_clipping: 'training only: positive rewards -> +1, negative -> -1, zero
+      unchanged (Section 5, p.6); evaluation uses the real, unmodified game scores'
+    substitute_preprocessing: 'CartPole: raw 4-dim state, no frame stacking, no frame
+      skipping, no reward clipping (rewards already +1 per step)'
+  splits:
+    train: 10 million frames of online interaction per game; replay memory of one
+      million most recent frames (Section 5, p.6)
+    eval_atari: 'Table 1 upper block: epsilon-greedy policy with epsilon=0.05 run
+      for a fixed (unstated) number of steps on the real, unmodified games; average
+      total reward per episode'
+    eval_atari_best: 'Table 1 lower block: single best-performing episode (HNeat rows
+      are deterministic policies; DQN Best uses epsilon-greedy with epsilon=0.05)'
+    eval_training_curve: 'Figure 2 (p.7): epsilon-greedy with epsilon=0.05 for 10000
+      steps, evaluated periodically; 1 epoch = 50000 minibatch weight updates (~30
+      min)'
+    substitute_budget: CartPole-v1, <=150k environment steps, report mean return of
+      last 50 training episodes plus a random-policy return baseline (substitute only;
+      not in the paper)
+method:
+  signal: 'Deep Q-Network: a convolutional Q-function Q(s,a;theta) over stacked preprocessed
+    frames, trained with online Q-learning updates on minibatches sampled uniformly
+    from an experience replay memory; behaviour policy is epsilon-greedy.'
+  model:
+    architecture: input 84x84x4 -> conv 16 filters 8x8 stride 4 + rectifier -> conv
+      32 filters 4x4 stride 2 + rectifier -> fully-connected 256 rectifier units ->
+      fully-connected linear output, one unit per valid action (padding scheme and
+      bias/pooling details not stated; no pooling mentioned)
+    loss: squared TD error (y_j - Q(phi_j,a_j;theta))^2, y_j = r_j for terminal phi_{j+1},
+      r_j + gamma*max_a' Q(phi_{j+1},a';theta) otherwise (Algorithm 1, p.5)
+    optimizer: RMSProp with minibatches of size 32 (Section 5, p.6); learning rate,
+      decay, momentum and epsilon not stated
+    exploration: epsilon-greedy, epsilon annealed linearly from 1 to 0.1 over the
+      first one million frames, fixed at 0.1 thereafter (Section 5, p.6)
+    replay_memory: replay memory of one million most recent frames (Section 5, p.6);
+      Section 4 states the algorithm stores the last N experience tuples and samples
+      uniformly at random
+    training_frames: 10 million frames total per game (Section 5, p.6); whether 'frames'
+      counts emulator frames or agent action-selection steps is not stated
+    target_network: Algorithm 1 as printed (p.5) uses the current theta in the target
+      (no separate frozen target network); the Eq. 2 text (p.3) says theta_{i-1} from
+      the previous iteration is held fixed
+    discount: gamma per time-step (numeric value never stated in the paper)
+    update_schedule: 'Algorithm 1: one minibatch replay update per environment time-step,
+      then act epsilon-greedily; no warm-up (replay start size) stated'
+    weight_init: '''Initialize action-value function Q with random weights'' (Algorithm
+      1); scheme not specified'
+    hyperparameter_sharing: same architecture, learning algorithm and hyperparameters
+      across all seven games; only frame-skip k differs (3 for Space Invaders)
+    substitute_model: 'CartPole DQN (substitute only): MLP (2 hidden layers, ReLU)
+      over 4-dim state, 2 outputs; uniform replay buffer + periodically-synced target
+      network'
+  evaluation:
+  - Average total reward per episode under an epsilon-greedy policy with epsilon=0.05
+    over a fixed (unstated) number of steps on the real, unmodified games (Table 1
+    upper block)
+  - 'Single best-performing episode return (Table 1 lower block: HNeat rows and DQN
+    Best)'
+  - 'Training-curve diagnostics: average reward per episode (epsilon=0.05, 10000 steps)
+    and average of the per-state maximum predicted Q on a held-out set of states collected
+    by a random policy before training (Figure 2)'
+  - Qualitative value-function visualisation on a 30-frame Seaquest segment (Figure
+    3)
+  - 'Mechanism-level surrogate check (substitute only): on CartPole-v1, mean return
+    of last 50 training episodes must be far above random-policy return'
+  eval_protocol:
+    eval_policy: epsilon-greedy with epsilon=0.05 (Section 5.3 p.7; Table 1 caption
+      p.8)
+    eval_reward_scale: evaluation uses real, unmodified game scores (reward clipping
+      is applied during training only, Section 5 p.6)
+    eval_steps_table1: '''a fixed number of steps'' - exact count not stated in the
+      paper'
+    eval_steps_figure2: 10000 steps per evaluation point (Figure 2 caption, p.7)
+    epoch_definition: 1 epoch = 50000 minibatch weight updates (~30 min training time)
+      (Figure 2 caption, p.7)
+    held_out_Q_states: fixed set of states collected by running a random policy before
+      training starts; track the average over states of max_a Q (footnote 2, p.6)
+    eval_checkpoint: which network snapshot produced the Table 1 DQN averages (final
+      network vs best epoch) is not stated
+    surrogate_metric: 'Substitute only - CartPole-v1: mean return over last 50 episodes
+      of training (and/or 50 greedy eval episodes), compared against mean return of
+      a uniform-random policy over 50 episodes'
+    surrogate_pass_rule: Substitute only - learning curve rises well above the random
+      baseline (random-policy return ~20-25; DQN should reach >=~200 mean return within
+      150k steps). This is a mechanism check, not a reproduction of any paper number.
+    atari_claims_status: 'Untested: all Table 1 claims are out of compute reach under
+      the CartPole substitute and are checked only qualitatively via the surrogate
+      mechanism test; Sarsa/Contingency/HNeat/Human rows are quoted from other sources
+      and are not reproducible at all'
+  variants:
+    dqn_avg_eps_greedy:
+      agent: DQN trained on 10M frames, frame skip k=4
+      scoring: average total reward per episode, epsilon-greedy epsilon=0.05, fixed
+        (unstated) number of steps, unmodified game rewards
+    dqn_avg_eps_greedy_k3:
+      agent: DQN trained on 10M frames, frame skip k=3 (Space Invaders only)
+      scoring: average total reward per episode, epsilon-greedy epsilon=0.05, fixed
+        (unstated) number of steps, unmodified game rewards
+    dqn_best_episode:
+      agent: same trained DQN as dqn_avg_eps_greedy (k=4)
+      scoring: single best performing episode under epsilon-greedy epsilon=0.05
+    dqn_best_episode_k3:
+      agent: same trained DQN as dqn_avg_eps_greedy_k3 (Space Invaders, frame skip
+        k=3)
+      scoring: single best performing episode under epsilon-greedy epsilon=0.05
+    random_policy:
+      agent: policy that selects actions uniformly at random (Section 5.3, p.7)
+      scoring: average total reward; number of steps/episodes and whether frame-skipping
+        is applied are not stated
+    human_expert:
+      agent: expert human player, around two hours of play per game
+      scoring: median reward achieved
+    sarsa_linear_best_features:
+      agent: Sarsa with linear policies on several hand-engineered Atari feature sets
+        [3]; score of the best performing feature set reported
+      prior_knowledge: background subtraction, each of the 128 colours treated as
+        a separate channel
+      provenance: number quoted from Bellemare et al. 2013, not re-run in this paper
+    contingency_awareness:
+      agent: same basic approach as Sarsa but feature sets augmented with a learned
+        representation of the parts of the screen under the agent's control [4]
+      prior_knowledge: background subtraction, each of the 128 colours treated as
+        a separate channel
+      provenance: number quoted from Bellemare et al. 2012, not re-run in this paper
+    hneat_best:
+      agent: HyperNEAT evolutionary policy search using a hand-engineered object detector
+        that outputs object locations and types [8]
+      scoring: highest scoring single episode (deterministic policy)
+      provenance: number quoted from Hausknecht et al. 2013
+    hneat_pixel:
+      agent: HyperNEAT using the emulator's special 8-colour-channel object label
+        map representation [8]
+      scoring: highest scoring single episode (deterministic policy)
+      provenance: number quoted from Hausknecht et al. 2013
+    cartpole_surrogate:
+      status: substitute task not present in the paper; produces no comparison to
+        any claim value
+      environment: CartPole-v1 (gymnasium), CPU only
+      budget: <=150,000 environment steps
+      algorithm: DQN with uniform experience replay + periodically synced target network,
+        epsilon-greedy annealed 1.0 -> 0.05
+      metric: mean return of last 50 episodes; random-policy return as baseline
+      seeds: '>=3 seeds, report mean and std; the paper reports single numbers with
+        no seed variation'
+baselines:
+- Random policy (uniform action selection)
+- Sarsa with linear function approximation on hand-engineered features, best feature
+  set [Bellemare et al. 2013] - quoted value
+- Contingency awareness features + Sarsa [Bellemare et al. 2012] - quoted value
+- HyperNEAT Best (hand-engineered object-detector inputs) [Hausknecht et al. 2013]
+  - quoted value, best single deterministic episode
+- HyperNEAT Pixel (8-channel object label map) [Hausknecht et al. 2013] - quoted value,
+  best single deterministic episode
+- Expert human player (median reward after ~2 hours per game)
+- 'For surrogate task only: random policy on CartPole-v1; optionally DQN without replay
+  / without target network as ablations'
+ambiguities:
+- id: amb_lr_schedule
+  question: What learning-rate schedule (and base learning rate) is used for RMSProp?
+    The paper names RMSProp and minibatch size 32 but gives no learning rate or schedule.
+  config_key: lr_schedule
+  options:
+  - constant
+  - cosine
+  - step
+  - as_paper
+  default: constant
+  source: conventions_kb
+  reason: Section 5 (p.6) states only 'RMSProp with minibatches of size 32'; the later
+    Nature DQN used a constant lr of 0.00025. For the CartPole surrogate a constant
+    lr is the convention.
+  sensitivity: high
+- id: amb_augmentation
+  question: Is any train-time input augmentation applied beyond the described grayscale/downsample/crop/frame-stack
+    preprocessing?
+  config_key: augmentation
+  options:
+  - none
+  - standard
+  - as_paper
+  default: none
+  source: paper_text
+  reason: Section 4.1 (p.5) describes the full preprocessing pipeline and mentions
+    no augmentation. CartPole has no image input so augmentation is vacuous.
+  sensitivity: low
+- id: amb_batch_vs_steps
+  question: When the scale is reduced, do we hold the number of environment steps/gradient
+    steps fixed, or the number of 'epochs'/episodes?
+  config_key: batch_vs_steps
+  options:
+  - epochs
+  - steps
+  default: steps
+  source: conventions_kb
+  reason: The paper's budget is expressed in frames (10M) and epochs of 50000 minibatch
+    updates; the reduced-scale run must hold a step budget (<=150k CartPole steps)
+    rather than an epoch count.
+  sensitivity: medium
+- id: amb_mixed_precision
+  question: Is mixed precision used at train time?
+  config_key: mixed_precision
+  options:
+  - fp32
+  - amp
+  default: fp32
+  source: conventions_kb
+  reason: The 2013 GPU implementation was fp32 and the paper says nothing about precision;
+    the CPU-only replication cannot use AMP meaningfully.
+  sensitivity: low
+- id: amb_split
+  question: Is the reported number computed on a validation split or the final/test
+    evaluation?
+  config_key: split
+  options:
+  - validation
+  - test
+  default: test
+  source: conventions_kb
+  reason: RL has no held-out split; Table 1 numbers are online evaluations of the
+    trained agent. Surrogate reports final (last-50-episode) returns, treated as 'test'.
+  sensitivity: low
+- id: amb_gamma
+  question: What discount factor gamma is used?
+  config_key: gamma
+  options:
+  - '0.9'
+  - '0.95'
+  - '0.99'
+  - '1.0'
+  default: '0.99'
+  source: conventions_kb
+  reason: Section 2 (p.2) introduces gamma but its numeric value is never stated anywhere
+    in the paper; DQN follow-ups use 0.99.
+  sensitivity: high
+- id: amb_target_network
+  question: Is a separate frozen target network used, or are targets computed with
+    the current weights (as printed in Algorithm 1)?
+  config_key: target_network
+  options:
+  - none_current_weights
+  - frozen_periodic_sync
+  default: none_current_weights
+  source: paper_text
+  reason: Algorithm 1 (p.5) as printed computes y_j with the current theta; the Eq.
+    2 text (p.3) holds theta_{i-1} fixed, so the paper is internally ambiguous. Faithful
+    default follows the printed algorithm; the CartPole surrogate uses a periodically
+    synced target network and that must be logged as a deviation.
+  sensitivity: high
+- id: amb_target_sync_interval
+  question: If a target network is used, how often are its weights synced?
+  config_key: target_sync_interval
+  options:
+  - '100'
+  - '500'
+  - '1000'
+  - '10000'
+  default: '500'
+  source: guess
+  reason: Not stated anywhere in the paper; 500 update steps is a common CartPole
+    setting for a 150k-step budget.
+  sensitivity: medium
+- id: amb_replay_start
+  question: How many transitions are collected before learning starts (replay warm-up)?
+  config_key: learning_starts
+  options:
+  - '0'
+  - '1000'
+  - '5000'
+  - '50000'
+  default: '1000'
+  source: conventions_kb
+  reason: Paper specifies no warm-up (Algorithm 1 updates from t=1); Nature DQN used
+    50k frames, scaled down to ~1k for CartPole.
+  sensitivity: medium
+- id: amb_replay_capacity
+  question: Replay memory capacity for the reduced-scale run (paper uses one million
+    most recent frames for Atari).
+  config_key: replay_capacity
+  options:
+  - '10000'
+  - '50000'
+  - '100000'
+  - '1000000'
+  default: '50000'
+  source: conventions_kb
+  reason: 1M transitions is meaningless for a 150k-step CartPole run; 50k is the usual
+    scaled equivalent.
+  sensitivity: medium
+- id: amb_replay_unit
+  question: Is the replay memory size of 'one million most recent frames' one million
+    raw emulator frames, one million agent time-steps, or one million stored transition
+    tuples?
+  config_key: replay_capacity_unit
+  options:
+  - emulator_frames
+  - agent_steps_transitions
+  - stored_tuples
+  default: agent_steps_transitions
+  source: paper_text
+  reason: Section 5 (p.6) says 'replay memory of one million most recent frames' while
+    Section 4 (p.5) says the algorithm stores the last N experience tuples; with frame-skip
+    k these differ by a factor of k.
+  sensitivity: medium
+- id: amb_frame_count_definition
+  question: Do the 10 million training frames and the 1 million epsilon-annealing
+    frames count raw emulator frames or agent action-selection steps (i.e., before
+    or after frame-skip)?
+  config_key: frame_count_definition
+  options:
+  - emulator_frames
+  - agent_steps
+  default: agent_steps
+  source: guess
+  reason: Section 5 (p.6) gives budgets in 'frames' without saying whether skipped
+    frames are counted; this changes the effective training budget by a factor of
+    k (3 or 4).
+  sensitivity: high
+- id: amb_updates_per_step
+  question: How many gradient updates per environment step (paper applies replay updates
+    inside the per-timestep inner loop)?
+  config_key: train_freq
+  options:
+  - 1_per_step
+  - 1_per_4_steps
+  - multiple_per_step
+  default: 1_per_step
+  source: paper_text
+  reason: Algorithm 1 (p.5) performs one minibatch gradient step per environment time-step;
+    kept for the surrogate.
+  sensitivity: medium
+- id: amb_epsilon_schedule
+  question: 'Exploration schedule for the surrogate: final epsilon and annealing length
+    (paper: linear 1 -> 0.1 over the first 1M frames, then fixed 0.1; evaluation epsilon
+    0.05).'
+  config_key: epsilon_schedule
+  options:
+  - linear_1_to_0.1_over_10pct_steps
+  - linear_1_to_0.05_over_10pct_steps
+  - linear_1_to_0.01_over_20pct_steps
+  default: linear_1_to_0.1_over_10pct_steps
+  source: paper_text
+  reason: The paper's training schedule is 1 -> 0.1 over the first million of 10M
+    frames (10% of budget); scaling that proportionally is the faithful choice, with
+    evaluation done separately at epsilon=0.05.
+  sensitivity: medium
+- id: amb_loss_fn
+  question: Squared TD error or Huber/clipped-gradient loss?
+  config_key: loss_fn
+  options:
+  - mse
+  - huber
+  default: mse
+  source: paper_text
+  reason: Equation 2 (p.3) and Algorithm 1 (p.5) use the squared error; error clipping
+    appears only in the later Nature paper.
+  sensitivity: medium
+- id: amb_optimizer_details
+  question: RMSProp decay/momentum/epsilon values (and whether Adam may be substituted).
+  config_key: optimizer
+  options:
+  - rmsprop_paper_defaults
+  - rmsprop_0.95_decay
+  - adam
+  default: rmsprop_0.95_decay
+  source: guess
+  reason: Paper names RMSProp (Section 5, p.6) but gives no hyperparameters; keeping
+    RMSProp is the faithful reading, and any switch to Adam for the CPU surrogate
+    must be logged as a deviation.
+  sensitivity: medium
+- id: amb_network_size_surrogate
+  question: Network size for the surrogate task (the paper's conv net is meaningless
+    for a 4-dim state).
+  config_key: hidden_sizes
+  options:
+  - '[64,64]'
+  - '[128,128]'
+  - '[256]'
+  default: '[128,128]'
+  source: guess
+  reason: Mirrors the paper's single 256-unit hidden layer capacity at CartPole scale;
+    the paper says nothing about non-pixel architectures.
+  sensitivity: low
+- id: amb_eval_steps
+  question: How many steps/episodes are averaged for the reported Table 1 average
+    scores?
+  config_key: eval_episodes
+  options:
+  - 10000_steps
+  - 50000_steps
+  - 100_episodes
+  - unspecified
+  default: unspecified
+  source: paper_text
+  reason: Section 5.3 (p.7) and the Table 1 caption (p.8) say only 'a fixed number
+    of steps' (Figure 2 uses 10000 steps for the training curves); this prevents deriving
+    a sampling tolerance for the Atari claims.
+  sensitivity: high
+- id: amb_eval_checkpoint
+  question: Which network snapshot produced the Table 1 DQN average scores - the network
+    after 10M frames, or the best-performing epoch?
+  config_key: eval_checkpoint
+  options:
+  - final_network
+  - best_epoch_network
+  default: final_network
+  source: guess
+  reason: Not stated; Section 5.3 only describes the evaluation policy, not the checkpoint
+    selection, and Figure 2 curves are non-monotone so the choice matters.
+  sensitivity: high
+- id: amb_seeds
+  question: How many random seeds are run and how is variability reported?
+  config_key: n_seeds
+  options:
+  - '1'
+  - '3'
+  - '5'
+  - '10'
+  default: '3'
+  source: conventions_kb
+  reason: The paper reports single numbers with no seed variation and never states
+    a seed count; the surrogate uses >=3 seeds and reports mean/std.
+  sensitivity: high
+- id: amb_episode_termination
+  question: For evaluation over a fixed number of steps, are truncated final episodes
+    included in the per-episode average?
+  config_key: eval_partial_episodes
+  options:
+  - include
+  - exclude
+  default: exclude
+  source: guess
+  reason: Not stated; excluding truncated episodes is the usual practice and matters
+    for short-budget averages.
+  sensitivity: low
+- id: amb_episode_life_loss
+  question: Is an episode terminated (for the purpose of the terminal target y_j =
+    r_j) at loss of life, or only at game over?
+  config_key: episodic_life
+  options:
+  - game_over_only
+  - life_loss_as_terminal
+  default: game_over_only
+  source: guess
+  reason: The paper only says all emulator sequences terminate in finitely many steps
+    (Section 2, p.2) and never mentions lives; episodic-life handling was introduced
+    in later work.
+  sensitivity: medium
+- id: amb_downsample_method
+  question: What resampling method converts the 210x160 grayscale frame to 110x84,
+    and where exactly is the 84x84 crop taken?
+  config_key: downsample_method
+  options:
+  - bilinear_center_crop
+  - bilinear_bottom_crop
+  - nearest_center_crop
+  - area_bottom_crop
+  default: bilinear_bottom_crop
+  source: guess
+  reason: Section 4.1 (p.5) says only 'down-sampling' and a crop 'that roughly captures
+    the playing area'; neither filter nor offsets are given.
+  sensitivity: medium
+- id: amb_frame_stack_selection
+  question: Are the 4 stacked frames the last 4 frames on which the agent acted (i.e.,
+    spaced k frames apart) or the last 4 consecutive emulator frames?
+  config_key: frame_stack_selection
+  options:
+  - last_4_acted_frames
+  - last_4_consecutive_frames
+  default: last_4_acted_frames
+  source: guess
+  reason: Section 4.1 (p.5) says phi is applied to 'the last 4 frames of a history'
+    without clarifying the interaction with frame-skip (k=4/3).
+  sensitivity: medium
+- id: amb_random_baseline_protocol
+  question: How was the 'Random' row evaluated - over how many steps/episodes, and
+    with the same frame-skip as DQN?
+  config_key: random_baseline_protocol
+  options:
+  - same_steps_and_frameskip_as_dqn
+  - same_steps_no_frameskip
+  - unspecified
+  default: same_steps_and_frameskip_as_dqn
+  source: guess
+  reason: Section 5.3 (p.7) only says the baseline 'selects actions uniformly at random';
+    the evaluation budget and frame-skip for this row are not stated.
+  sensitivity: medium
+- id: amb_weight_init
+  question: Weight initialization scheme?
+  config_key: weight_init
+  options:
+  - uniform_fan_in
+  - glorot
+  - kaiming
+  - as_paper
+  default: kaiming
+  source: conventions_kb
+  reason: Algorithm 1 says only 'random weights'; Kaiming/He is the default for rectifier
+    nets in modern frameworks.
+  sensitivity: low
+- id: amb_no_op_starts
+  question: Are random no-op / random starts used at episode initialisation to decorrelate
+    episodes?
+  config_key: random_starts
+  options:
+  - none
+  - up_to_30_noops
+  default: none
+  source: paper_text
+  reason: The 2013 paper describes no no-op starts (they were introduced later); episode
+    initialisation is just s1 = {x1} in Algorithm 1.
+  sensitivity: low
+descriptive_stats:
+- metric: n_games_evaluated
+  value: 7.0
+  where: Section 5, p.6; Table 1, p.8
+- metric: n_games_beating_prior_methods
+  value: 6.0
+  where: Abstract, p.1; Section 1, p.2; Conclusion, p.8
+- metric: n_games_surpassing_human_expert
+  value: 3.0
+  where: Abstract p.1; Section 5.3 p.8 (Breakout, Enduro, Pong)
+- metric: training_frames_total
+  value: 10000000.0
+  where: Section 5, p.6
+- metric: replay_memory_frames
+  value: 1000000.0
+  where: Section 5, p.6
+- metric: minibatch_size
+  value: 32.0
+  where: Section 5, p.6
+- metric: epsilon_initial
+  value: 1.0
+  where: Section 5, p.6
+- metric: epsilon_final_train
+  value: 0.1
+  where: Section 5, p.6
+- metric: epsilon_anneal_frames
+  value: 1000000.0
+  where: Section 5, p.6
+- metric: epsilon_eval
+  value: 0.05
+  where: Section 5.3, p.7; Figure 2 caption, p.7; Table 1 caption, p.8
+- metric: frame_skip_k_default
+  value: 4.0
+  where: Section 5, p.6
+- metric: frame_skip_k_space_invaders
+  value: 3.0
+  where: Section 5, p.6
+- metric: input_frames_stacked
+  value: 4.0
+  where: Section 4.1, p.5
+- metric: input_width_height
+  value: 84.0
+  where: Section 4.1, pp.5-6 (crop to 84x84; network input 84x84x4)
+- metric: downsampled_intermediate_height
+  value: 110.0
+  where: Section 4.1, p.5 (grayscale down-sample to 110x84)
+- metric: conv1_filters
+  value: 16.0
+  where: Section 4.1 architecture paragraph, p.6
+- metric: conv1_kernel
+  value: 8.0
+  where: Section 4.1 architecture paragraph, p.6
+- metric: conv1_stride
+  value: 4.0
+  where: Section 4.1 architecture paragraph, p.6
+- metric: conv2_filters
+  value: 32.0
+  where: Section 4.1 architecture paragraph, p.6
+- metric: conv2_kernel
+  value: 4.0
+  where: Section 4.1 architecture paragraph, p.6
+- metric: conv2_stride
+  value: 2.0
+  where: Section 4.1 architecture paragraph, p.6
+- metric: fc_hidden_units
+  value: 256.0
+  where: Section 4.1 architecture paragraph, p.6
+- metric: min_valid_actions
+  value: 4.0
+  where: Section 4.1 architecture paragraph, p.6
+- metric: max_valid_actions
+  value: 18.0
+  where: Section 4.1 architecture paragraph, p.6
+- metric: minibatch_updates_per_epoch
+  value: 50000.0
+  where: Figure 2 caption, p.7
+- metric: training_epochs_plotted
+  value: 100.0
+  where: Figure 2 x-axes, p.7
+- metric: eval_steps_per_curve_point
+  value: 10000.0
+  where: Figure 2 caption, p.7
+- metric: raw_frame_height
+  value: 210.0
+  where: Section 1, p.2; Section 4.1, p.5
+- metric: raw_frame_width
+  value: 160.0
+  where: Section 1, p.2; Section 4.1, p.5
+- metric: atari_color_palette_size
+  value: 128.0
+  where: Section 4.1, p.5
+- metric: atari_frame_rate_hz
+  value: 60.0
+  where: Section 1, p.2
+- metric: human_play_hours_per_game
+  value: 2.0
+  where: Section 5.3, p.7 ('around two hours')
+- metric: minutes_per_epoch_approx
+  value: 30.0
+  where: Figure 2 caption, p.7
+plan:
+  data_tier: C
+  compute_tier: 2
+  kind_of_test: mechanics_only
+  target_claims:
+  - c_dqn_breakout
+  - c_dqn_seaquest
+  - c_dqn_pong
+  - c_dqn_brider
+  - c_dqn_enduro
+  - c_dqn_qbert
+  - c_dqn_sinvaders
+  - c_rand_brider
+  substitutions:
+    arcade_learning_environment: 'UNAVAILABLE: claims depending on this source are
+      Untested'
+    human_expert_scores: 'UNAVAILABLE: claims depending on this source are Untested'
+    published_baseline_scores: 'UNAVAILABLE: claims depending on this source are Untested'
+  tolerances: {}
+  success_criteria: 'CPU only, compute tier 2. Atari-scale is out of reach: DQN with
+    replay + target net on CartPole-v1 (gymnasium) for <=150k steps; checkable claims
+    are mechanism-level: learning curve rises well above the random baseline; report
+    mean return of last 50 episodes and random-policy return. Atari scores are Untested.
+    || Match on every headline claim within its derived tolerance; all leakage tests
+    pass; kind of test = mechanics_only; data tier C; compute tier 1. Tier B: same
+    sign, significant, gap inside the substitution''s predicted band.'
+  budget:
+    spec: 10
+    setup: 20
+    build: 25
+    run: 20
+    verify: 15
+    report: 5
+    hard_kill_minutes: 240
+    max_cost_usd: 150.0
+    run_timeout_s: 1500
+  seeds:
+  - 0
+  frozen_hash: 02e83d6b07a3c8d108e4ea27cbdbfa15f7557ef3336e679a3ad80f24b8dfe457
+  frozen_at: '2026-09-15T16:05:23.100757+00:00'
