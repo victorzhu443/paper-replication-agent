@@ -1,0 +1,888 @@
+paper:
+  title: Deep Residual Learning for Image Recognition
+  authors:
+  - Kaiming He
+  - Xiangyu Zhang
+  - Shaoqing Ren
+  - Jian Sun
+  year: 2015
+  arxiv_id: '1512.03385'
+  version: v1
+  track: cs
+  family: train_and_eval
+claims:
+- id: cifar_resnet20_test_error
+  where: Table 6, row 'ResNet 20', column 'error (%)' (CIFAR-10 test set, single 32x32
+    view, with data augmentation)
+  evidence_page: 7
+  metric: top1_error
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 8.75
+  reported_precision: 0.005
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: cifar_resnet20
+  priority: headline
+- id: cifar_resnet32_test_error
+  where: Table 6, row 'ResNet 32', column 'error (%)'
+  evidence_page: 7
+  metric: top1_error
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 7.51
+  reported_precision: 0.005
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: cifar_resnet32
+  priority: secondary
+- id: cifar_resnet44_test_error
+  where: Table 6, row 'ResNet 44', column 'error (%)'
+  evidence_page: 7
+  metric: top1_error
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 7.17
+  reported_precision: 0.005
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: cifar_resnet44
+  priority: secondary
+- id: cifar_resnet56_test_error
+  where: Table 6, row 'ResNet 56', column 'error (%)'
+  evidence_page: 7
+  metric: top1_error
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 6.97
+  reported_precision: 0.005
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: cifar_resnet56
+  priority: secondary
+- id: cifar_resnet110_best_test_error
+  where: 'Table 6, row ''ResNet 110'', column ''error (%)'' = best of 5 runs (caption:
+    ''we run it 5 times and show best (mean±std)'')'
+  evidence_page: 7
+  metric: top1_error
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 6.43
+  reported_precision: 0.005
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: cifar_resnet110
+  priority: headline
+- id: cifar_resnet110_mean_test_error
+  where: Table 6, row 'ResNet 110', parenthetical mean±std over 5 runs (6.61±0.16)
+  evidence_page: 7
+  metric: top1_error
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 6.61
+  reported_precision: 0.005
+  n_periods: 10000
+  reported_std: 0.16
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: cifar_resnet110
+  priority: secondary
+- id: cifar_resnet1202_test_error
+  where: Table 6, row 'ResNet 1202', column 'error (%)' (also quoted as 7.93% in Section
+    4.2 'Exploring Over 1000 layers')
+  evidence_page: 7
+  metric: top1_error
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 7.93
+  reported_precision: 0.005
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: cifar_resnet1202
+  priority: secondary
+- id: cifar_plain110_test_error_lower_bound
+  where: 'Figure 6 caption (left panel): ''The error of plain-110 is higher than 60%
+    and not displayed'' — one-sided bound, not a printed point estimate; caption does
+    not disambiguate training vs testing error'
+  evidence_page: 8
+  metric: error_lower_bound
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 60.0
+  reported_precision: 0.0
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: cifar_plain110
+  priority: descriptive
+- id: cifar_resnet1202_train_error_upper_bound
+  where: 'Section 4.2 ''Exploring Over 1000 layers'': ''able to achieve training error
+    <0.1% (Fig. 6, right)'' — one-sided bound on CIFAR-10 training error, not a printed
+    point estimate'
+  evidence_page: 8
+  metric: train_error_upper_bound
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 0.1
+  reported_precision: 0.0
+  n_periods: 50000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: cifar_resnet1202
+  priority: descriptive
+- id: imagenet_plain18_top1
+  where: Table 2, row '18 layers', column 'plain' (top-1 error %, 10-crop testing,
+    ImageNet validation)
+  evidence_page: 5
+  metric: top1_error
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 27.94
+  reported_precision: 0.005
+  n_periods: 50000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: imagenet_plain18
+  priority: secondary
+- id: imagenet_resnet18_top1
+  where: Table 2, row '18 layers', column 'ResNet' (option A shortcuts, 10-crop testing)
+  evidence_page: 5
+  metric: top1_error
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 27.88
+  reported_precision: 0.005
+  n_periods: 50000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: imagenet_resnet18_optA
+  priority: secondary
+- id: imagenet_plain34_top1
+  where: Table 2, row '34 layers', column 'plain' (= Table 3 row 'plain-34' top-1
+    err. 28.54)
+  evidence_page: 5
+  metric: top1_error
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 28.54
+  reported_precision: 0.005
+  n_periods: 50000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: imagenet_plain34
+  priority: secondary
+- id: imagenet_resnet34A_top1
+  where: Table 2, row '34 layers', column 'ResNet' (= Table 3 row 'ResNet-34 A' top-1
+    err.)
+  evidence_page: 5
+  metric: top1_error
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 25.03
+  reported_precision: 0.005
+  n_periods: 50000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: imagenet_resnet34_optA
+  priority: secondary
+- id: imagenet_resnet34A_top5
+  where: Table 3, row 'ResNet-34 A', column 'top-5 err.' (10-crop testing, ImageNet
+    validation)
+  evidence_page: 6
+  metric: top5_error
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 7.76
+  reported_precision: 0.005
+  n_periods: 50000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: imagenet_resnet34_optA
+  priority: secondary
+- id: imagenet_plain34_top5
+  where: Table 3, row 'plain-34', column 'top-5 err.' (10-crop testing, ImageNet validation)
+  evidence_page: 6
+  metric: top5_error
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 10.02
+  reported_precision: 0.005
+  n_periods: 50000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: imagenet_plain34
+  priority: secondary
+- id: imagenet_resnet152_single_model_top5_val
+  where: Table 4, row 'ResNet-152', column 'top-5 err.' (single-model, ImageNet validation,
+    dense/multi-scale fully-convolutional testing)
+  evidence_page: 6
+  metric: top5_error
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 4.49
+  reported_precision: 0.005
+  n_periods: 50000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: imagenet_resnet152_optB
+  priority: headline
+- id: imagenet_ensemble_top5_test
+  where: Table 5, row 'ResNet (ILSVRC'15)', column 'top-5 err. (test)' — ensemble
+    of six models, ImageNet test set via test server
+  evidence_page: 6
+  metric: top5_error
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 3.57
+  reported_precision: 0.005
+  n_periods: 100000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: imagenet_ensemble
+  priority: headline
+data:
+  sources:
+  - canonical: cifar10
+    description: 'CIFAR-10 [20]: 50k training images, 10k test images, 10 classes,
+      32x32 RGB. Primary dataset for Section 4.2 replication.'
+    substitute: torchvision
+  - canonical: imagenet_ilsvrc2012
+    description: 'ImageNet 2012 classification dataset [36]: 1.28M training images,
+      50k validation, 100k test, 1000 classes. Out of reach at compute tier 2; claims
+      recorded only.'
+    substitute: null
+  universe:
+    cifar10_classes: 10 classes, balanced
+    cifar10_train_size: 50000 images (paper); reduced-scale replication run uses a
+      10000-image class-balanced subset (replication-only choice, not in paper)
+    cifar10_test_size: 10000 images (full test set used for evaluation)
+    imagenet_classes: 1000 classes
+  frequency: none
+  preprocessing:
+    cifar_input: '32x32 images with the per-pixel mean subtracted (paper wording:
+      ''per-pixel mean subtracted''; no division by std stated)'
+    cifar_train_augmentation: '4 pixels padded on each side, 32x32 crop randomly sampled
+      from the padded image or its horizontal flip (as in [24]); Table 6 caption:
+      all methods are with data augmentation'
+    cifar_test_view: single view of the original 32x32 image (no crops, no flips)
+    imagenet_train_augmentation: shorter side randomly sampled in [256,480]; 224x224
+      random crop from image or horizontal flip; per-pixel mean subtracted; standard
+      color augmentation of [21]
+    imagenet_test: 10-crop testing for comparison studies (Tables 2 and 3); fully-convolutional
+      multi-scale ({224,256,384,480,640}) score averaging for best results (Tables
+      4 and 5)
+    normalization_layer: batch normalization right after each convolution and before
+      activation, following [16]; no dropout
+  splits:
+    cifar_train_eval: trained on the 50k training set, evaluated on the 10k test set
+      (Section 4.2)
+    cifar_schedule_tuning_split: the 64k-iteration schedule was 'determined on a 45k/5k
+      train/val split'; the paper does not state explicitly whether the reported models
+      were retrained on the full 50k (inferred from 'trained on the training set')
+      — see ambiguity train_split_size
+    cifar_reduced_scale: 'replication at tier 2: 10k-image class-balanced training
+      subset, reduced step budget, evaluate on full 10k test set (replication-only,
+      not from paper)'
+    imagenet_split: train 1.28M / val 50k / test 100k (test results reported by the
+      test server)
+method:
+  signal: 'Depth-matched comparison of residual networks (identity shortcuts, option
+    A) against plain stacked-convolution networks on CIFAR-10: residual reformulation
+    F(x)+x should train faster and reach lower error at equal depth, width and parameter
+    count, while plain nets degrade with increasing depth.'
+  model:
+    cifar_architecture: first layer 3x3 conv; stack of 6n layers of 3x3 convs on feature
+      maps {32,16,8} with 2n layers each; filters {16,32,64}; global average pooling;
+      10-way fc + softmax; total 6n+2 weighted layers
+    cifar_depths: n in {3,5,7,9} -> 20/32/44/56 layers; n=18 -> 110 layers; n=200
+      -> 1202 layers
+    cifar_shortcuts: 'identity shortcuts connected to each pair of 3x3 layers (3n
+      shortcuts); option A in all CIFAR cases: zero-padding for increasing dimensions,
+      no extra parameters; subsampling performed by convolutions with stride 2'
+    plain_counterpart: identical architecture with shortcuts removed; same depth,
+      width, and parameter count
+    normalization: BN after each conv before activation; no dropout; second nonlinearity
+      applied after the addition (sigma(y), Fig. 2)
+    init: weight initialization of He et al. [13] (MSRA); fan mode not stated in paper
+    optimizer: SGD, momentum 0.9, weight decay 0.0001 (scope of decay not stated)
+    batch_size_cifar: 128 (two GPUs in the paper)
+    lr_schedule_cifar: start 0.1, divide by 10 at 32k and 48k iterations, terminate
+      at 64k iterations
+    warmup_110: 'for the 110-layer ResNet only: lr 0.01 until training error <80%
+      (~400 iterations), then back to 0.1; rest of schedule unchanged. Footnote 5:
+      with initial lr 0.1 it still starts converging (<90% error) after several epochs
+      and reaches similar accuracy'
+    imagenet_optimizer: SGD, mini-batch 256, lr 0.1 divided by 10 when the error plateaus,
+      up to 60x10^4 (600k) iterations, weight decay 0.0001, momentum 0.9, no dropout
+    imagenet_shortcut_options: (A) zero-padding identity shortcuts for increasing
+      dims, all shortcuts parameter-free; (B) projection (1x1 conv) shortcuts only
+      for increasing dims, others identity; (C) all shortcuts projections (thirteen
+      projection shortcuts); option C not used beyond Table 3; ResNet-50/101/152 use
+      option B; shortcuts crossing two feature-map sizes use stride 2
+    imagenet_bottleneck: ResNet-50/101/152 use 3-layer bottleneck blocks (1x1, 3x3,
+      1x1); 50-layer built by replacing each 2-layer block of the 34-layer net with
+      a bottleneck block
+  evaluation:
+  - top-1 classification error (%) on the CIFAR-10 test set, single 32x32 view
+  - training-error curves vs iteration for plain and residual nets of the same depth
+    (Fig. 1, Fig. 6)
+  - 'direction test: ResNet-d test/train error < plain-d test/train error at equal
+    depth d'
+  - 'direction test: plain-56 train/test error > plain-20 train/test error (degradation)'
+  - 'direction test: ResNet-56 error < ResNet-20 error (accuracy gains from depth)'
+  - ImageNet top-1/top-5 error with 10-crop testing (Table 2, Table 3) and single-model
+    dense multi-scale testing (Table 4) — not reproducible at tier 2
+  eval_protocol:
+    cifar_test_view: single view of the original 32x32 image
+    reported_checkpoint: error at end of the fixed schedule (64k iterations in the
+      paper); at reduced scale, error after the final step of the reduced budget
+    seeds: ResNet-110 run 5 times, reported as best (mean±std) per Table 6 caption;
+      all other Table 6 ResNet rows are implied single runs (paper does not state
+      otherwise)
+    metric_direction: lower error is better; percent scale
+    reduced_scale_check: at tier 2 verify sign of the gap (ResNet vs plain, deep plain
+      vs shallow plain), not the absolute 8.75%
+  variants:
+    cifar_resnet20:
+      depth: 20 (n=3)
+      shortcuts: identity, option A (zero-padding)
+      params: 0.27M
+      schedule: 64k iterations, batch 128, lr 0.1 with /10 at 32k and 48k
+    cifar_plain20:
+      depth: 20
+      shortcuts: none (plain)
+      schedule: same as cifar_resnet20
+    cifar_resnet32:
+      depth: 32 (n=5)
+      shortcuts: identity, option A
+      params: 0.46M
+      schedule: same as cifar_resnet20
+    cifar_resnet44:
+      depth: 44 (n=7)
+      shortcuts: identity, option A
+      params: 0.66M
+      schedule: same as cifar_resnet20
+    cifar_resnet56:
+      depth: 56 (n=9)
+      shortcuts: identity, option A
+      params: 0.85M
+      schedule: same as cifar_resnet20
+    cifar_plain56:
+      depth: 56
+      shortcuts: none (plain)
+      note: used for the degradation direction check vs plain-20 (Fig. 1, Fig. 6 left)
+    cifar_resnet110:
+      depth: 110 (n=18)
+      shortcuts: identity, option A
+      params: 1.7M
+      warmup: lr 0.01 until train error <80% (~400 iterations), then 0.1
+      runs: 5 runs; best (6.43) and mean±std (6.61±0.16) reported
+    cifar_plain110:
+      depth: 110
+      shortcuts: none (plain)
+      note: error >60%, not displayed in Fig. 6 left; paper does not state whether
+        the 0.01 warm-up was used for this plain net
+    cifar_resnet1202:
+      depth: 1202 (n=200)
+      shortcuts: identity, option A
+      params: 19.4M
+      schedule: '''trained as described above'' (same recipe; warm-up usage not explicitly
+        stated)'
+    imagenet_plain18:
+      dataset: ImageNet 2012
+      architecture: 18-layer plain (Table 1), 1.8e9 FLOPs
+      testing: 10-crop
+    imagenet_resnet18_optA:
+      dataset: ImageNet 2012
+      architecture: 18-layer ResNet
+      shortcuts: option A (identity + zero-padding), no extra parameters
+      testing: 10-crop
+    imagenet_plain34:
+      dataset: ImageNet 2012
+      architecture: 34-layer plain, 3.6e9 FLOPs
+      testing: 10-crop
+    imagenet_resnet34_optA:
+      dataset: ImageNet 2012
+      architecture: 34-layer ResNet, 3.6e9 FLOPs
+      shortcuts: 'option A: zero-padding for increasing dims, all shortcuts parameter-free'
+      testing: 10-crop
+    imagenet_resnet152_optB:
+      dataset: ImageNet 2012
+      architecture: 152-layer bottleneck ResNet, 11.3e9 FLOPs
+      shortcuts: 'option B: projections only for increasing dimensions'
+      testing: single model, validation set; Table 4 uses fully-convolutional dense
+        multi-scale testing
+    imagenet_ensemble:
+      composition: ensemble of six models of different depth (only two of them 152-layer
+        at submission time)
+      testing: ImageNet test set, reported by test server
+baselines:
+- plain networks of matched depth (plain-20/32/44/56/110 on CIFAR-10; plain-18/34
+  on ImageNet)
+- Maxout [10] 9.38% CIFAR-10
+- NIN [25] 8.81% CIFAR-10
+- DSN [24] 8.22% CIFAR-10
+- FitNet-19 [35] 8.39% CIFAR-10 (2.5M params)
+- Highway-19 [42,43] 7.54% (7.72±0.16, 2.3M) and Highway-32 8.80% (1.25M) CIFAR-10
+- VGG-16/VGG-19 [41] on ImageNet (15.3/19.6 billion FLOPs; VGG-16 10-crop 28.07/9.33
+  from authors' own test)
+- GoogLeNet [44], PReLU-net [13], BN-inception [16] on ImageNet
+ambiguities:
+- id: lr_schedule
+  question: Learning-rate schedule for the reduced-scale CIFAR runs (paper uses step
+    decay at 32k/48k of 64k iterations, which does not map onto a small-step budget
+    on a 10k-image subset)?
+  config_key: lr_schedule
+  options:
+  - constant
+  - cosine
+  - step
+  - as_paper
+  default: as_paper
+  source: paper_text
+  reason: Paper states 0.1, /10 at 32k and 48k iterations, stop at 64k (Section 4.2,
+    p.7). At reduced scale the step fractions (50%/75% of total steps) are preserved.
+  sensitivity: high
+- id: augmentation
+  question: Train-time augmentation for CIFAR-10?
+  config_key: augmentation
+  options:
+  - none
+  - standard
+  - as_paper
+  default: as_paper
+  source: paper_text
+  reason: 'Paper: 4-pixel padding each side, random 32x32 crop from padded image or
+    its horizontal flip; per-pixel mean subtracted; test on single original view (Section
+    4.2, p.7).'
+  sensitivity: medium
+- id: batch_vs_steps
+  question: When batch size or dataset size changes at reduced scale, hold epochs
+    fixed or optimizer steps fixed?
+  config_key: batch_vs_steps
+  options:
+  - epochs
+  - steps
+  default: steps
+  source: conventions_kb
+  reason: Paper specifies iterations (64k at batch 128), not epochs; reduced-scale
+    runs should hold the step budget and rescale decay points proportionally.
+  sensitivity: high
+- id: mixed_precision
+  question: Mixed precision at train time?
+  config_key: mixed_precision
+  options:
+  - fp32
+  - amp
+  default: fp32
+  source: conventions_kb
+  reason: Paper predates AMP (Caffe, fp32); CPU-only tier 2 has no useful AMP path.
+  sensitivity: low
+- id: split
+  question: Is the reported CIFAR number on a validation split or the test set?
+  config_key: split
+  options:
+  - validation
+  - test
+  default: test
+  source: paper_text
+  reason: 'Paper: ''trained on the training set and evaluated on the test set''; the
+    45k/5k split was only used to fix the iteration schedule (Section 4.2, p.7).'
+  sensitivity: medium
+- id: train_split_size
+  question: Are the reported CIFAR models trained on the full 50k training set or
+    on the 45k portion of the 45k/5k schedule-tuning split?
+  config_key: train_split_size
+  options:
+  - full_50k
+  - 45k_only
+  default: full_50k
+  source: paper_text
+  reason: Paper says experiments are 'trained on the training set and evaluated on
+    the test set' and that only the schedule was determined on a 45k/5k split; it
+    never states retraining explicitly, so this must be pinned.
+  sensitivity: medium
+- id: subset_selection
+  question: How is the 10k-image CIFAR training subset drawn at reduced scale?
+  config_key: train_subset_selection
+  options:
+  - class_balanced_random_seeded
+  - first_n_of_shuffled
+  - random_unstratified
+  default: class_balanced_random_seeded
+  source: guess
+  reason: Paper trains on the full 50k; subsetting is a replication-only decision.
+    Class balance reduces variance of the direction test.
+  sensitivity: high
+- id: n_seeds
+  question: How many random seeds per configuration?
+  config_key: n_seeds
+  options:
+  - '1'
+  - '3'
+  - '5'
+  default: '3'
+  source: conventions_kb
+  reason: Paper runs single seeds except ResNet-110 (5 runs, best and mean±std). At
+    reduced scale the ResNet-vs-plain gap is small, so >=3 seeds are needed to sign
+    the direction.
+  sensitivity: high
+- id: downsample_shortcut_impl
+  question: 'Implementation of option-A dimension-increasing shortcut: stride-2 subsample
+    (slice) then zero-pad channels, or average-pool then pad?'
+  config_key: shortcut_option_a_impl
+  options:
+  - stride2_slice_then_zero_pad
+  - avgpool_then_zero_pad
+  - projection_1x1
+  default: stride2_slice_then_zero_pad
+  source: conventions_kb
+  reason: Paper says identity with extra zero entries padded and stride 2 across feature-map
+    sizes (Section 3.3, p.4) but not whether subsampling is slicing or pooling; standard
+    reimplementations slice.
+  sensitivity: medium
+- id: zero_pad_channel_placement
+  question: Where are the zero channels placed when option-A pads for increased dimensions
+    (append at the end, or split evenly before/after the existing channels)?
+  config_key: shortcut_zero_pad_placement
+  options:
+  - append_end
+  - split_front_back
+  default: append_end
+  source: guess
+  reason: Paper only says 'extra zero entries padded for increasing dimensions' (p.4);
+    placement is unstated but the code must choose one.
+  sensitivity: low
+- id: weight_init
+  question: Exact weight initialization (fan mode for the He/MSRA init)?
+  config_key: init
+  options:
+  - he_normal_fan_out
+  - he_normal_fan_in
+  - glorot
+  default: he_normal_fan_out
+  source: conventions_kb
+  reason: Paper only cites [13] (He et al. MSRA init) in Sections 3.4 and 4.2; the
+    fan mode is not stated, and fan_out is the convention in the reference implementations.
+  sensitivity: low
+- id: conv_bias
+  question: Do convolution layers carry bias terms when followed by BN?
+  config_key: conv_bias
+  options:
+  - no_bias
+  - bias
+  default: no_bias
+  source: conventions_kb
+  reason: Paper omits biases 'for simplifying notations' (Section 3.2) and does not
+    state the conv-layer bias setting; with BN after every conv the bias is redundant.
+  sensitivity: low
+- id: input_normalization
+  question: Is the subtracted CIFAR mean a per-pixel (32x32x3) mean as written, or
+    the more common per-channel mean, and is there any division by std?
+  config_key: input_normalization
+  options:
+  - per_pixel_mean_only
+  - per_channel_mean_only
+  - per_channel_mean_and_std
+  default: per_pixel_mean_only
+  source: paper_text
+  reason: Section 4.2 says 'with the per-pixel mean subtracted' and mentions no std
+    scaling; many reimplementations deviate, so this must be pinned.
+  sensitivity: medium
+- id: bn_params
+  question: BN momentum/epsilon and whether affine parameters are learned?
+  config_key: bn_config
+  options:
+  - momentum_0.9_eps_1e-5_affine
+  - momentum_0.99_eps_1e-3_affine
+  - framework_default
+  default: framework_default
+  source: conventions_kb
+  reason: Paper only cites [16] for BN placement (after conv, before activation);
+    hyperparameters unstated.
+  sensitivity: low
+- id: warmup_110
+  question: Apply the 0.01 warm-up rule only to depth>=110 or to all depths?
+  config_key: lr_warmup
+  options:
+  - depth>=110_only
+  - all_depths
+  - none
+  default: depth>=110_only
+  source: paper_text
+  reason: Paper applies 0.01 warm-up until train error <80% for the 110-layer ResNet
+    (Section 4.2, p.7) and says the 1202-layer net was 'trained as described above';
+    shallower nets start at 0.1.
+  sensitivity: low
+- id: plain110_warmup
+  question: Is the 0.01 warm-up also used for the plain-110 baseline (whose error
+    is reported as >60%)?
+  config_key: plain_lr_warmup
+  options:
+  - same_as_resnet110
+  - no_warmup
+  default: no_warmup
+  source: guess
+  reason: Paper describes the warm-up only in the context of the 110-layer ResNet
+    and never states the plain-110 training recipe; the choice affects whether plain-110
+    converges at all.
+  sensitivity: medium
+- id: plain110_error_type
+  question: Does Fig. 6's '>60%' for plain-110 refer to training error, test error,
+    or both?
+  config_key: plain110_error_metric
+  options:
+  - test_error
+  - train_error
+  - both
+  default: test_error
+  source: guess
+  reason: Figure 6 caption (p.8) plots both dashed training and bold testing curves
+    and says only 'The error of plain-110 is higher than 60% and not displayed'; the
+    metric is not disambiguated.
+  sensitivity: low
+- id: reported_checkpoint
+  question: Report final-epoch error or best-epoch error on the eval set?
+  config_key: checkpoint_selection
+  options:
+  - final
+  - best
+  default: final
+  source: conventions_kb
+  reason: Paper trains to a fixed 64k iterations and reports the resulting error;
+    no early stopping described (ResNet-110 'best' refers to best of 5 runs, not best
+    epoch).
+  sensitivity: medium
+- id: weight_decay_on_bn
+  question: Is weight decay applied to BN gamma/beta and biases?
+  config_key: wd_scope
+  options:
+  - all_params
+  - conv_fc_weights_only
+  default: all_params
+  source: conventions_kb
+  reason: Paper states weight decay 0.0001 without scoping; Caffe-era practice applied
+    it to all learnable parameters.
+  sensitivity: low
+- id: nesterov_momentum
+  question: Is the momentum 0.9 classical heavy-ball or Nesterov?
+  config_key: optimizer_nesterov
+  options:
+  - classical
+  - nesterov
+  default: classical
+  source: conventions_kb
+  reason: Paper says only 'SGD ... a momentum of 0.9' (Sections 3.4, 4.2); Caffe's
+    default is classical momentum.
+  sensitivity: low
+- id: dataloader_determinism
+  question: Shuffling/determinism settings for CPU-only reruns?
+  config_key: determinism
+  options:
+  - seeded_deterministic
+  - nondeterministic
+  default: seeded_deterministic
+  source: guess
+  reason: Not discussed in the paper; needed so the direction test is reproducible
+    across runs.
+  sensitivity: medium
+descriptive_stats:
+- metric: cifar10_train_images
+  value: 50000.0
+  where: Section 4.2, p.7
+- metric: cifar10_test_images
+  value: 10000.0
+  where: Section 4.2, p.7
+- metric: cifar10_num_classes
+  value: 10.0
+  where: Section 4.2, p.7
+- metric: cifar_resnet20_params_millions
+  value: 0.27
+  where: Table 6, p.7
+- metric: cifar_resnet32_params_millions
+  value: 0.46
+  where: Table 6, p.7
+- metric: cifar_resnet44_params_millions
+  value: 0.66
+  where: Table 6, p.7
+- metric: cifar_resnet56_params_millions
+  value: 0.85
+  where: Table 6, p.7
+- metric: cifar_resnet110_params_millions
+  value: 1.7
+  where: Table 6, p.7
+- metric: cifar_resnet1202_params_millions
+  value: 19.4
+  where: Table 6 (p.7) and Section 4.2 'Exploring Over 1000 layers' (p.8)
+- metric: cifar_batch_size
+  value: 128.0
+  where: Section 4.2, p.7
+- metric: cifar_total_iterations
+  value: 64000.0
+  where: Section 4.2, p.7
+- metric: cifar_lr_decay_iter_1
+  value: 32000.0
+  where: Section 4.2, p.7
+- metric: cifar_lr_decay_iter_2
+  value: 48000.0
+  where: Section 4.2, p.7
+- metric: cifar_initial_lr
+  value: 0.1
+  where: Section 4.2, p.7
+- metric: weight_decay
+  value: 0.0001
+  where: Section 3.4 (p.4) and Section 4.2 (p.7)
+- metric: momentum
+  value: 0.9
+  where: Section 3.4 (p.4) and Section 4.2 (p.7)
+- metric: imagenet_batch_size
+  value: 256.0
+  where: Section 3.4, p.4
+- metric: imagenet_max_iterations
+  value: 600000.0
+  where: Section 3.4, p.4 (60 x 10^4 iterations)
+- metric: imagenet_train_images_millions
+  value: 1.28
+  where: Section 4.1, p.4
+- metric: imagenet_val_images
+  value: 50000.0
+  where: Section 4.1, p.4
+- metric: imagenet_test_images
+  value: 100000.0
+  where: Section 4.1, p.4
+- metric: imagenet_num_classes
+  value: 1000.0
+  where: Section 4.1, p.4
+- metric: resnet18_flops_billions
+  value: 1.8
+  where: Table 1, p.5
+- metric: resnet34_flops_billions
+  value: 3.6
+  where: Table 1 (p.5) and Fig. 3 caption (p.4)
+- metric: resnet50_flops_billions
+  value: 3.8
+  where: Table 1 (p.5) and Section 4.1 (p.7)
+- metric: resnet101_flops_billions
+  value: 7.6
+  where: Table 1, p.5
+- metric: resnet152_flops_billions
+  value: 11.3
+  where: Table 1 (p.5) and Section 4.1 (p.7)
+- metric: vgg16_flops_billions
+  value: 15.3
+  where: Section 4.1 '101-layer and 152-layer ResNets', p.7
+- metric: vgg19_flops_billions
+  value: 19.6
+  where: Section 3.3 (p.3) and Fig. 3 caption (p.4)
+plan:
+  data_tier: A
+  compute_tier: 2
+  kind_of_test: re_implementation
+  target_claims:
+  - cifar_resnet20_test_error
+  - cifar_resnet32_test_error
+  - cifar_resnet44_test_error
+  - cifar_resnet56_test_error
+  - cifar_resnet110_best_test_error
+  - cifar_resnet110_mean_test_error
+  - cifar_resnet1202_test_error
+  - imagenet_plain18_top1
+  substitutions:
+    imagenet_ilsvrc2012: 'UNAVAILABLE: claims depending on this source are Untested'
+  tolerances:
+    cifar_resnet110_mean_test_error: 0.325
+  success_criteria: 'CPU only, compute tier 2. Section 4.2 CIFAR-10: ResNet-20 vs
+    plain-20 and, if time allows, 56-layer variants on a 10k-image subset for 3-5
+    epochs. The checkable claim at this scale is the *direction*: residual nets train
+    faster/better than plain nets of the same depth, and deeper plain nets degrade.
+    Paper''s 8.75% is Untested. || Match on every headline claim within its derived
+    tolerance; all leakage tests pass; kind of test = re_implementation; data tier
+    A; compute tier 1. Tier B: same sign, significant, gap inside the substitution''s
+    predicted band.'
+  budget:
+    spec: 10
+    setup: 20
+    build: 25
+    run: 20
+    verify: 15
+    report: 5
+    hard_kill_minutes: 240
+    max_cost_usd: 150.0
+    run_timeout_s: 1500
+  seeds:
+  - 0
+  frozen_hash: e9a7d9e5e52e05ad5fce2842feb0604756f9eb843b49771927675c06bbfb0b8c
+  frozen_at: '2026-09-15T15:51:59.705377+00:00'
