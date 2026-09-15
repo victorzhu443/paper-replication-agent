@@ -1,0 +1,1100 @@
+paper:
+  title: Proximal Policy Optimization Algorithms
+  authors:
+  - John Schulman
+  - Filip Wolski
+  - Prafulla Dhariwal
+  - Alec Radford
+  - Oleg Klimov
+  year: 2017
+  arxiv_id: '1707.06347'
+  version: v2
+  track: cs
+  family: train_and_eval
+claims:
+- id: t1_clip_eps02
+  where: Table 1 (p.6), row 'Clipping, eps = 0.2', column 'avg. normalized score'
+  evidence_page: 6
+  metric: avg_normalized_score
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 0.82
+  reported_precision: 0.005
+  n_periods: 21
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: clip_eps_0.2
+  priority: headline
+- id: t1_no_clip
+  where: Table 1 (p.6), row 'No clipping or penalty', column 'avg. normalized score'
+  evidence_page: 6
+  metric: avg_normalized_score
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: -0.39
+  reported_precision: 0.005
+  n_periods: 21
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: no_clip_no_penalty
+  priority: headline
+- id: t1_clip_eps01
+  where: Table 1 (p.6), row 'Clipping, eps = 0.1', column 'avg. normalized score'
+  evidence_page: 6
+  metric: avg_normalized_score
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 0.76
+  reported_precision: 0.005
+  n_periods: 21
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: clip_eps_0.1
+  priority: secondary
+- id: t1_clip_eps03
+  where: Table 1 (p.6), row 'Clipping, eps = 0.3', column 'avg. normalized score'
+  evidence_page: 6
+  metric: avg_normalized_score
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 0.7
+  reported_precision: 0.005
+  n_periods: 21
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: clip_eps_0.3
+  priority: secondary
+- id: t1_adaptive_kl_0003
+  where: Table 1 (p.6), row 'Adaptive KL d_targ = 0.003', column 'avg. normalized
+    score'
+  evidence_page: 6
+  metric: avg_normalized_score
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 0.68
+  reported_precision: 0.005
+  n_periods: 21
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: adaptive_kl_dtarg_0.003
+  priority: secondary
+- id: t1_adaptive_kl_001
+  where: Table 1 (p.6), row 'Adaptive KL d_targ = 0.01', column 'avg. normalized score'
+  evidence_page: 6
+  metric: avg_normalized_score
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 0.74
+  reported_precision: 0.005
+  n_periods: 21
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: adaptive_kl_dtarg_0.01
+  priority: secondary
+- id: t1_adaptive_kl_003
+  where: Table 1 (p.6), row 'Adaptive KL d_targ = 0.03', column 'avg. normalized score'
+  evidence_page: 6
+  metric: avg_normalized_score
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 0.71
+  reported_precision: 0.005
+  n_periods: 21
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: adaptive_kl_dtarg_0.03
+  priority: secondary
+- id: t1_fixed_kl_beta03
+  where: Table 1 (p.6), row 'Fixed KL, beta = 0.3', column 'avg. normalized score'
+  evidence_page: 6
+  metric: avg_normalized_score
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 0.62
+  reported_precision: 0.005
+  n_periods: 21
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: fixed_kl_beta_0.3
+  priority: secondary
+- id: t1_fixed_kl_beta1
+  where: Table 1 (p.6), row 'Fixed KL, beta = 1.', column 'avg. normalized score'
+  evidence_page: 6
+  metric: avg_normalized_score
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 0.71
+  reported_precision: 0.005
+  n_periods: 21
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: fixed_kl_beta_1
+  priority: secondary
+- id: t1_fixed_kl_beta3
+  where: Table 1 (p.6), row 'Fixed KL, beta = 3.', column 'avg. normalized score'
+  evidence_page: 6
+  metric: avg_normalized_score
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 0.72
+  reported_precision: 0.005
+  n_periods: 21
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: fixed_kl_beta_3
+  priority: secondary
+- id: t1_fixed_kl_beta10
+  where: Table 1 (p.6), row 'Fixed KL, beta = 10.', column 'avg. normalized score'
+  evidence_page: 6
+  metric: avg_normalized_score
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 0.69
+  reported_precision: 0.005
+  n_periods: 21
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: fixed_kl_beta_10
+  priority: secondary
+- id: t2_alltraining_ppo_wins
+  where: Table 2 (p.8), row (1) 'avg. episode reward over all of training', column
+    PPO
+  evidence_page: 8
+  metric: games_won
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 30.0
+  reported_precision: 0.5
+  n_periods: 49
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: atari_ppo
+  priority: secondary
+- id: t2_alltraining_acer_wins
+  where: Table 2 (p.8), row (1) 'avg. episode reward over all of training', column
+    ACER
+  evidence_page: 8
+  metric: games_won
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 18.0
+  reported_precision: 0.5
+  n_periods: 49
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: atari_acer_baseline
+  priority: secondary
+- id: t2_alltraining_a2c_wins
+  where: Table 2 (p.8), row (1) 'avg. episode reward over all of training', column
+    A2C
+  evidence_page: 8
+  metric: games_won
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 1.0
+  reported_precision: 0.5
+  n_periods: 49
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: atari_a2c_baseline
+  priority: secondary
+- id: t2_last100_ppo_wins
+  where: Table 2 (p.8), row (2) 'avg. episode reward over last 100 episodes', column
+    PPO
+  evidence_page: 8
+  metric: games_won
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 19.0
+  reported_precision: 0.5
+  n_periods: 49
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: atari_ppo
+  priority: secondary
+- id: t2_last100_acer_wins
+  where: Table 2 (p.8), row (2) 'avg. episode reward over last 100 episodes', column
+    ACER
+  evidence_page: 8
+  metric: games_won
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 28.0
+  reported_precision: 0.5
+  n_periods: 49
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: atari_acer_baseline
+  priority: secondary
+- id: t2_last100_a2c_wins
+  where: Table 2 (p.8), row (2) 'avg. episode reward over last 100 episodes', column
+    A2C (omitted from the draft spec)
+  evidence_page: 8
+  metric: games_won
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 1.0
+  reported_precision: 0.5
+  n_periods: 49
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: atari_a2c_baseline
+  priority: secondary
+- id: t6_pong_ppo
+  where: Table 6 (p.12), row 'Pong', column PPO; mean over 3 trials of the last-100-episode
+    average score after 40M frames (10M timesteps)
+  evidence_page: 12
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 20.7
+  reported_precision: 0.05
+  n_periods: 3
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: atari_ppo
+  priority: secondary
+- id: t6_breakout_ppo
+  where: Table 6 (p.12), row 'Breakout', column PPO; mean over 3 trials of the last-100-episode
+    average score after 40M frames (10M timesteps)
+  evidence_page: 12
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 274.8
+  reported_precision: 0.05
+  n_periods: 3
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: atari_ppo
+  priority: secondary
+- id: cartpole_solved_threshold
+  where: NOT A PAPER VALUE. Scaled-down CPU-only replication target only; 475 is the
+    Gym CartPole-v1 'solved' criterion and appears nowhere in the paper (the paper's
+    continuous-control benchmark is the 7 MuJoCo -v1 tasks, Section 6.1 p.6)
+  evidence_page: null
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 475.0
+  reported_precision: 0.0
+  n_periods: 100
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: cartpole_clip_eps_0.2
+  priority: descriptive
+data:
+  sources:
+  - canonical: openai_gym_mujoco
+    description: '7 simulated robotics tasks in OpenAI Gym with the MuJoCo physics
+      engine: HalfCheetah, Hopper, InvertedDoublePendulum, InvertedPendulum, Reacher,
+      Swimmer, Walker2d (all ''-v1'', footnote 2 p.6); 1,000,000 timesteps of training
+      on each (Section 6.1, p.6). This is the source of all Table 1 claims.'
+    substitute: 'gymnasium CartPole-v1 (CPU-only scaled-down environment; no MuJoCo
+      license/compute needed). NOTE: this substitution cannot reproduce the Table
+      1 numeric values; only the qualitative clip-vs-no-clip ordering is testable.'
+  - canonical: ale_atari
+    description: Arcade Learning Environment [Bel+15], the 49 Atari games included
+      in OpenAI Gym at time of publication; 40M game frames (10M timesteps), 3 trials
+      per game; same policy network architecture as Mnih et al. 2016 (Section 6.4,
+      p.8; Appendix B, p.10-12)
+    substitute: null
+  - canonical: roboschool
+    description: RoboschoolHumanoid-v0 (50M timesteps), RoboschoolHumanoidFlagrun-v0
+      and RoboschoolHumanoidFlagrunHarder-v0 (100M timesteps) showcase tasks; learning
+      curves only, no numeric claims (Section 6.3 p.7, Figure 4 p.7, Table 4 p.10)
+    substitute: null
+  universe:
+    primary_benchmark_paper: 7 MuJoCo -v1 continuous control tasks, 3 random seeds
+      each = 21 runs per algorithm/hyperparameter setting (Section 6.1 and Table 1
+      caption, p.6)
+    replication_universe: 'SUBSTITUTE (not in paper): CartPole-v1 (discrete action,
+      2 actions, 4-dim observation), <=200k environment steps'
+    atari_universe: 49 ATARI games included in OpenAI Gym at time of publication,
+      3 trials each (Section 6.4 p.8; Appendix B p.10)
+    roboschool_universe: 3 Roboschool 3D humanoid tasks (Section 6.3, p.7)
+  frequency: per-environment-timestep online interaction; policy updates every N*T
+    timesteps (episodic RL, no calendar frequency)
+  preprocessing:
+    mujoco_obs: Not stated in paper; OpenAI baselines convention for the MuJoCo benchmark
+      is running mean/std observation normalization (see ambiguity obs_normalization)
+    atari_obs: Paper states only 'the same policy network architechture as used in
+      [Mni+16]' (p.8); it does not restate frame preprocessing (84x84 grayscale, 4-frame
+      stack, frame skip 4) or reward clipping — these are inferred from the cited
+      work (see ambiguities atari_preprocessing, atari_reward_clipping)
+    advantage_estimator: Truncated GAE over length-T segments (Eq. 11-12, p.5), lambda
+      = 0.95, gamma = 0.99 (Tables 3-5, p.10)
+    score_normalization_table1: Per-environment shift and scale so that the random
+      policy scores 0 and 'the best result was set to 1', then average over the 21
+      runs to produce one scalar per algorithm setting (Section 6.1, p.6). The paper
+      does not say over which set of runs the 'best result' is taken (see ambiguity
+      table1_normalization_reference)
+    cartpole_obs: 'SUBSTITUTE run: raw 4-dim observation, no normalization assumed'
+  splits:
+    train_eval_split: 'None: online RL, evaluation is on the same environment used
+      for training'
+    scoring_window: Average total reward of the last 100 episodes of training (Section
+      6.1, p.6 for MuJoCo/Table 1; Table 2 metric (2) p.8 and Table 6 caption p.12
+      for Atari final scores)
+    alternate_scoring: Average episode reward over the entire training period (metric
+      (1) in Table 2, p.8), which favours fast learning
+    seeds: 3 random seeds per environment (MuJoCo, p.6); 3 trials per game, averaged
+      before computing the victor (Atari, Table 2 caption p.8; Figure 6 shows the
+      3 seeds individually)
+method:
+  signal: Clipped probability-ratio surrogate objective L^CLIP = E_t[min(r_t(theta)
+    A_t, clip(r_t(theta), 1-eps, 1+eps) A_t)] with r_t(theta) = pi_theta(a_t|s_t)/pi_theta_old(a_t|s_t)
+    (Eq. 7, p.3), optimized with K epochs of minibatch Adam per batch of N*T on-policy
+    timesteps (Algorithm 1, p.5)
+  model:
+    policy_net_mujoco: Fully-connected MLP, 2 hidden layers of 64 units, tanh nonlinearities,
+      outputs the mean of a Gaussian distribution with 'variable standard deviations'
+      following [Sch+15b; Dua+16] (p.6). The paper does not state whether the std
+      is state-independent or its initial value (see ambiguity policy_std_parameterization)
+    value_net: 'Separate value network for the MuJoCo surrogate-objective comparison:
+      ''We don''t share parameters between the policy and value function (so coefficient
+      c1 is irrelevant)'' (p.6). Paper does not state the value-net architecture or
+      how it is fit (see ambiguity value_net_optimization)'
+    policy_net_cartpole: 'SUBSTITUTE run: same 2x64 tanh MLP but categorical (softmax)
+      action head for discrete actions'
+    optimizer: Adam [KB14]; stepsize 3e-4 constant (Table 3, MuJoCo); 2.5e-4 * alpha
+      with alpha annealed 1->0 (Table 5, Atari); adjusted based on the target KL divergence
+      (Table 4, Roboschool, value marked '*')
+    horizon_T: 2048 (MuJoCo, Table 3); 128 (Atari, Table 5); 512 (Roboschool, Table
+      4)
+    num_epochs_K: 10 (MuJoCo, Table 3); 3 (Atari, Table 5); 15 (Roboschool, Table
+      4)
+    minibatch_size_M: 64 (MuJoCo, Table 3); 32*8 = 256 (Atari, Table 5); 4096 (Roboschool,
+      Table 4); Algorithm 1 requires M <= N*T
+    num_actors_N: Not stated for the MuJoCo benchmark (Table 3 has no 'Number of actors'
+      row); 8 (Atari, Table 5); 32 locomotion / 128 flagrun (Roboschool, Table 4)
+    discount_gamma: 0.99 (Tables 3, 4 and 5)
+    gae_lambda: 0.95 (Tables 3, 4 and 5)
+    clip_eps: 0.2 default / best on MuJoCo (Eq. 7 p.3; Section 6.2 p.7; Table 1 p.6);
+      searched over {0.1, 0.2, 0.3} in Table 1; 0.1 * alpha for Atari (Table 5). Not
+      reported for Roboschool (Table 4).
+    entropy_coeff_c2: 0 for the MuJoCo comparison ('we don't use an entropy bonus',
+      p.6); 0.01 for Atari (Table 5)
+    vf_coeff_c1: Irrelevant for MuJoCo (separate policy/value nets, p.6); 1 for Atari
+      (Table 5)
+    kl_penalty_adaptation: 'Adaptive-beta rule (Section 4, p.4): if d < d_targ/1.5
+      then beta <- beta/2; if d > d_targ*1.5 then beta <- beta*2; beta initialized
+      at 1 (Table 1 caption, p.6). KL is the forward KL[pi_theta_old(.|s_t), pi_theta(.|s_t)]
+      averaged over sampled states.'
+    roboschool_action_std: Log stdev of action distribution = LinearAnneal(-0.7, -1.6)
+      (Table 4, p.10)
+    total_timesteps: 1,000,000 per MuJoCo environment (Section 6.1 p.6, Figure 3 p.7);
+      40M frames = 10M timesteps per Atari game (Table 6 caption p.12); 50M (Humanoid)
+      / 100M (Flagrun, FlagrunHarder) for Roboschool (Figure 4, p.7)
+  evaluation:
+  - Average total reward of the last 100 training episodes per run (Section 6.1, p.6)
+  - Per-environment shift/scale normalization (random policy = 0, best result = 1)
+    then average over the 21 runs -> single scalar per algorithm setting (Table 1,
+    p.6)
+  - Number of games 'won' across 49 Atari games under two scoring metrics — (1) avg.
+    episode reward over all of training, (2) avg. episode reward over last 100 episodes
+    — with the scoring metric averaged across three trials before determining the
+    victor (Table 2, p.8)
+  - Mean final scores (last 100 episodes) per Atari game after 40M frames (Table 6,
+    p.12)
+  - Learning curves vs timesteps/frames with across-seed mean and shaded variability
+    (Figures 3, 4, 6)
+  eval_protocol:
+    seeds: 3 random seeds per environment for MuJoCo (21 runs over 7 environments,
+      p.6); 3 trials per Atari game
+    scoring_window: last 100 episodes of training
+    reported_statistic: mean across runs; no standard deviations or t-statistics are
+      printed in Table 1, Table 2 or Table 6
+    comparison_direction: Clipped objective (eps=0.2) must score higher than every
+      other setting in Table 1, in particular strictly higher than the no-clipping/no-penalty
+      ablation (which is negative, -0.39)
+    substitute_replication_check: 'NOT A PAPER PROTOCOL. On CartPole-v1 within <=200k
+      steps: PPO-Clip mean return over the last 100 training episodes >= 475 and strictly
+      greater than the no-clip ablation''s mean return'
+  variants:
+    clip_eps_0.2:
+      objective: L^CLIP with epsilon=0.2
+      hyperparams: 'Table 3 (p.10): T=2048, Adam 3e-4 constant, K=10 epochs, M=64,
+        gamma=0.99, lambda=0.95; no entropy bonus; separate value network'
+      envs: 7 MuJoCo -v1 tasks, 1M steps each, 3 seeds each
+    clip_eps_0.1:
+      objective: L^CLIP with epsilon=0.1
+      hyperparams: Table 3 defaults otherwise
+    clip_eps_0.3:
+      objective: L^CLIP with epsilon=0.3
+      hyperparams: Table 3 defaults otherwise
+    no_clip_no_penalty:
+      objective: L_t = r_t(theta) * A_t, no clipping, no KL penalty, still K=10 epochs
+        of minibatch updates (Section 6.1, p.5-6)
+      hyperparams: Table 3 defaults otherwise
+    adaptive_kl_dtarg_0.003:
+      objective: L^KLPEN (Eq. 8) with adaptive beta, d_targ=0.003, beta initialized
+        at 1, beta halved/doubled per the Section 4 rule using thresholds d_targ/1.5
+        and d_targ*1.5
+      hyperparams: Table 3 defaults otherwise
+    adaptive_kl_dtarg_0.01:
+      objective: L^KLPEN with adaptive beta, d_targ=0.01, beta initialized at 1
+      hyperparams: Table 3 defaults otherwise
+    adaptive_kl_dtarg_0.03:
+      objective: L^KLPEN with adaptive beta, d_targ=0.03, beta initialized at 1
+      hyperparams: Table 3 defaults otherwise
+    fixed_kl_beta_0.3:
+      objective: L_t = r_t A_t - beta KL[pi_theta_old, pi_theta], beta fixed at 0.3
+        (no adaptation)
+      hyperparams: Table 3 defaults otherwise
+    fixed_kl_beta_1:
+      objective: L_t = r_t A_t - beta KL, beta fixed at 1
+      hyperparams: Table 3 defaults otherwise
+    fixed_kl_beta_3:
+      objective: L_t = r_t A_t - beta KL, beta fixed at 3
+      hyperparams: Table 3 defaults otherwise
+    fixed_kl_beta_10:
+      objective: L_t = r_t A_t - beta KL, beta fixed at 10
+      hyperparams: Table 3 defaults otherwise
+    atari_ppo:
+      hyperparams: 'Table 5 (p.10): T=128, Adam 2.5e-4*alpha, K=3, M=32*8, 8 actors,
+        clip eps=0.1*alpha, c1=1, c2=0.01, gamma=0.99, lambda=0.95, alpha annealed
+        linearly 1->0'
+      architecture: Same policy network architecture as Mnih et al. 2016 (p.8); policy
+        and value share the convolutional trunk in that architecture
+      budget: 40M game frames (10M timesteps), 3 trials per game, 49 games
+    atari_a2c_baseline:
+      algorithm: A2C [Mni+16] (synchronous A3C), well-tuned implementation with hyperparameters
+        tuned to maximize performance on the Atari benchmark (p.8)
+    atari_acer_baseline:
+      algorithm: ACER [Wan+16], well-tuned implementation with hyperparameters tuned
+        to maximize performance on the Atari benchmark (p.8)
+    cartpole_clip_eps_0.2:
+      status: SUBSTITUTE variant, not run in the paper
+      env: CartPole-v1, discrete actions, CPU only
+      objective: L^CLIP with epsilon=0.2, GAE lambda=0.95, gamma=0.99, K=10 epochs,
+        M=64, T=2048, Adam 3e-4 (Table 3 protocol)
+      budget: <= 200,000 environment steps
+      scoring: mean return of last 100 training episodes, averaged over seeds
+    cartpole_no_clip:
+      status: SUBSTITUTE variant, not run in the paper
+      env: CartPole-v1, discrete actions, CPU only
+      objective: L_t = r_t(theta) A_t, no clipping and no KL penalty, identical K
+        epochs / minibatching / step budget as cartpole_clip_eps_0.2
+baselines:
+- 'No clipping or penalty: L_t = r_t(theta) A_t with the same multi-epoch minibatch
+  updates (Section 6.1, p.5-6)'
+- Adaptive KL penalty PPO, d_targ in {0.003, 0.01, 0.03}, beta initialized at 1 (Section
+  4, p.4; Table 1, p.6)
+- Fixed KL penalty, beta in {0.3, 1, 3, 10} (Table 1, p.6)
+- TRPO [Sch+15b] (continuous-domain comparison, Figure 3, p.7)
+- Cross-entropy method (CEM) [SL06] (continuous-domain comparison, Figure 3)
+- Vanilla policy gradient with adaptive Adam stepsize adjusted via a KL-based rule
+  (footnote 3, p.6; Figure 3)
+- A2C [Mni+16], synchronous version of A3C (continuous domain Figure 3, and Atari
+  Section 6.4)
+- A2C with trust region [Wan+16] (continuous-domain comparison only, legend 'A2C +
+  Trust Region' in Figure 3, p.7) — listed separately from ACER
+- ACER [Wan+16] (Atari comparison only, Section 6.4 p.8, Tables 2 and 6)
+ambiguities:
+- id: env_substitution
+  question: Which environment suite does the executable replication use, given MuJoCo
+    licence/compute constraints?
+  config_key: env_suite
+  options:
+  - mujoco_7_v1_1M_steps
+  - gym_cartpole_v1_200k_steps
+  default: gym_cartpole_v1_200k_steps
+  source: guess
+  reason: The paper's Table 1 numbers come only from the 7 MuJoCo '-v1' tasks at 1M
+    steps each (Section 6.1, p.6). Using CartPole-v1 is a compute-driven deviation
+    and cannot reproduce the Table 1 values; only the qualitative clip > no-clip ordering
+    can be checked.
+  sensitivity: high
+- id: lr_schedule
+  question: Is the Adam stepsize constant or annealed during the MuJoCo-protocol (and
+    substitute CartPole) run?
+  config_key: lr_schedule
+  options:
+  - constant
+  - cosine
+  - step
+  - as_paper
+  default: constant
+  source: paper_text
+  reason: Table 3 (p.10) lists a fixed Adam stepsize 3e-4 for the MuJoCo 1M-step benchmark;
+    annealing by alpha is specified only for Atari (Table 5, p.10) and KL-based stepsize
+    adjustment only for Roboschool (Table 4, p.10).
+  sensitivity: medium
+- id: augmentation
+  question: Any train-time data augmentation / input perturbation?
+  config_key: augmentation
+  options:
+  - none
+  - standard
+  - as_paper
+  default: none
+  source: conventions_kb
+  reason: Not applicable to on-policy RL on low-dimensional state inputs; the paper
+    describes no augmentation for the MuJoCo benchmark.
+  sensitivity: low
+- id: batch_vs_steps
+  question: When the batch/rollout size is reduced for the CPU-only run, hold the
+    number of update epochs fixed or the number of environment steps fixed?
+  config_key: batch_vs_steps
+  options:
+  - epochs
+  - steps
+  default: steps
+  source: conventions_kb
+  reason: The paper fixes an environment-step budget (1M steps per MuJoCo env, p.6)
+    rather than an update count, so the reduced-scale run should also fix the step
+    budget.
+  sensitivity: high
+- id: mixed_precision
+  question: Train in fp32 or mixed precision?
+  config_key: mixed_precision
+  options:
+  - fp32
+  - amp
+  default: fp32
+  source: conventions_kb
+  reason: Paper is silent; CPU-only run with a tiny MLP, fp32 is the convention and
+    AMP gives no benefit.
+  sensitivity: low
+- id: split
+  question: Is the reported return computed on the training-environment rollouts or
+    on separate held-out evaluation episodes?
+  config_key: split
+  options:
+  - validation
+  - test
+  default: test
+  source: paper_text
+  reason: The paper scores runs by 'the average total reward of the last 100 episodes'
+    of training (Section 6.1, p.6); there is no held-out split in online RL, so the
+    training-environment return is the reported number.
+  sensitivity: medium
+- id: eval_return_source
+  question: Should the last-100-episode return use the stochastic training policy's
+    episode returns or deterministic greedy evaluation rollouts?
+  config_key: eval_return_source
+  options:
+  - train_episode_returns_last_100
+  - separate_stochastic_eval_rollouts
+  - deterministic_greedy_eval
+  default: train_episode_returns_last_100
+  source: paper_text
+  reason: Section 6.1 (p.6) and the Table 6 caption (p.12) both define the score as
+    the average reward of the last 100 (training) episodes.
+  sensitivity: high
+- id: episode_accounting
+  question: With N parallel actors and fixed-length segments, how are 'the last 100
+    episodes' collected (global FIFO buffer of finished episodes across actors, per-actor
+    buffers, or episodes finishing within the final updates)?
+  config_key: episode_buffer_rule
+  options:
+  - global_last_100_finished_episodes
+  - per_actor_last_100_then_average
+  - episodes_in_final_update_window
+  default: global_last_100_finished_episodes
+  source: guess
+  reason: The paper only says 'average total reward of the last 100 episodes' (p.6)
+    and never specifies how episodes are pooled across parallel actors or across truncated
+    segments; the code must pick one.
+  sensitivity: medium
+- id: num_seeds
+  question: How many random seeds per configuration?
+  config_key: seeds
+  options:
+  - '3'
+  - '5'
+  - '10'
+  default: '3'
+  source: paper_text
+  reason: Paper uses 3 random seeds per environment (21 runs over 7 environments,
+    p.6); returns are high-variance so more seeds would tighten the clip-vs-no-clip
+    comparison.
+  sensitivity: high
+- id: table1_normalization_reference
+  question: For the Table 1 normalization, what defines the per-environment 'random
+    policy = 0' and 'best result = 1' anchors — max over all runs of all algorithm
+    settings, max over the settings being compared, or max over that setting's own
+    runs? And over how many episodes is the random-policy score measured?
+  config_key: score_normalization_reference
+  options:
+  - max_over_all_settings_and_seeds_per_env
+  - max_over_setting_means_per_env
+  - max_within_setting_per_env
+  default: max_over_all_settings_and_seeds_per_env
+  source: guess
+  reason: Section 6.1 (p.6) says only 'We shifted and scaled the scores for each environment
+    so that the random policy gave a score of 0 and the best result was set to 1';
+    the reference set and the random-policy evaluation length are unspecified, yet
+    they directly determine every Table 1 number.
+  sensitivity: high
+- id: advantage_normalization
+  question: Are GAE advantages standardized (zero mean, unit std) before the policy
+    loss, and over what scope?
+  config_key: advantage_normalization
+  options:
+  - none
+  - per_batch
+  - per_minibatch
+  default: per_batch
+  source: author_code
+  reason: The paper never mentions advantage normalization. The authors' baselines
+    PPO code for the MuJoCo protocol (ppo1/pposgd_simple, matching Table 3) standardizes
+    advantages over the whole N*T batch, while the Atari code (ppo2) does it per minibatch;
+    this materially affects stability.
+  sensitivity: high
+- id: obs_normalization
+  question: Apply running mean/std observation (and optionally return) normalization?
+  config_key: obs_normalization
+  options:
+  - none
+  - running_mean_std
+  default: none
+  source: guess
+  reason: Paper does not state it (authors' baselines uses VecNormalize for MuJoCo);
+    CartPole observations are already small-scale, so the substitute run defaults
+    to off. Would need to be on to mimic the MuJoCo setting.
+  sensitivity: medium
+- id: entropy_coefficient
+  question: Entropy bonus coefficient c2 for the MuJoCo-protocol / substitute CartPole
+    run?
+  config_key: entropy_coef
+  options:
+  - '0.0'
+  - '0.01'
+  default: '0.0'
+  source: paper_text
+  reason: For the surrogate-objective comparison the paper explicitly says 'we don't
+    use an entropy bonus' (p.6); Atari uses c2=0.01 (Table 5, p.10). Discrete-action
+    CartPole often benefits from 0.01.
+  sensitivity: medium
+- id: value_network_sharing
+  question: Share parameters between policy and value networks?
+  config_key: shared_trunk
+  options:
+  - separate
+  - shared
+  default: separate
+  source: paper_text
+  reason: 'Section 6.1 (p.6): ''We don''t share parameters between the policy and
+    value function (so coefficient c1 is irrelevant)''. The Atari runs do share (c1=1
+    in Table 5).'
+  sensitivity: medium
+- id: value_net_optimization
+  question: With a separate value network, what architecture, loss weight and update
+    schedule are used (same 2x64 tanh MLP, same Adam stepsize, same K epochs / minibatches
+    as the policy)?
+  config_key: value_net_training
+  options:
+  - same_mlp_same_adam_same_epochs_weight1
+  - same_mlp_separate_optimizer
+  - shared_loss_with_c1_0.5
+  default: same_mlp_same_adam_same_epochs_weight1
+  source: guess
+  reason: The paper states only that the value function is not shared and hence c1
+    is irrelevant (p.6); it gives no value-net architecture, loss weight, or fitting
+    procedure, all of which the code needs.
+  sensitivity: medium
+- id: kl_estimator
+  question: For the KL-penalty variants, is KL[pi_old, pi] computed analytically per
+    state (Gaussian closed form) or estimated from sampled log-ratios?
+  config_key: kl_estimator
+  options:
+  - analytic_per_state
+  - sample_log_ratio_mean
+  - sample_k3_estimator
+  default: analytic_per_state
+  source: paper_text
+  reason: Section 4 (p.4) writes d = E_t[KL[pi_theta_old(.|s_t), pi_theta(.|s_t)]],
+    i.e. a per-state KL averaged over sampled states, which for a Gaussian/categorical
+    policy is available in closed form; the paper never says a sample-based estimator
+    is used.
+  sensitivity: medium
+- id: gradient_clipping
+  question: Clip gradients by global norm?
+  config_key: max_grad_norm
+  options:
+  - none
+  - '0.5'
+  - '1.0'
+  default: none
+  source: author_code
+  reason: The paper never mentions gradient clipping; the authors' MuJoCo-protocol
+    implementation (ppo1) does not clip, while their Atari implementation (ppo2) uses
+    global-norm 0.5.
+  sensitivity: medium
+- id: value_loss_clipping
+  question: Use the clipped value-function loss?
+  config_key: clip_vloss
+  options:
+  - none
+  - clipped
+  default: none
+  source: paper_text
+  reason: Equation (9) (p.5) defines L^VF as the plain squared error (V_theta(s_t)
+    - V_t^targ)^2; value clipping appears only in the later released baselines code.
+  sensitivity: low
+- id: rollout_and_actors
+  question: Rollout horizon T and number of parallel actors N for the MuJoCo-protocol
+    / substitute run?
+  config_key: rollout_length_and_actors
+  options:
+  - T=2048,N=1
+  - T=128,N=8
+  - T=1024,N=1
+  default: T=2048,N=1
+  source: paper_text
+  reason: Table 3 (p.10) gives T=2048 for the 1M-step MuJoCo benchmark and has no
+    'Number of actors' row (single actor implied, unlike Tables 4 and 5 which list
+    32/128 and 8 actors).
+  sensitivity: medium
+- id: epochs_and_minibatch
+  question: Number of optimization epochs K and minibatch size M per update?
+  config_key: ppo_epochs_minibatch
+  options:
+  - K=10,M=64
+  - K=4,M=256
+  - K=3,M=256
+  default: K=10,M=64
+  source: paper_text
+  reason: 'Table 3 (p.10): 10 epochs, minibatch size 64 for the MuJoCo 1M-step benchmark
+    (Algorithm 1 requires M <= N*T).'
+  sensitivity: medium
+- id: total_timesteps_cartpole
+  question: Environment-step budget for the scaled-down substitute run?
+  config_key: total_timesteps
+  options:
+  - '100000'
+  - '200000'
+  - '1000000'
+  default: '200000'
+  source: guess
+  reason: The paper uses 1,000,000 steps per MuJoCo environment (p.6); the 200k cap
+    is a CPU-only protocol choice not present in the paper.
+  sensitivity: high
+- id: no_clip_definition
+  question: How is the 'no clipping or penalty' ablation implemented — same K epochs
+    on the ratio objective, or a single gradient step per batch?
+  config_key: noclip_update_rule
+  options:
+  - same_K_epochs_ratio_objective
+  - single_step_per_batch
+  default: same_K_epochs_ratio_objective
+  source: paper_text
+  reason: 'Section 6.1 (p.5-6) lists ''No clipping or penalty: L_t = r_t A_t'' as
+    an ablation of the same algorithm/hyperparameters, i.e. the same multi-epoch minibatch
+    loop; Section 2.1 (p.2) separately notes that multi-step optimization of L^PG
+    behaved similarly or worse.'
+  sensitivity: high
+- id: bootstrapping_at_boundaries
+  question: How are segment truncation and true episode termination handled in the
+    GAE computation (bootstrap with V(s_T) on truncation, zero value on terminal)?
+  config_key: terminal_bootstrap
+  options:
+  - bootstrap_on_truncation_zero_on_terminal
+  - zero_on_both
+  - bootstrap_on_both
+  default: bootstrap_on_truncation_zero_on_terminal
+  source: conventions_kb
+  reason: Eq. (10)-(12) (p.5) define a truncated estimator over length-T segments
+    but the paper never states how true terminal states are distinguished from segment
+    cutoffs; on CartPole this strongly affects learning.
+  sensitivity: high
+- id: policy_std_parameterization
+  question: For Gaussian (MuJoCo) policies, is the 'variable standard deviation' a
+    state-independent learned parameter vector or a network output, and what is its
+    initial value?
+  config_key: policy_std_parameterization
+  options:
+  - state_independent_learned_logstd_init0
+  - state_dependent_network_output
+  - state_independent_learned_logstd_init-0.7
+  default: state_independent_learned_logstd_init0
+  source: conventions_kb
+  reason: Section 6.1 (p.6) says only 'outputting the mean of a Gaussian distribution,
+    with variable standard deviations, following [Sch+15b; Dua+16]'; the parameterization
+    and initial std are unspecified (Table 4 anneals log stdev from -0.7 for Roboschool).
+    Irrelevant for the discrete-action CartPole substitute.
+  sensitivity: low
+- id: weight_init
+  question: Network weight initialization scheme?
+  config_key: init_scheme
+  options:
+  - orthogonal_sqrt2_policy0.01
+  - normc_std1_policy0.01
+  - pytorch_default
+  - xavier
+  default: orthogonal_sqrt2_policy0.01
+  source: conventions_kb
+  reason: The paper does not state initialization; the authors' MuJoCo code uses normalized-column
+    init with a 0.01-scaled policy output layer, their Atari code uses orthogonal
+    init with gain sqrt(2) and 0.01 policy head. Affects early learning speed.
+  sensitivity: medium
+- id: adam_epsilon
+  question: Adam epsilon value?
+  config_key: adam_eps
+  options:
+  - 1e-8
+  - 1e-5
+  default: 1e-5
+  source: author_code
+  reason: The paper gives only the stepsize (Tables 3-5); the authors' PPO implementations
+    use Adam epsilon 1e-5.
+  sensitivity: low
+- id: atari_preprocessing
+  question: What Atari frame preprocessing is used (grayscale 84x84, frame skip 4,
+    frame stack 4, episodic life, no-op starts)?
+  config_key: atari_wrappers
+  options:
+  - mnih2016_standard_deepmind_wrappers
+  - no_episodic_life_no_noop
+  - custom
+  default: mnih2016_standard_deepmind_wrappers
+  source: paper_text
+  reason: Section 6.4 (p.8) states only that the same policy network architecture
+    as [Mni+16] is used and that 40M frames equal 10M timesteps (frame skip 4, Table
+    6 caption p.12); the wrapper details are inherited from the cited work, not stated.
+  sensitivity: medium
+- id: atari_reward_clipping
+  question: Are Atari rewards clipped to [-1, 1] during training, and are the reported
+    scores raw game scores?
+  config_key: atari_reward_clipping
+  options:
+  - clip_train_report_raw
+  - no_clipping
+  - clip_and_report_clipped
+  default: clip_train_report_raw
+  source: conventions_kb
+  reason: The paper never mentions reward clipping; Table 6 values are on raw game
+    scales (e.g. Atlantis 2311815.0), so training-time clipping with raw-score reporting
+    is the convention implied but not stated.
+  sensitivity: medium
+descriptive_stats:
+- metric: num_mujoco_environments
+  value: 7.0
+  where: Section 6.1, p.6 (footnote 2 lists the 7 '-v1' tasks)
+- metric: seeds_per_environment
+  value: 3.0
+  where: Section 6.1, p.6
+- metric: runs_averaged_per_setting
+  value: 21.0
+  where: Section 6.1 and Table 1 caption, p.6
+- metric: training_timesteps_per_mujoco_env
+  value: 1000000.0
+  where: Section 6.1, p.6; Figure 3 caption, p.7
+- metric: scoring_episodes_window
+  value: 100.0
+  where: Section 6.1, p.6
+- metric: num_atari_games
+  value: 49.0
+  where: Section 6.4, p.8; Appendix B, p.10; Figure 6 caption, p.11
+- metric: atari_frames
+  value: 40000000.0
+  where: Table 6 caption, p.12
+- metric: atari_timesteps
+  value: 10000000.0
+  where: Table 6 caption, p.12
+- metric: atari_trials_per_game
+  value: 3.0
+  where: Table 2 caption, p.8; Appendix B, p.10
+- metric: policy_hidden_layers
+  value: 2.0
+  where: Section 6.1, p.6
+- metric: policy_hidden_units_per_layer
+  value: 64.0
+  where: Section 6.1, p.6
+- metric: horizon_T_mujoco
+  value: 2048.0
+  where: Table 3, p.10
+- metric: adam_stepsize_mujoco
+  value: 0.0003
+  where: Table 3, p.10
+- metric: num_epochs_mujoco
+  value: 10.0
+  where: Table 3, p.10
+- metric: minibatch_size_mujoco
+  value: 64.0
+  where: Table 3, p.10
+- metric: discount_gamma
+  value: 0.99
+  where: Tables 3, 4 and 5, p.10
+- metric: gae_lambda
+  value: 0.95
+  where: Tables 3, 4 and 5, p.10
+- metric: clip_epsilon_default
+  value: 0.2
+  where: Section 3 (Eq. 7), p.3; Table 1 best row, p.6; Section 6.2, p.7
+- metric: kl_divergence_at_ppo_update
+  value: 0.02
+  where: Figure 2 caption, p.4 (first policy update on Hopper-v1)
+- metric: kl_adaptation_threshold_factor
+  value: 1.5
+  where: Section 4, p.4
+- metric: kl_adaptation_beta_factor
+  value: 2.0
+  where: Section 4, p.4
+- metric: beta_initial_value
+  value: 1.0
+  where: Table 1 caption, p.6
+- metric: horizon_T_atari
+  value: 128.0
+  where: Table 5, p.10
+- metric: num_epochs_atari
+  value: 3.0
+  where: Table 5, p.10
+- metric: minibatch_size_atari
+  value: 256.0
+  where: Table 5, p.10 (listed as 32 x 8)
+- metric: num_actors_atari
+  value: 8.0
+  where: Table 5, p.10
+- metric: vf_coeff_c1_atari
+  value: 1.0
+  where: Table 5, p.10
+- metric: entropy_coeff_c2_atari
+  value: 0.01
+  where: Table 5, p.10
+- metric: horizon_T_roboschool
+  value: 512.0
+  where: Table 4, p.10
+- metric: num_epochs_roboschool
+  value: 15.0
+  where: Table 4, p.10
+- metric: minibatch_size_roboschool
+  value: 4096.0
+  where: Table 4, p.10
+- metric: num_actors_roboschool_locomotion
+  value: 32.0
+  where: Table 4, p.10
+- metric: num_actors_roboschool_flagrun
+  value: 128.0
+  where: Table 4, p.10
+- metric: flagrun_target_reset_interval_timesteps
+  value: 200.0
+  where: Section 6.3, p.7
+- metric: table2_ties_alltraining
+  value: 0.0
+  where: Table 2, row (1), column Tie, p.8
+- metric: table2_ties_last100
+  value: 1.0
+  where: Table 2, row (2), column Tie, p.8
+plan:
+  data_tier: C
+  compute_tier: 2
+  kind_of_test: mechanics_only
+  target_claims:
+  - t1_clip_eps02
+  - t1_no_clip
+  - t1_clip_eps01
+  - t1_clip_eps03
+  - t1_adaptive_kl_0003
+  - t1_adaptive_kl_001
+  - t1_adaptive_kl_003
+  - t1_fixed_kl_beta03
+  substitutions:
+    openai_gym_mujoco: 'UNAVAILABLE: claims depending on this source are Untested'
+    ale_atari: 'UNAVAILABLE: claims depending on this source are Untested'
+    roboschool: 'UNAVAILABLE: claims depending on this source are Untested'
+  tolerances: {}
+  success_criteria: 'CPU only. PPO-Clip (eps=0.2, GAE lambda 0.95) on CartPole-v1
+    for <=200k steps; compare clip vs no-clip. Checkable: reaches >=475 mean return
+    and the clipped objective beats the unclipped (Table 1 direction). || Match on
+    every headline claim within its derived tolerance; all leakage tests pass; kind
+    of test = mechanics_only; data tier C; compute tier 1. Tier B: same sign, significant,
+    gap inside the substitution''s predicted band.'
+  budget:
+    spec: 10
+    setup: 20
+    build: 25
+    run: 20
+    verify: 15
+    report: 5
+    hard_kill_minutes: 240
+    max_cost_usd: 150.0
+    run_timeout_s: 900
+  seeds:
+  - 0
+  - 1
+  - 2
+  frozen_hash: f3ac1d57ceba896af33d21c8dd20e50b8d5bfa81119ab9dad6306602670fe721
+  frozen_at: '2026-09-15T16:05:17.087494+00:00'
