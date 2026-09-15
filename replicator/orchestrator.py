@@ -210,7 +210,11 @@ class Orchestrator:
         run_fn = self.run_fn_for(spec)
         recs: list[RunRecord] = []
         seeds = seeds or (spec.plan.seeds if spec.paper.track.value == "cs" else [0])
-        variants = sorted({c.method_variant for c in spec.claims if c.id in spec.plan.target_claims}) or ["default"]
+        # Headline variants first; at most three distinct procedures per paper. At reduced scale
+        # extra variants are usually the same run relabeled, and each costs a full timeout.
+        head_v = [c.method_variant for c in spec.claims if c.priority == "headline" and c.id in spec.plan.target_claims]
+        rest_v = [c.method_variant for c in spec.claims if c.id in spec.plan.target_claims]
+        variants = list(dict.fromkeys(head_v + rest_v))[:3] or ["default"]
         for variant in variants:
             cfg = spec.config_for_variant(variant)
             cfg["_variant"] = variant

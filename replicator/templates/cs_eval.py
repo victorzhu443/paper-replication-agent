@@ -27,9 +27,22 @@ def run_reproduce(workdir: Path, config: dict[str, Any], seed: int, timeout_s: i
     if out.exists():
         out.unlink()
     env["METRICS_OUT"] = str(out)
-    proc = subprocess.run(["bash", "reproduce.sh"], cwd=workdir, env=env, capture_output=True, text=True, timeout=timeout_s)
+    # Run in its own process group so a timeout kills the training script and any workers it
+    # spawned, not just the bash wrapper (a surviving grandchild holding the pipe hangs the parent).
+    import signal
+    proc = subprocess.Popen(["bash", "reproduce.sh"], cwd=workdir, env=env, stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE, text=True, start_new_session=True)
+    try:
+        stdout, stderr = proc.communicate(timeout=timeout_s)
+    except subprocess.TimeoutExpired:
+        try:
+            os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        proc.wait(timeout=30)
+        raise RuntimeError(f"reproduce.sh timed out after {timeout_s}s (seed {seed}); process group killed")
     if proc.returncode != 0:
-        raise RuntimeError(f"reproduce.sh failed (seed {seed}):\n{proc.stderr[-3000:]}")
+        raise RuntimeError(f"reproduce.sh failed (seed {seed}):\n{stderr[-3000:]}")
     if not out.exists():
         raise RuntimeError("reproduce.sh did not write METRICS_OUT")
     return json.loads(out.read_text())
