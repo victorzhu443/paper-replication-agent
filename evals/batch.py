@@ -105,6 +105,7 @@ def spec_stage(slug: str) -> str:
         spec.plan.compute_tier = 2
         spec.plan.seeds = p["seeds"]
         spec.plan.budget.run_timeout_s = p["timeout"]
+        spec.plan.budget.build = 40
         spec.plan.success_criteria = p["hint"] + " || " + spec.plan.success_criteria
         spec.plan.frozen_hash = None
         spec.freeze()
@@ -127,6 +128,7 @@ def replicate(slug: str) -> dict:
         return {"slug": slug, "grade": "-", "note": "no spec"}
     orch = Orchestrator(d, batch=True)
     spec = Spec.load(d / "spec.yaml")
+    spec.plan.budget.build = max(spec.plan.budget.build, 40)
     t0 = time.time()
     rep = orch.replicate(spec, do_grid=p["grid"])
     row = _row(json.loads(rep.model_dump_json()))

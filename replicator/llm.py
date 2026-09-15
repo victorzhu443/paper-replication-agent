@@ -53,7 +53,9 @@ class LLM:
     def client(self):
         if self._client is None:
             import anthropic
-            self._client = anthropic.Anthropic()
+            # A stalled stream must fail fast: 5-minute cap per call, one retry. A builder turn
+            # that produces nothing is cheaper than a turn that eats the stage budget.
+            self._client = anthropic.Anthropic(timeout=300.0, max_retries=1)
         return self._client
 
     @property
@@ -175,13 +177,20 @@ class LLM:
         """One assistant turn of a manual tool loop. The orchestrator owns the loop and the stop."""
         model = model or MODEL
         t0 = time.time()
-        with self.client.messages.stream(
-            model=model, max_tokens=max_tokens,
-            system=[{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}],
-            messages=messages, tools=tools,
-            thinking={"type": "adaptive"}, output_config={"effort": effort},
-        ) as stream:
-            resp = stream.get_final_message()
+        import anthropic
+        try:
+            with self.client.messages.stream(
+                model=model, max_tokens=max_tokens,
+                system=[{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}],
+                messages=messages, tools=tools,
+                thinking={"type": "adaptive"}, output_config={"effort": effort},
+            ) as stream:
+                resp = stream.get_final_message()
+        except (anthropic.APITimeoutError, anthropic.APIConnectionError) as e:
+            self.log_dir.mkdir(parents=True, exist_ok=True)
+            with (self.log_dir / "llm_calls.jsonl").open("a") as f:
+                f.write(json.dumps({"stage": stage, "model": model, "error": type(e).__name__, "wall_seconds": time.time() - t0}) + "\n")
+            return None
         self._record(stage, model, resp, t0)
         return resp
 

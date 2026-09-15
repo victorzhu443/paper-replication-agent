@@ -37,7 +37,10 @@ Contract you must satisfy (the orchestrator checks it; saying you are done does 
 - Use pandas/numpy/statsmodels/torch. No network calls except through the provided data adapters.
 - Do not read the paper authors' code or clone repositories in re-implementation mode.
 - Keep intermediates: return them under metrics['_intermediates'] when cheap (row counts, dates).
-Explain briefly what you changed after each tool call; be terse."""
+Work order: (1) read the template and README, (2) write reproduce.sh and the script it calls with
+SMOKE=1 support first, (3) call run_smoke immediately, before polishing anything, (4) fix what it
+reports, repeat. Calling run_smoke early is how you find contract mismatches cheaply; the stage
+ends only when it passes. Keep each tool call small; do not write long explanations."""
 
 TOOLS = [
     {"name": "list_files", "description": "List files in the work directory.", "input_schema": {"type": "object", "properties": {}, "additionalProperties": False}},
@@ -62,6 +65,7 @@ class Builder:
         self.smoke_passed = False
         self.last_smoke: dict[str, Any] = {}
         self.turns = 0
+        self.timeouts = 0
 
     # ------------------------------------------------------------------ tools
     def _tool(self, name: str, inp: dict) -> str:
@@ -117,7 +121,12 @@ class Builder:
             then call run_smoke. Continue until run_smoke reports passed=true.""")}]
         while time.time() - t0 < self.budget_s:
             self.turns += 1
-            resp = self.llm.tool_turn("build", BUILDER_SYSTEM, messages, TOOLS, effort="high")
+            resp = self.llm.tool_turn("build", BUILDER_SYSTEM, messages, TOOLS, effort="medium")
+            if resp is None:  # timed out or connection dropped: an empty turn, not a lost stage
+                self.timeouts += 1
+                if self.timeouts >= 3:
+                    break
+                continue
             messages.append({"role": "assistant", "content": resp.content})
             tool_uses = [b for b in resp.content if b.type == "tool_use"]
             if not tool_uses:
@@ -136,5 +145,13 @@ class Builder:
             messages.append({"role": "user", "content": results})
             if self.smoke_passed:
                 break
-        return {"smoke_passed": self.smoke_passed, "turns": self.turns, "seconds": time.time() - t0,
+        if not self.smoke_passed:
+            # Budget expired (or the model stopped) without ever passing the gate: run it once on
+            # whatever exists, so partial work is judged by the same check rather than lost.
+            try:
+                self.last_smoke = self.smoke_fn()
+                self.smoke_passed = bool(self.last_smoke.get("passed"))
+            except Exception as e:  # noqa: BLE001
+                self.last_smoke = {"passed": False, "problems": [f"{type(e).__name__}: {e}"]}
+        return {"smoke_passed": self.smoke_passed, "turns": self.turns, "timeouts": self.timeouts, "seconds": time.time() - t0,
                 "blacklist_hits": self.sandbox.blacklist_hits, "last_smoke": self.last_smoke}
