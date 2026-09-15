@@ -1437,26 +1437,32 @@ to work, which is the error the order exists to prevent.
 
 ---
 
-## 10. Implementation status (2026-09-14)
+## 10. Implementation status (updated 2026-09-15)
 
-The §9 MVP cut is implemented in `replicator/` (see `README.md` for layout and commands).
-Both tracks run end to end on the two hand replications in `papers/`, which double as the
-first benchmark entries:
+The §9 MVP cut is implemented in `replicator/`; `README.md` has layout, commands, and the
+results table. Repository: https://github.com/victorzhu443/paper-replication-agent.
 
 | Piece | Status | Where |
 |---|---|---|
 | Contracts, freeze, run records, report schema | built, tested | `replicator/schema.py` |
-| Extractor → referee → page re-read, structured outputs over the PDF | built; needs credentials to exercise | `replicator/spec/` |
+| Extractor → referee → page re-read; strict structured outputs for small schemas, schema-guided JSON with lenient parse and repair rounds for the full spec | built, exercised live on 15 papers | `replicator/spec/`, `replicator/llm.py` |
 | Conventions KB (2 finance + 2 CS families) seeded from OSAP SignalDoc | built | `replicator/kb/` |
-| Triage: probe, two-axis tiers, derived tolerances, budget, freeze, dry-run | built, tested | `replicator/triage.py` |
-| Data: content-addressed cache, pandera contracts, `available_at` lineage, Table-1 checkpoint, French adapter, local-file adapter | built, tested live | `replicator/data/` |
-| Anomaly template (pre-formed portfolios and stock-level sorts), CS `reproduce.sh` contract | built, tested | `replicator/templates/` |
-| Builder: bounded tool loop, orchestrator-owned stop, subprocess sandbox, blacklist monitor | built; loop mechanics tested with a scripted model | `replicator/build/` |
-| Verify: one Match rule, shuffle + future-perturbation + `available_at` tests, convention grid | built, tested (leaky vs clean fixtures) | `replicator/verify/` |
-| Orchestrator with budgets, report-always, grade vector | built, tested end to end | `replicator/orchestrator.py`, `report.py` |
-| Spec-extraction eval against SignalDoc | scorer built; predictions need credentials | `evals/spec_eval.py` |
-| Hand replication 1: Jegadeesh–Titman momentum on French deciles (OSAP Mom12m row as ground truth) | grade A; headline Match, t-stat Mismatch surfaced | `papers/momentum_french/` |
-| Hand replication 2: LeCun 1998 MLP-300 on MNIST, 3 seeds, grid over loss/optimizer/epochs/hidden | runs; claim value flagged as recalled, not re-read | `papers/mnist_mlp/` |
+| Triage: probe, two-axis tiers, derived tolerances, budget, freeze, dry-run; author code not tiered as data; missing sources make claims Untested rather than sinking the paper | built, tested | `replicator/triage.py` |
+| Data: content-addressed cache, pandera contracts, `available_at` lineage, Table-1 checkpoint; adapters for French library, Hugging Face datasets (Hub probe), torchvision, local file | built, tested live | `replicator/data/` |
+| Anomaly template (pre-formed portfolios and stock-level sorts; cohort-based inference for overlapping holding periods), CS `reproduce.sh` contract with process-group timeouts | built, tested | `replicator/templates/` |
+| Builder: bounded tool loop, orchestrator-owned stop, smoke gate on budget expiry, 5-minute call cap, subprocess sandbox, blacklist monitor | built; exercised live (momentum: 11 turns, $0.93, grade A) | `replicator/build/` |
+| Verify: one Match rule, shuffle + future-perturbation + `available_at` tests, convention grid, reduced-scale comparisons marked not comparable | built, tested | `replicator/verify/`, `orchestrator.py` |
+| Orchestrator with budgets, report-always, grade vector, variant cap | built, tested end to end | `replicator/orchestrator.py`, `report.py` |
+| Spec-extraction eval against SignalDoc; 14-paper resumable sweep | built | `evals/` |
+| Hand replication 1: Jegadeesh–Titman momentum on French deciles | grade A, live builder and prebuilt | `papers/momentum_french/` |
+| Hand replication 2: LeCun 1998 MLP-300 on MNIST, 3 seeds | grade C; claim value flagged as recalled | `papers/mnist_mlp/` |
+| 14-paper CS sweep (Transformer, ResNet, LayerNorm, BatchNorm, GAN, DQN, PPO, World Models, Lottery Ticket, LoRA, DPO, Superposition, Circuits, ROME) | specs extracted for all ($32.90); Transformer grade C at reduced scale; rest in progress | `papers/batch/` |
+
+Observed on the sweep and folded back into the design: model-call stalls must fail fast (§0.2's
+budget is only enforceable if a single call cannot consume it); the builder must be made to test
+early (§9.4 add-back 2 is necessary but not sufficient, the orchestrator also runs the gate on
+expiry); reduced-scale results are values, not verdicts, unless the paper reports the same
+configuration at that scale (§2 stage 3, compute axis).
 
 Deferred per §9: Tiingo/WRDS adapters, contamination scan, block bootstrap, Hamilton, Docker
 sandbox, era images, Extend flag.
