@@ -1,0 +1,99 @@
+"""Stage 1b (Triage): probe data sources, assign the two tiers, derive tolerances, set the budget
+from family defaults, write success criteria, and FREEZE. Dry-run mode stops here."""
+from __future__ import annotations
+
+from dataclasses import dataclass
+
+from .data.adapters import options_for, probe
+from .data.adapters import hf_datasets
+from .kb import family_kb
+from .schema import Budget, Plan, Spec
+from .verify.compare import freeze_tolerances
+
+COMPUTE_ENVELOPE = {"cores": 8, "ram_gb": 16, "gpu": False, "budget_minutes": 20}
+
+
+@dataclass
+class TriageNote:
+    lines: list[str]
+
+
+def triage(spec: Spec, reported_gpu_hours: float | None = None, user_data: dict[str, str] | None = None) -> TriageNote:
+    notes: list[str] = []
+    plan = spec.plan
+    user_data = user_data or {}
+
+    # ---- data axis. Author code is not data; an unavailable source makes the claims that need it
+    # Untested rather than pulling the whole paper to tier C, unless nothing at all is available.
+    worst = "A"
+    unavailable: list[str] = []
+    for src in spec.data.sources:
+        if any(k in src.canonical.lower() for k in ("code", "repo", "github")):
+            notes.append(f"{src.canonical}: author code, not data (oracle mode input, not tiered)")
+            continue
+        if src.canonical in user_data:
+            src.substitute = "local_file"
+            plan.substitutions[src.canonical] = f"local_file:{user_data[src.canonical]}"
+            notes.append(f"{src.canonical}: user-supplied file (tier A)")
+            continue
+        options = options_for(src.canonical)
+        chosen = None
+        for adapter, consequence in options:
+            if adapter == "local_file":
+                continue
+            if adapter.startswith("hf_datasets:"):
+                ok, why = hf_datasets.probe(adapter.split(":", 1)[1])
+            else:
+                ok, why = probe(adapter)
+            if ok:
+                chosen = (adapter, consequence)
+                notes.append(f"{src.canonical}: probe {adapter} OK ({why})")
+                break
+            notes.append(f"{src.canonical}: probe {adapter} failed ({why})")
+        if chosen is None:
+            unavailable.append(src.canonical)
+            plan.substitutions[src.canonical] = "UNAVAILABLE: claims depending on this source are Untested"
+            notes.append(f"{src.canonical}: no adapter available -> claims needing it will be Untested")
+            continue
+        src.substitute = chosen[0]
+        exact = chosen[0] == src.canonical or chosen[1] == "exact source"
+        if not exact:
+            worst = "B" if worst == "A" else worst
+            plan.substitutions[src.canonical] = f"{chosen[0]}: {chosen[1]}"
+    n_data = sum(1 for s_ in spec.data.sources if not any(k in s_.canonical.lower() for k in ("code", "repo", "github")))
+    if n_data and len(unavailable) == n_data:
+        worst = "C"
+        notes.append("no data source available at all -> tier C")
+    plan.data_tier = worst
+
+    # ---- compute axis
+    if reported_gpu_hours is not None and reported_gpu_hours * 60 > COMPUTE_ENVELOPE["budget_minutes"]:
+        plan.compute_tier = 2
+        notes.append(f"reported compute {reported_gpu_hours} GPU-h exceeds envelope -> compute tier 2 (reduced scale)")
+    else:
+        plan.compute_tier = 1
+
+    # ---- kind of test
+    if plan.data_tier == "C":
+        plan.kind_of_test = "mechanics_only"
+    elif plan.data_tier == "B":
+        plan.kind_of_test = "conceptual_replication"
+    else:
+        plan.kind_of_test = "re_implementation"
+
+    # ---- claims, tolerances, budget
+    plan.target_claims = [c.id for c in spec.claims if c.priority in ("headline", "secondary")][:8]
+    freeze_tolerances(spec)
+    fam = family_kb(spec.paper.family.value)
+    plan.budget = Budget()
+    plan.success_criteria = (
+        f"Match on every headline claim within its derived tolerance; all leakage tests pass; "
+        f"kind of test = {plan.kind_of_test}; data tier {plan.data_tier}; compute tier {plan.compute_tier}. "
+        f"Tier B: same sign, significant, gap inside the substitution's predicted band."
+    )
+    h = spec.freeze()
+    notes.append(f"frozen: claims+tolerances sha256 {h[:12]}")
+    missing = [c.id for c in spec.claims if c.id not in plan.tolerances]
+    if missing:
+        notes.append(f"no analytic tolerance for {missing}: will be filled from our own series SE and recorded in the run log")
+    return TriageNote(notes)
