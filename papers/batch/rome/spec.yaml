@@ -1,0 +1,1878 @@
+paper:
+  title: Locating and Editing Factual Associations in GPT
+  authors:
+  - Kevin Meng
+  - David Bau
+  - Alex Andonian
+  - Yonatan Belinkov
+  year: 2022
+  arxiv_id: '2202.05262'
+  version: v5
+  track: cs
+  family: checkpoint_eval
+claims:
+- id: ct_ate_gpt2xl
+  where: 'Section 2.2, body text: ''The ATE of this experiment is 18.6%'''
+  evidence_page: 4
+  metric: average_total_effect
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 18.6
+  reported_precision: 0.05
+  n_periods: 1000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ct_single_state
+  priority: secondary
+- id: ct_aie_state_peak
+  where: 'Section 2.2 body text (heatmap in Figure 2a): AIE of a single restored hidden
+    state at the last subject token, layer 15 = 8.7%'
+  evidence_page: 4
+  metric: average_indirect_effect
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 8.7
+  reported_precision: 0.05
+  n_periods: 1000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ct_single_state
+  priority: headline
+- id: ct_aie_mlp_peak
+  where: 'Section 2.2 body text (heatmap in Figure 2b): ''MLP contributions peak at
+    AIE 6.6%'' at the early site, last subject token'
+  evidence_page: 4
+  metric: average_indirect_effect
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 6.6
+  reported_precision: 0.05
+  n_periods: 1000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ct_mlp_window10
+  priority: headline
+- id: ct_aie_attn_last_subject
+  where: 'Section 2.2 body text (heatmap in Figure 2c): ''attention at the last subject
+    token is only AIE 1.6%'''
+  evidence_page: 4
+  metric: average_indirect_effect
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 1.6
+  reported_precision: 0.05
+  n_periods: 1000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ct_attn_window10
+  priority: secondary
+- id: ct_peak_layer_state
+  where: 'Appendix B.1 text: ''the maximum effect is seen around the 15th layer of
+    the last subject token'' (paper cites ''Figure 1j''; published panel is Figure
+    2a / Figure 7a)'
+  evidence_page: 15
+  metric: peak_layer
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 15.0
+  reported_precision: 0.5
+  n_periods: 1000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ct_single_state
+  priority: secondary
+- id: ct_peak_layer_mlp
+  where: 'Appendix B.2 text: MLP 10-layer-window maximum effect at the last entity
+    token, ''centered at the 17th layer'' (Figure 2b)'
+  evidence_page: 15
+  metric: peak_layer
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 17.0
+  reported_precision: 0.5
+  n_periods: 1000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ct_mlp_window10
+  priority: secondary
+- id: ct_peak_layer_attn
+  where: 'Appendix B.2 text: Attn 10-layer-window maximum effect ''centered at the
+    32nd layer at the last word before prediction'' (Figure 2c)'
+  evidence_page: 15
+  metric: peak_layer
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 32.0
+  reported_precision: 0.5
+  n_periods: 1000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ct_attn_window10
+  priority: secondary
+- id: ct_clean_prob
+  where: 'Appendix B.1 text: mean clean-run predicted probability of the correct object
+    token over the 1000 known facts averages 27.0%'
+  evidence_page: 15
+  metric: mean_probability
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 27.0
+  reported_precision: 0.05
+  n_periods: 1000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ct_single_state
+  priority: descriptive
+- id: ct_corrupted_prob
+  where: 'Appendix B.1 text: corruption ''reduces the correct object token score to
+    8.47%'''
+  evidence_page: 15
+  metric: mean_probability
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 8.47
+  reported_precision: 0.005
+  n_periods: 1000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ct_single_state
+  priority: descriptive
+- id: ct_restore_max_state_last_subject
+  where: 'Appendix B.1 text: ''the average maximum score seen by restoring the most
+    impactful activation vector at the last token of the subject is 19.5%'''
+  evidence_page: 15
+  metric: mean_restored_probability
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 19.5
+  reported_precision: 0.05
+  n_periods: 1000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ct_single_state
+  priority: secondary
+- id: ct_restore_layer15_state
+  where: 'Appendix B.1 text: bucketed by layer, maximum effect around the 15th layer
+    of the last subject token raises the score on average to 15.0%'
+  evidence_page: 15
+  metric: mean_restored_probability
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 15.0
+  reported_precision: 0.05
+  n_periods: 1000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ct_single_state
+  priority: secondary
+- id: ct_restore_max_mlp
+  where: 'Appendix B.2 text: per-text average maximum score for a run of ten MLP restorations
+    is 23.6%'
+  evidence_page: 15
+  metric: mean_restored_probability
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 23.6
+  reported_precision: 0.05
+  n_periods: 1000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ct_mlp_window10
+  priority: secondary
+- id: ct_restore_mlp_layer17
+  where: 'Appendix B.2 text: MLP-window bucketed maximum (last entity token, centered
+    at layer 17) restores scores to an average of 15.0%'
+  evidence_page: 15
+  metric: mean_restored_probability
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 15.0
+  reported_precision: 0.05
+  n_periods: 1000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ct_mlp_window10
+  priority: secondary
+- id: ct_restore_max_attn
+  where: 'Appendix B.2 text: Attn-window average maximum score over any location is
+    19.4%'
+  evidence_page: 15
+  metric: mean_restored_probability
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 19.4
+  reported_precision: 0.05
+  n_periods: 1000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ct_attn_window10
+  priority: secondary
+- id: ct_restore_attn_layer32
+  where: 'Appendix B.2 text: Attn-window bucketed maximum (centered at layer 32, last
+    word before prediction) restores scores to an average of 16.5%'
+  evidence_page: 15
+  metric: mean_restored_probability
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 16.5
+  reported_precision: 0.05
+  n_periods: 1000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ct_attn_window10
+  priority: secondary
+- id: zsre_rome_efficacy
+  where: Table 1 (zsRE Editing Results on GPT-2 XL), row ROME, column Efficacy (95%
+    CI +/- 0.0)
+  evidence_page: 6
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 99.8
+  reported_precision: 0.05
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_zsre_gpt2xl
+  priority: secondary
+- id: zsre_rome_paraphrase
+  where: Table 1, row ROME, column Paraphrase (95% CI +/- 0.5)
+  evidence_page: 6
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 88.1
+  reported_precision: 0.05
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_zsre_gpt2xl
+  priority: secondary
+- id: zsre_rome_specificity
+  where: Table 1, row ROME, column Specificity (95% CI +/- 0.5)
+  evidence_page: 6
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 24.2
+  reported_precision: 0.05
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_zsre_gpt2xl
+  priority: secondary
+- id: zsre_unedited_efficacy
+  where: Table 1, row GPT-2 XL (unedited), column Efficacy (95% CI +/- 0.5)
+  evidence_page: 6
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 22.2
+  reported_precision: 0.05
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: unedited_gpt2xl_zsre
+  priority: descriptive
+- id: zsre_ftl_paraphrase
+  where: Table 1, row FT+L, column Paraphrase (95% CI +/- 0.7)
+  evidence_page: 6
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 47.2
+  reported_precision: 0.05
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ftl_zsre_gpt2xl
+  priority: secondary
+- id: cf_rome_S_gpt2xl
+  where: Table 4 (Quantitative Editing Results), GPT-2 XL panel, row ROME, column
+    S (harmonic mean of ES/PS/NS)
+  evidence_page: 8
+  metric: score
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 89.2
+  reported_precision: 0.05
+  n_periods: 7500
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_cf_gpt2xl
+  priority: headline
+- id: cf_rome_ES_gpt2xl
+  where: Table 4, GPT-2 XL panel, row ROME, column ES (95% CI +/- 0.1)
+  evidence_page: 8
+  metric: efficacy_score
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 100.0
+  reported_precision: 0.05
+  n_periods: 7500
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_cf_gpt2xl
+  priority: secondary
+- id: cf_rome_EM_gpt2xl
+  where: Table 4, GPT-2 XL panel, row ROME, column EM (95% CI +/- 0.2)
+  evidence_page: 8
+  metric: efficacy_magnitude
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 97.9
+  reported_precision: 0.05
+  n_periods: 7500
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_cf_gpt2xl
+  priority: secondary
+- id: cf_rome_PS_gpt2xl
+  where: Table 4, GPT-2 XL panel, row ROME, column PS (95% CI +/- 0.3)
+  evidence_page: 8
+  metric: paraphrase_score
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 96.4
+  reported_precision: 0.05
+  n_periods: 7500
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_cf_gpt2xl
+  priority: secondary
+- id: cf_rome_PM_gpt2xl
+  where: Table 4, GPT-2 XL panel, row ROME, column PM (95% CI +/- 0.8)
+  evidence_page: 8
+  metric: paraphrase_magnitude
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 62.7
+  reported_precision: 0.05
+  n_periods: 7500
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_cf_gpt2xl
+  priority: secondary
+- id: cf_rome_NS_gpt2xl
+  where: Table 4, GPT-2 XL panel, row ROME, column NS (95% CI +/- 0.7)
+  evidence_page: 8
+  metric: neighborhood_score
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 75.4
+  reported_precision: 0.05
+  n_periods: 7500
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_cf_gpt2xl
+  priority: secondary
+- id: cf_rome_NM_gpt2xl
+  where: Table 4, GPT-2 XL panel, row ROME, column NM (95% CI +/- 0.2)
+  evidence_page: 8
+  metric: neighborhood_magnitude
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 4.2
+  reported_precision: 0.05
+  n_periods: 7500
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_cf_gpt2xl
+  priority: secondary
+- id: cf_rome_GE_gpt2xl
+  where: 'Table 4, GPT-2 XL panel, row ROME, column GE (generation entropy, 95% CI
+    +/- 0.5). NOTE: Table 4 prints GE on a x100 scale (621.9) whereas Figure 24h plots
+    the same quantity near 6.2 bits.'
+  evidence_page: 8
+  metric: generation_entropy
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 621.9
+  reported_precision: 0.05
+  n_periods: 7500
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_cf_gpt2xl
+  priority: secondary
+- id: cf_rome_RS_gpt2xl
+  where: Table 4, GPT-2 XL panel, row ROME, column RS (Consistency / reference score
+    = TF-IDF cosine x100, 95% CI +/- 0.3)
+  evidence_page: 8
+  metric: reference_score
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 41.9
+  reported_precision: 0.05
+  n_periods: 7500
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_cf_gpt2xl
+  priority: secondary
+- id: cf_unedited_S_gpt2xl
+  where: Table 4, row GPT-2 XL (pre-edit), column S
+  evidence_page: 8
+  metric: score
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 30.5
+  reported_precision: 0.05
+  n_periods: 7500
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: unedited_gpt2xl_cf
+  priority: descriptive
+- id: cf_unedited_ES_gpt2xl
+  where: Table 4, row GPT-2 XL (pre-edit), column ES (95% CI +/- 0.9)
+  evidence_page: 8
+  metric: efficacy_score
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 22.2
+  reported_precision: 0.05
+  n_periods: 7500
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: unedited_gpt2xl_cf
+  priority: descriptive
+- id: cf_unedited_NS_gpt2xl
+  where: Table 4, row GPT-2 XL (pre-edit), column NS (95% CI +/- 0.6)
+  evidence_page: 8
+  metric: neighborhood_score
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 78.1
+  reported_precision: 0.05
+  n_periods: 7500
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: unedited_gpt2xl_cf
+  priority: descriptive
+- id: cf_ft_S_gpt2xl
+  where: Table 4, GPT-2 XL panel, row FT, column S
+  evidence_page: 8
+  metric: score
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 65.1
+  reported_precision: 0.05
+  n_periods: 7500
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ft_cf_gpt2xl
+  priority: secondary
+- id: cf_ftl_S_gpt2xl
+  where: Table 4, GPT-2 XL panel, row FT+L, column S
+  evidence_page: 8
+  metric: score
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 66.9
+  reported_precision: 0.05
+  n_periods: 7500
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ftl_cf_gpt2xl
+  priority: secondary
+- id: cf_kn_S_gpt2xl
+  where: Table 4, GPT-2 XL panel, row KN, column S
+  evidence_page: 8
+  metric: score
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 35.6
+  reported_precision: 0.05
+  n_periods: 7500
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: kn_cf_gpt2xl
+  priority: secondary
+- id: cf_ke_S_gpt2xl
+  where: Table 4, GPT-2 XL panel, row KE, column S
+  evidence_page: 8
+  metric: score
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 52.2
+  reported_precision: 0.05
+  n_periods: 7500
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ke_cf_gpt2xl
+  priority: secondary
+- id: cf_mend_S_gpt2xl
+  where: Table 4, GPT-2 XL panel, row MEND, column S
+  evidence_page: 8
+  metric: score
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 57.9
+  reported_precision: 0.05
+  n_periods: 7500
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: mend_cf_gpt2xl
+  priority: secondary
+- id: cf_rome_S_gptj
+  where: Table 4, GPT-J panel, row ROME, column S
+  evidence_page: 8
+  metric: score
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 91.5
+  reported_precision: 0.05
+  n_periods: 2000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_cf_gptj
+  priority: secondary
+- id: cf_rome_PS_gptj
+  where: Table 4, GPT-J panel, row ROME, column PS (95% CI +/- 0.3)
+  evidence_page: 8
+  metric: paraphrase_score
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 99.1
+  reported_precision: 0.05
+  n_periods: 2000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_cf_gptj
+  priority: secondary
+- id: cf_rome_NS_gptj
+  where: Table 4, GPT-J panel, row ROME, column NS (95% CI +/- 1.2)
+  evidence_page: 8
+  metric: neighborhood_score
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 78.9
+  reported_precision: 0.05
+  n_periods: 2000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_cf_gptj
+  priority: secondary
+- id: cf_rome_S_gpt2m
+  where: Table 5 (Extended Quantitative Editing Results), GPT-2 M panel, row ROME,
+    column S
+  evidence_page: 27
+  metric: score
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 87.4
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_cf_gpt2m
+  priority: secondary
+- id: cf_rome_ES_gpt2m
+  where: Table 5, GPT-2 M panel, row ROME, column ES (95% CI +/- 0.0)
+  evidence_page: 27
+  metric: efficacy_score
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 100.0
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_cf_gpt2m
+  priority: secondary
+- id: cf_rome_EM_gpt2m
+  where: Table 5, GPT-2 M panel, row ROME, column EM (95% CI +/- 0.3)
+  evidence_page: 27
+  metric: efficacy_magnitude
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 94.9
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_cf_gpt2m
+  priority: secondary
+- id: cf_rome_PS_gpt2m
+  where: Table 5, GPT-2 M panel, row ROME, column PS (95% CI +/- 0.3)
+  evidence_page: 27
+  metric: paraphrase_score
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 96.4
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_cf_gpt2m
+  priority: secondary
+- id: cf_rome_NS_gpt2m
+  where: Table 5, GPT-2 M panel, row ROME, column NS (95% CI +/- 0.7)
+  evidence_page: 27
+  metric: neighborhood_score
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 71.8
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_cf_gpt2m
+  priority: secondary
+- id: cf_unedited_S_gpt2m
+  where: Table 5, row GPT-2 M (pre-edit), column S
+  evidence_page: 27
+  metric: score
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 33.4
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: unedited_gpt2m_cf
+  priority: descriptive
+- id: cf_unedited_ES_gpt2m
+  where: Table 5, row GPT-2 M (pre-edit), column ES (95% CI +/- 1.0)
+  evidence_page: 27
+  metric: efficacy_score
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 25.0
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: unedited_gpt2m_cf
+  priority: descriptive
+- id: cf_rome_S_gpt2l
+  where: Table 5, GPT-2 L panel, row ROME, column S
+  evidence_page: 27
+  metric: score
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 88.2
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_cf_gpt2l
+  priority: secondary
+- id: zsre_rome_efficacy_gpt2m
+  where: Table 6 (Extended zsRE Editing Results), GPT-2 M panel, row ROME, column
+    Efficacy (95% CI +/- 0.2)
+  evidence_page: 27
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 96.6
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_zsre_gpt2m
+  priority: secondary
+- id: zsre_rome_paraphrase_gpt2m
+  where: Table 6, GPT-2 M panel, row ROME, column Paraphrase (95% CI +/- 0.6)
+  evidence_page: 27
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 79.8
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_zsre_gpt2m
+  priority: secondary
+- id: zsre_rome_specificity_gpt2m
+  where: Table 6, GPT-2 M panel, row ROME, column Specificity (95% CI +/- 0.4)
+  evidence_page: 27
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 21.3
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_zsre_gpt2m
+  priority: secondary
+- id: zsre_unedited_efficacy_gpt2m
+  where: Table 6, row GPT-2 M (pre-edit), column Efficacy (95% CI +/- 0.5)
+  evidence_page: 27
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 18.8
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: unedited_gpt2m_zsre
+  priority: descriptive
+- id: zsre_rome_efficacy_gpt2l
+  where: Table 6, GPT-2 L panel, row ROME, column Efficacy (95% CI +/- 0.1)
+  evidence_page: 27
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 99.6
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_zsre_gpt2l
+  priority: secondary
+- id: rome_peak_layer_gpt2xl
+  where: 'Section 3.4 text (continuation on p.8): ''generalization peaking at the
+    18th layer'' of GPT-2 XL; sweep plotted in Figure 5b (PM panel)'
+  evidence_page: 8
+  metric: peak_layer
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 18.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_layer_token_sweep_gpt2xl
+  priority: secondary
+- id: rome_ablation_noprefix_S
+  where: 'Appendix E.5, Key Selection bullet: ''No prefix ... performed worse (S''
+    = 86.1 compared to S = 89.2)'''
+  evidence_page: 26
+  metric: score
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 86.1
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_cf_gpt2xl_noprefix
+  priority: secondary
+- id: rome_ablation_longprefix_S
+  where: 'Appendix E.5, Key Selection bullet: longer prefixes (ten len 5 + ten len
+    10 + ten len 50) give S'' = 89.3'
+  evidence_page: 26
+  metric: score
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 89.3
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: rome_cf_gpt2xl_longprefix
+  priority: secondary
+- id: human_consistency_rome_vs_gpt
+  where: Figure 26 (left bar chart), ROME vs GPT, 'ROME more consistent' count out
+    of 150
+  evidence_page: 32
+  metric: count_preferred
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 125.0
+  reported_precision: 0.5
+  n_periods: 150
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: human_eval
+  priority: secondary
+- id: human_consistency_rome_vs_ftl
+  where: Figure 26 (left bar chart), ROME vs FT+L, 'ROME more consistent' count out
+    of 150
+  evidence_page: 32
+  metric: count_preferred
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 97.0
+  reported_precision: 0.5
+  n_periods: 150
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: human_eval
+  priority: secondary
+- id: human_fluency_rome_vs_gpt
+  where: Figure 26 (right bar chart), ROME vs GPT, 'ROME more fluent' count out of
+    150
+  evidence_page: 32
+  metric: count_preferred
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 61.0
+  reported_precision: 0.5
+  n_periods: 150
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: human_eval
+  priority: secondary
+- id: human_fluency_rome_vs_ftl
+  where: Figure 26 (right bar chart), ROME vs FT+L, 'ROME more fluent' count out of
+    150
+  evidence_page: 32
+  metric: count_preferred
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 64.0
+  reported_precision: 0.5
+  n_periods: 150
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: human_eval
+  priority: secondary
+- id: human_consistency_ratio_rome_ftl
+  where: 'Section 3.6 text (p.9): ''evaluators are 1.8 times more likely to rate ROME
+    as more consistent with the inserted fact than the FT+L model'''
+  evidence_page: 9
+  metric: preference_ratio
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 1.8
+  reported_precision: 0.05
+  n_periods: 150
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: human_eval
+  priority: secondary
+- id: human_fluency_ratio_rome_ftl
+  where: 'Section 3.6 text (p.9): ''rating ROME as 1.3 times less likely to be more
+    fluent than the FT+L model'''
+  evidence_page: 9
+  metric: preference_ratio
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 1.3
+  reported_precision: 0.05
+  n_periods: 150
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: human_eval
+  priority: secondary
+data:
+  sources:
+  - canonical: huggingface_gpt2
+    description: 'Pretrained autoregressive checkpoints: GPT-2 XL (1.5B, 48 layers),
+      GPT-2 Large (774M), GPT-2 Medium (345M in Appendix F; Figure 9 caption says
+      334M), plus GPT-J (6B, 28 layers) and GPT-NeoX (20B, 44 layers) for appendix
+      traces. CPU replication restricted to gpt2 / gpt2-medium.'
+    substitute: null
+  - canonical: counterfact_dataset
+    description: 'COUNTERFACT: 21,919 counterfactual records released with the paper
+      (rome.baulab.info); each has requested_rewrite {s, r, o_c, o*, p*}, 2 paraphrase
+      prompts, 10 neighborhood prompts, generation prompts (Table 2: 3 distinct per
+      record; Appendix D and Figure 21 show 10 entries per record because prompts
+      are duplicated), and Wikipedia reference texts RT.'
+    substitute: null
+  - canonical: zsre
+    description: 'Zero-shot relation extraction QA (Levy et al. 2017) with De Cao
+      et al. / Mitchell et al. extensions; 10,000-record evaluation slice, Mitchell
+      et al. (2021) train/test splits (train split discarded for non-hypernetwork
+      methods). Each record: factual statement t*, paraphrase prompts P^P, and one
+      unrelated/neighborhood fact with its own true answer (loc / loc_ans in Fig.
+      22).'
+    substitute: null
+  - canonical: pararel
+    description: PARAREL (Elazar et al. 2021a) relation-level prompt templates and
+      knowledge tuples used to construct COUNTERFACT.
+    substitute: null
+  - canonical: wikidata
+    description: WikiData SPARQL queries (query.wikidata.org) for neighborhood subjects
+      s' sharing (r, o_c) and for sampling entities with (s', r, o*) whose Wikipedia
+      articles serve as reference texts.
+    substitute: null
+  - canonical: wikipedia_dump
+    description: 'Wikipedia 2020-05-01 snapshot: 100,000 sampled MLP fan-out activations
+      k (all tokens, float32, up to the transformer buffer length) used to precompute
+      C proportional to E[k k^T] for the ROME update (Appendix E.5).'
+    substitute: null
+  universe:
+    models_main: GPT-2 XL (Tables 1, 4), GPT-J 6B (Table 4 lower panel), GPT-2 Medium
+      and Large (Tables 5, 6); causal tracing also on GPT-NeoX 20B (Appendix B.3)
+    edited_parameters: W_proj (mlp.c_proj) of a single MLP layer for ROME; FT/FT+L
+      edit mlp_proj at one layer; KN adds scaled embedding vectors to rows of mlp_proj;
+      MEND edits several of the last layers; KE predicts rank-1 weight changes; AttnEdit
+      fine-tunes W_Q, W_K, W_V of all heads at layer 33
+    fact_representation: knowledge tuple t=(s, r, o); prompt p templated per relation
+      with subject substitution (P(s,r) = {t.format(s)})
+    layer_indexing: 'Appendix B.1: in by-layer experimental results layers are numbered
+      0..L-1, but prose uses ordinals (''15th layer'', ''17th layer'', ''18th layer'')'
+    tracing_prompt_universe: 1000 prompts generated from COUNTERFACT facts/templates
+      by greedy generation, kept only if GPT-2 XL names o_c before any other capitalized
+      word; for NeoX/GPT-J the same prompts are reused with cases dropped where the
+      larger model predicts a different object (700 and 501 prompts respectively per
+      Figure 8)
+  frequency: none (per-record single-fact edit; one model edit per COUNTERFACT/zsRE
+    record, original weights restored between records)
+  preprocessing:
+    tracing_prompt_selection: greedy generation from COUNTERFACT facts/templates;
+      prompt = text up to but not including o_c; random sample of 1000 such known
+      facts
+    corruption_rule: 'add epsilon ~ N(0; nu) to the embeddings (post emb+pos) of all
+      tokens naming the subject s, with nu = 3 sigma_t where sigma_t is the observed
+      standard deviation of token embeddings (footnote 4: nu is 3 times larger than
+      the empirical standard deviation of embeddings); 10 independent noise draws
+      per prompt; GPT-NeoX nu = 0.03, GPT-J nu = 0.025 (Appendix B.3). Alternative
+      corruption rules (multivariate N(mu_t, Sigma_t), uniform +/-3 sigma, extra corrupted
+      token after the subject) appear only in Appendix B.4 / Figures 12, 13, 15.'
+    restoration_rule: single hidden state h_i^(l) restored to its clean value from
+      the same layer and same token, with no further intervention; for MLP/Attn decomposition
+      a window of ten module outputs m_i^(l) (or a_i^(l)) over layers [l*-4, ...,
+      l*+5] (clipped at the edges) is restored and plotted at l*
+    mlp_severing: for the modified-graph experiment (Figure 3), MLP (or Attn) contributions
+      at token i are severed, i.e. frozen at their baseline corrupted-run values,
+      so they are unaffected by the inserted clean h_i^(l)
+    token_buckets: first subject token, middle subject tokens, last subject token,
+      first subsequent token, further tokens, last token
+    k_star_prefixes: 'prefix texts generated by G prepended to the subject; CONFLICT:
+      Section 3.1 says 50 random token sequences of length 2-10, Appendix E.5 says
+      20 texts (ten of length 5 and ten of length 10) - see ambiguity k_star_prefix_sampling'
+    v_star_prefixes: v* optimization reuses the same random prefix texts x_j as k*
+      selection (Section 3.1, Step 2)
+    covariance_cache: C proportional to E[k k^T] computed from 100,000 k vectors over
+      every token of randomly sampled Wikipedia articles (2020-05-01 snapshot), float32
+  splits:
+    causal_tracing_sample: 1000 known-fact prompts for GPT-2 XL (700 for GPT-NeoX,
+      501 for GPT-J per Figure 8)
+    counterfact_test_gpt2xl: 7,500 records (Section 3.4)
+    counterfact_test_gptj: 2,000 records (Section 3.4)
+    counterfact_test_gpt2m_gpt2l: size not stated in the paper for Tables 5/6
+    zsre_eval_slice: 10,000 records (Mitchell et al. test split); Table 6 does not
+      restate the slice size for GPT-2 M/L
+    hyperparameter_sweep: randomly sampled size-50 subset of COUNTERFACT, max 25 optimization
+      steps (Figures 17, 18)
+    hypernetwork_training: KE-zsRE/KE-CF and MEND-zsRE/MEND-CF trained on size-10,000
+      subsets of the respective training sets
+    human_eval: 50 counterfactual scenarios, 15 volunteers, 150 consistency and 150
+      fluency judgments
+method:
+  signal: Causal mediation analysis (average indirect effect of restoring clean hidden
+    states under subject-embedding corruption) localizes factual recall to midlayer
+    MLPs at the last subject token; ROME then writes a new (k*, v*) association into
+    that MLP's W_proj via the closed-form rank-one update W_hat = W + Lambda (C^-1
+    k*)^T, with Lambda = (v* - W k*) / ((C^-1 k*)^T k*).
+  model:
+    rome_edit_layer_gpt2xl: 'Appendix E.5: ''We perform the intervention at layer
+      18'' for GPT-2 XL (0-indexed plots imply the code index may be 17); the section
+      header covers both GPT-2 XL and GPT-J and no separate GPT-J layer is printed'
+    k_star: post-nonlinearity MLP activation sigma(W_fc gamma(a_i^(l*) + h_i^(l*-1)))
+      at layer l*, last subject token index i, averaged over N prefix texts (Eqn.
+      3)
+    v_star_objective: argmin_z [ (1/N) sum_j -log P_{G(m_i^(l*):=z)}[o* | x_j + p]
+      + lambda * D_KL( P_{G(m_i'^(l*):=z)}[x | p'] || P_G[x | p'] ) ], with p' of
+      the form '{subject} is a'
+    v_star_optimizer: Adam, lr 0.5, weight decay 1.5e-3, KL scaling factor lambda
+      = 1e2, max 20 steps, early stop when L(z) reaches 5e-2 (Appendix E.5)
+    update_rule: Lambda = (v* - W k*) / ((C^-1 k*)^T k*); C = K K^T uncentered second
+      moment from 100k Wikipedia k vectors (Eqns. 2, 13, 17)
+    ft_baseline: 'FT: Adam on mlp_proj at one layer, lr 5e-4, early stop at 0.03 loss;
+      layer 1 for GPT-2 XL, layer 21 for GPT-J (Appendix E.1)'
+    ftl_baseline: 'FT+L: FT plus L_inf clamp ||theta_G - theta_G''||_inf <= eps applied
+      at every gradient step; layer 0 with eps = 5e-4 (GPT-2 XL), layer 0 with eps
+      = 5e-5 (GPT-J); lr and early stopping as in FT'
+    kn_baseline: 'Knowledge Neurons: coarse refinement to ~1000 neurons then fine
+      refinement to <=10; all hyperparameters default from EleutherAI/knowledge-neurons
+      (Appendix E.2); GPT-2 XL only'
+    ke_baseline: 'KE: Mitchell et al. re-implementation, default training config,
+      test-time weight-update scaling factor 1.0 (Appendix E.3); GPT-2 XL only'
+    mend_baseline: 'MEND: default training and test-time configs; retrained MEND-zsRE
+      / MEND-CF on size-10,000 subsets (Appendix E.4)'
+    attnedit: constrained fine-tuning of W_Q, W_K, W_V of all heads at layer 33 (center
+      of attention causal effect), L_inf eps = 0.001 (Appendix I)
+    runtime: about 2s per ROME edit on an NVIDIA A6000 for GPT-2 XL; KE/MEND inference
+      ~100ms but need hours-to-days of training
+  evaluation:
+  - average total effect ATE = P[o] - P*[o] averaged over sampled facts
+  - average indirect effect AIE = P*_{clean h_i^(l)}[o] - P*[o] per (token bucket,
+    layer, component); direct effect not computed
+  - 'zsRE Efficacy and Paraphrase: post-edit top-1 accuracy I[o* = argmax_o P_{G''}[o]]
+    on the rewritten statement and its paraphrase'
+  - 'zsRE Specificity: post-edit top-1 accuracy of the edited model on an unrelated
+    fact, scored against that fact''s own true answer (not o*)'
+  - COUNTERFACT Efficacy Score ES = fraction of cases with P[o*] > P[o_c]; Efficacy
+    Magnitude EM = mean(P[o*] - P[o_c])
+  - Paraphrase Score/Magnitude PS, PM computed the same way on the 2 paraphrase prompts
+  - Neighborhood Score/Magnitude NS, NM on the 10 neighborhood prompts, success =
+    P[o_c] > P[o*]
+  - Score S = harmonic mean of ES, PS, NS
+  - Generation Entropy GE = weighted average of bi- and tri-gram entropies -sum_k
+    f(k) log2 f(k) of text generated from the generation prompts (weights not stated;
+    Table 4 prints the quantity x100 relative to Figure 24h)
+  - Reference Score RS (Consistency) = cosine similarity of unigram TF-IDF vectors
+    of generated text vs Wikipedia reference texts for entities sharing o*
+  - Human ranking of consistency with the counterfactual and of fluency (150 judgments
+    each)
+  eval_protocol:
+    edit_scope: one fact edited at a time; original weights restored before the next
+      record (Section 3.7)
+    uncertainty: 95% confidence intervals in parentheses in Tables 1, 4, 5, 6 and
+      as shaded areas in Figures 5, 7, 23; no cross-seed standard deviations are reported
+    probability_target: probability of the target object token(s) under the (edited)
+      model given the prompt; multi-token handling not specified in the paper
+    generation_decoding: top-k probabilistic continuations; generation prompts duplicated
+      so each has more than one chance (Figure 21 note). k, temperature, length and
+      number of samples are not printed.
+    tracing_averaging: AIE averaged over 1000 prompts x 10 corruption-noise draws
+      per prompt
+    reduced_cpu_protocol: 'planned replication: causal tracing on about 10 facts with
+      GPT-2 / GPT-2 Medium, then one ROME edit checking the post-edit rise in target-token
+      probability; point AIE values will be noisier than the paper''s 1000-prompt
+      averages'
+  variants:
+    ct_single_state:
+      component: single hidden state h_i^(l) restored
+      model: GPT-2 XL
+      n_prompts: 1000
+      noise: 3 sigma_t spherical Gaussian added to subject token embeddings, 10 draws
+        per prompt
+    ct_mlp_window10:
+      component: run of 10 MLP outputs m_i^(l), layers [l*-4, l*+5] clipped at edges,
+        plotted at l*
+      model: GPT-2 XL
+      n_prompts: 1000
+    ct_attn_window10:
+      component: run of 10 attention outputs a_i^(l), layers [l*-4, l*+5] clipped
+        at edges, plotted at l*
+      model: GPT-2 XL
+      n_prompts: 1000
+    rome_cf_gpt2xl:
+      dataset: COUNTERFACT 7,500-record test set
+      model: GPT-2 XL
+      edit_layer: 18 (Appendix E.5)
+      prefixes: 20 texts (ten len 5, ten len 10) per Appendix E.5
+    rome_cf_gpt2xl_noprefix:
+      dataset: COUNTERFACT (ablation; subset size not stated)
+      k_star_prefix: none
+    rome_cf_gpt2xl_longprefix:
+      dataset: COUNTERFACT (ablation; subset size not stated)
+      k_star_prefix: ten len 5 + ten len 10 + ten len 50
+    rome_cf_gptj:
+      dataset: COUNTERFACT 2,000-record test set
+      model: GPT-J 6B (28 layers)
+      edit_layer: not separately stated; Appendix E.5 header covers GPT-J but prints
+        only layer 18
+    rome_cf_gpt2m:
+      dataset: COUNTERFACT (Table 5; set size not stated)
+      model: GPT-2 Medium (345M)
+      edit_layer: not stated in paper
+    rome_cf_gpt2l:
+      dataset: COUNTERFACT (Table 5; set size not stated)
+      model: GPT-2 Large (774M)
+      edit_layer: not stated in paper
+    rome_zsre_gpt2xl:
+      dataset: zsRE 10,000-record evaluation slice
+      model: GPT-2 XL
+    rome_zsre_gpt2m:
+      dataset: zsRE (Table 6; slice size not restated)
+      model: GPT-2 Medium
+    rome_zsre_gpt2l:
+      dataset: zsRE (Table 6; slice size not restated)
+      model: GPT-2 Large
+    rome_layer_token_sweep_gpt2xl:
+      sweep: ROME applied at every (layer, token-index) combination; token index is
+        where k* is collected (Eqn. 3)
+      metrics: EM, PM, NM, S with 95% CI (Figure 5a-d)
+      token_choices: first subject token, last subject token, first token after subject,
+        last token
+    unedited_gpt2xl_cf:
+      editor: none (pre-edit GPT-2 XL)
+      dataset: COUNTERFACT 7,500
+    unedited_gpt2xl_zsre:
+      editor: none (pre-edit GPT-2 XL)
+      dataset: zsRE 10,000
+    unedited_gpt2m_cf:
+      editor: none
+      model: GPT-2 Medium
+    unedited_gpt2m_zsre:
+      editor: none
+      model: GPT-2 Medium
+    ft_cf_gpt2xl:
+      editor: 'FT: Adam on mlp_proj at layer 1, lr 5e-4, early stop 0.03'
+    ftl_cf_gpt2xl:
+      editor: 'FT+L: layer 0, L_inf eps 5e-4'
+    ftl_zsre_gpt2xl:
+      editor: FT+L on the zsRE slice (same hyperparameters as COUNTERFACT)
+    kn_cf_gpt2xl:
+      editor: Knowledge Neurons (Dai et al. 2022), EleutherAI reimplementation defaults
+    ke_cf_gpt2xl:
+      editor: KE (De Cao et al. 2021) out-of-the-box, scaling factor 1.0
+    mend_cf_gpt2xl:
+      editor: MEND (Mitchell et al. 2021) out-of-the-box
+    human_eval:
+      raters: 15 unpaid volunteers
+      judgments: 150 consistency + 150 fluency rankings over 50 counterfactuals
+      comparisons: ROME vs unmodified GPT-2 XL and ROME vs FT+L
+baselines:
+- Unedited GPT-2 XL / GPT-2 M / GPT-2 L / GPT-J (pre-edit model)
+- 'FT: unconstrained Adam fine-tuning of one MLP layer''s mlp_proj with early stopping'
+- 'FT+L: constrained fine-tuning with L_inf weight constraint (Zhu et al. 2020)'
+- 'KN: Knowledge Neurons (Dai et al. 2022) via EleutherAI reimplementation (GPT-2
+  XL only)'
+- 'KE: Knowledge Editor (De Cao et al. 2021), plus KE-zsRE and KE-CF retrained variants
+  (GPT-2 XL only)'
+- MEND (Mitchell et al. 2021), plus MEND-zsRE and MEND-CF retrained variants
+- 'AttnEdit: constrained fine-tuning of attention W_Q, W_K, W_V at layer 33 (Appendix
+  I)'
+- Integrated Gradients saliency maps as an alternative localization method (Appendix
+  B.4, Figure 16; 50 steps of Gauss-Legendre quadrature)
+ambiguities:
+- id: split
+  question: Are the reported editing numbers on a validation or test split?
+  config_key: eval.split
+  options:
+  - validation
+  - test
+  default: test
+  source: paper_text
+  reason: Section 3.4 states 7,500 and 2,000-record test sets in COUNTERFACT; zsRE
+    uses Mitchell et al. (2021) train/test splits with the train split discarded for
+    ROME. No separate dev set is reported.
+  sensitivity: medium
+- id: averaging
+  question: Are ES/PS/NS and zsRE accuracy averaged per record (macro) or pooled over
+    all prompts (micro)?
+  config_key: eval.averaging
+  options:
+  - macro
+  - micro
+  default: macro
+  source: conventions_kb
+  reason: Paper defines ES as 'the portion of cases' and PS/NS 'computed similarly',
+    implying each record contributes equally after averaging its 2 paraphrase / 10
+    neighborhood prompts; micro pooling would reweight records.
+  sensitivity: medium
+- id: preprocessing
+  question: Which eval-time preprocessing (tokenizer leading-space handling, subject
+    span matching, prompt formatting) to use?
+  config_key: eval.preprocessing
+  options:
+  - as_repo
+  - as_paper
+  default: as_repo
+  source: conventions_kb
+  reason: Paper never states how subject token spans are located or whether target
+    tokens carry a leading space; the released ROME eval script is the closest thing
+    to the paper protocol.
+  sensitivity: high
+- id: checkpoint_version
+  question: Which released checkpoint revision of GPT-2 (small/medium/large/XL) and
+    GPT-J is used?
+  config_key: model.checkpoint_version
+  options:
+  - latest
+  - paper_date
+  default: paper_date
+  source: conventions_kb
+  reason: Paper only names 'GPT-2 XL (1.5B)', 'GPT-J (6B)' etc.; HF checkpoints can
+    be silently re-uploaded, so pin the revision current as of the paper date (Feb
+    2022 / v5 Jan 2023).
+  sensitivity: low
+- id: layer_index_base
+  question: Is 'layer 18' (ROME) / 'layer 15' (AIE peak) / 'layer 17' (MLP peak) 0-indexed
+    or 1-indexed?
+  config_key: model.layer_index_base
+  options:
+  - zero_indexed
+  - one_indexed
+  default: zero_indexed
+  source: paper_text
+  reason: Appendix B.1 says by-layer results number layers 0..L-1, but the prose says
+    '15th layer', '17th layer', '18th layer'; an off-by-one changes which MLP is traced/edited.
+  sensitivity: high
+- id: rome_edit_layer_small_models
+  question: Which MLP layer does ROME edit for GPT-2 medium/large (only layer 18 is
+    given, for GPT-2 XL)?
+  config_key: rome.edit_layer
+  options:
+  - scaled_mid_layer (about 0.37*L, e.g. 8 of 24 for gpt2-medium)
+  - layer_18
+  - sweep_and_pick_peak_generalization
+  default: scaled_mid_layer (about 0.37*L, e.g. 8 of 24 for gpt2-medium)
+  source: guess
+  reason: Tables 5/6 report GPT-2 M/L ROME results but never state the edit layer;
+    released hparams use a mid-stack layer chosen from each model's causal trace.
+  sensitivity: high
+- id: rome_edit_layer_gptj
+  question: Which MLP layer does ROME edit for GPT-J, whose 28 layers make the printed
+    'layer 18' late-stack?
+  config_key: rome.edit_layer_gptj
+  options:
+  - layer_18_as_printed_in_E5
+  - 'model_specific_mid_layer_from_gptj_causal_trace (released hparams: layer 5 of
+    28)'
+  default: 'model_specific_mid_layer_from_gptj_causal_trace (released hparams: layer
+    5 of 28)'
+  source: author_code
+  reason: Appendix E.5's header covers [GPT-2 XL, GPT-J] but prints only 'layer 18',
+    justified by GPT-2 XL traces (Figures 1/3); the released GPT-J hparams use a mid-stack
+    layer instead, and the choice moves all GPT-J COUNTERFACT numbers.
+  sensitivity: high
+- id: k_star_prefix_sampling
+  question: How many prefix texts x_j and of which lengths are used to average k*
+    (and v*)?
+  config_key: rome.k_star_prefixes
+  options:
+  - '20 texts: ten of length 5 and ten of length 10 (Appendix E.5)'
+  - 50 random sequences of length 2-10 (Section 3.1)
+  - no prefix
+  default: '20 texts: ten of length 5 and ten of length 10 (Appendix E.5)'
+  source: paper_text
+  reason: Section 3.1 and Appendix E.5 contradict each other; the appendix describes
+    the implementation behind the reported S=89.2 (no-prefix ablation gives 86.1).
+  sensitivity: medium
+- id: covariance_source
+  question: How is C = E[k k^T] obtained for the rank-one update?
+  config_key: rome.cov_source
+  options:
+  - recompute_100k_wikipedia
+  - released_precomputed_stats
+  - identity_C
+  default: released_precomputed_stats
+  source: conventions_kb
+  reason: Paper specifies 100,000 k samples from the 2020-05-01 Wikipedia snapshot,
+    infeasible on CPU; released precomputed second-moment files match the protocol.
+    Identity C materially changes specificity.
+  sensitivity: high
+- id: target_probability_definition
+  question: For COUNTERFACT ES/EM/PS/PM/NS/NM, is P[o] the probability of the first
+    object token or an aggregate over the full object token sequence?
+  config_key: eval.target_prob
+  options:
+  - first_token_prob
+  - mean_per_token_prob
+  - sequence_prob
+  default: mean_per_token_prob
+  source: guess
+  reason: The paper writes P[o*] and P[o_c] without specifying multi-token handling;
+    multi-token objects are common in COUNTERFACT and the choice shifts EM/PM/NM magnitudes.
+  sensitivity: high
+- id: tracing_target_probability
+  question: For causal tracing, is P[o] the probability of the single first object
+    token or of the whole object string?
+  config_key: tracing.target_prob
+  options:
+  - first_token_prob
+  - mean_per_token_prob
+  - sequence_prob
+  default: first_token_prob
+  source: guess
+  reason: Section 2.1 writes P[o] with no multi-token rule; tracing prompts are truncated
+    just before o_c, so the natural target is the next single token, but the paper
+    never says so and the ATE/AIE percentages depend on it.
+  sensitivity: high
+- id: noise_parameterization
+  question: Is nu in epsilon ~ N(0; nu) a standard deviation or a variance?
+  config_key: tracing.noise_parameterization
+  options:
+  - nu_is_std (sigma = 3*sigma_t)
+  - nu_is_variance (sigma = sqrt(3*sigma_t))
+  default: nu_is_std (sigma = 3*sigma_t)
+  source: paper_text
+  reason: The notation N(0; nu) is ambiguous, but footnote 4 and Appendix B.1 say
+    nu = 3 sigma_t is 'three times larger than the observed standard deviation'; the
+    variance reading would shrink corruption and hence ATE/AIE.
+  sensitivity: high
+- id: noise_scale_small_models
+  question: What corruption noise nu is used for GPT-2 small/medium/large traces?
+  config_key: tracing.noise_nu
+  options:
+  - 3*sigma_t measured on the same model's embeddings
+  - 3*sigma_t measured on GPT-2 XL
+  - fixed 0.1
+  default: 3*sigma_t measured on the same model's embeddings
+  source: paper_text
+  reason: Appendix B.1 gives nu = 3*sigma_t for GPT-2 XL and model-specific values
+    for NeoX (0.03) and GPT-J (0.025) 'to match embedding magnitudes', implying rescaling
+    per model; values for the smaller GPT-2 models are never printed.
+  sensitivity: high
+- id: noise_seed_and_samples
+  question: How many corruption noise resamples per prompt, and with which RNG seed?
+  config_key: tracing.n_noise_samples_seed
+  options:
+  - 10_samples_seed0
+  - 10_samples_random_seed
+  - 1_sample
+  default: 10_samples_seed0
+  source: paper_text
+  reason: Appendix B.1 states the process is repeated ten times per text; the seed
+    is never given, so fix seed 0 for determinism.
+  sensitivity: medium
+- id: tracing_sample_size
+  question: How many factual prompts are traced in the reduced CPU replication vs
+    the paper's 1000?
+  config_key: tracing.n_prompts
+  options:
+  - 1000 (paper)
+  - 10 (CPU budget)
+  - '100'
+  default: 10 (CPU budget)
+  source: paper_text
+  reason: Paper averages over 1000 prompts (Section 2.2); the CPU replication can
+    only afford about 10, so AIE point values will be noisier than the printed 8.7/6.6
+    and only the layer/token pattern is checkable.
+  sensitivity: high
+- id: subject_token_identification
+  question: How are subject tokens located in the tokenized prompt (for corruption
+    and for the k* index)?
+  config_key: tracing.subject_span_rule
+  options:
+  - substring_char_span_to_token_span_with_leading_space
+  - exact_token_match
+  - manual_annotation
+  default: substring_char_span_to_token_span_with_leading_space
+  source: guess
+  reason: Paper says 'indices i that correspond to the subject entity' and 'last subject
+    token index i' without specifying tokenizer alignment; BPE leading-space handling
+    changes which token is the 'last subject token'.
+  sensitivity: high
+- id: token_bucket_aggregation
+  question: How are the token buckets (middle subject tokens, further tokens) aggregated
+    across prompts of different subject lengths?
+  config_key: tracing.bucket_aggregation
+  options:
+  - average within bucket per prompt then average across prompts
+  - pool all token positions across prompts
+  - sample one representative token per bucket
+  default: average within bucket per prompt then average across prompts
+  source: guess
+  reason: Figure 2 and the bucketed numbers (15.0%, 16.5%) require a rule for variable-length
+    subjects that the paper never states.
+  sensitivity: medium
+- id: weight_restoration
+  question: Are model weights restored to the original after each single-fact edit?
+  config_key: eval.restore_weights_between_records
+  options:
+  - restore_after_each_record
+  - accumulate_edits
+  default: restore_after_each_record
+  source: paper_text
+  reason: Section 3.7 states ROME 'only edits a single fact at a time'; accumulating
+    edits would degrade later records.
+  sensitivity: high
+- id: counterfact_test_subset_choice
+  question: Which 7,500 of the 21,919 COUNTERFACT records constitute the GPT-2 XL
+    test set (and which 2,000 for GPT-J)?
+  config_key: data.counterfact_subset_rule
+  options:
+  - first_n_by_case_id
+  - random_seeded_sample
+  - released_split_file
+  default: first_n_by_case_id
+  source: guess
+  reason: The paper gives only the sizes (7,500 / 2,000) and no selection rule; different
+    subsets shift all COUNTERFACT scores by a few tenths.
+  sensitivity: medium
+- id: zsre_accuracy_matching
+  question: For zsRE Efficacy/Paraphrase/Specificity, how is I[o* = argmax_o P[o]]
+    evaluated for multi-token answers?
+  config_key: eval.zsre_match_rule
+  options:
+  - first_answer_token_argmax
+  - all_answer_tokens_argmax_teacher_forced
+  - generated_string_exact_match
+  default: first_answer_token_argmax
+  source: guess
+  reason: Tables 1 and 6 use the indicator formula only; zsRE answers such as '1958'
+    or '16 August 1975' are multi-token and the matching rule changes the accuracies.
+  sensitivity: medium
+- id: generation_decoding
+  question: What decoding settings produce the generations scored by GE (entropy)
+    and RS (TF-IDF consistency)?
+  config_key: eval.generation_decoding
+  options:
+  - as_repo (top-k sampling, repo defaults)
+  - greedy
+  - nucleus_sampling
+  default: as_repo (top-k sampling, repo defaults)
+  source: conventions_kb
+  reason: Figure 21's note says continuations are 'top-k probabilistic' but k, temperature,
+    max length and number of samples are never printed; GE/RS claims cannot be matched
+    without them.
+  sensitivity: medium
+- id: generation_entropy_scale
+  question: Is GE reported in raw bits or multiplied by 100?
+  config_key: eval.ge_scale
+  options:
+  - times_100 (to match Table 4 values near 620)
+  - raw_bits (to match Figure 24h values near 6.2)
+  default: times_100 (to match Table 4 values near 620)
+  source: paper_text
+  reason: Table 4/5 print GE around 570-627 while Figure 24h plots the same metric
+    around 4-6.5 bits, so Table 4 values are the entropy scaled by 100; the paper
+    never states the scaling.
+  sensitivity: high
+- id: generation_entropy_weights
+  question: What weights combine the bi-gram and tri-gram entropies in GE, and how
+    are they aggregated over samples?
+  config_key: eval.ge_weights
+  options:
+  - as_repo (n=[2,3], weights [2/3, 4/3], arithmetic mean over generations)
+  - equal weights 0.5/0.5
+  - geometric mean aggregation
+  default: as_repo (n=[2,3], weights [2/3, 4/3], arithmetic mean over generations)
+  source: author_code
+  reason: Section 3.3 only says 'weighted average of bi- and tri-gram entropies' without
+    giving weights or the across-sample aggregator; the released eval code fixes both.
+  sensitivity: medium
+- id: rs_tfidf_vectorizer
+  question: How are the unigram TF-IDF vectors for RS (Consistency) computed - with
+    a pre-fit IDF over a Wikipedia corpus or fit on the compared texts?
+  config_key: eval.rs_tfidf
+  options:
+  - released_precomputed_tfidf_vectorizer
+  - fit_on_generated_and_reference_pair
+  - sklearn_defaults_fit_on_eval_corpus
+  default: released_precomputed_tfidf_vectorizer
+  source: conventions_kb
+  reason: Section 3.3 only says 'cos similarity between the unigram TF-IDF vectors';
+    the IDF source and stop-word/lowercasing settings are unstated and directly scale
+    RS.
+  sensitivity: medium
+- id: reference_text_sampling
+  question: How many and which Wikipedia reference texts are used for the RS consistency
+    metric?
+  config_key: eval.reference_texts
+  options:
+  - released_reference_texts
+  - resample_wikipedia_for_o_star_entities
+  default: released_reference_texts
+  source: conventions_kb
+  reason: Appendix D says reference texts are Wikipedia articles for 'a sample of
+    entities' sharing o* but gives no sample size; use the released files.
+  sensitivity: low
+- id: runtime_dtype
+  question: What numeric precision/device is used for inference and for the ROME solve?
+  config_key: runtime.dtype
+  options:
+  - float32_cpu
+  - float16_gpu
+  - float64_solve
+  default: float32_cpu
+  source: guess
+  reason: Paper reports A6000 GPU timings but not inference dtype (only the covariance
+    samples are stated as float32); CPU replication uses float32, which can shift
+    probabilities in the third decimal.
+  sensitivity: low
+- id: KB1
+  question: 'Which split is the reported number on: validation or test?'
+  config_key: split
+  options:
+  - validation
+  - test
+  default: test
+  source: conventions_kb
+  reason: GLUE-style papers report dev; leaderboard papers report test
+  sensitivity: high
+- id: KB2
+  question: Macro or micro averaging for F1/accuracy?
+  config_key: averaging
+  options:
+  - macro
+  - micro
+  default: macro
+  source: conventions_kb
+  reason: sklearn default differs from many papers; must be stated
+  sensitivity: medium
+- id: KB3
+  question: Eval-time preprocessing (crop/tokenizer/normalization)?
+  config_key: preprocessing
+  options:
+  - as_repo
+  - as_paper
+  default: as_repo
+  source: conventions_kb
+  reason: the released eval script is the closest thing to the paper's protocol
+  sensitivity: high
+- id: KB4
+  question: Which released checkpoint version?
+  config_key: checkpoint_version
+  options:
+  - latest
+  - paper_date
+  default: paper_date
+  source: conventions_kb
+  reason: checkpoints get silently re-uploaded
+  sensitivity: high
+descriptive_stats:
+- metric: counterfact_records_total
+  value: 21919.0
+  where: Table 2, row Records, column Total (p.7)
+- metric: counterfact_subjects_total
+  value: 20391.0
+  where: Table 2, row Subjects, column Total (p.7)
+- metric: counterfact_objects_total
+  value: 749.0
+  where: Table 2, row Objects, column Total (p.7)
+- metric: counterfact_counterfactual_statements_total
+  value: 21595.0
+  where: Table 2, row Counterfactual Statements, column Total (p.7)
+- metric: counterfact_paraphrase_prompts_total
+  value: 42876.0
+  where: Table 2, row Paraphrase Prompts, column Total (p.7)
+- metric: counterfact_neighborhood_prompts_total
+  value: 82650.0
+  where: Table 2, row Neighborhood Prompts, column Total (p.7)
+- metric: counterfact_generation_prompts_total
+  value: 62346.0
+  where: Table 2, row Generation Prompts, column Total (p.7)
+- metric: counterfact_records_per_relation
+  value: 645.0
+  where: Table 2, row Records, column Per Relation (p.7)
+- metric: counterfact_paraphrase_prompts_per_record
+  value: 2.0
+  where: Table 2, row Paraphrase Prompts, column Per Record (p.7)
+- metric: counterfact_neighborhood_prompts_per_record
+  value: 10.0
+  where: Table 2, row Neighborhood Prompts, column Per Record (p.7)
+- metric: counterfact_generation_prompts_per_record
+  value: 3.0
+  where: Table 2, row Generation Prompts, column Per Record (p.7); Appendix D and
+    Figure 21 show ten (duplicated) generation prompt entries per record
+- metric: zsre_eval_records
+  value: 10000.0
+  where: 'Section 3.2 text: evaluation slice contains 10,000 records (p.6)'
+- metric: counterfact_test_records_gpt2xl
+  value: 7500.0
+  where: 'Section 3.4 text: 7,500-record test set (p.8)'
+- metric: counterfact_test_records_gptj
+  value: 2000.0
+  where: 'Section 3.4 text: 2,000-record test set (p.8)'
+- metric: causal_tracing_prompts
+  value: 1000.0
+  where: 'Section 2.2 / Appendix B.1: 1000 factual prompts (pp.4,15)'
+- metric: causal_tracing_noise_repeats_per_prompt
+  value: 10.0
+  where: 'Appendix B.1: process repeated ten times with different corruption noise
+    (p.15)'
+- metric: clean_mean_prob_pct
+  value: 27.0
+  where: 'Appendix B.1: mean predicted probability of correct object token (p.15)'
+- metric: corrupted_mean_prob_pct
+  value: 8.47
+  where: 'Appendix B.1: mean score after corruption (p.15)'
+- metric: gpt2xl_layers
+  value: 48.0
+  where: 'Appendix B.3 text: GPT-NeoX/GPT-J have 44 and 28 layers ''instead of 48''
+    (p.16)'
+- metric: gptneox_layers
+  value: 44.0
+  where: Appendix B.3 text (p.16)
+- metric: gptj_layers
+  value: 28.0
+  where: Appendix B.3 text (p.16)
+- metric: k_star_prefix_texts
+  value: 20.0
+  where: 'Appendix E.5 Key Selection: 20 texts (ten len 5, ten len 10) (p.26); Section
+    3.1 instead says 50 sequences of length 2-10 (p.6)'
+- metric: covariance_k_samples
+  value: 100000.0
+  where: 'Appendix E.5 Second moment statistics: 100,000 k vectors (p.26)'
+- metric: hyperparam_sweep_subset_size
+  value: 50.0
+  where: 'Figure 17 caption: randomly-sampled size-50 subset of COUNTERFACT (p.25)'
+- metric: hypernetwork_training_subset_size
+  value: 10000.0
+  where: 'Appendix E.3: KE-zsRE and KE-CF trained on size-10,000 subsets (p.26)'
+- metric: human_eval_raters
+  value: 15.0
+  where: 'Section 3.6 / Appendix J: 15 volunteers (pp.8,32)'
+- metric: human_eval_judgments_per_criterion
+  value: 150.0
+  where: 'Appendix J / Figure 26: n=150 consistency and n=150 fluency judgments (p.32)'
+- metric: human_eval_facts
+  value: 50.0
+  where: 'Section 3.6: models modified to insert 50 different facts (p.8)'
+plan:
+  data_tier: C
+  compute_tier: 2
+  kind_of_test: mechanics_only
+  target_claims:
+  - ct_ate_gpt2xl
+  - ct_aie_state_peak
+  - ct_aie_mlp_peak
+  - ct_aie_attn_last_subject
+  - ct_peak_layer_state
+  - ct_peak_layer_mlp
+  - ct_peak_layer_attn
+  - ct_restore_max_state_last_subject
+  substitutions:
+    huggingface_gpt2: 'UNAVAILABLE: claims depending on this source are Untested'
+    counterfact_dataset: 'UNAVAILABLE: claims depending on this source are Untested'
+    zsre: 'UNAVAILABLE: claims depending on this source are Untested'
+    pararel: 'UNAVAILABLE: claims depending on this source are Untested'
+    wikidata: 'UNAVAILABLE: claims depending on this source are Untested'
+    wikipedia_dump: 'UNAVAILABLE: claims depending on this source are Untested'
+  tolerances:
+    zsre_rome_efficacy: 0.13935323161475474
+    zsre_rome_paraphrase: 0.6975770224459793
+    zsre_rome_specificity: 0.9065885826929986
+    zsre_unedited_efficacy: 0.8811822904754409
+    zsre_ftl_paraphrase: 1.0484307687566523
+  success_criteria: 'CPU only. GPT-2 small/medium from HF. Causal tracing (Sec 3)
+    on ~10 facts: corrupt subject tokens, restore hidden states per (layer, token);
+    checkable claim: the largest restoration effect at the last subject token is in
+    early-middle MLP layers. Then one ROME rank-one edit: target-token probability
+    rises after the edit. || Match on every headline claim within its derived tolerance;
+    all leakage tests pass; kind of test = mechanics_only; data tier C; compute tier
+    1. Tier B: same sign, significant, gap inside the substitution''s predicted band.'
+  budget:
+    spec: 10
+    setup: 20
+    build: 25
+    run: 20
+    verify: 15
+    report: 5
+    hard_kill_minutes: 240
+    max_cost_usd: 150.0
+    run_timeout_s: 1500
+  seeds:
+  - 0
+  frozen_hash: d6c6222464747236ecffa81bc0f36a7eda295d30cdf4050f96351e4cd8ea21c0
+  frozen_at: '2026-09-15T16:35:12.385943+00:00'
