@@ -1,0 +1,1164 @@
+paper:
+  title: Attention Is All You Need
+  authors:
+  - Ashish Vaswani
+  - Noam Shazeer
+  - Niki Parmar
+  - Jakob Uszkoreit
+  - Llion Jones
+  - Aidan N. Gomez
+  - Łukasz Kaiser
+  - Illia Polosukhin
+  year: 2017
+  arxiv_id: '1706.03762'
+  version: v7
+  track: cs
+  family: train_and_eval
+claims:
+- id: c_t2_big_ende_bleu
+  where: Table 2, row 'Transformer (big)', column BLEU EN-DE (newstest2014)
+  evidence_page: 8
+  metric: bleu
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 28.4
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: big_ende
+  priority: headline
+- id: c_t2_big_enfr_bleu
+  where: Table 2, row 'Transformer (big)', column BLEU EN-FR (newstest2014); note
+    Section 6.1 narrative text on p8 instead states 41.0 for the same model
+  evidence_page: 8
+  metric: bleu
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 41.8
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: big_enfr
+  priority: headline
+- id: c_t2_base_ende_bleu
+  where: Table 2, row 'Transformer (base model)', column BLEU EN-DE (newstest2014)
+  evidence_page: 8
+  metric: bleu
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 27.3
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: base_ende
+  priority: secondary
+- id: c_t2_base_enfr_bleu
+  where: Table 2, row 'Transformer (base model)', column BLEU EN-FR (newstest2014)
+  evidence_page: 8
+  metric: bleu
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 38.1
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: base_enfr
+  priority: secondary
+- id: c_t2_base_flops
+  where: Table 2, row 'Transformer (base model)', Training Cost (FLOPs) — a single
+    bolded value printed spanning the EN-DE and EN-FR cost columns
+  evidence_page: 8
+  metric: training_flops
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 3.3e+18
+  reported_precision: 5.0e+16
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: base_ende
+  priority: secondary
+- id: c_t2_big_flops
+  where: Table 2, row 'Transformer (big)', Training Cost (FLOPs) — a single value
+    printed spanning the EN-DE and EN-FR cost columns
+  evidence_page: 8
+  metric: training_flops
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 2.3e+19
+  reported_precision: 5.0e+17
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: big_ende
+  priority: secondary
+- id: c_t3_base_ppl_dev
+  where: Table 3, row 'base', column PPL (dev) — newstest2013, per-wordpiece
+  evidence_page: 9
+  metric: perplexity
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 4.92
+  reported_precision: 0.005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: base_dev_newstest2013
+  priority: secondary
+- id: c_t3_base_bleu_dev
+  where: Table 3, row 'base', column BLEU (dev) — newstest2013
+  evidence_page: 9
+  metric: bleu
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 25.8
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: base_dev_newstest2013
+  priority: secondary
+- id: c_t3_base_params
+  where: Table 3, row 'base', column params x10^6
+  evidence_page: 9
+  metric: param_count_millions
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 65.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: base_dev_newstest2013
+  priority: descriptive
+- id: c_t3_big_ppl_dev
+  where: Table 3, row 'big', column PPL (dev) — newstest2013, per-wordpiece
+  evidence_page: 9
+  metric: perplexity
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 4.33
+  reported_precision: 0.005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: big_dev_newstest2013
+  priority: secondary
+- id: c_t3_big_bleu_dev
+  where: Table 3, row 'big', column BLEU (dev) — newstest2013
+  evidence_page: 9
+  metric: bleu
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 26.4
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: big_dev_newstest2013
+  priority: secondary
+- id: c_t3_big_params
+  where: Table 3, row 'big', column params x10^6
+  evidence_page: 9
+  metric: param_count_millions
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 213.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: big_dev_newstest2013
+  priority: descriptive
+- id: c_t3_A_h1_ppl
+  where: Table 3, rows (A), first sub-row h=1 (d_k=d_v=512), column PPL (dev)
+  evidence_page: 9
+  metric: perplexity
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 5.29
+  reported_precision: 0.005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ablation_A_single_head
+  priority: secondary
+- id: c_t3_A_h1_bleu
+  where: Table 3, rows (A), first sub-row h=1 (d_k=d_v=512), column BLEU (dev)
+  evidence_page: 9
+  metric: bleu
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 24.9
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ablation_A_single_head
+  priority: secondary
+- id: c_t3_A_h16_bleu
+  where: Table 3, rows (A), third sub-row h=16 (d_k=d_v=32), column BLEU (dev)
+  evidence_page: 9
+  metric: bleu
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 25.8
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ablation_A_16_heads
+  priority: secondary
+- id: c_text_single_head_delta
+  where: 'Section 6.2 text, page 9: ''single-head attention is 0.9 BLEU worse than
+    the best setting'' (25.8 best in rows (A) vs 24.9 for h=1)'
+  evidence_page: 9
+  metric: bleu_delta
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 0.9
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ablation_A_single_head
+  priority: secondary
+- id: c_t3_C_N2_ppl
+  where: Table 3, rows (C), sub-row N=2, column PPL (dev)
+  evidence_page: 9
+  metric: perplexity
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 6.11
+  reported_precision: 0.005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ablation_C_N2
+  priority: secondary
+- id: c_t3_C_N2_bleu
+  where: Table 3, rows (C), sub-row N=2, column BLEU (dev)
+  evidence_page: 9
+  metric: bleu
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 23.7
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ablation_C_N2
+  priority: secondary
+- id: c_t3_D_drop0_ppl
+  where: Table 3, rows (D), first sub-row P_drop=0.0, column PPL (dev)
+  evidence_page: 9
+  metric: perplexity
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 5.77
+  reported_precision: 0.005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ablation_D_no_dropout
+  priority: secondary
+- id: c_t3_D_drop0_bleu
+  where: Table 3, rows (D), first sub-row P_drop=0.0, column BLEU (dev)
+  evidence_page: 9
+  metric: bleu
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 24.6
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ablation_D_no_dropout
+  priority: secondary
+- id: c_t3_E_learned_pe_ppl
+  where: Table 3, row (E) 'positional embedding instead of sinusoids', column PPL
+    (dev)
+  evidence_page: 9
+  metric: perplexity
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 4.92
+  reported_precision: 0.005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ablation_E_learned_positions
+  priority: secondary
+- id: c_t3_E_learned_pe_bleu
+  where: Table 3, row (E) 'positional embedding instead of sinusoids', column BLEU
+    (dev)
+  evidence_page: 9
+  metric: bleu
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 25.7
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ablation_E_learned_positions
+  priority: secondary
+- id: c_t4_parse_wsj_only_f1
+  where: Table 4, row 'Transformer (4 layers)', Training = 'WSJ only, discriminative',
+    column WSJ 23 F1
+  evidence_page: 10
+  metric: f1
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 91.3
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: parsing_wsj_only
+  priority: secondary
+- id: c_t4_parse_semisup_f1
+  where: Table 4, row 'Transformer (4 layers)', Training = 'semi-supervised', column
+    WSJ 23 F1
+  evidence_page: 10
+  metric: f1
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 92.7
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: parsing_semisupervised
+  priority: secondary
+data:
+  sources:
+  - canonical: wmt14_en_de
+    description: 'Standard WMT 2014 English-German training corpus, ~4.5M sentence
+      pairs, shared source-target byte-pair-encoding vocabulary of ~37000 tokens (Section
+      5.1, p7). Dev: newstest2013 (Table 3); test: newstest2014 (Table 2).'
+    substitute: hf_datasets:wmt/wmt14
+  - canonical: wmt14_en_fr
+    description: 'WMT 2014 English-French training corpus, 36M sentences, 32000 word-piece
+      vocabulary (Section 5.1, p7; paper does not state whether this vocabulary is
+      shared source-target). Test: newstest2014.'
+    substitute: hf_datasets:wmt/wmt14
+  - canonical: penn_treebank_wsj
+    description: 'WSJ portion of the Penn Treebank for English constituency parsing,
+      ~40K training sentences, 16K token vocabulary; semi-supervised setting adds
+      high-confidence and BerkeleyParser corpora (~17M sentences), 32K vocabulary
+      (Section 6.3, p9). Dev: Section 22; test: Section 23.'
+    substitute: hf_datasets:ptb-text-only/ptb_text_only
+  universe:
+    task_paper_primary: sequence-to-sequence machine translation (EN-DE, EN-FR)
+    task_paper_secondary: English constituency parsing (WSJ)
+    task_reduced_scale: 'synthetic sequence transduction: copy and/or reverse of random
+      token sequences'
+    reduced_vocab_size: 32 symbols (+ pad/bos/eos) for synthetic task
+    reduced_seq_len: <= 20 tokens per source sequence
+    reduced_train_examples: ~20000 generated pairs (or <=20k IWSLT-style pairs)
+  frequency: none (single static training run per configuration; no time-series panel)
+  preprocessing:
+    tokenization_ende: byte-pair encoding, shared source-target vocab ~37000 tokens
+      (Section 5.1, p7)
+    tokenization_enfr: word-piece, 32000 vocab (Section 5.1, p7)
+    batching: sentence pairs batched together by approximate sequence length; ~25000
+      source tokens and ~25000 target tokens per batch (Section 5.1, p7)
+    decoder_input_shift: output embeddings offset by one position (shifted right)
+      with causal masking so position i sees only outputs < i (Section 3.1, p3; Figure
+      1)
+    reduced_tokenization: character/symbol-level integer ids for synthetic task; no
+      subword model
+    padding_masking: pad to max length in batch, mask pads in attention and in loss
+    augmentation: none stated in paper
+  splits:
+    wmt_dev: newstest2013 (used for Table 3 model variations, EN-DE)
+    wmt_test: newstest2014 (used for Table 2 BLEU, EN-DE and EN-FR)
+    parsing_dev: WSJ Section 22 (selection of dropout, learning rates, beam size only)
+    parsing_test: WSJ Section 23 (Table 4 F1)
+    reduced_splits: 80/10/10 train/validation/test of generated pairs, disjoint sequences;
+      report on test
+method:
+  signal: Encoder-decoder Transformer built entirely from multi-head scaled dot-product
+    attention plus position-wise feed-forward layers, residual connections, layer
+    normalization, and sinusoidal positional encodings; no recurrence, no convolution.
+    Trained with teacher forcing on next-token cross-entropy with label smoothing;
+    decoded with beam search.
+  model:
+    architecture: N=6 identical encoder layers (multi-head self-attention sub-layer
+      + position-wise FFN sub-layer) and N=6 identical decoder layers (masked multi-head
+      self-attention + multi-head encoder-decoder attention over encoder output +
+      position-wise FFN); every sub-layer output is LayerNorm(x + Sublayer(x)), i.e.
+      post-norm (Section 3.1, p3)
+    d_model: 512 (base), 1024 (big)
+    d_ff: 2048 (base), 4096 (big)
+    heads_h: 8 (base), 16 (big)
+    d_k_d_v: 64 each (base) = d_model/h; Table 3 leaves d_k/d_v unlisted for the big
+      row, i.e. identical to base (64 = 1024/16)
+    attention: Attention(Q,K,V) = softmax(QK^T / sqrt(d_k)) V; MultiHead = Concat(head_1..head_h)
+      W^O with per-head projections W^Q, W^K in R^{d_model x d_k} and W^V in R^{d_model
+      x d_v}; decoder self-attention masks illegal (future) connections by setting
+      softmax inputs to -inf
+    ffn: FFN(x) = max(0, xW1+b1)W2+b2 (ReLU), applied position-wise, separate parameters
+      per layer
+    positional_encoding: 'fixed sinusoidal: PE(pos,2i)=sin(pos/10000^{2i/d_model}),
+      PE(pos,2i+1)=cos(pos/10000^{2i/d_model}); wavelengths geometric from 2*pi to
+      10000*2*pi; added to input embeddings at the bottom of both stacks (Section
+      3.5, p6)'
+    embedding_sharing: input embedding, output embedding and pre-softmax linear share
+      one weight matrix; embedding weights multiplied by sqrt(d_model) (Section 3.4,
+      p5)
+    dropout: Residual dropout applied to each sub-layer output before the residual
+      add and normalization, and to the sums of embeddings and positional encodings
+      in both stacks; P_drop=0.1 for base, 0.3 for big EN-DE (Table 3 big row), 0.1
+      for big EN-FR (Section 6.1, p8). Paper claims 'three types of regularization'
+      but explicitly describes only residual dropout and label smoothing; attention
+      dropout rate is never stated.
+    label_smoothing: eps_ls = 0.1 (Section 5.4, p8); also listed in the Table 3 base
+      row
+    loss: token-level cross-entropy over the shared vocabulary with label smoothing
+      0.1 (paper does not state whether reported dev perplexity uses the smoothed
+      or unsmoothed objective)
+    optimizer: Adam, beta1=0.9, beta2=0.98, eps=1e-9 (Section 5.3, p7)
+    lr_schedule: lrate = d_model^-0.5 * min(step_num^-0.5, step_num * warmup_steps^-1.5),
+      warmup_steps=4000 (Eq. 3, p7)
+    train_steps: 100,000 steps (base; ~0.4 s/step, ~12 h on 8 P100 GPUs) / 300,000
+      steps (big; ~1.0 s/step, 3.5 days) (Section 5.2, p7)
+    reduced_scale_model: 2-layer encoder / 2-layer decoder, d_model=128, d_ff=512,
+      h=4, d_k=d_v=32, dropout=0.1, same sinusoidal PE and Adam+warmup schedule scaled
+      to the shorter run
+    reduced_scale_budget: CPU only, <= 15 minutes wall-clock per run, fixed step count
+      rather than fixed epochs
+    no_attention_baseline: 'same encoder-decoder skeleton with all attention sub-layers
+      removed: encoder = position-wise FFN stack over embeddings with a fixed summary
+      (mean-pooled) context vector fed to every decoder position; decoder = position-wise
+      FFN stack with causal-safe inputs only (no cross-attention, no self-attention).
+      Not a paper ablation; internal control only.'
+  evaluation:
+  - corpus BLEU on newstest2014 (EN-DE, EN-FR) for Table 2 (paper scale, Untested
+    here)
+  - per-wordpiece perplexity and BLEU on newstest2013 dev for Table 3 ablations (paper
+    scale, Untested here)
+  - F1 on WSJ Section 23 for Table 4 (paper scale, Untested here)
+  - training cost in FLOPs estimated as training_time x n_GPUs x sustained single-precision
+    capacity (2.8/3.7/6.0/9.5 TFLOPS for K80/K40/M40/P100) for Table 2 (paper scale,
+    Untested here)
+  - 'reduced scale: token-level cross-entropy loss on held-out test split'
+  - 'reduced scale: token accuracy (exact-match per target token, pads excluded) on
+    held-out test split'
+  - 'reduced scale: corpus BLEU on greedy/beam decodes of held-out test split'
+  - 'reduced scale: same three metrics for the no-attention baseline'
+  eval_protocol:
+    decoding_paper: beam search, beam size 4, length penalty alpha=0.6 following [38];
+      max output length = input length + 50, terminate early when possible (Section
+      6.1, p8); hyperparameters chosen on the development set
+    checkpoint_averaging_paper: 'Table 2: single model from averaging the last 5 checkpoints
+      (base), written at 10-minute intervals, and the last 20 checkpoints (big); paper
+      does not state the checkpoint interval for the big models. Table 3: explicitly
+      no checkpoint averaging (p9).'
+    decoding_parsing: beam size 21, alpha=0.3 for both WSJ-only and semi-supervised;
+      max output length = input length + 300 (Section 6.3, p10)
+    decoding_reduced: greedy decoding primary; beam=4 alpha=0.6 as secondary check
+    reduced_seeds: 3 random seeds; report mean and std of loss, token accuracy, BLEU
+    bleu_tool: paper does not name a BLEU implementation; reduced task uses a single
+      consistent implementation across variants (sacrebleu corpus_bleu on detokenized
+      output)
+    report_split: held-out test split for the reduced task; paper Table 2/Table 4
+      are test (newstest2014 / WSJ 23), Table 3 is dev (newstest2013)
+    paper_scale_status: 'Untested: WMT14/PTB-scale claims cannot be run at compute
+      tier 2'
+  variants:
+    base_ende:
+      config: 'base: N=6, d_model=512, d_ff=2048, h=8, d_k=d_v=64, P_drop=0.1, eps_ls=0.1,
+        100K steps'
+      data: WMT14 EN-DE (BPE, shared ~37K vocab), newstest2014 test
+      inference: average last 5 checkpoints (10-min intervals), beam 4, alpha 0.6,
+        max len = src + 50
+    base_enfr:
+      config: base hyperparameters, 100K steps (paper does not separately report the
+        base EN-FR configuration; 'base models' are stated to use the hyperparameters
+        described throughout the paper)
+      data: WMT14 EN-FR (32K word-piece), newstest2014 test
+      inference: average last 5 checkpoints, beam 4, alpha 0.6, max len = src + 50
+    big_ende:
+      config: 'big: N=6, d_model=1024, d_ff=4096, h=16, P_drop=0.3, eps_ls=0.1, 300K
+        steps (Table 3 bottom row)'
+      data: WMT14 EN-DE, newstest2014 test
+      inference: average last 20 checkpoints, beam 4, alpha 0.6, max len = src + 50
+    big_enfr:
+      config: big, P_drop=0.1 instead of 0.3 (Section 6.1, p8), 300K steps
+      data: WMT14 EN-FR, newstest2014 test
+      inference: average last 20 checkpoints, beam 4, alpha 0.6, max len = src + 50
+    base_dev_newstest2013:
+      config: base, 100K steps
+      data: EN-DE development set newstest2013
+      inference: beam search as in Section 6.1, NO checkpoint averaging
+      perplexity_units: per-wordpiece under the BPE vocabulary (not comparable to
+        per-word perplexity)
+    big_dev_newstest2013:
+      config: big, 300K steps, P_drop=0.3
+      data: EN-DE development set newstest2013
+      inference: beam search, no checkpoint averaging
+    ablation_A_single_head:
+      config: base but h=1, d_k=d_v=512 (amount of computation held constant, Section
+        3.2.2/6.2)
+      data: newstest2013 dev
+      inference: beam search, no checkpoint averaging
+    ablation_A_16_heads:
+      config: base but h=16, d_k=d_v=32
+      data: newstest2013 dev
+      inference: beam search, no checkpoint averaging
+    ablation_C_N2:
+      config: base but N=2 layers (36M params per Table 3)
+      data: newstest2013 dev
+      inference: beam search, no checkpoint averaging
+    ablation_D_no_dropout:
+      config: base but P_drop=0.0 (eps_ls stays 0.1)
+      data: newstest2013 dev
+      inference: beam search, no checkpoint averaging
+    ablation_E_learned_positions:
+      config: base but learned positional embeddings [9] instead of sinusoids
+      data: newstest2013 dev
+      inference: beam search, no checkpoint averaging
+    parsing_wsj_only:
+      config: 4-layer Transformer, d_model=1024, 16K token vocabulary; dropout (attention
+        and residual), learning rate and beam size tuned on WSJ Section 22, all other
+        parameters unchanged from the EN-DE base model
+      data: WSJ only (~40K sentences), discriminative; test on Section 23
+      inference: beam 21, alpha 0.3, max output length = input length + 300
+    parsing_semisupervised:
+      config: 4-layer Transformer, d_model=1024, 32K token vocabulary; same tuning
+        protocol as WSJ-only
+      data: WSJ + high-confidence and BerkeleyParser corpora (~17M sentences); test
+        on Section 23
+      inference: beam 21, alpha 0.3, max output length = input length + 300
+    reduced_transformer:
+      config: 2-layer enc / 2-layer dec, d_model=128, d_ff=512, h=4, d_k=d_v=32, P_drop=0.1,
+        eps_ls=0.1, sinusoidal PE, shared embeddings, post-norm
+      optimizer: Adam(0.9, 0.98, 1e-9) with the paper's inverse-sqrt warmup schedule,
+        warmup rescaled to run length
+      budget: CPU only, fixed step count, <= 15 min wall clock, 3 seeds
+      data: synthetic copy/reverse task (or <=20k-pair IWSLT-style subset)
+      metrics: test loss, token accuracy, corpus BLEU
+    reduced_no_attention_baseline:
+      config: identical depth/width/parameter budget but all self-attention and cross-attention
+        removed; fixed mean-pooled encoder context vector, position-wise FFN stacks
+        only
+      optimizer: identical optimizer, schedule, step count, and seeds as reduced_transformer
+      data: same synthetic task and splits
+      metrics: test loss, token accuracy, corpus BLEU
+baselines:
+- 'ByteNet [18] (Table 2: EN-DE BLEU 23.75, no EN-FR entry, no FLOPs entry)'
+- 'Deep-Att + PosUnk [39] (Table 2: EN-FR BLEU 39.2, 1.0e20 FLOPs) and its ensemble
+  (40.4, 8.0e20)'
+- 'GNMT + RL [38] (Table 2: 24.6 / 39.92, 2.3e19 / 1.4e20) and its ensemble (26.30
+  / 41.16, 1.8e20 / 1.1e21)'
+- 'ConvS2S [9] (Table 2: 25.16 / 40.46, 9.6e18 / 1.5e20) and its ensemble (26.36 /
+  41.29, 7.7e19 / 1.2e21)'
+- 'MoE [32] (Table 2: 26.03 / 40.56, 2.0e19 / 1.2e20)'
+- 'Parsing baselines (Table 4, WSJ 23 F1): Vinyals & Kaiser et al. 2014 (88.3 WSJ-only,
+  92.1 semi-supervised), Petrov et al. 2006 (90.4), Zhu et al. 2013 (90.4 WSJ-only,
+  91.3 semi-supervised), Dyer et al. 2016 (91.7 discriminative, 93.3 generative),
+  Huang & Harper 2009 (91.3), McClosky et al. 2006 (92.1), Luong et al. 2015 (93.0
+  multi-task)'
+- 'Reduced-scale internal baseline: no-attention encoder-decoder (attention sub-layers
+  removed, mean-pooled context) — not from the paper'
+ambiguities:
+- id: lr_schedule
+  question: Which learning-rate schedule for the reduced-scale run?
+  config_key: lr_schedule
+  options:
+  - constant
+  - cosine
+  - step
+  - as_paper
+  default: as_paper
+  source: paper_text
+  reason: Eq. (3) on p7 gives lrate = d_model^-0.5 * min(step^-0.5, step*warmup^-1.5)
+    with warmup_steps=4000; we keep the same inverse-sqrt-with-warmup shape but must
+    rescale warmup to the much shorter CPU run (see warmup_scaling ambiguity).
+  sensitivity: high
+- id: warmup_scaling
+  question: With only a few thousand steps available, what warmup_steps value should
+    be used?
+  config_key: warmup_steps
+  options:
+  - 4000_as_paper
+  - 10_percent_of_total_steps
+  - '400'
+  default: 10_percent_of_total_steps
+  source: conventions_kb
+  reason: Paper's 4000 warmup is 4% of its 100K base steps; holding 4000 in a ~2-4K
+    step CPU run would mean the LR never decays. Scaling warmup to ~10% of total steps
+    preserves the schedule shape.
+  sensitivity: high
+- id: attention_dropout
+  question: What dropout rate (if any) is applied inside attention (on the softmax
+    weights)?
+  config_key: attention_dropout
+  options:
+  - '0.0'
+  - same_as_residual_p_drop
+  - tuned
+  default: same_as_residual_p_drop
+  source: paper_text
+  reason: Section 5.4 (p7-8) announces 'three types of regularization' but describes
+    only residual dropout and label smoothing; Section 6.3 (p9) refers to 'the dropout,
+    both attention and residual (section 5.4)', so attention dropout exists but its
+    rate is never printed. Code must pick one.
+  sensitivity: medium
+- id: perplexity_definition
+  question: Is the reported dev perplexity computed from the label-smoothed objective
+    or from unsmoothed cross-entropy?
+  config_key: ppl_definition
+  options:
+  - unsmoothed_ce
+  - smoothed_objective
+  default: unsmoothed_ce
+  source: paper_text
+  reason: Table 3 (p9) says only that perplexities are per-wordpiece under the BPE
+    vocabulary; Section 5.4 (p8) notes label smoothing 'hurts perplexity', implying
+    perplexity of the model's own predictive distribution (unsmoothed CE). Never stated
+    explicitly.
+  sensitivity: medium
+- id: length_penalty_definition
+  question: Which length-penalty formula does alpha correspond to?
+  config_key: length_penalty_form
+  options:
+  - gnmt_wu2016
+  - divide_by_length_alpha
+  - none
+  default: gnmt_wu2016
+  source: paper_text
+  reason: Section 6.1 (p8) gives 'length penalty alpha = 0.6 [38]', citing GNMT (Wu
+    et al. 2016), but does not write the formula; the GNMT lp(Y) = ((5+|Y|)/6)^alpha
+    definition is implied.
+  sensitivity: medium
+- id: enfr_vocab_sharing
+  question: Is the 32000 word-piece EN-FR vocabulary shared between source and target?
+  config_key: vocab_sharing_enfr
+  options:
+  - shared
+  - separate
+  default: shared
+  source: guess
+  reason: Section 5.1 (p7) states a shared source-target vocabulary only for EN-DE
+    BPE; for EN-FR it says only 'split tokens into a 32000 word-piece vocabulary'.
+    Section 3.4 weight tying implies a single shared matrix, but the paper is silent.
+  sensitivity: low
+- id: base_enfr_config
+  question: What dropout and step count were used for the base EN-FR model (Table
+    2, BLEU 38.1)?
+  config_key: base_enfr_config
+  options:
+  - same_as_base_ende_100k_pdrop0.1
+  - pdrop_0.1_longer_schedule
+  - unknown
+  default: same_as_base_ende_100k_pdrop0.1
+  source: paper_text
+  reason: Section 5.2 (p7) says base models use 'the hyperparameters described throughout
+    the paper' and were trained 100,000 steps; no EN-FR-specific base settings are
+    reported, and the Table 2 base FLOPs figure is printed once spanning both language
+    pairs.
+  sensitivity: low
+- id: checkpoint_interval_big
+  question: At what interval were the big-model checkpoints written before averaging
+    the last 20?
+  config_key: checkpoint_interval
+  options:
+  - 10_minutes_as_base
+  - unspecified_other
+  default: 10_minutes_as_base
+  source: paper_text
+  reason: Section 6.1 (p8) states the 10-minute interval only in the sentence about
+    base models ('last 5 checkpoints, which were written at 10-minute intervals');
+    the interval for the big models' 20 checkpoints is not stated.
+  sensitivity: low
+- id: augmentation
+  question: Any train-time data augmentation / noising?
+  config_key: augmentation
+  options:
+  - none
+  - standard
+  - as_paper
+  default: none
+  source: paper_text
+  reason: The paper never mentions augmentation for MT; Section 5.4 (p7-8) lists only
+    dropout and label smoothing as described regularizers. Synthetic task pairs are
+    freshly generated, which already provides sampling variety.
+  sensitivity: low
+- id: batch_vs_steps
+  question: Hold fixed epochs or fixed optimizer steps when the batch size shrinks
+    to CPU scale?
+  config_key: batch_vs_steps
+  options:
+  - epochs
+  - steps
+  default: steps
+  source: conventions_kb
+  reason: Paper reports training length in steps (100K / 300K, Section 5.2) with ~25000
+    source and ~25000 target tokens per batch (Section 5.1); at reduced scale the
+    token budget cannot be matched, so hold a fixed step count under the 15-minute
+    wall-clock cap and record tokens/step.
+  sensitivity: medium
+- id: mixed_precision
+  question: Train in fp32 or with automatic mixed precision?
+  config_key: mixed_precision
+  options:
+  - fp32
+  - amp
+  default: fp32
+  source: conventions_kb
+  reason: Paper estimates cost from 'sustained single-precision floating-point capacity'
+    (p8 footnote 5), implying fp32; CPU-only runs have no AMP benefit anyway.
+  sensitivity: low
+- id: split
+  question: Report the reduced-scale numbers on validation or test?
+  config_key: split
+  options:
+  - validation
+  - test
+  default: test
+  source: paper_text
+  reason: Paper's headline Table 2 BLEU and Table 4 F1 are on test sets (newstest2014,
+    WSJ Section 23) while Table 3 ablations are on dev (newstest2013). We mirror the
+    headline convention and report held-out test, logging validation for model selection
+    only.
+  sensitivity: medium
+- id: reduced_task_definition
+  question: What exactly is the reduced-scale task (copy, reverse, or a real IWSLT
+    subset)?
+  config_key: reduced_task
+  options:
+  - copy
+  - reverse
+  - copy_and_reverse
+  - iwslt_subset_20k
+  default: reverse
+  source: guess
+  reason: Not in the paper; sequence reversal requires genuine long-range reordering,
+    which stresses attention versus the no-attention baseline more than pure copy,
+    while staying trainable in 15 CPU minutes.
+  sensitivity: high
+- id: bleu_implementation
+  question: Which BLEU implementation and tokenization (tokenized multi-bleu vs sacreBLEU,
+    smoothing)?
+  config_key: bleu_tool
+  options:
+  - sacrebleu_13a
+  - nltk_corpus_bleu_smoothed
+  - multi_bleu_perl
+  default: sacrebleu_13a
+  source: conventions_kb
+  reason: Paper gives no BLEU tool or tokenization for Table 2/Table 3; 2017-era numbers
+    were tokenized multi-bleu. For the synthetic symbol task we use a single consistent
+    corpus-BLEU implementation across Transformer and baseline so the comparison is
+    internally valid.
+  sensitivity: medium
+- id: no_attention_baseline_form
+  question: How should the 'no-attention' baseline be constructed?
+  config_key: baseline_arch
+  options:
+  - mean_pooled_context_ffn
+  - lstm_encdec_no_attention
+  - conv_encdec
+  default: mean_pooled_context_ffn
+  source: guess
+  reason: The paper's ablations (Table 3) never remove attention entirely; the cleanest
+    control keeps depth/width/parameters and the training recipe fixed and deletes
+    only the attention sub-layers, replacing cross-attention with a fixed mean-pooled
+    encoder summary.
+  sensitivity: high
+- id: checkpoint_averaging
+  question: Average the last k checkpoints at reduced scale?
+  config_key: checkpoint_averaging
+  options:
+  - none
+  - last_5
+  - last_20
+  default: none
+  source: paper_text
+  reason: Paper averages 5/20 checkpoints for Table 2 but explicitly uses 'no checkpoint
+    averaging' for the Table 3 ablation grid (p9); the reduced run is an ablation-style
+    comparison, so no averaging.
+  sensitivity: low
+- id: decode_beam
+  question: Greedy or beam decoding for reduced-scale BLEU?
+  config_key: beam_size
+  options:
+  - 1_greedy
+  - 4_alpha_0.6
+  default: 1_greedy
+  source: conventions_kb
+  reason: Paper uses beam 4 with alpha 0.6 (p8), but greedy is cheaper on CPU and
+    sufficient for a short synthetic task; beam 4 / alpha 0.6 is run as a secondary
+    check.
+  sensitivity: medium
+- id: weight_init
+  question: Parameter initialization scheme?
+  config_key: init
+  options:
+  - xavier_uniform
+  - normal_0_0.02
+  - framework_default
+  default: xavier_uniform
+  source: conventions_kb
+  reason: Paper does not state initialization anywhere; tensor2tensor/standard Transformer
+    implementations use Xavier/Glorot uniform with N(0, d_model^-0.5) embeddings.
+  sensitivity: medium
+- id: grad_clipping
+  question: Is gradient clipping used?
+  config_key: grad_clip
+  options:
+  - none
+  - 1.0_global_norm
+  default: none
+  source: conventions_kb
+  reason: Not mentioned in Section 5 (p7-8); the original Transformer recipe relies
+    on the warmup schedule rather than clipping.
+  sensitivity: low
+- id: layernorm_placement
+  question: Post-norm (as written) or pre-norm residual blocks?
+  config_key: norm_placement
+  options:
+  - post_norm
+  - pre_norm
+  default: post_norm
+  source: paper_text
+  reason: Section 3.1 (p3) states LayerNorm(x + Sublayer(x)), i.e. post-norm; note
+    that post-norm is less stable at very short warmup, which interacts with the warmup_scaling
+    choice.
+  sensitivity: medium
+- id: label_smoothing_reduced
+  question: Keep label smoothing 0.1 at reduced scale even though it distorts loss/perplexity
+    comparisons?
+  config_key: label_smoothing
+  options:
+  - 0.1_as_paper
+  - '0.0'
+  default: 0.1_as_paper
+  source: paper_text
+  reason: Paper uses eps_ls=0.1 and warns it hurts perplexity while improving accuracy
+    and BLEU (Section 5.4, p8); we keep it but report unsmoothed cross-entropy separately
+    so the reported loss is comparable to the baseline.
+  sensitivity: medium
+- id: seed_count
+  question: How many seeds for the reduced-scale comparison?
+  config_key: n_seeds
+  options:
+  - '1'
+  - '3'
+  - '5'
+  default: '3'
+  source: conventions_kb
+  reason: Paper reports single runs with no variance or seed information; 3 seeds
+    is the minimum needed to report a std for the Transformer-vs-no-attention gap
+    within the compute budget.
+  sensitivity: medium
+- id: enfr_bleu_reference
+  question: 'Which printed EN-FR big-model BLEU is authoritative: 41.8 (Table 2 /
+    abstract) or 41.0 (Section 6.1 text)?'
+  config_key: enfr_reference_value
+  options:
+  - 41.8_table2
+  - 41.0_text
+  default: 41.8_table2
+  source: paper_text
+  reason: Table 2 (p8) prints 41.8 and the abstract (p1) also says 41.8, while the
+    Section 6.1 narrative (p8) says 41.0; the table/abstract value is taken as the
+    claim. This claim is Untested at this compute tier regardless.
+  sensitivity: low
+- id: paper_scale_untested
+  question: How to record paper-scale WMT14/PTB claims that cannot be executed?
+  config_key: claim_status
+  options:
+  - untested
+  - attempt_partial
+  - proxy_extrapolation
+  default: untested
+  source: conventions_kb
+  reason: CPU tier 2 with a 15-minute budget cannot train on 4.5M/36M sentence pairs;
+    Table 2, Table 3 and Table 4 claims are marked Untested and only the reduced-scale
+    synthetic-task metrics plus the no-attention comparison are verified.
+  sensitivity: high
+descriptive_stats:
+- metric: wmt14_ende_training_sentence_pairs_millions
+  value: 4.5
+  where: Section 5.1, page 7
+- metric: wmt14_ende_shared_bpe_vocab_tokens
+  value: 37000.0
+  where: Section 5.1, page 7
+- metric: wmt14_enfr_training_sentences_millions
+  value: 36.0
+  where: Section 5.1, page 7
+- metric: wmt14_enfr_wordpiece_vocab_tokens
+  value: 32000.0
+  where: Section 5.1, page 7
+- metric: tokens_per_training_batch_source
+  value: 25000.0
+  where: Section 5.1, page 7 (approximately 25000 source tokens; also ~25000 target
+    tokens)
+- metric: tokens_per_training_batch_target
+  value: 25000.0
+  where: Section 5.1, page 7
+- metric: num_gpus
+  value: 8.0
+  where: Section 5.2, page 7 (NVIDIA P100)
+- metric: base_step_time_seconds
+  value: 0.4
+  where: Section 5.2, page 7
+- metric: base_train_steps
+  value: 100000.0
+  where: Section 5.2 (page 7) and Table 3 base row (page 9)
+- metric: base_train_hours
+  value: 12.0
+  where: Section 5.2, page 7
+- metric: big_step_time_seconds
+  value: 1.0
+  where: Section 5.2, page 7
+- metric: big_train_steps
+  value: 300000.0
+  where: Section 5.2 (page 7) and Table 3 big row (page 9)
+- metric: big_train_days
+  value: 3.5
+  where: Section 5.2 / Section 6.1, pages 7-8
+- metric: warmup_steps
+  value: 4000.0
+  where: Section 5.3, page 7
+- metric: adam_beta1
+  value: 0.9
+  where: Section 5.3, page 7
+- metric: adam_beta2
+  value: 0.98
+  where: Section 5.3, page 7
+- metric: adam_epsilon
+  value: 1.0e-09
+  where: Section 5.3, page 7
+- metric: base_params_millions
+  value: 65.0
+  where: Table 3, row base, page 9
+- metric: big_params_millions
+  value: 213.0
+  where: Table 3, row big, page 9
+- metric: parsing_wsj_training_sentences_thousands
+  value: 40.0
+  where: Section 6.3, page 9
+- metric: parsing_semisupervised_sentences_millions
+  value: 17.0
+  where: Section 6.3, page 9
+- metric: parsing_wsj_vocab_tokens_thousands
+  value: 16.0
+  where: Section 6.3, page 9
+- metric: parsing_semisup_vocab_tokens_thousands
+  value: 32.0
+  where: Section 6.3, page 9
+- metric: parsing_layers
+  value: 4.0
+  where: Section 6.3, page 9
+- metric: parsing_d_model
+  value: 1024.0
+  where: Section 6.3, page 9
+- metric: encoder_decoder_layers_base
+  value: 6.0
+  where: Section 3.1, page 3 (N=6 for both encoder and decoder)
+- metric: d_model_base
+  value: 512.0
+  where: Section 3.1 / 3.3, pages 3 and 5
+- metric: d_ff_base
+  value: 2048.0
+  where: Section 3.3, page 5
+- metric: heads_base
+  value: 8.0
+  where: Section 3.2.2, page 5
+- metric: d_k_d_v_base
+  value: 64.0
+  where: Section 3.2.2, page 5
+- metric: dropout_base
+  value: 0.1
+  where: Section 5.4 (Residual Dropout), page 8
+- metric: dropout_big_ende
+  value: 0.3
+  where: Table 3, row big, page 9
+- metric: dropout_big_enfr
+  value: 0.1
+  where: Section 6.1, page 8
+- metric: label_smoothing
+  value: 0.1
+  where: Section 5.4 (Label Smoothing), page 8
+- metric: beam_size_translation
+  value: 4.0
+  where: Section 6.1, page 8
+- metric: length_penalty_alpha_translation
+  value: 0.6
+  where: Section 6.1, page 8
+- metric: max_output_length_offset_translation
+  value: 50.0
+  where: Section 6.1, page 8 (input length + 50)
+- metric: checkpoints_averaged_base
+  value: 5.0
+  where: Section 6.1, page 8 (written at 10-minute intervals)
+- metric: checkpoints_averaged_big
+  value: 20.0
+  where: Section 6.1, page 8
+- metric: beam_size_parsing
+  value: 21.0
+  where: Section 6.3, page 10
+- metric: length_penalty_alpha_parsing
+  value: 0.3
+  where: Section 6.3, page 10
+- metric: max_output_length_offset_parsing
+  value: 300.0
+  where: Section 6.3, page 10 (input length + 300)
+plan:
+  data_tier: A
+  compute_tier: 2
+  kind_of_test: re_implementation
+  target_claims:
+  - c_t2_big_ende_bleu
+  - c_t2_big_enfr_bleu
+  - c_t2_base_ende_bleu
+  - c_t2_base_enfr_bleu
+  - c_t2_base_flops
+  - c_t2_big_flops
+  - c_t3_base_ppl_dev
+  - c_t3_base_bleu_dev
+  substitutions: {}
+  tolerances:
+    c_t2_big_ende_bleu: 1.05
+    c_t2_big_enfr_bleu: 1.05
+    c_t2_base_ende_bleu: 1.05
+    c_t2_base_enfr_bleu: 1.05
+    c_t3_base_ppl_dev: 0.1034
+    c_t3_base_bleu_dev: 1.05
+    c_t3_big_ppl_dev: 0.0916
+    c_t3_big_bleu_dev: 1.05
+    c_t3_A_h1_ppl: 0.11080000000000001
+    c_t3_A_h1_bleu: 1.05
+    c_t3_A_h16_bleu: 1.05
+    c_t3_C_N2_ppl: 0.1272
+    c_t3_C_N2_bleu: 1.05
+    c_t3_D_drop0_ppl: 0.1204
+    c_t3_D_drop0_bleu: 1.05
+    c_t3_E_learned_pe_ppl: 0.1034
+    c_t3_E_learned_pe_bleu: 1.05
+  success_criteria: 'CPU only, compute tier 2. WMT14 is out of reach: train a 2-layer
+    d_model=128 Transformer on a synthetic copy/reverse task (or a <=20k-pair IWSLT-style
+    subset if a download is fast) for <=15 min; report loss, token accuracy, and BLEU
+    on the small task, plus a no-attention baseline. Paper-scale BLEU claims are Untested.
+    || Match on every headline claim within its derived tolerance; all leakage tests
+    pass; kind of test = re_implementation; data tier A; compute tier 1. Tier B: same
+    sign, significant, gap inside the substitution''s predicted band.'
+  budget:
+    spec: 10
+    setup: 20
+    build: 25
+    run: 20
+    verify: 15
+    report: 5
+    hard_kill_minutes: 240
+    max_cost_usd: 150.0
+    run_timeout_s: 1500
+  seeds:
+  - 0
+  frozen_hash: 12e3f385c46de4225c6a250a2028616d2b1768dd5cebcb210eae8c16bb0f15c3
+  frozen_at: '2026-09-15T15:53:29.208516+00:00'
