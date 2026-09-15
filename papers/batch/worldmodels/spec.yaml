@@ -1,0 +1,1071 @@
+paper:
+  title: World Models
+  authors:
+  - David Ha
+  - Jürgen Schmidhuber
+  year: 2018
+  arxiv_id: '1803.10122'
+  version: v4
+  track: cs
+  family: train_and_eval
+claims:
+- id: carracing_full_world_model
+  where: Table 1, row 'FULL WORLD MODEL', column AVG. SCORE (also text p.6 and Figure
+    25, p.15)
+  evidence_page: 6
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 906.0
+  reported_precision: 0.5
+  n_periods: 100
+  reported_std: 21.0
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: carracing_full_zh
+  priority: headline
+- id: carracing_v_only
+  where: Table 1, row 'V MODEL', column AVG. SCORE (also text p.5 and Figure 26, p.15)
+  evidence_page: 6
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 632.0
+  reported_precision: 0.5
+  n_periods: 100
+  reported_std: 251.0
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: carracing_z_only_linear
+  priority: secondary
+- id: carracing_v_only_hidden
+  where: Table 1, row 'V MODEL WITH HIDDEN LAYER', column AVG. SCORE (also text p.5
+    and Figure 27, p.15)
+  evidence_page: 6
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 788.0
+  reported_precision: 0.5
+  n_periods: 100
+  reported_std: 141.0
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: carracing_z_only_hidden40
+  priority: secondary
+- id: carracing_baseline_dqn
+  where: Table 1, row 'DQN (PRIEUR, 2017)', column AVG. SCORE (quoted from prior work;
+    number of trials not stated)
+  evidence_page: 6
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 343.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: 18.0
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: external_baseline
+  priority: secondary
+- id: carracing_baseline_a3c_continuous
+  where: Table 1, row 'A3C (CONTINUOUS) (JANG ET AL., 2017)', column AVG. SCORE (quoted
+    from prior work; number of trials not stated)
+  evidence_page: 6
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 591.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: 45.0
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: external_baseline
+  priority: secondary
+- id: carracing_baseline_a3c_discrete
+  where: Table 1, row 'A3C (DISCRETE) (KHAN & ELIBOL, 2016)', column AVG. SCORE (quoted
+    from prior work; number of trials not stated)
+  evidence_page: 6
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 652.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: 10.0
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: external_baseline
+  priority: secondary
+- id: carracing_baseline_gym_leader
+  where: Table 1, row 'CEOBILLIONAIRE (GYM LEADERBOARD)', column AVG. SCORE; text
+    p.6 states 'average score of 838 ± 11 over 100 random trials'
+  evidence_page: 6
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 838.0
+  reported_precision: 0.5
+  n_periods: 100
+  reported_std: 11.0
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: external_baseline
+  priority: secondary
+- id: carracing_best_agent_1024_rollouts
+  where: 'Appendix A.4 text: ''After 1800 generations, an agent was able to achieve
+    an average score of 900.46 over 1024 random rollouts'''
+  evidence_page: 14
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 900.46
+  reported_precision: 0.005
+  n_periods: 1024
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: carracing_full_zh
+  priority: secondary
+- id: doom_transfer_actual_tau115
+  where: Table 2, row τ=1.15, column ACTUAL SCORE (also Appendix A.5 text and Figure
+    29, p.15)
+  evidence_page: 10
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 1092.0
+  reported_precision: 0.5
+  n_periods: 100
+  reported_std: 556.0
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: doom_dream_tau_1.15
+  priority: headline
+- id: doom_virtual_tau115
+  where: Table 2, row τ=1.15, column VIRTUAL SCORE
+  evidence_page: 10
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 918.0
+  reported_precision: 0.5
+  n_periods: 100
+  reported_std: 546.0
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: doom_dream_tau_1.15
+  priority: secondary
+- id: doom_virtual_tau010
+  where: Table 2, row τ=0.10, column VIRTUAL SCORE
+  evidence_page: 10
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 2086.0
+  reported_precision: 0.5
+  n_periods: 100
+  reported_std: 140.0
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: doom_dream_tau_0.10
+  priority: secondary
+- id: doom_actual_tau010
+  where: Table 2, row τ=0.10, column ACTUAL SCORE
+  evidence_page: 10
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 193.0
+  reported_precision: 0.5
+  n_periods: 100
+  reported_std: 58.0
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: doom_dream_tau_0.10
+  priority: secondary
+- id: doom_virtual_tau050
+  where: Table 2, row τ=0.50, column VIRTUAL SCORE
+  evidence_page: 10
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 2060.0
+  reported_precision: 0.5
+  n_periods: 100
+  reported_std: 277.0
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: doom_dream_tau_0.50
+  priority: secondary
+- id: doom_actual_tau050
+  where: Table 2, row τ=0.50, column ACTUAL SCORE
+  evidence_page: 10
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 196.0
+  reported_precision: 0.5
+  n_periods: 100
+  reported_std: 50.0
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: doom_dream_tau_0.50
+  priority: secondary
+- id: doom_virtual_tau100
+  where: Table 2, row τ=1.00, column VIRTUAL SCORE
+  evidence_page: 10
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 1145.0
+  reported_precision: 0.5
+  n_periods: 100
+  reported_std: 690.0
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: doom_dream_tau_1.00
+  priority: secondary
+- id: doom_actual_tau100
+  where: Table 2, row τ=1.00, column ACTUAL SCORE
+  evidence_page: 10
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 868.0
+  reported_precision: 0.5
+  n_periods: 100
+  reported_std: 511.0
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: doom_dream_tau_1.00
+  priority: secondary
+- id: doom_virtual_tau130
+  where: Table 2, row τ=1.30, column VIRTUAL SCORE
+  evidence_page: 10
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 732.0
+  reported_precision: 0.5
+  n_periods: 100
+  reported_std: 269.0
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: doom_dream_tau_1.30
+  priority: secondary
+- id: doom_actual_tau130
+  where: Table 2, row τ=1.30, column ACTUAL SCORE
+  evidence_page: 10
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 753.0
+  reported_precision: 0.5
+  n_periods: 100
+  reported_std: 139.0
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: doom_dream_tau_1.30
+  priority: secondary
+- id: doom_random_policy
+  where: Table 2, row 'RANDOM POLICY', column ACTUAL SCORE (virtual column is N/A)
+  evidence_page: 10
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 210.0
+  reported_precision: 0.5
+  n_periods: 100
+  reported_std: 108.0
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: random_policy
+  priority: secondary
+- id: doom_gym_leader
+  where: Table 2, row 'GYM LEADER', column ACTUAL SCORE; also text p.10 ('best score
+    on the OpenAI Gym leaderboard is 820 ± 58'); number of trials not stated
+  evidence_page: 10
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 820.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: 58.0
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: external_baseline
+  priority: secondary
+- id: doomrnn_best_agent_virtual_1024
+  where: 'Appendix A.5 text: ''The best agent managed to obtain an average score of
+    959 over 1024 random rollouts'' (score inside the virtual DoomRNN env at τ=1.15)'
+  evidence_page: 15
+  metric: mean_return
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 959.0
+  reported_precision: 0.5
+  n_periods: 1024
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: doom_dream_tau_1.15
+  priority: secondary
+data:
+  sources:
+  - canonical: openai_gym_carracing_v0
+    description: CarRacing-v0 top-down car racing environment (Klimov 2016); tracks
+      randomly generated each trial; 10,000 rollouts collected from a random policy;
+      raw RGB frames (native resolution not stated in the paper) resized to 64x64x3;
+      3 continuous actions (steering left/right, acceleration, brake).
+    substitute: gym_cartpole_v1_pixels (rendered frames resized to 64x64x3) or tiny
+      gridworld pixel env — CarRacing is out of reach on CPU-only tier-2 compute
+  - canonical: vizdoom_takecover_v0
+    description: DoomTakeCover-v0 (Paquette 2016); 10,000 random-policy rollouts used
+      only to collect training frames/actions/done flags (the paper never trains the
+      controller in the real VizDoom env, only evaluates there); reward = number of
+      time steps survived, max 2100 steps per rollout.
+    substitute: not run (out of reach on CPU-only tier-2 compute)
+  - canonical: random_policy_rollout_dataset
+    description: Frames + actions (+ done flags for Doom) recorded from a random policy;
+      used to train V (VAE) and M (MDN-RNN) in an unsupervised manner. The exact random-action
+      distribution is not specified in the paper.
+    substitute: random-policy rollouts in the substitute environment
+  universe:
+    environments_paper: CarRacing-v0 (continuous control, controller trained in the
+      real env), VizDoom DoomTakeCover-v0 (controller trained only inside the DoomRNN
+      dream env, then transferred)
+    environments_replication: CartPole-v1 pixel observations or tiny pixel grid env
+      (CPU tier 2)
+    observation: 64x64x3 RGB, each channel stored as float in [0,1] (Appendix A.1)
+    action_space_carracing: '3 continuous: steering [-1,1], acceleration [0,1], brake
+      [0,1]; tanh nonlinearities applied to clip/bound the action space (exact mapping
+      of tanh output to [0,1] ranges not stated)'
+    action_space_doom: discrete left/stay/right obtained by splitting a continuous
+      tanh output in [-1,1] into thirds (Appendix A.3)
+  frequency: per environment time step (episodic rollouts; Doom rollouts capped at
+    2100 time steps per Section 4.1; CarRacing episode length is not stated anywhere
+    in the paper)
+  preprocessing:
+    resize: each frame resized to 64x64 pixels (Appendix A.1)
+    scaling: each RGB channel stored as float in [0,1] (Appendix A.1)
+    no_frame_stacking: raw single RGB frame; explicitly no edge detection and no frame
+      stacking (contrast with Deep RL baselines, p.6)
+    latent_sampling_for_M: store precomputed mu, sigma per frame; sample z ~ N(mu,
+      sigma) fresh each time a MDN-RNN training batch is constructed, to avoid overfitting
+      to one sampled z (Appendix A.2)
+    doom_action_discretization: recorded discrete VizDoom actions are represented
+      in a continuous [-1,1] space split into thirds
+    done_threshold_doom: predicted death probability > 50% sets done=true in the virtual
+      env (cutoff rather than sampling from the Bernoulli distribution) (Appendix
+      A.2)
+  splits:
+    vae_train: all frames from the 10,000 random rollouts; 1 epoch (Appendix A.1)
+    mdnrnn_train: same rollouts encoded to latents; 20 epochs, teacher forcing (Appendix
+      A.2)
+    controller_eval: evaluation on fresh random environment seeds; 100 consecutive
+      random trials for the reported table numbers; 1024 random rollouts every 25
+      generations for appendix best-agent selection (Appendix A.4)
+    no_held_out_set_stated: paper reports no explicit train/validation split for V
+      or M and reports no VAE or MDN-RNN loss values; only downstream episodic return
+      is reported
+method:
+  signal: 'Learn a compressed world model of a pixel RL environment: a ConvVAE (V)
+    encodes each frame into a latent z, an MDN-RNN (M) models P(z_{t+1} | a_t, z_t,
+    h_t) (plus done_{t+1} for Doom), and a tiny linear controller (C) mapping [z_t
+    h_t] to actions is evolved with CMA-ES to maximize cumulative reward (CarRacing:
+    trained in the real env; Doom: trained entirely inside the M-generated dream at
+    a chosen temperature, then transferred).'
+  model:
+    V_architecture: 'ConvVAE (Figure 22): encoder 4 conv layers (relu conv 32x4 ->
+      31x31x32, 64x4 -> 14x14x64, 128x4 -> 6x6x128, 256x4 -> 2x2x256), all stride
+      2 -> dense mu, sigma of size Nz; decoder dense -> 1x1x1024 -> 4 deconv layers
+      (relu deconv 128x5 -> 5x5x128, relu 64x5 -> 13x13x64, relu 32x6 -> 30x30x32,
+      sigmoid deconv 3x6 -> 64x64x3)'
+    V_latent_dim: Nz=32 (CarRacing), Nz=64 (Doom); z sampled as z = mu + sigma * N(0,1)
+    V_loss: L2 distance between input image and reconstruction, in addition to KL
+      loss (relative weighting / reduction not stated)
+    V_epochs: 1 epoch over random-policy data
+    M_architecture: LSTM (256 hidden units CarRacing, 512 Doom) with Mixture Density
+      Network output layer, 5 Gaussian mixtures, diagonal (factored) covariance, no
+      correlation rho; temperature tau rescales sampling uncertainty
+    M_epochs: 20 epochs, teacher forcing on recorded data
+    M_extra_output_doom: also predicts the done_{t+1} probability in addition to z_{t+1}
+      (not done in the CarRacing task)
+    C_architecture: 'single-layer linear model; CarRacing: a_t = Wc [z_t h_t] + bc
+      (867 params); Doom: a_t = Wc [z_t h_t] with no bias term (1,088 params); tanh
+      applied to bound actions'
+    C_inputs: 'CarRacing: z and the LSTM output vector h; Doom: z and both the LSTM
+      cell vector c and output vector h (Appendix A.3)'
+    C_optimizer: CMA-ES (Hansen 2016; Hansen & Ostermeier 2001), population size 64,
+      each candidate performs the task 16 times with different initial random seeds,
+      fitness = average cumulative reward of the 16 rollouts; run on a single 64-core
+      machine with parallel rollouts
+    param_counts_carracing: VAE 4,348,547; MDN-RNN 422,368; Controller 867
+    param_counts_doom: VAE 4,446,915; MDN-RNN 1,678,785; Controller 1,088
+    training_note: V and M trained separately (not end-to-end); each model required
+      less than an hour on a single GPU (footnote 3, p.4)
+  evaluation:
+  - Average cumulative reward over 100 consecutive random trials (CarRacing-v0) /
+    average survival time steps over 100 consecutive random rollouts of the actual
+    DoomTakeCover-v0, reported as 'mean ± value' (the paper does not define the ±
+    measure; assumed across-trial standard deviation)
+  - 'Best-agent selection (Appendix A.4): every 25 generations the best population
+    member is evaluated over 1024 random rollouts'
+  - 'CarRacing solved criterion: average reward of 900 over 100 consecutive trials
+    (footnote 2, p.4)'
+  - 'Take Cover solved criterion: average survival time over 100 consecutive rollouts
+    greater than 750 time steps (Section 4.1)'
+  - Table 2 'VIRTUAL SCORE' is measured inside the DoomRNN dream env at the same temperature
+    used for training; the rollout count for the virtual column is not stated in the
+    paper
+  - 'Replication-only staged checks (not reported in the paper): (1) VAE reconstruction
+    loss decreases on held-out frames, (2) MDN-RNN next-latent NLL below an explicit
+    reference-distribution baseline, (3) CMA-ES linear controller on (z,h) beats a
+    random policy in the substitute environment'
+  eval_protocol:
+    n_eval_episodes: 100 random trials for the table numbers; 1024 rollouts for appendix
+      best-agent selection
+    metric: mean cumulative reward (CarRacing, unitless gym score) / mean survival
+      time steps (Doom, count of time steps)
+    dispersion: paper writes 'mean ± value' without defining the measure; assumed
+      standard deviation across evaluation trials (Figures 25 and 29 show across-trial
+      histograms). Not stated — see ambiguity dispersion_definition
+    seeds: environment random seeds vary per trial; number of independent training
+      seeds is not reported (appears to be a single training run per configuration)
+    training_budget_carracing: solved after ~1800 CMA-ES generations; Figure 24 plots
+      up to ~2000 generations
+    training_budget_doom: ~2500 CMA-ES generations inside DoomRNN at tau=1.15 (read
+      off the Figure 28 x-axis; not stated in the text)
+    carracing_episode_length: not stated in the paper
+    temperature_at_actual_eval: the actual (real) environments have no temperature
+      parameter; tau applies only to sampling inside the M-generated dream env
+  variants:
+    carracing_full_zh:
+      controller_input: '[z_t, h_t] concatenated (h = LSTM output vector)'
+      controller_form: linear with bias, 867 parameters
+      training_env: actual CarRacing-v0 (not dream)
+      eval_env: CarRacing-v0, 100 random trials (1024 for best-agent selection)
+    carracing_z_only_linear:
+      controller_input: z_t only (a = Wc z_t + bc)
+      controller_form: linear with bias
+      training_env: actual CarRacing-v0
+      eval_env: CarRacing-v0, 100 random trials
+    carracing_z_only_hidden40:
+      controller_input: z_t only
+      controller_form: one hidden layer of 40 tanh units between z and a, 1,443 parameters
+      training_env: actual CarRacing-v0
+      eval_env: CarRacing-v0, 100 random trials
+    doom_dream_tau_0.10:
+      training_env: DoomRNN dream env, temperature tau=0.10
+      eval: 'virtual score in dream and actual DoomTakeCover-v0 score (actual: 100
+        random rollouts; virtual rollout count not stated)'
+    doom_dream_tau_0.50:
+      training_env: DoomRNN dream env, temperature tau=0.50
+      eval: 'virtual and actual score (actual: 100 random rollouts)'
+    doom_dream_tau_1.00:
+      training_env: DoomRNN dream env, temperature tau=1.00
+      eval: 'virtual and actual score (actual: 100 random rollouts)'
+    doom_dream_tau_1.15:
+      training_env: DoomRNN dream env, temperature tau=1.15 (main reported setting,
+        Appendix A.5)
+      eval: virtual score and transfer to actual DoomTakeCover-v0 over 100 random
+        rollouts; 1024 virtual rollouts for best-agent selection
+    doom_dream_tau_1.30:
+      training_env: DoomRNN dream env, temperature tau=1.30
+      eval: 'virtual and actual score (actual: 100 random rollouts)'
+    random_policy:
+      policy: random actions (distribution not specified in the paper)
+      eval: actual DoomTakeCover-v0 (Table 2 'RANDOM POLICY' row; virtual column N/A)
+    external_baseline:
+      source: numbers quoted from prior work / OpenAI Gym leaderboards, not re-run
+        by the authors
+baselines:
+- 'Random policy on DoomTakeCover-v0 (Table 2: 210 ± 108)'
+- 'DQN (Prieur 2017) on CarRacing-v0 (Table 1: 343 ± 18)'
+- 'A3C continuous (Jang et al. 2017) on CarRacing-v0 (Table 1: 591 ± 45)'
+- 'A3C discrete (Khan & Elibol 2016) on CarRacing-v0 (Table 1: 652 ± 10)'
+- 'OpenAI Gym leaderboard best (ceobillionaire) CarRacing-v0 (Table 1: 838 ± 11 over
+  100 random trials)'
+- 'OpenAI Gym leaderboard best DoomTakeCover-v0 (Table 2: 820 ± 58)'
+- 'Ablation: controller with z only, no h (Table 1 ''V MODEL'')'
+- 'Ablation: controller with z only plus 40-unit tanh hidden layer (Table 1 ''V MODEL
+  WITH HIDDEN LAYER'')'
+- 'Replication-only: reference latent distribution as NLL baseline for the MDN-RNN
+  stage check (no NLL numbers reported in the paper)'
+ambiguities:
+- id: lr_schedule
+  question: What learning-rate schedule is used for VAE and MDN-RNN training?
+  config_key: lr_schedule
+  options:
+  - constant
+  - cosine
+  - step
+  - as_paper
+  default: constant
+  source: author_code
+  reason: Paper states epochs only (1 for VAE, 20 for MDN-RNN) and never states optimizer
+    settings or a schedule; author code uses a constant / slowly-decayed Adam LR.
+  sensitivity: medium
+- id: augmentation
+  question: Is any train-time data augmentation applied to the collected frames?
+  config_key: augmentation
+  options:
+  - none
+  - standard
+  - as_paper
+  default: none
+  source: paper_text
+  reason: Paper describes only resize to 64x64 and [0,1] scaling; the only stochastic
+    element mentioned is re-sampling z ~ N(mu,sigma) per batch when training M.
+  sensitivity: low
+- id: batch_vs_steps
+  question: When reducing scale (smaller env, fewer rollouts), hold fixed epochs or
+    fixed gradient steps?
+  config_key: batch_vs_steps
+  options:
+  - epochs
+  - steps
+  default: steps
+  source: conventions_kb
+  reason: Paper specifies epochs over a 10,000-rollout dataset that cannot be collected
+    on CPU; holding gradient steps keeps the reduced run comparable.
+  sensitivity: high
+- id: mixed_precision
+  question: Train in fp32 or mixed precision?
+  config_key: mixed_precision
+  options:
+  - fp32
+  - amp
+  default: fp32
+  source: conventions_kb
+  reason: 2018 paper, single GPU; CPU-only replication makes fp32 the only sensible
+    choice.
+  sensitivity: low
+- id: split
+  question: Are the reported numbers validation or test numbers?
+  config_key: split
+  options:
+  - validation
+  - test
+  default: test
+  source: conventions_kb
+  reason: There is no held-out dataset split; the reported score is a fresh-seed evaluation
+    over 100 random trials, which plays the role of test. The 1024-rollout evaluation
+    used to pick the best agent is effectively validation.
+  sensitivity: medium
+- id: optimizer
+  question: Which optimizer and learning rate are used for V and M?
+  config_key: optimizer
+  options:
+  - adam_1e-4
+  - adam_1e-3
+  - rmsprop
+  - as_paper
+  default: adam_1e-4
+  source: author_code
+  reason: Not stated anywhere in the paper; author code uses Adam with LR ~1e-4 and
+    gradient clipping.
+  sensitivity: medium
+- id: batch_size
+  question: What batch size is used for VAE and MDN-RNN training?
+  config_key: batch_size
+  options:
+  - '32'
+  - '64'
+  - '100'
+  - '128'
+  default: '100'
+  source: author_code
+  reason: Paper gives no batch size; author code uses batch size 100 for the VAE and
+    100 sequences for the RNN.
+  sensitivity: low
+- id: kl_loss_weight
+  question: How is the KL term weighted / is a KL tolerance (free bits) floor applied?
+  config_key: kl_weight
+  options:
+  - kl_weight_1_no_tolerance
+  - kl_tolerance_0.5_per_dim
+  - beta_tuned
+  default: kl_tolerance_0.5_per_dim
+  source: author_code
+  reason: Paper only says 'L2 reconstruction loss ... in addition to KL loss'; author
+    code clamps KL at 0.5 nats per latent dim, which strongly affects latent usefulness.
+  sensitivity: high
+- id: recon_loss_reduction
+  question: Is the L2 reconstruction loss summed over pixels or averaged?
+  config_key: recon_reduction
+  options:
+  - sum_over_pixels
+  - mean_over_pixels
+  default: sum_over_pixels
+  source: conventions_kb
+  reason: Paper says only 'L2 distance between the input image and the reconstruction';
+    the reduction changes the effective KL/recon balance.
+  sensitivity: high
+- id: rnn_sequence_length
+  question: What truncated-BPTT sequence length is used to train the MDN-RNN?
+  config_key: rnn_seq_len
+  options:
+  - '100'
+  - '500'
+  - '1000'
+  - full_episode
+  default: '1000'
+  source: author_code
+  reason: Not stated in the paper; author code trains on 1000-step CarRacing sequences
+    / ~500-step Doom sequences.
+  sensitivity: medium
+- id: mdn_temperature_train_eval
+  question: What temperature tau is used when the CarRacing controller is trained/evaluated
+    in the real environment?
+  config_key: temperature_carracing
+  options:
+  - '1.0'
+  - not_applicable_deterministic_h
+  - tuned
+  default: not_applicable_deterministic_h
+  source: paper_text
+  reason: In the real env the controller only reads z and the deterministic LSTM state
+    h, so no sampling from M occurs; tau matters only inside the dream envs, where
+    the paper gives explicit values (Table 2, A.5).
+  sensitivity: low
+- id: cma_sigma_init
+  question: What initial CMA-ES step size (sigma) and initial solution are used?
+  config_key: cma_sigma_init
+  options:
+  - '0.1'
+  - '0.5'
+  - '1.0'
+  default: '0.1'
+  source: author_code
+  reason: Paper gives population size (64) and 16 rollouts per candidate but not sigma
+    or initialization; author code uses sigma_init=0.1 starting from zeros.
+  sensitivity: high
+- id: cma_generations
+  question: How many CMA-ES generations should the reduced-scale run use?
+  config_key: n_generations
+  options:
+  - '100'
+  - '300'
+  - '1800'
+  - as_paper
+  default: '100'
+  source: conventions_kb
+  reason: Paper used ~1800 (CarRacing) to ~2500 (DoomRNN) generations on a 64-core
+    machine; infeasible on CPU tier 2, so a much smaller budget is used and only the
+    'beats random policy' check is claimed.
+  sensitivity: high
+- id: rollouts_dataset_size
+  question: How many random-policy rollouts (and frames) are collected for the reduced-scale
+    run?
+  config_key: n_random_rollouts
+  options:
+  - '100'
+  - '500'
+  - '1000'
+  - '10000'
+  default: '500'
+  source: conventions_kb
+  reason: Paper uses 10,000 rollouts for both tasks; CPU-only budget forces a much
+    smaller dataset.
+  sensitivity: high
+- id: action_repeat_frameskip
+  question: Is any action repeat / frame skip used when collecting rollouts and acting?
+  config_key: frame_skip
+  options:
+  - '1'
+  - '2'
+  - '4'
+  default: '1'
+  source: conventions_kb
+  reason: Paper does not mention frame skip for CarRacing or Doom; the pseudocode
+    (p.4) shows one action per env step.
+  sensitivity: medium
+- id: seeds
+  question: How many independent training seeds are run and how are results aggregated?
+  config_key: n_seeds
+  options:
+  - '1'
+  - '3'
+  - '5'
+  default: '3'
+  source: conventions_kb
+  reason: Paper reports a single trained agent per configuration with ± denoting across-trial
+    spread; multiple training seeds are needed to judge reproducibility of the procedure.
+  sensitivity: medium
+- id: env_substitute
+  question: Which environment substitutes for CarRacing-v0 under CPU-only tier-2 compute?
+  config_key: environment
+  options:
+  - cartpole_v1_pixels
+  - tiny_gridworld_pixels
+  - carracing_v0
+  default: cartpole_v1_pixels
+  source: guess
+  reason: 'Triage instruction: CarRacing is out of reach; the paper''s CarRacing/Doom
+    score claims are marked Untested and only the three staged checks are verified.'
+  sensitivity: high
+- id: controller_h_definition
+  question: Does the controller consume only the LSTM output h, or both cell c and
+    output h?
+  config_key: controller_state_input
+  options:
+  - h_only
+  - h_and_c
+  default: h_only
+  source: paper_text
+  reason: 'Appendix A.3: CarRacing uses the output vector h only; Doom uses both the
+    cell vector c and output vector h. Substitute env follows the CarRacing convention.'
+  sensitivity: medium
+- id: controller_bias_term
+  question: Does the substitute-env controller include a bias term?
+  config_key: controller_bias
+  options:
+  - with_bias
+  - no_bias
+  default: with_bias
+  source: paper_text
+  reason: Section 3.2 step 4 defines CarRacing C as Wc[z h] + bc (867 params = (32+256)*3+3),
+    while Section 4.2 step 4 defines Doom C as Wc[z h] with no bias (1,088 params).
+    Substitute env follows CarRacing.
+  sensitivity: low
+- id: eval_episode_count
+  question: How many evaluation episodes for the substitute-environment controller
+    check?
+  config_key: n_eval_episodes
+  options:
+  - '30'
+  - '100'
+  - '1024'
+  default: '100'
+  source: paper_text
+  reason: Paper evaluates over 100 consecutive random trials; keep 100 for comparability
+    with the reported ± spread.
+  sensitivity: low
+- id: mdn_nll_baseline
+  question: What baseline defines 'better than a constant predictor' for the MDN-RNN
+    NLL check?
+  config_key: mdnrnn_baseline
+  options:
+  - unit_gaussian_prior
+  - marginal_gaussian_fit_to_z
+  - persistence_z_t
+  default: marginal_gaussian_fit_to_z
+  source: guess
+  reason: Paper reports no NLL or loss numbers at all; the stage check needs an explicit
+    reference distribution.
+  sensitivity: medium
+- id: dispersion_definition
+  question: Is the '±' in Tables 1 and 2 a standard deviation across trials or a standard
+    error?
+  config_key: dispersion_measure
+  options:
+  - std_across_trials
+  - standard_error
+  - unknown
+  default: std_across_trials
+  source: conventions_kb
+  reason: The paper never defines the ± quantity; the wide spreads (e.g. 906 ± 21,
+    1092 ± 556) and the across-trial histograms in Figures 25/29 are consistent with
+    a per-trial standard deviation, not a standard error.
+  sensitivity: medium
+- id: baseline_trial_counts
+  question: Over how many trials were the quoted external baselines (DQN, A3C continuous/discrete,
+    Doom Gym leader) averaged?
+  config_key: baseline_n_trials
+  options:
+  - '100'
+  - unknown_as_quoted
+  default: unknown_as_quoted
+  source: paper_text
+  reason: Table 1/Table 2 quote these numbers without a trial count (only the CarRacing
+    leaderboard entry is explicitly stated as 100 random trials); these rows are not
+    re-run, so no n_periods is asserted.
+  sensitivity: low
+- id: virtual_score_rollout_count
+  question: How many dream rollouts are averaged for the 'VIRTUAL SCORE' column of
+    Table 2?
+  config_key: n_virtual_rollouts
+  options:
+  - '100'
+  - '1024'
+  - unknown
+  default: '100'
+  source: paper_text
+  reason: The text on p.10 states 100 random rollouts only for the actual-environment
+    column; the virtual column count is never stated. 100 is assumed to match the
+    actual column (Appendix A.5 separately reports a 1024-rollout virtual score of
+    959).
+  sensitivity: medium
+- id: random_policy_distribution
+  question: What distribution does the 'random policy' use when collecting the 10,000
+    rollouts and when reported as the Doom random-policy baseline?
+  config_key: random_policy
+  options:
+  - uniform_over_action_space
+  - correlated_random_walk
+  - as_paper
+  default: uniform_over_action_space
+  source: guess
+  reason: Paper only says 'an agent acting randomly'; the action distribution (and
+    any temporal correlation) is not specified, yet it fully determines the V/M training
+    data.
+  sensitivity: high
+- id: z_at_rollout
+  question: During rollouts, is the controller's z the VAE mean mu or a sample from
+    N(mu, sigma)?
+  config_key: z_encode_mode
+  options:
+  - sample
+  - mu_only
+  default: sample
+  source: paper_text
+  reason: The pseudocode (p.4) only shows z = vae.encode(obs); Appendix A.1 says z
+    is sampled from N(mu, sigma I), so sampling is the closer reading, but the paper
+    never states it for rollout time.
+  sensitivity: medium
+- id: action_range_mapping
+  question: How is the tanh output mapped to the CarRacing acceleration/brake ranges
+    [0,1]?
+  config_key: action_mapping
+  options:
+  - clip_negative_to_zero
+  - affine_rescale_minus1_1_to_0_1
+  - tanh_then_relu
+  default: clip_negative_to_zero
+  source: guess
+  reason: Appendix A.3 says tanh nonlinearities are applied 'to clip and bound the
+    action space to the appropriate ranges' but does not specify the transformation
+    for the one-sided [0,1] dimensions.
+  sensitivity: medium
+- id: dream_env_initialization
+  question: How is a dream (DoomRNN) episode initialized — random real latent/hidden
+    state, zeros, or a sampled initial z?
+  config_key: dream_init
+  options:
+  - random_real_frame_latent
+  - zeros_state
+  - sampled_from_prior
+  default: random_real_frame_latent
+  source: guess
+  reason: Section 4.2/A.5 describe wrapping M in a gym.Env interface but never state
+    the reset distribution of z and h for dream episodes.
+  sensitivity: high
+- id: dream_episode_max_steps
+  question: What is the maximum episode length inside the dream environment during
+    controller training?
+  config_key: dream_max_steps
+  options:
+  - '2100'
+  - '1000'
+  - unbounded_until_done
+  default: '2100'
+  source: paper_text
+  reason: The 2100-step cap is stated for the actual VizDoom rollouts (Section 4.1)
+    and virtual scores of 2086/2060 suggest the same cap in the dream, but the paper
+    never states the dream cap explicitly.
+  sensitivity: medium
+- id: cma_seed_resampling
+  question: Are the 16 evaluation seeds per candidate re-sampled every generation
+    or held fixed across generations?
+  config_key: fitness_seed_policy
+  options:
+  - resample_each_generation
+  - fixed_seed_set
+  default: resample_each_generation
+  source: guess
+  reason: Appendix A.4 says each agent performs the task 16 times 'with different
+    initial random seeds' but is silent on whether the seed set changes per generation,
+    which affects fitness noise and overfitting to seeds.
+  sensitivity: medium
+descriptive_stats:
+- metric: carracing_random_rollouts_collected
+  value: 10000.0
+  where: Section 3.1, p.4; Section 3.2 step 1, p.5
+- metric: doom_random_rollouts_collected
+  value: 10000.0
+  where: Section 4.2 step 1, p.7
+- metric: carracing_latent_dim_Nz
+  value: 32.0
+  where: Section 3.2 step 2, p.5; Appendix A.1, p.13
+- metric: doom_latent_dim_Nz
+  value: 64.0
+  where: Section 4.2 step 2, p.7; Appendix A.1, p.13
+- metric: carracing_vae_param_count
+  value: 4348547.0
+  where: Unnumbered parameter-count table, Section 3.2, p.5
+- metric: carracing_mdnrnn_param_count
+  value: 422368.0
+  where: Unnumbered parameter-count table, Section 3.2, p.5
+- metric: carracing_controller_param_count
+  value: 867.0
+  where: Unnumbered parameter-count table, Section 3.2, p.5; also text p.5
+- metric: doom_vae_param_count
+  value: 4446915.0
+  where: Unnumbered parameter-count table, Section 4.2, p.7
+- metric: doom_mdnrnn_param_count
+  value: 1678785.0
+  where: Unnumbered parameter-count table, Section 4.2, p.7
+- metric: doom_controller_param_count
+  value: 1088.0
+  where: Unnumbered parameter-count table, Section 4.2, p.7
+- metric: carracing_lstm_hidden_units
+  value: 256.0
+  where: Appendix A.2, p.14
+- metric: doom_lstm_hidden_units
+  value: 512.0
+  where: Appendix A.2, p.14
+- metric: n_gaussian_mixtures
+  value: 5.0
+  where: Appendix A.2, p.14
+- metric: vae_training_epochs
+  value: 1.0
+  where: Appendix A.1, p.13
+- metric: mdnrnn_training_epochs
+  value: 20.0
+  where: Appendix A.2, p.14
+- metric: cma_es_population_size
+  value: 64.0
+  where: Appendix A.4, p.14
+- metric: rollouts_per_candidate_solution
+  value: 16.0
+  where: Appendix A.4, p.14
+- metric: generations_to_solve_carracing
+  value: 1800.0
+  where: Appendix A.4, p.14
+- metric: best_agent_eval_rollouts
+  value: 1024.0
+  where: Appendix A.4, p.14; Appendix A.5, p.15
+- metric: best_agent_eval_interval_generations
+  value: 25.0
+  where: Appendix A.4, p.14
+- metric: zonly_hidden_controller_param_count
+  value: 1443.0
+  where: Appendix A.4 text (continued), p.15
+- metric: zonly_hidden_units
+  value: 40.0
+  where: Appendix A.4 text (continued), p.15
+- metric: doom_max_timesteps_per_rollout
+  value: 2100.0
+  where: Section 4.1, p.7
+- metric: doom_solve_threshold_timesteps
+  value: 750.0
+  where: Section 4.1, p.7
+- metric: carracing_solve_threshold_score
+  value: 900.0
+  where: Footnote 2, p.4; Appendix A.4, p.14
+- metric: input_frame_resolution_pixels
+  value: 64.0
+  where: Appendix A.1, p.13
+- metric: doom_done_probability_cutoff_percent
+  value: 50.0
+  where: Appendix A.2, p.14
+- metric: doomrnn_training_temperature
+  value: 1.15
+  where: Appendix A.5, p.15
+plan:
+  data_tier: C
+  compute_tier: 2
+  kind_of_test: mechanics_only
+  target_claims:
+  - carracing_full_world_model
+  - carracing_v_only
+  - carracing_v_only_hidden
+  - carracing_baseline_dqn
+  - carracing_baseline_a3c_continuous
+  - carracing_baseline_a3c_discrete
+  - carracing_baseline_gym_leader
+  - carracing_best_agent_1024_rollouts
+  substitutions:
+    openai_gym_carracing_v0: 'UNAVAILABLE: claims depending on this source are Untested'
+    vizdoom_takecover_v0: 'UNAVAILABLE: claims depending on this source are Untested'
+    random_policy_rollout_dataset: 'UNAVAILABLE: claims depending on this source are
+      Untested'
+  tolerances: {}
+  success_criteria: 'CPU only, compute tier 2. CarRacing is out of reach: use CartPole-v1
+    pixels or a tiny grid env. Three stages, each checked: VAE reconstruction loss
+    falls; MDN-RNN next-latent NLL falls below a constant predictor; CMA-ES linear
+    controller on (z,h) beats a random policy. Paper CarRacing scores are Untested.
+    || Match on every headline claim within its derived tolerance; all leakage tests
+    pass; kind of test = mechanics_only; data tier C; compute tier 1. Tier B: same
+    sign, significant, gap inside the substitution''s predicted band.'
+  budget:
+    spec: 10
+    setup: 20
+    build: 25
+    run: 20
+    verify: 15
+    report: 5
+    hard_kill_minutes: 240
+    max_cost_usd: 150.0
+    run_timeout_s: 1500
+  seeds:
+  - 0
+  frozen_hash: 52ffd1068f3942f460bad89e30b19f2b9fb7c3054362dcd2d5e7f2f4d93f90df
+  frozen_at: '2026-09-15T16:12:55.568686+00:00'
