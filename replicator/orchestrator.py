@@ -270,8 +270,17 @@ class Orchestrator:
             sig = None
             if rs and "t_stat" in rs[0].metrics:
                 sig = abs(rs[0].metrics["t_stat"]) > 2
-            report.claims.append(compare.compare_claim(spec, c, ours, std, substitution_note=sub_note, significant=sig,
-                                                       tolerance_override=tol_override))
+            cr = compare.compare_claim(spec, c, ours, std, substitution_note=sub_note, significant=sig,
+                                       tolerance_override=tol_override)
+            # Compute tier 2: our run is a reduced-scale stand-in. A paper-scale number is not
+            # comparable unless the paper reports the same configuration at our scale (the run
+            # says so via _intermediates.matched_scale). Report the value, do not call it a match
+            # or a mismatch.
+            matched = any((r.intermediates or {}).get("matched_scale") for r in rs)
+            if spec.plan.compute_tier == 2 and not matched and cr.outcome in (Outcome.match, Outcome.mismatch):
+                cr.outcome = Outcome.untested
+                cr.note = f"reduced scale (compute tier 2): ours={ours:.4g} is not comparable to the paper-scale value; " + cr.note
+            report.claims.append(cr)
         # ---- leakage
         headline = next((c for c in spec.claims if c.priority == "headline"), spec.claims[0] if spec.claims else None)
         base_cfg = spec.config_for_variant(headline.method_variant if headline else "default")
