@@ -1,0 +1,95 @@
+paper:
+  title: "Returns to Buying Winners and Selling Losers: Implications for Stock Market Efficiency"
+  authors: [Jegadeesh, Titman]
+  year: 1993
+  track: finance
+  family: cross_sectional_anomaly
+claims:
+  - id: T1A.K3.J12.ret
+    where: "Table 1 Panel A, J=12, K=3, buy-minus-sell average monthly return (OSAP SignalDoc Mom12m: Return=1.31)"
+    evidence_page: null
+    metric: mean_return_pct
+    units: {period: monthly, annualized: false, scale: percent}
+    value: 1.31
+    reported_precision: 0.005
+    n_periods: 300
+    reported_t_stat: 3.74
+    sample_start: "1965-01"
+    sample_end: "1989-12"
+    method_variant: ew_decile_k3
+    priority: headline
+  - id: T1A.K3.J12.t
+    where: "Table 1 Panel A, J=12, K=3, t-statistic (OSAP SignalDoc Mom12m: T-Stat=3.74)"
+    metric: t_stat
+    units: {period: monthly, scale: none}
+    value: 3.74
+    reported_precision: 0.005
+    n_periods: 300
+    sample_start: "1965-01"
+    sample_end: "1989-12"
+    method_variant: ew_decile_k3
+    priority: secondary
+data:
+  sources:
+    - canonical: french_library
+      description: "Kenneth French 10 portfolios formed on prior (12,2) return, monthly, CRSP NYSE/AMEX/NASDAQ"
+  universe: {exchanges: [NYSE, AMEX, NASDAQ], note: "the paper used NYSE/AMEX only; French portfolios add NASDAQ"}
+  frequency: monthly
+method:
+  signal: "prior return over months t-12..t-1 (paper); French library forms on t-12..t-2 (skips one month)"
+  evaluation: [mean_return_pct, t_stat]
+  variants:
+    default: {weighting: EW, holding_months: 1}
+    ew_decile_k3: {weighting: EW, holding_months: 3, sample_start: "1965-01", sample_end: "1989-12"}
+    vw_decile_k3: {weighting: VW, holding_months: 3, sample_start: "1965-01", sample_end: "1989-12"}
+ambiguities:
+  - id: A1
+    question: "Equal- or value-weighted decile portfolios?"
+    config_key: weighting
+    options: [EW, VW]
+    default: EW
+    source: paper_text
+    reason: "JT93 use equal weights (OSAP Stock Weight=EW)"
+    sensitivity: high
+  - id: A2
+    question: "Holding period K in months (overlapping portfolios)?"
+    config_key: holding_months
+    options: ["1", "3", "6", "12"]
+    default: "3"
+    source: paper_text
+    reason: "Table 1 row K=3"
+    sensitivity: medium
+  - id: A3
+    question: "Simple or log returns for the long-short series?"
+    config_key: return_def
+    options: [simple, log]
+    default: simple
+    source: conventions_kb
+    reason: "portfolio returns are simple by construction"
+    sensitivity: low
+  - id: A4
+    question: "Newey-West lags for the t-statistic?"
+    config_key: nw_lags
+    options: ["0", "3", "6"]
+    default: "0"
+    source: guess
+    reason: "JT93 report plain t-stats; K=3 overlapping returns motivate HAC"
+    sensitivity: medium
+  - id: A5
+    question: "Inference for the overlapping K-month strategy: SE from the K=1 cohort series or from the smoothed rolling series?"
+    config_key: overlap_inference
+    options: [cohort, rolling]
+    default: cohort
+    source: guess
+    reason: "the paper averages K distinct cohorts; with pre-formed monthly portfolios the rolling mean over-smooths"
+    sensitivity: medium
+descriptive_stats:
+  - {metric: n_portfolios, value: 10, where: "deciles"}
+plan:
+  data_tier: A
+  compute_tier: 1
+  kind_of_test: re_implementation
+  substitutions:
+    signal_formation: "French forms on t-12..t-2 with a one-month skip; the paper forms on t-12..t-1 and skips one week. Documented deviation, not a data substitution."
+    universe: "French includes NASDAQ; the paper is NYSE/AMEX. Documented deviation."
+  seeds: [0]
