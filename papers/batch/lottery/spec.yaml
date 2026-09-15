@@ -1,0 +1,1462 @@
+paper:
+  title: 'The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks'
+  authors:
+  - Jonathan Frankle
+  - Michael Carbin
+  year: 2019
+  arxiv_id: '1803.03635'
+  version: v5
+  track: cs
+  family: train_and_eval
+claims:
+- id: lenet_ticket_pm_above_original
+  where: 'Section 2, ''Random reinitialization'' paragraph: iterative winning-ticket
+    test accuracy drops off from the original network''s accuracy only at Pm = 2.9%
+    (Figure 4a, middle panel, blue ''Winning Ticket (Iterative)'' line)'
+  evidence_page: 4
+  metric: sparsity_threshold_matching_original_accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 2.9
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: lenet_ticket_iterative
+  priority: headline
+- id: lenet_reinit_pm_above_original
+  where: 'Section 2, ''Random reinitialization'' paragraph: average reinitialized
+    iterative winning ticket''s test accuracy drops off from the original accuracy
+    at Pm = 21.1% (Figure 4a, middle panel, orange ''Random Reinit (Iterative)'' line)'
+  evidence_page: 4
+  metric: sparsity_threshold_matching_original_accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 21.1
+  reported_precision: 0.05
+  n_periods: 15
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: lenet_reinit_iterative
+  priority: headline
+- id: lenet_acc_gain_at_50k
+  where: 'Section 2, paragraph beginning ''At early stopping, training accuracy...''
+    (reporting Figure 4b): at iteration 50,000, iteratively-pruned winning tickets
+    see a test accuracy improvement of up to 0.35 percentage points over the unpruned
+    network'
+  evidence_page: 4
+  metric: accuracy_improvement_over_unpruned
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 0.35
+  reported_precision: 0.005
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: lenet_ticket_iterative
+  priority: headline
+- id: lenet_acc_gain_at_early_stop_pm13_5
+  where: 'Section 2, ''Iterative pruning'' paragraph (Figure 4a, middle panel): test
+    accuracy at the early-stopping iteration improves by more than 0.3 percentage
+    points when Pm = 13.5%'
+  evidence_page: 4
+  metric: accuracy_improvement_over_unpruned
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 0.3
+  reported_precision: 0.05
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: lenet_ticket_iterative
+  priority: secondary
+- id: lenet_early_stop_38pct_earlier
+  where: 'Section 2, ''Iterative pruning'' paragraph (Figure 4a, left panel): at Pm
+    ~= 21%, early-stopping (minimum validation loss) occurs 38% earlier than for the
+    original network'
+  evidence_page: 4
+  metric: early_stop_iteration_reduction
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 38.0
+  reported_precision: 0.5
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: lenet_ticket_iterative
+  priority: secondary
+- id: lenet_early_stop_return_pm3_6
+  where: 'Section 2, ''Iterative pruning'' paragraph (Figure 4a, left panel): early-stopping
+    performance returns to that of the original network when Pm = 3.6%'
+  evidence_page: 4
+  metric: sparsity_threshold_matching_original_early_stop
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 3.6
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: lenet_ticket_iterative
+  priority: secondary
+- id: lenet_ticket_vs_reinit_speedup_pm21
+  where: 'Section 2, ''Random reinitialization'' paragraph: at Pm = 21% the winning
+    ticket reaches minimum validation loss 2.51x faster than the same mask when randomly
+    reinitialized'
+  evidence_page: 4
+  metric: early_stop_speedup_ratio_vs_reinit
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 2.51
+  reported_precision: 0.005
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: lenet_ticket_iterative
+  priority: secondary
+- id: lenet_ticket_vs_reinit_acc_pm21
+  where: 'Section 2, ''Random reinitialization'' paragraph: at Pm = 21% the winning
+    ticket is half a percentage point more accurate than the reinitialized network'
+  evidence_page: 4
+  metric: accuracy_gap_ticket_minus_reinit
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 0.5
+  reported_precision: 0.05
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: lenet_ticket_iterative
+  priority: secondary
+- id: lenet_train_acc_100_pm5
+  where: 'Section 2, ''Random reinitialization'' paragraph: ALL networks (winning
+    tickets and random reinitializations alike) reach 100% training accuracy for Pm
+    >= 5%. Note the separate, looser statement in the Figure 4 caption: at iteration
+    50,000 training accuracy ~= 100% for Pm >= 2% for iterative winning tickets'
+  evidence_page: 4
+  metric: sparsity_threshold_train_accuracy_100
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 5.0
+  reported_precision: 0.05
+  n_periods: 55000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: lenet_ticket_iterative
+  priority: descriptive
+- id: lenet_oneshot_faster_lower_bound
+  where: 'Section 2, ''One-shot pruning'' paragraph (Figure 4c, left panel): one-shot
+    winning tickets reach minimum validation loss (paper text reads ''minimum validation
+    accuracy'') earlier than the original network when 67.5% >= Pm >= 17.6% — lower
+    bound of that range'
+  evidence_page: 5
+  metric: sparsity_threshold_matching_original_early_stop
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 17.6
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: lenet_ticket_oneshot
+  priority: secondary
+- id: lenet_oneshot_faster_upper_bound
+  where: 'Section 2, ''One-shot pruning'' paragraph (Figure 4c, left panel): upper
+    bound of the range in which one-shot winning tickets reach minimum validation
+    loss earlier than the original network, Pm = 67.5%'
+  evidence_page: 5
+  metric: sparsity_threshold_upper_matching_original_early_stop
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 67.5
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: lenet_ticket_oneshot
+  priority: secondary
+- id: lenet_oneshot_acc_lower_bound
+  where: 'Section 2, ''One-shot pruning'' paragraph (Figure 4c, right panel): one-shot
+    winning ticket test accuracy is higher than the original network when 95.0% >=
+    Pm >= 5.17% — lower bound'
+  evidence_page: 5
+  metric: sparsity_threshold_matching_original_accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 5.17
+  reported_precision: 0.005
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: lenet_ticket_oneshot
+  priority: secondary
+- id: lenet_oneshot_acc_upper_bound
+  where: 'Section 2, ''One-shot pruning'' paragraph (Figure 4c, right panel): upper
+    bound of the range in which one-shot test accuracy exceeds the original network,
+    Pm = 95.0%'
+  evidence_page: 5
+  metric: sparsity_threshold_upper_matching_original_accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 95.0
+  reported_precision: 0.05
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: lenet_ticket_oneshot
+  priority: secondary
+- id: conv2_speedup_best
+  where: 'Section 3, ''Finding winning tickets'' paragraph (Figure 5, top-left): Conv-2
+    winning tickets reach minimum validation loss at best 3.5x faster than the unpruned
+    network (at Pm = 8.8%)'
+  evidence_page: 6
+  metric: early_stop_speedup_ratio_vs_unpruned
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 3.5
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv2_ticket_iterative
+  priority: secondary
+- id: conv4_speedup_best
+  where: 'Section 3, ''Finding winning tickets'' paragraph (Figure 5, top-left): Conv-4
+    winning tickets reach minimum validation loss at best 3.5x faster than the unpruned
+    network (at Pm = 9.2%)'
+  evidence_page: 6
+  metric: early_stop_speedup_ratio_vs_unpruned
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 3.5
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv4_ticket_iterative
+  priority: secondary
+- id: conv6_speedup_best
+  where: 'Section 3, ''Finding winning tickets'' paragraph (Figure 5, top-left): Conv-6
+    winning tickets reach minimum validation loss at best 2.5x faster than the unpruned
+    network (at Pm = 15.1%)'
+  evidence_page: 6
+  metric: early_stop_speedup_ratio_vs_unpruned
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 2.5
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv6_ticket_iterative
+  priority: secondary
+- id: conv2_acc_gain_best
+  where: 'Section 3, ''Finding winning tickets'' paragraph (Figure 5, top-right):
+    Conv-2 test accuracy at early-stopping improves at best 3.4 percentage points
+    (Pm = 4.6%)'
+  evidence_page: 6
+  metric: accuracy_improvement_over_unpruned
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 3.4
+  reported_precision: 0.05
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv2_ticket_iterative
+  priority: secondary
+- id: conv4_acc_gain_best
+  where: 'Section 3, ''Finding winning tickets'' paragraph (Figure 5, top-right):
+    Conv-4 test accuracy at early-stopping improves at best 3.5 percentage points
+    (Pm = 11.1%)'
+  evidence_page: 6
+  metric: accuracy_improvement_over_unpruned
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 3.5
+  reported_precision: 0.05
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv4_ticket_iterative
+  priority: secondary
+- id: conv6_acc_gain_best
+  where: 'Section 3, ''Finding winning tickets'' paragraph (Figure 5, top-right):
+    Conv-6 test accuracy at early-stopping improves at best 3.3 percentage points
+    (Pm = 26.4%)'
+  evidence_page: 6
+  metric: accuracy_improvement_over_unpruned
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 3.3
+  reported_precision: 0.05
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv6_ticket_iterative
+  priority: secondary
+- id: conv_all_above_original_pm2
+  where: 'Section 3, ''Finding winning tickets'' paragraph: each of Conv-2, Conv-4
+    and Conv-6 remains above its original average test accuracy when Pm > 2% (single
+    statement covering all three architectures; the variant field can name only one
+    of them)'
+  evidence_page: 6
+  metric: sparsity_threshold_matching_original_accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 2.0
+  reported_precision: 0.05
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv6_ticket_iterative
+  priority: secondary
+- id: conv_dropout_initial_gain_conv2
+  where: 'Section 3, ''Dropout'' paragraph (main body, test accuracy): dropout increases
+    initial (unpruned) test accuracy by 2.1 percentage points on average for Conv-2'
+  evidence_page: 6
+  metric: accuracy_improvement_from_dropout
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 2.1
+  reported_precision: 0.05
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv2_dropout
+  priority: secondary
+- id: conv_dropout_initial_gain_conv4
+  where: 'Section 3, ''Dropout'' paragraph (main body, test accuracy): dropout increases
+    initial (unpruned) test accuracy by 3.0 percentage points on average for Conv-4'
+  evidence_page: 6
+  metric: accuracy_improvement_from_dropout
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 3.0
+  reported_precision: 0.05
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv4_dropout_test
+  priority: secondary
+- id: conv_dropout_initial_gain_conv6
+  where: 'Section 3, ''Dropout'' paragraph (main body, test accuracy): dropout increases
+    initial (unpruned) test accuracy by 2.4 percentage points on average for Conv-6'
+  evidence_page: 6
+  metric: accuracy_improvement_from_dropout
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 2.4
+  reported_precision: 0.05
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv6_dropout_test
+  priority: secondary
+- id: resnet18_lr001_best_ticket_acc
+  where: 'Section 4, ''Resnet-18'' paragraph (Figure 8, right panel; test accuracy
+    at 30K iterations): best winning tickets at learning rate 0.01 reach 89.5% test
+    accuracy when 41.7% >= Pm >= 21.9%'
+  evidence_page: 8
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 89.5
+  reported_precision: 0.05
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: resnet18_lr001_global
+  priority: secondary
+- id: resnet18_lr01_unpruned_acc
+  where: 'Section 4, ''Resnet-18'' paragraph (Figure 8, right panel): original (unpruned)
+    network test accuracy at learning rate 0.1 is 90.5% (at 30K iterations)'
+  evidence_page: 8
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 90.5
+  reported_precision: 0.05
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: resnet18_lr01_unpruned
+  priority: secondary
+- id: resnet18_warmup_ticket_acc
+  where: 'Section 4, ''Resnet-18'' paragraph (Figure 8, right panel): winning tickets
+    with learning rate 0.03 and linear warmup k = 20000 reach 90.5% test accuracy
+    at Pm = 27.1%'
+  evidence_page: 8
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 90.5
+  reported_precision: 0.05
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: resnet18_lr003_warmup20k_global
+  priority: secondary
+- id: resnet18_warmup_ticket_pm_threshold
+  where: 'Section 4, ''Resnet-18'' paragraph: for learning rate 0.03 with warmup k
+    = 20000, winning tickets are still found when Pm >= 11.8%'
+  evidence_page: 8
+  metric: sparsity_threshold_matching_original_accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 11.8
+  reported_precision: 0.05
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: resnet18_lr003_warmup20k_global
+  priority: secondary
+- id: vgg19_lr001_within_1pp_pm
+  where: 'Section 4, ''VGG-19'' paragraph (Figure 7): at learning rate 0.01, subnetworks
+    remain within 1 percentage point of the original accuracy while Pm >= 3.5% (the
+    paper explicitly notes these are NOT winning tickets, since they do not match
+    the original accuracy)'
+  evidence_page: 8
+  metric: sparsity_threshold_within_1pp_of_original
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 3.5
+  reported_precision: 0.05
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: vgg19_lr001_global
+  priority: secondary
+- id: vgg19_warmup_ticket_pm
+  where: 'Section 4, ''VGG-19'' paragraph (Figure 7): with warmup k = 10000 at learning
+    rate 0.1 and global pruning, winning tickets exceed the unpruned network''s accuracy
+    when Pm >= 1.5%'
+  evidence_page: 8
+  metric: sparsity_threshold_matching_original_accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 1.5
+  reported_precision: 0.05
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: vgg19_lr01_warmup10k_global
+  priority: secondary
+- id: vgg19_layerwise_vs_global_pm
+  where: 'Appendix I.1 (comparison shown in Figure 38): with learning rate 0.1 and
+    warmup to iteration 10,000, winning tickets are found for Pm >= 6.9% with layer-wise
+    pruning vs Pm >= 1.5% with global pruning — this claim records the layer-wise
+    value'
+  evidence_page: 39
+  metric: sparsity_threshold_matching_original_accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 6.9
+  reported_precision: 0.05
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: vgg19_lr01_warmup10k_layerwise
+  priority: secondary
+- id: conv4_val_acc_best_lr0003
+  where: 'Appendix H.2 (Figure 32, middle): Conv-4 at Adam 0.0003 improves validation
+    accuracy by 3.7 percentage points to 78.6% when 5.4% of weights remain'
+  evidence_page: 31
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 78.6
+  reported_precision: 0.05
+  n_periods: 5000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv4_val_lr0003
+  priority: secondary
+- id: conv6_val_acc_best_lr0003
+  where: 'Appendix H.2 (Figure 32, bottom): Conv-6 at Adam 0.0003 improves validation
+    accuracy by 2.4 percentage points to 81.5% when 9.31% of weights remain'
+  evidence_page: 31
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 81.5
+  reported_precision: 0.05
+  n_periods: 5000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv6_val_lr0003
+  priority: secondary
+- id: conv4_dropout_val_acc
+  where: 'Appendix H.5 (Figure 36, middle): dropout-trained Conv-4 winning tickets
+    reach 82.6% average validation accuracy when pruned to Pm = 7.6%'
+  evidence_page: 36
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 82.6
+  reported_precision: 0.05
+  n_periods: 5000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv4_dropout
+  priority: secondary
+- id: conv6_dropout_val_acc
+  where: 'Appendix H.5 (Figure 36, bottom): dropout-trained Conv-6 winning tickets
+    reach 84.8% average validation accuracy when pruned to Pm = 10.5%'
+  evidence_page: 36
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 84.8
+  reported_precision: 0.05
+  n_periods: 5000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv6_dropout
+  priority: secondary
+data:
+  sources:
+  - canonical: mnist
+    description: 'MNIST handwritten digits (LeCun et al., 1998): 60,000 training and
+      10,000 test 28x28 grayscale images, 10 classes. Used for all Lenet-300-100 lottery
+      ticket experiments (Section 2, Appendices B-G).'
+    substitute: torchvision
+  - canonical: cifar10
+    description: 'CIFAR10 (Krizhevsky & Hinton, 2009): 50,000 training and 10,000
+      test 32x32 color images, 10 classes. Required for the Conv-2/4/6 claims (Section
+      3, Appendix H) and the VGG-19 / Resnet-18 claims (Section 4, Appendix I), all
+      of which appear in this spec.'
+    substitute: torchvision
+  universe:
+    primary_task: 10-class image classification (MNIST) with Lenet-300-100 fully-connected
+      network (784-300-100-10, 266K weights)
+    secondary_tasks: CIFAR10 classification with Conv-2 (4.3M total / 38K conv), Conv-4
+      (2.4M / 260K conv), Conv-6 (1.7M / 1.1M conv), VGG-19 (20.0M params), Resnet-18
+      (271K params; Figure 2 lists 274K total / 270K conv)
+    parameters_pruned: weights of fully-connected/convolutional layers only; Lenet
+      and Conv-2/4/6 output-layer weights pruned at half the fully-connected rate;
+      VGG-19 output layer (5120 params) and Resnet-18 downsample (2560) and fully-connected
+      output (640) params never pruned (Figure 2 lists fc0% for both deep nets)
+    sparsity_grid: 'Pm decreases by ~20% of surviving weights per round: 100, 80,
+      64, 51.3, 41.0, 32.8, 26.3, 21.1, 16.9, 13.5, 10.8, 8.7, 7.0, 5.6, 4.5, 3.6,
+      2.9, 2.3, 1.9, ... down to ~0.3% in Figure 4. Overall Pm deviates slightly from
+      0.8^k for Lenet/Conv nets because the output layer is pruned at half rate; axis
+      labels in Figures 4/5 are the paper''s own values'
+  frequency: not time-series; validation/test loss and accuracy evaluated every 100
+    training iterations; accuracy reported at the early-stopping iteration (minimum
+    validation loss) and at the final training iteration of each round
+  preprocessing:
+    mnist_split: randomly sample 5,000-example validation set from the 60,000 training
+      examples; train on remaining 55,000 (Appendix G.1)
+    cifar10_split: randomly sample 5,000-example validation set from the 50,000 training
+      examples; train on remaining 45,000 (Appendix H.1, I.3)
+    batching: mini-batches of 60 examples for Lenet and Conv-2/4/6; 128 for Resnet-18;
+      64 for VGG-19; training set shuffled each epoch
+    augmentation: none stated for MNIST or Conv-2/4/6; random flips and random four-pixel
+      pads and crops for Resnet-18 and VGG-19 (Appendix I.2/I.3)
+    input_normalization: not stated in the paper for MNIST or CIFAR10
+    initialization: Gaussian Glorot (Glorot & Bengio, 2010) for all architectures
+      (Figure 2 caption; Appendices G.1, H.1, I.2, I.3); bias initialization not stated
+    regularization: no weight decay or batchnorm for Lenet/Conv-2/4/6 (dropout 0.5
+      only in the dropout experiments); batchnorm and weight decay 0.0001 for VGG-19
+      and Resnet-18
+  splits:
+    mnist_train: 55000
+    mnist_validation: 5000
+    mnist_test: 10000
+    cifar10_train: 45000
+    cifar10_validation: 5000
+    cifar10_test: 10000
+    reported_split_main_body: test set (validation used only to locate the early-stopping
+      iteration)
+    reported_split_appendices: validation set for all hyperparameter-selection figures
+      (Appendices G, H, I)
+method:
+  signal: 'Iterative unstructured magnitude pruning with weight rewinding: train the
+    dense network to the end of its iteration budget, prune the smallest-magnitude
+    surviving weights (layer-wise for Lenet/Conv-2/4/6, globally over conv layers
+    for VGG-19/Resnet-18), reset surviving weights to their original initialization
+    theta_0, and retrain; over n rounds this prunes p^(1/n)% of survivors per round.
+    The resulting mask + original-init subnetwork f(x; m ⊙ theta_0) is the ''winning
+    ticket''.'
+  model:
+    architecture_primary: Lenet-300-100 fully-connected (784-300-100-10), 266K weights
+    optimizer_primary: Adam, learning rate 0.0012 (Figure 2 lists Adam 1.2e-3; Appendix
+      G.2 selects 0.0012 after a sweep); constant learning rate, no decay stated
+    batch_size_primary: 60
+    train_length_primary: '50,000 iterations per pruning round (Figure 2 ''Iterations/Batch''
+      = 50K/60; Appendix G.1: trained the full 50,000 iterations regardless of when
+      early stopping would occur), i.e. ~54.5 epochs of the 55,000-example training
+      set'
+    loss: not stated in paper; multi-class classification implies softmax cross-entropy
+    pruning_rate_primary: 20% of the weights surviving the previous round, applied
+      per layer (10% for the output layer, i.e. half rate) — Figure 2 'fc20%'; Appendix
+      G.4
+    pruning_snapshot: weights are ranked by magnitude at the FINAL training iteration
+      of each round (theta_j), not at the early-stopping iteration (Section 1 central
+      experiment; Appendix G.1)
+    pruning_scope_primary: layer-wise (each layer pruned independently at the same
+      rate) for Lenet and Conv-2/4/6; global across all convolutional layers for VGG-19
+      and Resnet-18 (Section 4; Appendix I.1)
+    n_rounds_primary: ~26 rounds of 20% pruning to reach Pm ~ 0.3% (smallest level
+      plotted in Figure 4); claims require levels at least as sparse as Pm = 2.9%
+    reset_rule: 'Strategy 1 (iterative pruning with resetting): after each pruning
+      round, surviving weights are reset to theta_0 before retraining (Appendix B);
+      Strategy 1 dominates Strategy 2 (Figures 9, 10)'
+    initialization: Gaussian Glorot
+    one_shot_variant: 'train once for the full budget, prune p% of weights in a single
+      step, reset survivors to theta_0 (Figure 4c levels: 100, 87.5, 75.0, 62.6, 50.1,
+      37.6, 25.1, 12.7)'
+    reinit_control: keep mask m, resample theta_0' ~ D_theta (Gaussian Glorot) per
+      layer; 3 reinitializations per trial (15 runs per point, Section 2)
+    random_sparsity_control: random mask with the same per-layer sparsity as the winning
+      ticket (Appendix E, Figure 14; Figure 1 random sampling averages ten trials)
+    conv_hparams: 'Conv-2: Adam 2e-4, batch 60, 20K iters, prune conv 10% / fc 20%
+      / output 10% per round; Conv-4: Adam 3e-4, batch 60, 25K iters, conv 10% / fc
+      20% / output 10%; Conv-6: Adam 3e-4, batch 60, 30K iters, conv 15% / fc 20%
+      / output 10% (Figure 2; Appendices H.1, H.4)'
+    dropout_hparams: 'dropout rate 0.5; iteration budget tripled (Conv-2 60,000; Conv-4
+      75,000; Conv-6 90,000); learning rates re-selected: Adam 0.0003 for Conv-2 and
+      0.0002 for Conv-4 and Conv-6 (Figure 6 caption; Appendix H.5)'
+    deep_net_hparams: 'Resnet-18: SGD momentum 0.9, weight decay 1e-4, batchnorm,
+      batch 128, 30,000 iterations with 10x LR drops at 20,000 and 25,000 (stages
+      20K/5K/5K), initial LR 0.1 or 0.01 (or 0.03 with warmup), global conv pruning
+      20% per round, downsample (2560) and output (640) params unpruned. VGG-19: SGD
+      momentum 0.9, weight decay 1e-4, batchnorm, batch 64, 160 epochs = 112,480 iterations
+      with 10x LR drops at 80 and 120 epochs, initial LR 0.1 or 0.01, global conv
+      pruning 20% per round, 5120 output params unpruned. Linear LR warmup from 0
+      to the initial LR over k iterations (k = 20000 for Resnet-18 at LR 0.03; k =
+      10000 for VGG-19 at LR 0.1)'
+  evaluation:
+  - Test accuracy at each sparsity level Pm for winning tickets (original init) and
+    for random reinitializations of the same masks
+  - Test accuracy at the final training iteration (iteration 50,000 for Lenet; 20K/25K/30K
+    for Conv-2/4/6; 30K for Resnet-18; 112K for VGG-19)
+  - Test accuracy at the early-stopping iteration (iteration of minimum validation
+    loss)
+  - Early-stopping iteration (iteration of minimum validation loss) as a proxy for
+    learning speed
+  - Training accuracy at early-stopping and at end of training (generalization gap)
+  - Validation accuracy at early-stopping for the appendix hyperparameter sweeps
+  eval_protocol:
+    early_stopping_criterion: iteration of minimum validation loss, determined retroactively;
+      training always runs the full iteration budget (Appendix C, G.1)
+    eval_interval: validation and test loss/accuracy measured every 100 training iterations
+      (Appendix G.1, H.1)
+    aggregation: mean over 5 trials (main body); mean over 3 trials in the appendix
+      sweeps; error bars are the minimum and maximum over trials
+    reinit_aggregation: mean over 15 runs (3 random reinitializations per each of
+      5 trials); random-sparsity curves in Figure 1 average ten trials
+    reported_split: test set in main body (Sections 2-4); validation set in appendix
+      hyperparameter sweeps (Appendices G, H, I)
+    comparison_rule: 'a winning ticket is declared when accuracy >= the unpruned network''s
+      accuracy AND the early-stopping iteration <= the unpruned network''s early-stopping
+      iteration (Section 1 formalism: j'' <= j, a'' >= a)'
+    threshold_determination: the paper does not state how the Pm 'drop-off' / 'remains
+      above' crossing points (e.g. 2.9%, 21.1%, 2%) are computed from the averaged
+      curves; see ambiguity threshold_rule
+  variants:
+    lenet_ticket_iterative:
+      architecture: Lenet-300-100 on MNIST
+      pruning: iterative, layer-wise magnitude, 20% of survivors per round (output
+        layer 10%)
+      weights_at_reset: original initialization theta_0
+      trials: 5
+      optimizer: Adam 0.0012, batch 60, 50,000 iterations per round
+      split: test
+    lenet_reinit_iterative:
+      pruning: same masks as lenet_ticket_iterative
+      weights_at_reset: freshly sampled Gaussian Glorot theta_0' (per layer)
+      trials: 15 (3 reinits per each of 5 trials)
+      split: test
+    lenet_ticket_oneshot:
+      pruning: 'one-shot: train once for 50,000 iterations, prune p% in a single step,
+        reset survivors to theta_0'
+      trials: 5
+      sparsity_grid: 100, 87.5, 75.0, 62.6, 50.1, 37.6, 25.1, 12.7 (Figure 4c axis
+        labels)
+      split: test
+    lenet_reinit_oneshot:
+      pruning: one-shot masks with randomly reinitialized weights
+      trials: 15 (3 reinits per each of 5 trials)
+      split: test
+    lenet_random_sparsity:
+      pruning: random mask with same per-layer sparsity as iterative winning ticket
+      trials: 10 (Figure 1 dashed lines); Appendix E Figure 14 compares original init,
+        reinit and random sparsity
+      split: test
+    lenet_unpruned:
+      pruning: none (Pm = 100%)
+      trials: 5
+      split: test
+    conv2_ticket_iterative:
+      architecture: Conv-2 on CIFAR10
+      optimizer: Adam 2e-4, batch 60, 20,000 iterations
+      pruning: 'layer-wise: conv 10%, fc 20%, output 10% per round'
+      trials: 5
+      split: test
+    conv4_ticket_iterative:
+      architecture: Conv-4 on CIFAR10
+      optimizer: Adam 3e-4, batch 60, 25,000 iterations
+      pruning: 'layer-wise: conv 10%, fc 20%, output 10% per round'
+      trials: 5
+      split: test
+    conv6_ticket_iterative:
+      architecture: Conv-6 on CIFAR10
+      optimizer: Adam 3e-4, batch 60, 30,000 iterations
+      pruning: 'layer-wise: conv 15%, fc 20%, output 10% per round'
+      trials: 5
+      split: test
+    conv2_dropout:
+      regularization: dropout 0.5
+      optimizer: Adam 0.0003, 60,000 iterations (3x the no-dropout budget)
+      pruning: 'layer-wise: conv 10%, fc 20%, output 10% per round'
+      trials: 5 (main body)
+      split: test (Figure 6, main body)
+    conv4_dropout_test:
+      regularization: dropout 0.5
+      optimizer: Adam 0.0002, 75,000 iterations (3x)
+      pruning: 'layer-wise: conv 10%, fc 20%, output 10% per round'
+      trials: 5 (main body)
+      split: test (Figure 6, main body)
+    conv6_dropout_test:
+      regularization: dropout 0.5
+      optimizer: Adam 0.0002, 90,000 iterations (3x)
+      pruning: 'layer-wise: conv 15%, fc 20%, output 10% per round'
+      trials: 5 (main body)
+      split: test (Figure 6, main body)
+    conv4_dropout:
+      regularization: dropout 0.5
+      optimizer: Adam 0.0002, 75,000 iterations (3x)
+      pruning: 'rates from Appendix H.4: conv 10%, fc 20%, output 10% per round'
+      trials: 3 (appendix)
+      split: validation (Appendix H.5, Figure 36)
+    conv6_dropout:
+      regularization: dropout 0.5
+      optimizer: Adam 0.0002, 90,000 iterations (3x)
+      pruning: 'rates from Appendix H.4: conv 15%, fc 20%, output 10% per round'
+      trials: 3 (appendix)
+      split: validation (Appendix H.5, Figure 36)
+    conv4_val_lr0003:
+      optimizer: Adam 0.0003, batch 60, 25,000 iterations
+      trials: 3
+      split: validation (Appendix H.2 sweep)
+      pruning: 'temporary sweep rates: fc 20% / conv 10% / output 10% per round (Appendix
+        H.2)'
+    conv6_val_lr0003:
+      optimizer: Adam 0.0003, batch 60, 30,000 iterations
+      trials: 3
+      split: validation (Appendix H.2 sweep)
+      pruning: 'temporary sweep rates: fc 20% / conv 10% / output 10% per round (Appendix
+        H.2); note the finally selected Conv-6 conv rate is 15%'
+    resnet18_lr001_global:
+      architecture: 'Resnet-18 on CIFAR10, 271K params (Figure 2: 274K total / 270K
+        conv)'
+      optimizer: SGD momentum 0.9, lr 0.01 with 10x drops at 20,000 and 25,000, weight
+        decay 1e-4, batchnorm, batch 128, 30,000 iterations
+      pruning: global over conv layers, 20% of survivors per round; output (640) and
+        downsample (2560) params unpruned
+      trials: 5 (main body)
+      split: test
+    resnet18_lr01_unpruned:
+      pruning: none (Pm = 100%)
+      optimizer: SGD momentum 0.9, lr 0.1 with 10x drops at 20,000 and 25,000, weight
+        decay 1e-4, batch 128, 30,000 iterations
+      split: test
+    resnet18_lr003_warmup20k_global:
+      optimizer: SGD momentum 0.9, lr 0.03 with linear warmup from 0 over k = 20000
+        iterations, 10x drops at 20,000 and 25,000, weight decay 1e-4, batch 128,
+        30,000 iterations
+      pruning: global conv 20% of survivors per round
+      split: test
+    vgg19_lr001_global:
+      architecture: VGG-19 for CIFAR10 (Liu et al. 2019 variant), 20.0M params
+      optimizer: SGD momentum 0.9, lr 0.01, weight decay 1e-4, batchnorm, batch 64,
+        160 epochs = 112,480 iterations (10x drops at 80 and 120 epochs)
+      pruning: global conv 20% of survivors per round; 5120 output params unpruned
+      split: test
+    vgg19_lr01_warmup10k_global:
+      optimizer: SGD momentum 0.9, lr 0.1 with linear warmup from 0 over k = 10000
+        iterations, weight decay 1e-4, batch 64, 112,480 iterations (10x drops at
+        80 and 120 epochs)
+      pruning: global conv 20% of survivors per round
+      split: test
+    vgg19_lr01_warmup10k_layerwise:
+      optimizer: SGD momentum 0.9, lr 0.1 with linear warmup k = 10000, weight decay
+        1e-4, batch 64, 112,480 iterations
+      pruning: layer-wise conv pruning at 20% per round (Appendix I.1 comparison;
+        Figures 38 and 40)
+      split: Figure 38 (source of the Pm >= 6.9% statement) is labelled validation
+        accuracy; Figure 40 shows the test-accuracy version
+baselines:
+- Unpruned original network (Pm = 100%) trained with identical hyperparameters
+- Random reinitialization of the winning-ticket mask (structure kept, weights resampled
+  from Gaussian Glorot)
+- Random sparse subnetwork with the same per-layer parameter count (random sparsity,
+  Appendix E; Figure 1 random sampling)
+- One-shot magnitude pruning with weight rewinding
+- Pruning at iteration 0 (magnitude pruning before any training, Appendix F.4)
+- Reinitialization sampled from the winning ticket's own per-layer initialization
+  distribution D_m (Appendix F.3)
+- Gaussian noise added to winning ticket initialization at 0.5 sigma, 1 sigma, 2 sigma,
+  3 sigma (Appendix F.7)
+- Iterative pruning with continued training instead of resetting (Strategy 2, Appendix
+  B)
+- Layer-wise pruning as the comparison for global pruning on VGG-19 / Resnet-18 (Appendix
+  I.1)
+ambiguities:
+- id: lr_schedule
+  question: What learning-rate schedule is used when training Lenet-300-100 on MNIST
+    in each pruning round?
+  config_key: lr_schedule
+  options:
+  - constant
+  - cosine
+  - step
+  - as_paper
+  default: constant
+  source: paper_text
+  reason: Figure 2 and Appendix G.2 specify Adam at a single fixed learning rate (1.2e-3
+    / 0.0012) for Lenet with no decay mentioned; step schedules are described only
+    for Resnet-18 and VGG-19.
+  sensitivity: medium
+- id: augmentation
+  question: Is any train-time data augmentation applied to MNIST (and to Conv-2/4/6
+    on CIFAR10)?
+  config_key: augmentation
+  options:
+  - none
+  - standard
+  - as_paper
+  default: none
+  source: paper_text
+  reason: Appendices G.1 and H.1 describe only shuffling and mini-batching; augmentation
+    (random flips, four-pixel pads/crops) is stated only for Resnet-18/VGG-19 (Appendix
+    I.2/I.3).
+  sensitivity: low
+- id: batch_vs_steps
+  question: If the training budget must be altered, is it held in epochs or in optimizer
+    steps?
+  config_key: batch_vs_steps
+  options:
+  - epochs
+  - steps
+  default: steps
+  source: paper_text
+  reason: The paper always states budgets in iterations at a fixed batch size (Lenet
+    50,000 at batch 60; Conv-2/4/6 20K/25K/30K at batch 60; Resnet-18 30K at batch
+    128; VGG-19 112,480 at batch 64), so step count is the paper's primitive.
+  sensitivity: high
+- id: mixed_precision
+  question: Is mixed precision used at train time?
+  config_key: mixed_precision
+  options:
+  - fp32
+  - amp
+  default: fp32
+  source: conventions_kb
+  reason: Paper never mentions numeric precision; magnitude-pruning thresholds are
+    precision-sensitive, so fp32 is the conservative choice.
+  sensitivity: low
+- id: split
+  question: Is the reported accuracy at each sparsity level taken from the validation
+    set or the test set?
+  config_key: split
+  options:
+  - validation
+  - test
+  default: test
+  source: paper_text
+  reason: 'Appendix G.1/H.1: hyperparameter-selection figures (Appendices G, H, I)
+    use the 5,000-example validation set, while the main-body figures (3, 4, 5, 6,
+    7, 8) report test-set accuracy with validation used only to locate the early-stopping
+    iteration. Claims drawn from Appendix H.2/H.5 and Figure 38 are therefore validation-set
+    quantities.'
+  sensitivity: medium
+- id: pruning_scope
+  question: Is magnitude pruning applied per layer or globally across layers for Lenet?
+  config_key: pruning_scope
+  options:
+  - layerwise
+  - global
+  default: layerwise
+  source: paper_text
+  reason: 'Section 2 and Appendix I.1: Lenet and Conv-2/4/6 are pruned layer-wise
+    at equal per-layer rates; global pruning is used only for VGG-19 and Resnet-18.'
+  sensitivity: high
+- id: output_layer_rate
+  question: At what rate is the 10-unit output layer pruned?
+  config_key: output_layer_pruning_rate
+  options:
+  - half_of_base_rate_10pct
+  - same_as_base_20pct
+  - never_pruned
+  default: half_of_base_rate_10pct
+  source: paper_text
+  reason: 'Section 2 and Appendix G.4: connections to outputs are pruned at half the
+    rate of the rest of the network (10% when the base rate is 20%), because the output
+    layer holds only 1,000 of 266,000 weights. For VGG-19/Resnet-18 the fc/output
+    layers are not pruned at all (Figure 2 fc0%).'
+  sensitivity: medium
+- id: prune_biases
+  question: Are biases (and, for the deep nets, batchnorm parameters) included in
+    the pruned parameter set and in the Pm denominator?
+  config_key: prune_biases
+  options:
+  - weights_only
+  - weights_and_biases
+  default: weights_only
+  source: conventions_kb
+  reason: The paper counts 'weights' (266K = 784*300 + 300*100 + 100*10) and speaks
+    exclusively of connections; biases and batchnorm parameters are never described
+    as pruned.
+  sensitivity: medium
+- id: reset_strategy
+  question: Between pruning rounds, are surviving weights reset to theta_0 (Strategy
+    1) or retrained from the already-trained values (Strategy 2)?
+  config_key: iterative_strategy
+  options:
+  - resetting
+  - continued_training
+  default: resetting
+  source: paper_text
+  reason: 'Appendix B: all main-body results use Strategy 1 (iterative pruning with
+    resetting), which dominates Strategy 2 in Figures 9 and 10.'
+  sensitivity: high
+- id: reinit_distribution
+  question: How are random-reinitialization control weights drawn?
+  config_key: reinit_distribution
+  options:
+  - fresh_gaussian_glorot_per_layer
+  - shuffle_surviving_init_values
+  - sample_from_ticket_distribution
+  default: fresh_gaussian_glorot_per_layer
+  source: paper_text
+  reason: Section 2 defines the control as theta_0' ~ D_theta, the same Gaussian Glorot
+    distribution; sampling from D_m is a separate appendix experiment (F.3).
+  sensitivity: high
+- id: n_trials
+  question: How many independent trials (seeds) per sparsity level, and how many reinitializations
+    per trial?
+  config_key: n_seeds
+  options:
+  - 5_trials_3_reinits
+  - 3_trials_1_reinit
+  - 1_trial
+  default: 5_trials_3_reinits
+  source: paper_text
+  reason: 'Figures 3-5 captions: main-body curves average five trials; reinit curves
+    average fifteen runs (three reinitializations per trial). Appendix sweeps use
+    three trials (Appendix G.1, H.1).'
+  sensitivity: medium
+- id: early_stopping_criterion
+  question: How is the early-stopping iteration determined and how often is validation
+    measured?
+  config_key: early_stopping_criterion
+  options:
+  - min_validation_loss_every_100_iters
+  - min_validation_loss_every_epoch
+  - max_validation_accuracy
+  default: min_validation_loss_every_100_iters
+  source: paper_text
+  reason: 'Appendices C and G.1: iteration of minimum validation loss, evaluated every
+    100 iterations, determined retroactively (training never actually stops early).'
+  sensitivity: medium
+- id: validation_split_seed
+  question: Which 5,000 MNIST (or CIFAR10) training examples form the validation set
+    (sampling seed)?
+  config_key: validation_split_seed
+  options:
+  - fixed_seed_0_random_sample
+  - last_5000_of_train
+  - per_trial_random_sample
+  default: fixed_seed_0_random_sample
+  source: guess
+  reason: Appendices G.1 and H.1 say the 5,000-example validation set was randomly
+    sampled but give no seed or index rule.
+  sensitivity: low
+- id: reported_accuracy_point
+  question: Which iteration's accuracy is compared across sparsity levels?
+  config_key: accuracy_evaluation_point
+  options:
+  - early_stop
+  - final_iteration
+  - both
+  default: both
+  source: paper_text
+  reason: 'The paper reports both and different claims need different points: Figure
+    4a middle / Figure 5 top-right give accuracy at the early-stopping iteration (claims
+    lenet_acc_gain_at_early_stop_pm13_5, conv*_acc_gain_best), while Figure 4b / Figure
+    5 bottom-right give accuracy at the final iteration (claim lenet_acc_gain_at_50k).'
+  sensitivity: medium
+- id: train_iters_per_round
+  question: How long is each pruning round trained?
+  config_key: train_iters_per_round
+  options:
+  - 50000_iterations_as_paper
+  - 2_epochs
+  - 1_epoch
+  default: 50000_iterations_as_paper
+  source: paper_text
+  reason: Figure 2 and Appendix G.1 fix 50,000 iterations per round for Lenet (20K/25K/30K
+    for Conv-2/4/6, tripled under dropout; 30K Resnet-18; 112,480 VGG-19), trained
+    in full regardless of early stopping. Any shortened budget is a deviation from
+    the paper that lowers absolute accuracies and can shrink the ticket-vs-reinit
+    gap.
+  sensitivity: high
+- id: target_sparsity_levels
+  question: Which Pm levels are reported (how many pruning rounds)?
+  config_key: sparsity_levels
+  options:
+  - geometric_0.8_per_round_to_0.3pct
+  - geometric_0.8_per_round_to_10pct
+  - paper_grid_100_51.3_21.1_13.5_7.0_3.6_1.9
+  default: geometric_0.8_per_round_to_0.3pct
+  source: paper_text
+  reason: Figure 4 plots Lenet down to Pm = 0.3% (0.8^k grid, ~26 rounds); claims
+    require levels at least as sparse as Pm = 2.9% (winning-ticket drop-off) and 5.17%
+    (one-shot bound), so a grid stopping at 10% cannot verify them.
+  sensitivity: medium
+- id: weight_init
+  question: What initialization is used?
+  config_key: weight_init
+  options:
+  - gaussian_glorot
+  - uniform_glorot
+  - he_normal
+  default: gaussian_glorot
+  source: paper_text
+  reason: 'Figure 2 caption and Appendix G.1: initializations are Gaussian Glorot
+    (normal with Glorot standard deviation).'
+  sensitivity: medium
+- id: glorot_normal_truncation
+  question: Is the Gaussian Glorot initializer a truncated or untruncated normal?
+  config_key: init_truncation
+  options:
+  - truncated_normal
+  - untruncated_normal
+  default: truncated_normal
+  source: conventions_kb
+  reason: The paper says only 'Gaussian Glorot'; the TF1 glorot_normal_initializer
+    used in this era draws from a truncated normal, which slightly changes the initialization
+    magnitude distribution that magnitude pruning ranks.
+  sensitivity: low
+- id: optimizer_lr
+  question: What optimizer and learning rate for Lenet?
+  config_key: optimizer
+  options:
+  - adam_0.0012
+  - adam_0.001
+  - sgd_0.8
+  default: adam_0.0012
+  source: paper_text
+  reason: Figure 2 lists Adam 1.2e-3 and Appendix G.2 selects 0.0012 after a sweep;
+    SGD 0.8 is only an appendix alternative (Appendix F.2, G.3.1).
+  sensitivity: medium
+- id: optimizer_state_between_rounds
+  question: Is the optimizer state (Adam moments, momentum buffers) reset at the start
+    of each pruning round?
+  config_key: optimizer_state_reset
+  options:
+  - reset_each_round
+  - carry_over_across_rounds
+  default: reset_each_round
+  source: guess
+  reason: The paper's Strategy 1 describes training the rewound network afresh each
+    round but never states what happens to optimizer state; a fresh optimizer is the
+    natural reading of 'reset ... and training again' (Appendix B, G.4).
+  sensitivity: medium
+- id: input_normalization
+  question: How are MNIST pixels normalized?
+  config_key: input_normalization
+  options:
+  - scale_0_1
+  - mean_std_0.1307_0.3081
+  - raw_0_255
+  default: scale_0_1
+  source: conventions_kb
+  reason: Paper never states preprocessing; dividing by 255 is the standard MNIST
+    convention for this era of TensorFlow examples.
+  sensitivity: low
+- id: loss_function
+  question: What training loss is used?
+  config_key: loss_function
+  options:
+  - softmax_cross_entropy
+  - mse
+  default: softmax_cross_entropy
+  source: conventions_kb
+  reason: The paper never names the loss, but all tasks are 10-class classification
+    and the early-stopping criterion is 'validation loss', implying softmax cross-entropy.
+  sensitivity: low
+- id: bias_init
+  question: How are biases initialized?
+  config_key: bias_init
+  options:
+  - zeros
+  - gaussian_glorot
+  default: zeros
+  source: conventions_kb
+  reason: Only weight initialization (Gaussian Glorot) is stated; bias initialization
+    is unspecified and zeros is the standard default.
+  sensitivity: low
+- id: pruning_rate_basis
+  question: Is the per-round pruning percentage applied to the weights that survived
+    the previous round or to the original weight count?
+  config_key: pruning_rate_basis
+  options:
+  - fraction_of_surviving_weights
+  - fraction_of_original_weights
+  default: fraction_of_surviving_weights
+  source: paper_text
+  reason: 'Section 1: ''each round prunes p^(1/n)% of the weights that survive the
+    previous round''; Appendix G.4 likewise prunes k% of the weights remaining in
+    each layer, which is what produces the 0.8^k Pm grid.'
+  sensitivity: high
+- id: pruning_weights_snapshot
+  question: 'Which weights are ranked by magnitude when building the mask: those at
+    the final training iteration of the round, or at the early-stopping iteration?'
+  config_key: pruning_weights_snapshot
+  options:
+  - final_iteration
+  - early_stopping_iteration
+  default: final_iteration
+  source: paper_text
+  reason: Section 1 step 3 prunes theta_j after training for j iterations, and Appendix
+    G.1 states each round trains the full 50,000 iterations with no validation/test
+    data influencing training, so the end-of-round weights are ranked.
+  sensitivity: high
+- id: mask_application
+  question: Are pruned weights masked to zero and kept frozen (no gradient/optimizer
+    update) throughout training?
+  config_key: mask_application
+  options:
+  - frozen_zero_mask
+  - reapply_mask_each_step_only
+  - no_mask_after_init
+  default: frozen_zero_mask
+  source: paper_text
+  reason: The formalism f(x; m ⊙ theta) with m fixed during SGD implies pruned weights
+    stay zero for the whole run; whether Adam moment state is maintained for masked
+    weights is unspecified.
+  sensitivity: high
+- id: threshold_rule
+  question: How are the reported Pm crossing points ('drops off from the original
+    accuracy', 'remains above original accuracy', 'winning tickets found when Pm >=
+    x') computed from the averaged curves?
+  config_key: threshold_rule
+  options:
+  - last_grid_point_where_mean_ge_mean_unpruned
+  - first_grid_point_where_mean_below_unpruned
+  - interpolated_crossing
+  default: last_grid_point_where_mean_ge_mean_unpruned
+  source: guess
+  reason: The paper gives thresholds (2.9%, 21.1%, 2%, 3.5%, 1.5%, 11.8%, 6.9%) as
+    read off averaged curves but never states the decision rule or whether error bars
+    are considered; the rule drives every sparsity-threshold claim.
+  sensitivity: high
+descriptive_stats:
+- metric: mnist_training_examples_total
+  value: 60000.0
+  where: Appendix G.1, p.24
+- metric: mnist_test_examples
+  value: 10000.0
+  where: Appendix G.1, p.24
+- metric: mnist_validation_examples
+  value: 5000.0
+  where: Appendix G.1, p.24
+- metric: mnist_training_examples_used
+  value: 55000.0
+  where: Appendix G.1, p.24
+- metric: lenet_total_weights
+  value: 266000.0
+  where: Figure 2 'All/Conv Weights' column, p.3; Appendix G.4, p.27
+- metric: lenet_output_layer_weights
+  value: 1000.0
+  where: Appendix G.4, p.27
+- metric: lenet_hidden1_units
+  value: 300.0
+  where: Figure 2 'FC Layers', p.3
+- metric: lenet_hidden2_units
+  value: 100.0
+  where: Figure 2 'FC Layers', p.3
+- metric: lenet_batch_size
+  value: 60.0
+  where: Figure 2 'Iterations/Batch', p.3; Appendix G.1, p.24
+- metric: lenet_training_iterations_per_round
+  value: 50000.0
+  where: Figure 2 'Iterations/Batch', p.3; Appendix G.1, p.24
+- metric: lenet_pruning_rate_per_round_percent
+  value: 20.0
+  where: Figure 2 'Pruning Rate' (fc20%), p.3; Appendix G.4, p.27
+- metric: lenet_output_layer_pruning_rate_percent
+  value: 10.0
+  where: Section 2, p.3; Appendix G.4, p.27
+- metric: lenet_train_acc_100_threshold_at_50k_percent
+  value: 2.0
+  where: Figure 4 caption, p.5 (training accuracy ~= 100% for Pm >= 2% for iterative
+    winning tickets)
+- metric: trials_per_point_main_body
+  value: 5.0
+  where: Figure 3/4/5 captions, pp.4-6
+- metric: reinitializations_per_trial
+  value: 3.0
+  where: Section 2 'Random reinitialization', p.4 (15 total per point)
+- metric: trials_per_point_appendix
+  value: 3.0
+  where: Appendix G.1, p.24; Appendix H.1, p.29
+- metric: random_sparse_trials_figure1
+  value: 10.0
+  where: Figure 1 caption, p.2
+- metric: eval_interval_iterations
+  value: 100.0
+  where: Appendix G.1, p.24; Appendix H.1, p.29
+- metric: dropout_rate
+  value: 0.5
+  where: Section 3 'Dropout', p.6
+- metric: cifar10_training_examples_total
+  value: 50000.0
+  where: Appendix H.1, p.29
+- metric: cifar10_training_examples_used
+  value: 45000.0
+  where: Appendix H.1, p.29; Appendix I.3, p.40
+- metric: cifar10_test_examples
+  value: 10000.0
+  where: Appendix H.1, p.29
+- metric: conv2_total_weights
+  value: 4300000.0
+  where: Figure 2, p.3
+- metric: conv2_conv_weights
+  value: 38000.0
+  where: Figure 2, p.3
+- metric: conv4_total_weights
+  value: 2400000.0
+  where: Figure 2, p.3
+- metric: conv4_conv_weights
+  value: 260000.0
+  where: Figure 2, p.3
+- metric: conv6_total_weights
+  value: 1700000.0
+  where: Figure 2, p.3
+- metric: conv6_conv_weights
+  value: 1100000.0
+  where: Figure 2, p.3
+- metric: conv2_training_iterations
+  value: 20000.0
+  where: Figure 2, p.3
+- metric: conv4_training_iterations
+  value: 25000.0
+  where: Figure 2, p.3
+- metric: conv6_training_iterations
+  value: 30000.0
+  where: Figure 2, p.3
+- metric: vgg19_total_weights
+  value: 20000000.0
+  where: Figure 2, p.3; Section 4, p.8
+- metric: vgg19_training_iterations
+  value: 112480.0
+  where: Section 4 'VGG-19', p.7; Appendix I.2, p.39 (160 epochs)
+- metric: vgg19_output_layer_params_unpruned
+  value: 5120.0
+  where: Appendix I.2, p.39
+- metric: resnet18_total_weights
+  value: 271000.0
+  where: Section 4 'Resnet-18', p.8 (Figure 2 lists 274K total / 270K conv)
+- metric: resnet18_training_iterations
+  value: 30000.0
+  where: Section 4 'Resnet-18', p.8; Appendix I.3, p.40 (stages 20K/5K/5K)
+- metric: resnet18_output_layer_params_unpruned
+  value: 640.0
+  where: Appendix I.3, p.40
+- metric: resnet18_downsample_params_unpruned
+  value: 2560.0
+  where: Appendix I.3, p.40
+- metric: conv2_fc_share_of_params_percent
+  value: 99.0
+  where: Appendix H.6, p.36
+- metric: conv4_fc_share_of_params_percent
+  value: 89.0
+  where: Appendix H.6, p.36
+- metric: conv6_fc_share_of_params_percent
+  value: 35.0
+  where: Appendix H.6, p.36
+plan:
+  data_tier: A
+  compute_tier: 2
+  kind_of_test: re_implementation
+  target_claims:
+  - lenet_ticket_pm_above_original
+  - lenet_reinit_pm_above_original
+  - lenet_acc_gain_at_50k
+  - lenet_acc_gain_at_early_stop_pm13_5
+  - lenet_early_stop_38pct_earlier
+  - lenet_early_stop_return_pm3_6
+  - lenet_ticket_vs_reinit_speedup_pm21
+  - lenet_ticket_vs_reinit_acc_pm21
+  substitutions: {}
+  tolerances:
+    resnet18_lr001_best_ticket_acc: 0.6631068422387733
+    resnet18_lr01_unpruned_acc: 0.6364298764558299
+    resnet18_warmup_ticket_acc: 0.6364298764558299
+    conv4_val_acc_best_lr0003: 1.2100137930214452
+    conv6_val_acc_best_lr0003: 1.1482713690158732
+    conv4_dropout_val_acc: 1.1222835445907022
+    conv6_dropout_val_acc: 1.0654644257678356
+  success_criteria: 'CPU only. LeNet-300-100 on MNIST, iterative magnitude pruning
+    (20% per round) to ~10% weights remaining, 2 epochs per round. Claim: winning
+    tickets reset to the original init match/exceed the unpruned accuracy at 10-20%
+    weights while random-reinit tickets do worse. Report accuracy at each sparsity
+    for both. || Match on every headline claim within its derived tolerance; all leakage
+    tests pass; kind of test = re_implementation; data tier A; compute tier 1. Tier
+    B: same sign, significant, gap inside the substitution''s predicted band.'
+  budget:
+    spec: 10
+    setup: 20
+    build: 25
+    run: 20
+    verify: 15
+    report: 5
+    hard_kill_minutes: 240
+    max_cost_usd: 150.0
+    run_timeout_s: 1500
+  seeds:
+  - 0
+  - 1
+  frozen_hash: 8544bcf97afc63464e12b2e7d4664a9385bb379a9e8fbcb049d5f033856242e5
+  frozen_at: '2026-09-15T16:16:02.560644+00:00'
