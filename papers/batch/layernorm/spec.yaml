@@ -1,0 +1,1737 @@
+paper:
+  title: Layer Normalization
+  authors:
+  - Jimmy Lei Ba
+  - Jamie Ryan Kiros
+  - Geoffrey E. Hinton
+  year: 2016
+  arxiv_id: '1607.06450'
+  version: v1
+  track: cs
+  family: train_and_eval
+claims:
+- id: oe_ln_speedup_60pct
+  where: 'Section 6.1 text, page 7: ''converges to its best validation model in 60%
+    of the time it takes the baseline model to do so'''
+  evidence_page: 7
+  metric: convergence_time_ratio_vs_baseline
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 60.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: oe_ln
+  priority: headline
+- id: draw_test_nll_ln
+  where: 'Section 6.4 text, page 9: layer normalization DRAW model test variational
+    log likelihood after 200 epochs'
+  evidence_page: 9
+  metric: test_variational_bound_negative_log_likelihood_nats
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 82.09
+  reported_precision: 0.005
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: draw_ln
+  priority: headline
+- id: draw_test_nll_baseline
+  where: 'Section 6.4 text, page 9: baseline DRAW model test variational log likelihood
+    after 200 epochs'
+  evidence_page: 9
+  metric: test_variational_bound_negative_log_likelihood_nats
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 82.36
+  reported_precision: 0.005
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: draw_baseline
+  priority: headline
+- id: t2_sym_cap_r1
+  where: Table 2, row 'Sym [Vendrov et al., 2016]', Caption Retrieval R@1
+  evidence_page: 6
+  metric: recall_at_1
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 45.4
+  reported_precision: 0.05
+  n_periods: 5000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: sym_vendrov
+  priority: secondary
+- id: t2_sym_cap_r10
+  where: Table 2, row 'Sym [Vendrov et al., 2016]', Caption Retrieval R@10 (R@5 is
+    not reported for this row)
+  evidence_page: 6
+  metric: recall_at_10
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 88.7
+  reported_precision: 0.05
+  n_periods: 5000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: sym_vendrov
+  priority: secondary
+- id: t2_sym_cap_meanr
+  where: Table 2, row 'Sym [Vendrov et al., 2016]', Caption Retrieval Mean r
+  evidence_page: 6
+  metric: mean_rank
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 5.8
+  reported_precision: 0.05
+  n_periods: 5000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: sym_vendrov
+  priority: secondary
+- id: t2_sym_img_r1
+  where: Table 2, row 'Sym [Vendrov et al., 2016]', Image Retrieval R@1
+  evidence_page: 6
+  metric: recall_at_1
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 36.3
+  reported_precision: 0.05
+  n_periods: 25000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: sym_vendrov
+  priority: secondary
+- id: t2_sym_img_r10
+  where: Table 2, row 'Sym [Vendrov et al., 2016]', Image Retrieval R@10 (R@5 is not
+    reported for this row)
+  evidence_page: 6
+  metric: recall_at_10
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 85.8
+  reported_precision: 0.05
+  n_periods: 25000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: sym_vendrov
+  priority: secondary
+- id: t2_sym_img_meanr
+  where: Table 2, row 'Sym [Vendrov et al., 2016]', Image Retrieval Mean r
+  evidence_page: 6
+  metric: mean_rank
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 9.0
+  reported_precision: 0.05
+  n_periods: 25000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: sym_vendrov
+  priority: secondary
+- id: t2_oe_vendrov_cap_r1
+  where: Table 2, row 'OE [Vendrov et al., 2016]', Caption Retrieval R@1
+  evidence_page: 6
+  metric: recall_at_1
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 46.7
+  reported_precision: 0.05
+  n_periods: 5000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: oe_vendrov
+  priority: secondary
+- id: t2_oe_vendrov_cap_r10
+  where: Table 2, row 'OE [Vendrov et al., 2016]', Caption Retrieval R@10 (R@5 is
+    not reported for this row)
+  evidence_page: 6
+  metric: recall_at_10
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 88.9
+  reported_precision: 0.05
+  n_periods: 5000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: oe_vendrov
+  priority: secondary
+- id: t2_oe_vendrov_cap_meanr
+  where: Table 2, row 'OE [Vendrov et al., 2016]', Caption Retrieval Mean r
+  evidence_page: 6
+  metric: mean_rank
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 5.7
+  reported_precision: 0.05
+  n_periods: 5000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: oe_vendrov
+  priority: secondary
+- id: t2_oe_vendrov_img_r1
+  where: Table 2, row 'OE [Vendrov et al., 2016]', Image Retrieval R@1
+  evidence_page: 6
+  metric: recall_at_1
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 37.9
+  reported_precision: 0.05
+  n_periods: 25000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: oe_vendrov
+  priority: secondary
+- id: t2_oe_vendrov_img_r10
+  where: Table 2, row 'OE [Vendrov et al., 2016]', Image Retrieval R@10 (R@5 is not
+    reported for this row)
+  evidence_page: 6
+  metric: recall_at_10
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 85.9
+  reported_precision: 0.05
+  n_periods: 25000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: oe_vendrov
+  priority: secondary
+- id: t2_oe_vendrov_img_meanr
+  where: Table 2, row 'OE [Vendrov et al., 2016]', Image Retrieval Mean r
+  evidence_page: 6
+  metric: mean_rank
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 8.1
+  reported_precision: 0.05
+  n_periods: 25000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: oe_vendrov
+  priority: secondary
+- id: t2_oe_ours_cap_r1
+  where: Table 2, row 'OE (ours)', Caption Retrieval R@1
+  evidence_page: 6
+  metric: recall_at_1
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 46.6
+  reported_precision: 0.05
+  n_periods: 5000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: oe_baseline_ours
+  priority: secondary
+- id: t2_oe_ours_cap_r5
+  where: Table 2, row 'OE (ours)', Caption Retrieval R@5
+  evidence_page: 6
+  metric: recall_at_5
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 79.3
+  reported_precision: 0.05
+  n_periods: 5000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: oe_baseline_ours
+  priority: secondary
+- id: t2_oe_ours_cap_r10
+  where: Table 2, row 'OE (ours)', Caption Retrieval R@10
+  evidence_page: 6
+  metric: recall_at_10
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 89.1
+  reported_precision: 0.05
+  n_periods: 5000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: oe_baseline_ours
+  priority: secondary
+- id: t2_oe_ours_cap_meanr
+  where: Table 2, row 'OE (ours)', Caption Retrieval Mean r
+  evidence_page: 6
+  metric: mean_rank
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 5.2
+  reported_precision: 0.05
+  n_periods: 5000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: oe_baseline_ours
+  priority: secondary
+- id: t2_oe_ln_cap_r1
+  where: Table 2, row 'OE + LN', Caption Retrieval R@1
+  evidence_page: 6
+  metric: recall_at_1
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 48.5
+  reported_precision: 0.05
+  n_periods: 5000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: oe_ln
+  priority: secondary
+- id: t2_oe_ln_cap_r5
+  where: Table 2, row 'OE + LN', Caption Retrieval R@5
+  evidence_page: 6
+  metric: recall_at_5
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 80.6
+  reported_precision: 0.05
+  n_periods: 5000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: oe_ln
+  priority: secondary
+- id: t2_oe_ln_cap_r10
+  where: Table 2, row 'OE + LN', Caption Retrieval R@10
+  evidence_page: 6
+  metric: recall_at_10
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 89.8
+  reported_precision: 0.05
+  n_periods: 5000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: oe_ln
+  priority: secondary
+- id: t2_oe_ln_cap_meanr
+  where: Table 2, row 'OE + LN', Caption Retrieval Mean r
+  evidence_page: 6
+  metric: mean_rank
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 5.1
+  reported_precision: 0.05
+  n_periods: 5000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: oe_ln
+  priority: secondary
+- id: t2_oe_ours_img_r1
+  where: Table 2, row 'OE (ours)', Image Retrieval R@1
+  evidence_page: 6
+  metric: recall_at_1
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 37.8
+  reported_precision: 0.05
+  n_periods: 25000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: oe_baseline_ours
+  priority: secondary
+- id: t2_oe_ours_img_r5
+  where: Table 2, row 'OE (ours)', Image Retrieval R@5
+  evidence_page: 6
+  metric: recall_at_5
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 73.6
+  reported_precision: 0.05
+  n_periods: 25000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: oe_baseline_ours
+  priority: secondary
+- id: t2_oe_ours_img_r10
+  where: Table 2, row 'OE (ours)', Image Retrieval R@10
+  evidence_page: 6
+  metric: recall_at_10
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 85.7
+  reported_precision: 0.05
+  n_periods: 25000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: oe_baseline_ours
+  priority: secondary
+- id: t2_oe_ours_img_meanr
+  where: Table 2, row 'OE (ours)', Image Retrieval Mean r
+  evidence_page: 6
+  metric: mean_rank
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 7.9
+  reported_precision: 0.05
+  n_periods: 25000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: oe_baseline_ours
+  priority: secondary
+- id: t2_oe_ln_img_r1
+  where: Table 2, row 'OE + LN', Image Retrieval R@1
+  evidence_page: 6
+  metric: recall_at_1
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 38.9
+  reported_precision: 0.05
+  n_periods: 25000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: oe_ln
+  priority: secondary
+- id: t2_oe_ln_img_r5
+  where: Table 2, row 'OE + LN', Image Retrieval R@5
+  evidence_page: 6
+  metric: recall_at_5
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 74.3
+  reported_precision: 0.05
+  n_periods: 25000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: oe_ln
+  priority: secondary
+- id: t2_oe_ln_img_r10
+  where: Table 2, row 'OE + LN', Image Retrieval R@10
+  evidence_page: 6
+  metric: recall_at_10
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 86.3
+  reported_precision: 0.05
+  n_periods: 25000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: oe_ln
+  priority: secondary
+- id: t2_oe_ln_img_meanr
+  where: Table 2, row 'OE + LN', Image Retrieval Mean r
+  evidence_page: 6
+  metric: mean_rank
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 7.6
+  reported_precision: 0.05
+  n_periods: 25000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: oe_ln
+  priority: secondary
+- id: t3_orig_sick_r
+  where: Table 3, row 'Original [Kiros et al., 2015]', column SICK(r)
+  evidence_page: 8
+  metric: pearson_r
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.848
+  reported_precision: 0.0005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_original_reported
+  priority: secondary
+- id: t3_orig_sick_rho
+  where: Table 3, row 'Original [Kiros et al., 2015]', column SICK(rho)
+  evidence_page: 8
+  metric: spearman_rho
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.778
+  reported_precision: 0.0005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_original_reported
+  priority: secondary
+- id: t3_orig_sick_mse
+  where: Table 3, row 'Original [Kiros et al., 2015]', column SICK(MSE)
+  evidence_page: 8
+  metric: mse
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.287
+  reported_precision: 0.0005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_original_reported
+  priority: secondary
+- id: t3_orig_mr
+  where: Table 3, row 'Original [Kiros et al., 2015]', column MR
+  evidence_page: 8
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 75.5
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_original_reported
+  priority: secondary
+- id: t3_orig_cr
+  where: Table 3, row 'Original [Kiros et al., 2015]', column CR
+  evidence_page: 8
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 79.3
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_original_reported
+  priority: secondary
+- id: t3_orig_subj
+  where: Table 3, row 'Original [Kiros et al., 2015]', column SUBJ
+  evidence_page: 8
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 92.1
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_original_reported
+  priority: secondary
+- id: t3_orig_mpqa
+  where: Table 3, row 'Original [Kiros et al., 2015]', column MPQA
+  evidence_page: 8
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 86.9
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_original_reported
+  priority: secondary
+- id: t3_ours_sick_r
+  where: Table 3, row 'Ours', column SICK(r)
+  evidence_page: 8
+  metric: pearson_r
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.842
+  reported_precision: 0.0005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_baseline
+  priority: secondary
+- id: t3_ourslen_sick_r
+  where: Table 3, row 'Ours + LN', column SICK(r)
+  evidence_page: 8
+  metric: pearson_r
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.854
+  reported_precision: 0.0005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_ln
+  priority: secondary
+- id: t3_ourslen_month_sick_r
+  where: Table 3, row 'Ours + LN †' (approx. 1.7M iterations), column SICK(r)
+  evidence_page: 8
+  metric: pearson_r
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.858
+  reported_precision: 0.0005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_ln_long
+  priority: secondary
+- id: t3_ours_sick_rho
+  where: Table 3, row 'Ours', column SICK(rho)
+  evidence_page: 8
+  metric: spearman_rho
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.767
+  reported_precision: 0.0005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_baseline
+  priority: secondary
+- id: t3_ourslen_sick_rho
+  where: Table 3, row 'Ours + LN', column SICK(rho)
+  evidence_page: 8
+  metric: spearman_rho
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.785
+  reported_precision: 0.0005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_ln
+  priority: secondary
+- id: t3_ourslen_month_sick_rho
+  where: Table 3, row 'Ours + LN †' (approx. 1.7M iterations), column SICK(rho)
+  evidence_page: 8
+  metric: spearman_rho
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.788
+  reported_precision: 0.0005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_ln_long
+  priority: secondary
+- id: t3_ours_sick_mse
+  where: Table 3, row 'Ours', column SICK(MSE)
+  evidence_page: 8
+  metric: mse
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.298
+  reported_precision: 0.0005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_baseline
+  priority: secondary
+- id: t3_ourslen_sick_mse
+  where: Table 3, row 'Ours + LN', column SICK(MSE)
+  evidence_page: 8
+  metric: mse
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.277
+  reported_precision: 0.0005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_ln
+  priority: secondary
+- id: t3_ourslen_month_sick_mse
+  where: Table 3, row 'Ours + LN †' (approx. 1.7M iterations), column SICK(MSE)
+  evidence_page: 8
+  metric: mse
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.27
+  reported_precision: 0.0005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_ln_long
+  priority: secondary
+- id: t3_ours_mr
+  where: Table 3, row 'Ours', column MR
+  evidence_page: 8
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 77.3
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_baseline
+  priority: secondary
+- id: t3_ourslen_mr
+  where: Table 3, row 'Ours + LN', column MR
+  evidence_page: 8
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 79.5
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_ln
+  priority: secondary
+- id: t3_ourslen_month_mr
+  where: Table 3, row 'Ours + LN †' (approx. 1.7M iterations), column MR
+  evidence_page: 8
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 79.4
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_ln_long
+  priority: secondary
+- id: t3_ours_cr
+  where: Table 3, row 'Ours', column CR
+  evidence_page: 8
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 81.8
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_baseline
+  priority: secondary
+- id: t3_ourslen_cr
+  where: Table 3, row 'Ours + LN', column CR
+  evidence_page: 8
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 82.6
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_ln
+  priority: secondary
+- id: t3_ourslen_month_cr
+  where: Table 3, row 'Ours + LN †' (approx. 1.7M iterations), column CR
+  evidence_page: 8
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 83.1
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_ln_long
+  priority: secondary
+- id: t3_ours_subj
+  where: Table 3, row 'Ours', column SUBJ
+  evidence_page: 8
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 92.6
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_baseline
+  priority: secondary
+- id: t3_ourslen_subj
+  where: Table 3, row 'Ours + LN', column SUBJ
+  evidence_page: 8
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 93.4
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_ln
+  priority: secondary
+- id: t3_ourslen_month_subj
+  where: Table 3, row 'Ours + LN †' (approx. 1.7M iterations), column SUBJ
+  evidence_page: 8
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 93.7
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_ln_long
+  priority: secondary
+- id: t3_ours_mpqa
+  where: Table 3, row 'Ours', column MPQA
+  evidence_page: 8
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 87.9
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_baseline
+  priority: secondary
+- id: t3_ourslen_mpqa
+  where: Table 3, row 'Ours + LN', column MPQA
+  evidence_page: 8
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 89.0
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_ln
+  priority: secondary
+- id: t3_ourslen_month_mpqa
+  where: Table 3, row 'Ours + LN †' (approx. 1.7M iterations), column MPQA
+  evidence_page: 8
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 89.3
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: skipthought_ln_long
+  priority: secondary
+data:
+  sources:
+  - canonical: mnist
+    description: 'Permutation invariant MNIST classification (Section 6.6): 55,000
+      training points used, 784-1000-1000-10 MLP; also fixed-binarized MNIST (Larochelle
+      and Murray, 2011) for DRAW with 50k/10k/10k split (Section 6.4).'
+    substitute: torchvision
+  - canonical: mscoco
+    description: Microsoft COCO images and captions for order-embeddings (Section
+      6.1); 5 separate test splits of 1000 images and 5000 captions each; images encoded
+      with pre-trained VGG ConvNet (10-crop) features.
+    substitute: null
+  - canonical: bookcorpus
+    description: BookCorpus (Zhu et al., 2015) for skip-thought training (Section
+      6.3).
+    substitute: null
+  - canonical: cnn_qa_corpus
+    description: CNN reading-comprehension corpus (Hermann et al., 2015), pre-processed
+      dataset obtained from Cooijmans et al. (2016) with each passage limited to 4
+      sentences (Section 6.2).
+    substitute: null
+  - canonical: iam_ondb
+    description: 'IAM Online Handwriting Database (Liwicki and Bunke, 2005): 12,179
+      handwriting line sequences from 221 writers (Section 6.5).'
+    substitute: null
+  - canonical: downstream_sentence_eval_sets
+    description: SICK (semantic relatedness), MR, CR, SUBJ, MPQA used to evaluate
+      skip-thought vectors (Table 3); MR/CR/SUBJ/MPQA plots in Figure 3 use 10-fold
+      cross validation.
+    substitute: null
+  universe:
+    mnist_mlp_architecture: 784-1000-1000-10 fully connected, permutation invariant;
+      LN applied to fully-connected hidden layers only (excludes the last softmax
+      layer)
+    draw_architecture: DRAW with 64 glimpses and 256 LSTM hidden units; LN applied
+      only to the LSTM cell state before tanh in the hidden-state output (Appendix
+      Eq. 31)
+    order_embedding_architecture: GRU sentence encoder + pre-trained VGG (10-crop)
+      image features, order-embedding asymmetric scoring, 2-level partial ordering;
+      LN applied inside the GRU (Appendix Eqs. 26-28)
+    skipthought_architecture: 2400-dimensional GRU sentence encoder with decoder RNNs,
+      same hyperparameters as Kiros et al. (2015); LN applied inside the GRU (Appendix
+      Eqs. 26-28)
+    attentive_reader_architecture: Unidirectional attentive reader LSTM on the CNN
+      corpus; LN applied within the LSTM only (Appendix Eqs. 20-22)
+    handwriting_architecture: 'Graves (2013) Section 5.2 model: 3 hidden layers of
+      400 LSTM cells, 20 bivariate Gaussian mixture components at the output, size-3
+      input layer, 57-dim one-hot window vectors, 10 Gaussian window functions (size-30
+      parameter vector), ~3.7M weights'
+    replication_target: 'Small-scale stand-in: 784-1000-1000-10 MLP on MNIST (Section
+      6.6) and optionally a small GRU sequence model, each with and without LN and
+      with a BN comparison'
+  frequency: not_applicable_single_training_runs
+  preprocessing:
+    mnist_scaling: Not stated in paper; conventional [0,1] scaling of pixel intensities
+      for the MLP experiment
+    mnist_input_shape: Inputs flattened to 784-dim vectors ('permutation invariant'
+      means no spatial structure is exploited; the paper does not apply an explicit
+      fixed pixel permutation)
+    mnist_binarization: DRAW experiment uses the fixed binarization of Larochelle
+      and Murray (2011)
+    cnn_qa_anonymization: Entities replaced by randomized tokens, consistently permuted
+      during training and evaluation; passages limited to 4 sentences (pre-processed
+      dataset of Cooijmans et al., 2016)
+    image_features: Pre-trained VGG ConvNet 10-crop features for MSCOCO images
+    handwriting_sequences: Sequence length 500 and mini-batch size 8 during training
+      (Figure 5 caption); character strings one-hot encoded (57 dims)
+    bn_variance_estimator: For the smaller batch-size, the batch normalization variance
+      term is computed with the unbiased estimator (Section 6.6)
+  splits:
+    mnist_mlp: 55,000 training data points (Section 6.6); the paper does not say how
+      the remaining 5,000 of the 60k train set are used; standard 10,000-image test
+      set used for the test-error curves in Figure 6
+    binarized_mnist_draw: 50,000 train / 10,000 validation / 10,000 test (Section
+      6.4)
+    mscoco_order_embeddings: Held-out validation set for model selection (R@K computed
+      every 300 iterations, model saved whenever R@K improves); best model evaluated
+      on 5 separate test splits of 1000 images and 5000 captions each, mean reported
+    cnn_attentive_reader: 'Validation set only (footnote 3: results produced on the
+      validation set, as in Cooijmans et al. 2016)'
+    skipthought_downstream: Checkpoints every 50,000 iterations; MR/CR/SUBJ/MPQA curves
+      in Figure 3 use 10-fold cross validation; Table 3 models trained for 1M iterations,
+      the † row for ~1.7M iterations (1 month)
+method:
+  signal: 'Layer normalization: normalize the summed inputs of each layer (or each
+    recurrent time step) using the mean and standard deviation computed across the
+    H hidden units of that layer for a single training case, then apply per-unit learned
+    gain and bias after the normalization but before the non-linearity; compare training
+    speed and final metrics against an unnormalized baseline and against batch normalization
+    / weight normalization.'
+  model:
+    ln_formula: LN(z; alpha, beta) = ((z - mu)/sigma) * alpha + beta (Eq. 15), mu
+      = (1/D) sum z_i, sigma = sqrt((1/D) sum (z_i - mu)^2) (Eq. 16; biased 1/D variance,
+      no epsilon printed)
+    ln_placement_relative_to_nonlinearity: Statistics are computed on the summed inputs
+      a; the adaptive gain and bias are applied after normalization but before the
+      non-linearity (Abstract, Eq. 5)
+    ln_default_init: 'Section 6: ''the default initialization of layer normalization
+      is to set the adaptive gains to 1 and the biases to 0''. Appendix states ''alpha
+      initialized to a vector of zeros and beta initialized to a vector of ones''
+      and calls alpha/beta ''additive and multiplicative'' respectively, which is
+      inconsistent with Eq. 15 where alpha multiplies; effective initialization =
+      gain 1, bias 0'
+    ln_placement_mlp: Applied to the fully-connected hidden layers only; the last
+      softmax layer is not normalized (Section 6.6)
+    ln_placement_lstm: 'Gates: LN(W_h h_{t-1}; a1,b1) + LN(W_x x_t; a2,b2) + b; h_t
+      = sigma(o_t) * tanh(LN(c_t; a3,b3)) (Appendix Eqs. 20-22). The additive bias
+      b of the pre-activation is retained alongside the LN biases'
+    ln_placement_gru: '[z_t; r_t] = LN(W_h h_{t-1}; a1,b1) + LN(W_x x_t; a2,b2) (no
+      extra bias term); h_hat = tanh(LN(W x_t; a3,b3) + sigma(r_t) * LN(U h_{t-1};
+      a4,b4)); h_t = (1 - sigma(z_t)) h_{t-1} + sigma(z_t) h_hat (Appendix Eqs. 26-28)'
+    ln_placement_draw: 'LN only on the LSTM cell state in the hidden-state output:
+      h_t = sigma(o_t) * tanh(LN(c_t; alpha, beta)); gates are not normalized (Appendix
+      Eqs. 29-31)'
+    optimizer: Adam (Kingma & Ba, 2014) for MNIST MLP (Section 6.6), DRAW ('default
+      setting', Section 6.4), handwriting (Section 6.5), and order-embeddings ('same
+      initial hyperparameters' for both models, Section 6.1); optimizer for skip-thoughts
+      follows Kiros et al. (2015) code and is not restated
+    batch_sizes: 'MNIST MLP: 128 and 4; DRAW: 128; handwriting: 8 (sequence length
+      500); order-embeddings/skip-thoughts: not stated (inherited from public code)'
+    mlp_loss: Not stated in the paper; softmax cross-entropy (the 'Train NLL' curve
+      of Figure 6) is the only consistent reading
+    bn_gain_init_note: Recurrent BN of Cooijmans et al. sets the BN scale parameter
+      to 0.1; the authors tried LN with 1.0 and 0.1 scale initialization and found
+      1.0 performed significantly better (Section 6.2)
+  evaluation:
+  - 'MNIST MLP: train negative log likelihood and test error rate vs epoch (Figure
+    6), for batch sizes 128 and 4, with baseline / BatchNorm / LayerNorm'
+  - 'DRAW: test variational bound (negative log likelihood in nats) vs epoch; Figure
+    4 shows the first 100 epochs, the reported final numbers are after 200 epochs'
+  - 'Order-embeddings: Recall@1/5/10 and mean rank for caption and image retrieval,
+    mean over 5 test splits (Table 2); validation R@1/R@5/R@10 curves for image retrieval
+    vs iteration (Figure 1, iteration x 300)'
+  - 'Skip-thoughts: SICK Pearson r, Spearman rho, MSE; MR/CR/SUBJ/MPQA accuracy at
+    checkpoints every 50k iterations (Figure 3, Table 3)'
+  - 'Attentive reader: validation error rate vs training steps (Figure 2); validation
+    only'
+  - 'Handwriting: negative log likelihood vs updates (Figure 5, Updates x 200)'
+  - 'Replication target: train loss and test error/accuracy vs epoch with and without
+    LN (and with BN) at the paper''s batch sizes'
+  eval_protocol:
+    reporting_point: Fixed epoch/iteration counts (MNIST MLP curves run to ~60 epochs
+      in Figure 6; DRAW final numbers at 200 epochs; skip-thoughts Table 3 at 1M iterations,
+      † row ~1.7M)
+    model_selection: 'Order-embeddings: model saved whenever validation R@K improves
+      (checked every 300 iterations), best model then evaluated on the 5 test splits;
+      other tasks report curves at fixed step counts with no early stopping described'
+    averaging: 'Order-embeddings: mean over 5 test splits; skip-thought classification
+      tasks in Figure 3: 10-fold cross validation'
+    speed_metric: 'Order-embeddings: ''per-iteration speedup across all metrics'';
+      the LN model reaches its own best validation model in 60% of the time the baseline
+      takes to reach its best (Section 6.1)'
+    no_seed_variance: Paper reports no seed-level standard deviations and never states
+      how many runs each curve represents; the shaded bands in Figure 3 are 10-fold
+      CV spread, and the shading in Figure 6 is unexplained
+  variants:
+    mnist_mlp_baseline_bz128:
+      normalization: none
+      architecture: 784-1000-1000-10
+      batch_size: 128
+      optimizer: Adam
+      train_size: 55000
+    mnist_mlp_ln_bz128:
+      normalization: layer_norm on fully-connected hidden layers, excluding the softmax
+        layer
+      architecture: 784-1000-1000-10
+      batch_size: 128
+      gain_bias_init: gain 1, bias 0
+    mnist_mlp_bn_bz128:
+      normalization: batch_norm applied to all layers
+      architecture: 784-1000-1000-10
+      batch_size: 128
+    mnist_mlp_baseline_bz4:
+      normalization: none
+      batch_size: 4
+    mnist_mlp_ln_bz4:
+      normalization: layer_norm on fully-connected hidden layers
+      batch_size: 4
+    mnist_mlp_bn_bz4:
+      normalization: batch_norm on all layers, unbiased variance estimator for the
+        small batch
+      batch_size: 4
+    draw_baseline:
+      normalization: none
+      glimpses: 64
+      lstm_units: 256
+      batch_size: 128
+      epochs: 200 (final reported value); Figure 4 shows first 100 epochs
+    draw_ln:
+      normalization: layer_norm on the LSTM cell state in the hidden-state output
+        only
+      glimpses: 64
+      lstm_units: 256
+      batch_size: 128
+      epochs: 200
+    draw_wn:
+      normalization: weight normalization (WN curve in Figure 4; no final nats value
+        reported in the text)
+      glimpses: 64
+      lstm_units: 256
+    oe_baseline_ours:
+      normalization: none
+      code: Vendrov et al. order-embedding public code (Theano)
+      reported_over: mean of 5 test splits
+    oe_ln:
+      normalization: layer_norm inside the GRU encoder (Appendix Eqs. 26-28)
+      code: Vendrov et al. order-embedding public code + LN
+      reported_over: mean of 5 test splits
+    oe_vendrov:
+      source: numbers copied from Vendrov et al. (2016) order-embedding row; R@5 not
+        reported
+    sym_vendrov:
+      source: numbers copied from Vendrov et al. (2016) symmetric baseline row; R@5
+        not reported
+    skipthought_baseline:
+      normalization: none
+      encoder_dim: 2400
+      iterations: 1M
+    skipthought_ln:
+      normalization: layer_norm inside the GRU
+      encoder_dim: 2400
+      iterations: 1M
+    skipthought_ln_long:
+      normalization: layer_norm inside the GRU
+      iterations: approximately 1.7M (1 month of training)
+    skipthought_original_reported:
+      source: numbers copied from Kiros et al. (2015)
+    attentive_reader_baseline:
+      normalization: none (LSTM curve, Figure 2)
+      metric: validation error rate only
+    attentive_reader_ln:
+      normalization: layer_norm within the LSTM only
+      ln_scale_init: 1.0 (also tried 0.1; 1.0 performed significantly better)
+    gru_baseline_small:
+      normalization: none
+      purpose: reduced-scale stand-in sequence task for replication (not a paper configuration)
+    gru_ln_small:
+      normalization: layer_norm inside GRU (Appendix Eqs. 26-28)
+      purpose: reduced-scale stand-in sequence task for replication (not a paper configuration)
+baselines:
+- unnormalized baseline network (no normalization)
+- batch normalization (Ioffe & Szegedy, 2015) applied to all layers (MNIST MLP, Section
+  6.6)
+- recurrent batch normalization BN-LSTM and BN-everywhere (Cooijmans et al., 2016)
+  on the attentive reader; curves taken from that paper
+- weight normalization (Salimans & Kingma, 2016) on DRAW (Figure 4, WN curve)
+- order-embeddings (Vendrov et al., 2016) and the symmetric embedding baseline
+- original skip-thought vectors (Kiros et al., 2015)
+ambiguities:
+- id: lr_schedule
+  question: What learning-rate schedule is used for the Adam runs?
+  config_key: lr_schedule
+  options:
+  - constant
+  - cosine
+  - step
+  - as_paper
+  default: constant
+  source: conventions_kb
+  reason: Paper only says Adam with 'default setting' (DRAW) or 'the same initial
+    hyperparameters' (order-embeddings); no schedule is described, so a constant LR
+    is the conventional reading.
+  sensitivity: medium
+- id: learning_rate_value
+  question: What numeric learning rate is used for the MNIST MLP / GRU runs?
+  config_key: learning_rate
+  options:
+  - '0.001'
+  - '0.0003'
+  - '0.0001'
+  default: '0.001'
+  source: conventions_kb
+  reason: Never stated for the MNIST MLP; Adam's default alpha=0.001 matches the paper's
+    phrase 'default setting of Adam' used for DRAW.
+  sensitivity: high
+- id: adam_hyperparams
+  question: What Adam beta1/beta2/epsilon values are used?
+  config_key: adam_betas_eps
+  options:
+  - beta1=0.9,beta2=0.999,eps=1e-8
+  - beta1=0.9,beta2=0.99,eps=1e-8
+  - beta1=0.5,beta2=0.999,eps=1e-8
+  default: beta1=0.9,beta2=0.999,eps=1e-8
+  source: conventions_kb
+  reason: Paper says only 'Adam' / 'default setting of Adam'; the Kingma & Ba defaults
+    are the only defensible reading.
+  sensitivity: medium
+- id: augmentation
+  question: Is any train-time data augmentation applied to MNIST?
+  config_key: augmentation
+  options:
+  - none
+  - standard
+  - as_paper
+  default: none
+  source: conventions_kb
+  reason: The permutation-invariant MNIST experiment never mentions augmentation;
+    none is standard for this benchmark.
+  sensitivity: low
+- id: batch_vs_steps
+  question: When batch size changes (128 vs 4), do we hold epochs or optimization
+    steps fixed for the reported comparison?
+  config_key: batch_vs_steps
+  options:
+  - epochs
+  - steps
+  default: epochs
+  source: paper_text
+  reason: Figure 6 plots both the bz128 and bz4 runs against epochs on the x-axis,
+    so the paper's comparison holds epochs fixed; a matched-step comparison would
+    be a deviation and must be flagged as a sensitivity run.
+  sensitivity: high
+- id: mixed_precision
+  question: Is mixed precision used at train time?
+  config_key: mixed_precision
+  options:
+  - fp32
+  - amp
+  default: fp32
+  source: conventions_kb
+  reason: 2016 Theano implementation; single precision is implied and the replication
+    is CPU-only.
+  sensitivity: low
+- id: split
+  question: Is the reported number computed on the validation or the test split?
+  config_key: split
+  options:
+  - validation
+  - test
+  default: test
+  source: paper_text
+  reason: Figure 6 reports MNIST test error, Section 6.4/Figure 4 report the test
+    variational bound, Table 2 reports the 5 test splits and Table 3 the downstream
+    evaluations; only the attentive reader (Figure 2) is validation-only per footnote
+    3, and Figure 1 shows validation curves.
+  sensitivity: medium
+- id: ln_epsilon
+  question: What epsilon is added inside the LN standard deviation for numerical stability?
+  config_key: ln_eps
+  options:
+  - '0'
+  - 1e-5
+  - 1e-6
+  - 1e-8
+  default: 1e-5
+  source: conventions_kb
+  reason: Eqs. (3)/(16) print sigma with no epsilon; an epsilon is numerically required
+    in practice and 1e-5 is the standard implementation value.
+  sensitivity: low
+- id: ln_gain_bias_init
+  question: Are the LN gains initialized to 1 and biases to 0 (Section 6), or is the
+    appendix's literal 'alpha=zeros, beta=ones' intended?
+  config_key: ln_param_init
+  options:
+  - gain=1,bias=0
+  - gain=0,bias=1
+  default: gain=1,bias=0
+  source: paper_text
+  reason: Section 6 states gains=1 and biases=0; the appendix swaps the symbol roles
+    (calling alpha 'additive' though Eq. 15 multiplies by alpha) but describes the
+    same effective initialization.
+  sensitivity: high
+- id: ln_replaces_bias
+  question: In the feed-forward MNIST MLP, is the layer's own bias kept in addition
+    to the LN bias beta?
+  config_key: ln_bias_handling
+  options:
+  - ln_beta_only
+  - keep_layer_bias_and_ln_beta
+  default: ln_beta_only
+  source: conventions_kb
+  reason: Paper is silent for the MLP; Eq. (5) shows a single post-normalization bias
+    b, while the LSTM appendix (Eq. 20) additionally keeps the pre-activation bias,
+    so the feed-forward case must be set by convention.
+  sensitivity: low
+- id: mlp_activation
+  question: What nonlinearity is used in the 784-1000-1000-10 MNIST MLP?
+  config_key: activation
+  options:
+  - relu
+  - tanh
+  - sigmoid
+  default: relu
+  source: conventions_kb
+  reason: Never stated; ReLU units are the case discussed in Sections 3 and 6.7 and
+    are the conventional choice for this benchmark.
+  sensitivity: medium
+- id: weight_init
+  question: What weight initialization scheme is used?
+  config_key: weight_init
+  options:
+  - glorot_uniform
+  - he_normal
+  - gaussian_0.01
+  - orthogonal_recurrent
+  default: glorot_uniform
+  source: conventions_kb
+  reason: Not stated anywhere in the paper; Glorot uniform is the Theano-era default
+    for MLPs (orthogonal for recurrent weight matrices).
+  sensitivity: medium
+- id: n_seeds
+  question: How many random seeds per configuration, and are the curves single runs
+    or averages?
+  config_key: n_seeds
+  options:
+  - '1'
+  - '3'
+  - '5'
+  default: '1'
+  source: guess
+  reason: The paper never states the number of runs; Figure 3's bands are explicitly
+    10-fold cross-validation spread (not seeds) and Figure 6's shading is unexplained,
+    so a single run is the faithful default and extra seeds are a deviation.
+  sensitivity: high
+- id: train_steps
+  question: How many epochs should the MNIST MLP replication run for before reporting?
+  config_key: max_epochs
+  options:
+  - '10'
+  - '20'
+  - '60'
+  default: '60'
+  source: paper_text
+  reason: Figure 6's x-axis runs to about 60 epochs for both batch sizes, so 60 is
+    the paper's reporting horizon; shorter runs are only permissible as explicitly-labelled
+    reduced-budget checkpoints.
+  sensitivity: high
+- id: bn_placement
+  question: For the batch-norm baseline, is BN applied to every layer including the
+    output logits?
+  config_key: bn_scope
+  options:
+  - all_layers
+  - hidden_only
+  default: all_layers
+  source: paper_text
+  reason: Section 6.6 compares against 'batch normalization that is applied to all
+    layers', whereas LN excludes the final softmax layer.
+  sensitivity: medium
+- id: variance_estimator
+  question: Biased (1/N) or unbiased (1/(N-1)) variance for the normalization statistics
+    of LN and of BN?
+  config_key: variance_estimator
+  options:
+  - biased_LN_biased_BN
+  - biased_LN_unbiased_BN_small_batch
+  - biased_LN_unbiased_BN_all_batches
+  - unbiased_all
+  default: biased_LN_unbiased_BN_small_batch
+  source: paper_text
+  reason: Eqs. (3)/(16) define the LN sigma with 1/H (biased); Section 6.6 states
+    that for the smaller batch-size the BN variance uses the unbiased estimator, and
+    is silent about the bz128 BN run.
+  sensitivity: low
+- id: bn_inference_stats
+  question: How are batch-norm statistics computed at evaluation time (running averages
+    with what momentum, vs batch statistics)?
+  config_key: bn_inference_stats
+  options:
+  - running_average_momentum_0.9
+  - running_average_momentum_0.99
+  - batch_statistics_at_test
+  default: running_average_momentum_0.9
+  source: conventions_kb
+  reason: The paper only notes that BN 'requires running averages of the summed input
+    statistics' without giving a momentum or test-time rule; the code must pick one.
+  sensitivity: medium
+- id: mnist_val_split
+  question: Which 5,000 of the 60,000 MNIST training images are excluded (the paper
+    trains on 55,000)?
+  config_key: val_split
+  options:
+  - last_5000
+  - random_5000_fixed_seed
+  - none_held_out
+  default: last_5000
+  source: conventions_kb
+  reason: Section 6.6 states 55,000 training points but never says how the remaining
+    5,000 are selected or whether they are used as validation; taking the last 5,000
+    is the standard convention.
+  sensitivity: low
+- id: regularization
+  question: Is any dropout or weight decay used in the MNIST MLP / GRU runs?
+  config_key: regularization
+  options:
+  - none
+  - dropout_0.5
+  - weight_decay_1e-4
+  default: none
+  source: conventions_kb
+  reason: No regularizer is mentioned anywhere; the train NLL curves reaching ~1e-7
+    in Figure 6 are consistent with no regularization.
+  sensitivity: medium
+- id: grad_clipping
+  question: Is gradient clipping applied in the recurrent stand-in runs?
+  config_key: grad_clip
+  options:
+  - none
+  - clip_norm_5
+  - clip_norm_10
+  default: none
+  source: guess
+  reason: The paper never states clipping for any experiment (the public codebases
+    it modifies do clip), so the replication must choose explicitly.
+  sensitivity: medium
+- id: replication_task_choice
+  question: Which reduced-scale task stands in for the paper's experiments on CPU?
+  config_key: replication_task
+  options:
+  - mnist_mlp
+  - small_gru_sequence
+  - both
+  default: mnist_mlp
+  source: conventions_kb
+  reason: The MNIST MLP (Section 6.6) is the only experiment in the paper cheap enough
+    to run faithfully on CPU; a small GRU can optionally cover the recurrent claim.
+  sensitivity: high
+- id: speedup_definition
+  question: How is the 'converges to its best validation model in 60% of the time'
+    speedup operationalized?
+  config_key: speedup_metric
+  options:
+  - iterations_for_LN_to_reach_its_own_best_vs_baseline_to_reach_its_own_best
+  - wallclock_for_LN_to_reach_its_own_best_vs_baseline
+  - iterations_for_LN_to_reach_baseline_best
+  default: iterations_for_LN_to_reach_its_own_best_vs_baseline_to_reach_its_own_best
+  source: paper_text
+  reason: Section 6.1 says LN 'converges to its best validation model in 60% of the
+    time it takes the baseline model to do so' and describes a per-iteration speedup,
+    i.e. each model reaching its own best; whether 'time' means iterations or wall-clock
+    is not stated.
+  sensitivity: high
+- id: checkpoint_criterion
+  question: Which R@K quantity triggers saving the order-embedding model ('save the
+    model whenever R@K improves')?
+  config_key: checkpoint_criterion
+  options:
+  - sum_of_R@1_R@5_R@10
+  - R@1_only
+  - mean_rank
+  default: sum_of_R@1_R@5_R@10
+  source: conventions_kb
+  reason: Section 6.1 says the model is saved whenever R@K improves without specifying
+    K or an aggregation; the Vendrov et al. code the authors modified uses the sum
+    of recalls.
+  sensitivity: medium
+- id: reporting_statistic
+  question: For the replication's MNIST curves, is the reported number the final-epoch
+    value or the best value over training?
+  config_key: reporting_statistic
+  options:
+  - final_epoch
+  - best_over_training
+  default: final_epoch
+  source: conventions_kb
+  reason: Figure 6 shows full curves and the paper reports no single MNIST number,
+    so the reporting rule must be fixed; the paper's other final numbers (DRAW at
+    200 epochs, skip-thoughts at 1M iterations) are end-of-training values.
+  sensitivity: medium
+- id: hidden_width_scaling
+  question: May hidden widths be reduced from 1000 to fit a CPU budget?
+  config_key: hidden_width
+  options:
+  - '1000'
+  - '512'
+  - '256'
+  default: '1000'
+  source: paper_text
+  reason: Section 6.6 / Figure 6 specify 784-1000-1000-10; reducing the width changes
+    H and therefore the LN statistics, so it may only be done as an explicitly-labelled
+    sensitivity run.
+  sensitivity: medium
+descriptive_stats:
+- metric: mnist_mlp_training_examples
+  value: 55000.0
+  where: Section 6.6, page 10
+- metric: mnist_mlp_hidden_units_per_layer
+  value: 1000.0
+  where: Figure 6 caption, page 10 (784-1000-1000-10)
+- metric: mnist_mlp_batch_size_large
+  value: 128.0
+  where: Figure 6 caption, page 10
+- metric: mnist_mlp_batch_size_small
+  value: 4.0
+  where: Figure 6 caption, page 10
+- metric: binarized_mnist_train_images
+  value: 50000.0
+  where: Section 6.4, page 9
+- metric: binarized_mnist_validation_images
+  value: 10000.0
+  where: Section 6.4, page 9
+- metric: binarized_mnist_test_images
+  value: 10000.0
+  where: Section 6.4, page 9
+- metric: draw_glimpses
+  value: 64.0
+  where: Section 6.4, page 9
+- metric: draw_lstm_hidden_units
+  value: 256.0
+  where: Section 6.4, page 9
+- metric: draw_minibatch_size
+  value: 128.0
+  where: Section 6.4, page 9
+- metric: draw_epochs_for_final_numbers
+  value: 200.0
+  where: Section 6.4, page 9
+- metric: draw_epochs_shown_in_figure
+  value: 100.0
+  where: Section 6.4 / Figure 4, page 9
+- metric: mscoco_test_splits
+  value: 5.0
+  where: Table 2 caption, page 6 and Section 6.1, page 7
+- metric: mscoco_images_per_test_split
+  value: 1000.0
+  where: Section 6.1, page 7
+- metric: mscoco_captions_per_test_split
+  value: 5000.0
+  where: Section 6.1, page 7
+- metric: order_embedding_validation_eval_interval_iterations
+  value: 300.0
+  where: Section 6.1, page 7
+- metric: skipthought_encoder_dim
+  value: 2400.0
+  where: Section 6.3, page 8
+- metric: skipthought_checkpoint_interval_iterations
+  value: 50000.0
+  where: Section 6.3, page 8
+- metric: skipthought_training_iterations
+  value: 1000000.0
+  where: Table 3 caption, page 8
+- metric: skipthought_long_training_iterations
+  value: 1700000.0
+  where: Table 3 caption, page 8 (approximately, 1 month)
+- metric: iam_ondb_handwriting_sequences
+  value: 12179.0
+  where: Section 6.5, page 9
+- metric: iam_ondb_writers
+  value: 221.0
+  where: Section 6.5, page 9
+- metric: iam_ondb_avg_line_length
+  value: 700.0
+  where: Section 6.5, page 9 (approximate)
+- metric: handwriting_lstm_layers
+  value: 3.0
+  where: Section 6.5, page 9
+- metric: handwriting_lstm_cells_per_layer
+  value: 400.0
+  where: Section 6.5, page 9
+- metric: handwriting_output_mixture_components
+  value: 20.0
+  where: Section 6.5, page 9 (bivariate Gaussian mixture)
+- metric: handwriting_window_vector_size
+  value: 57.0
+  where: Section 6.5, page 9
+- metric: handwriting_window_mixture_components
+  value: 10.0
+  where: Section 6.5, page 9 (size-30 parameter vector)
+- metric: handwriting_total_weights
+  value: 3700000.0
+  where: Section 6.5, page 9 (approximately 3.7M)
+- metric: handwriting_minibatch_size
+  value: 8.0
+  where: Section 6.5 and Figure 5 caption, page 9
+- metric: handwriting_sequence_length
+  value: 500.0
+  where: Figure 5 caption, page 9
+- metric: cnn_qa_sentences_per_passage
+  value: 4.0
+  where: Section 6.2, page 7
+- metric: num_experimental_tasks
+  value: 6.0
+  where: Section 6, page 6
+plan:
+  data_tier: A
+  compute_tier: 2
+  kind_of_test: re_implementation
+  target_claims:
+  - oe_ln_speedup_60pct
+  - draw_test_nll_ln
+  - draw_test_nll_baseline
+  - t2_sym_cap_r1
+  - t2_sym_cap_r10
+  - t2_sym_cap_meanr
+  - t2_sym_img_r1
+  - t2_sym_img_r10
+  substitutions:
+    mscoco: 'UNAVAILABLE: claims depending on this source are Untested'
+    bookcorpus: 'UNAVAILABLE: claims depending on this source are Untested'
+    cnn_qa_corpus: 'UNAVAILABLE: claims depending on this source are Untested'
+    iam_ondb: 'UNAVAILABLE: claims depending on this source are Untested'
+    downstream_sentence_eval_sets: 'UNAVAILABLE: claims depending on this source are
+      Untested'
+  tolerances: {}
+  success_criteria: 'CPU only. Claimed effect: layer normalization speeds convergence.
+    Reproduce on a small model the paper class covers (MLP on MNIST or a small GRU
+    on a sequence task) with/without LN at matched steps; report train loss and test
+    accuracy at fixed step counts. || Match on every headline claim within its derived
+    tolerance; all leakage tests pass; kind of test = re_implementation; data tier
+    A; compute tier 1. Tier B: same sign, significant, gap inside the substitution''s
+    predicted band.'
+  budget:
+    spec: 10
+    setup: 20
+    build: 25
+    run: 20
+    verify: 15
+    report: 5
+    hard_kill_minutes: 240
+    max_cost_usd: 150.0
+    run_timeout_s: 900
+  seeds:
+  - 0
+  - 1
+  frozen_hash: 94e8f5277c341a10aed5fd4fb97b945b9a9a5e8d164a943c48b901b202c866e1
+  frozen_at: '2026-09-15T15:57:52.084253+00:00'
