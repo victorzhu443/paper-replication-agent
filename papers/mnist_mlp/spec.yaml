@@ -1,0 +1,68 @@
+paper:
+  title: "Gradient-Based Learning Applied to Document Recognition (MNIST benchmark table row: 2-layer NN, 300 HU, mean square error)"
+  authors: [LeCun, Bottou, Bengio, Haffner]
+  year: 1998
+  track: cs
+  family: train_and_eval
+claims:
+  - id: mnist.mlp300.err
+    where: "Classifier comparison (Fig./Table in Section III and the MNIST page): '2-layer NN, 300 hidden units, mean square error' test error 4.7%. VALUE RECALLED, NOT RE-READ FROM THE PAGE: the reference page was unreachable at spec time; verify before trusting."
+    evidence_page: null
+    metric: test_error
+    units: {period: none, annualized: false, scale: percent}
+    value: 4.7
+    reported_precision: 0.05
+    n_periods: 10000
+    method_variant: default
+    priority: headline
+data:
+  sources:
+    - canonical: mnist
+      description: "MNIST 60k train / 10k test, via torchvision"
+  splits: {train: 60000, test: 10000}
+method:
+  model: {type: mlp, hidden: 300, layers: 2}
+  evaluation: [test_error]
+  eval_protocol: {metric: "test error rate, percent", split: test, n_runs: "unstated (single run in 1998)"}
+  variants:
+    default: {loss: mse, optimizer: sgd, epochs: 20, hidden: 300}
+ambiguities:
+  - id: A1
+    question: "Loss function: the 1998 row says mean square error; modern default is cross-entropy"
+    config_key: loss
+    options: [mse, cross_entropy]
+    default: mse
+    source: paper_text
+    reason: "the table row is labelled 'mean square error'"
+    sensitivity: high
+  - id: A2
+    question: "Optimizer and schedule (paper: stochastic gradient descent with a hand-tuned global learning rate)"
+    config_key: optimizer
+    options: [sgd, adam]
+    default: sgd
+    source: paper_text
+    reason: "Adam did not exist in 1998"
+    sensitivity: high
+  - id: A3
+    question: "Number of training epochs (the paper reports ~20 passes)"
+    config_key: epochs
+    options: ["10", "20", "40"]
+    default: "20"
+    source: paper_text
+    reason: "Section III: 'about 20 passes through the training set'"
+    sensitivity: medium
+  - id: A4
+    question: "Hidden layer size"
+    config_key: hidden
+    options: ["300", "1000"]
+    default: "300"
+    source: paper_text
+    reason: "row label"
+    sensitivity: low
+descriptive_stats:
+  - {metric: n_examples, value: 10000, where: "test set size"}
+plan:
+  data_tier: A
+  compute_tier: 1
+  kind_of_test: re_implementation
+  seeds: [0, 1, 2]
