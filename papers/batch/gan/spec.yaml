@@ -1,0 +1,725 @@
+paper:
+  title: Generative Adversarial Nets
+  authors:
+  - Ian J. Goodfellow
+  - Jean Pouget-Abadie
+  - Mehdi Mirza
+  - Bing Xu
+  - David Warde-Farley
+  - Sherjil Ozair
+  - Aaron Courville
+  - Yoshua Bengio
+  year: 2014
+  arxiv_id: '1406.2661'
+  version: v1
+  track: cs
+  family: train_and_eval
+claims:
+- id: gan_equilibrium_d_loss
+  where: 'Derived from Theorem 1, Section 4.1 (page 5): C(G) = -log 4 at pg = pdata.
+    The paper does NOT print a discriminator loss; log 4 = 1.3863 is the negation
+    of the reported value function optimum (i.e. the summed binary-cross-entropy of
+    D at equilibrium). Analytic, not an empirical measurement.'
+  evidence_page: 5
+  metric: discriminator_loss
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 1.3863
+  reported_precision: 5.0e-05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: mnist_mlp_gan_cpu
+  priority: headline
+- id: gan_equilibrium_value_function
+  where: 'Theorem 1, Section 4.1, page 5: global minimum of the virtual training criterion
+    C(G) equals -log 4 (analytic result, not a measured quantity)'
+  evidence_page: 5
+  metric: value_function_at_optimum
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: -1.3863
+  reported_precision: 5.0e-05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: mnist_mlp_gan_cpu
+  priority: secondary
+- id: gan_equilibrium_d_output_half
+  where: 'Figure 1(d) caption (page 3): D(x) = 1/2 at pg = pdata; also stated in the
+    Abstract (page 1) and in the Theorem 1 proof (page 5). Analytic equilibrium value.'
+  evidence_page: 3
+  metric: mean_discriminator_output
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.5
+  reported_precision: 0.0005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: mnist_mlp_gan_cpu
+  priority: secondary
+- id: adv_nets_mnist_parzen
+  where: 'Table 1 (page 6), row ''Adversarial nets'', column MNIST: 225 +/- 2. Value
+    is mean Parzen-window log-likelihood (nats) of the MNIST test set; the +/- is
+    the standard error of the mean across test examples, not a std across runs/seeds.'
+  evidence_page: 6
+  metric: parzen_log_likelihood
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 225.0
+  reported_precision: 0.5
+  n_periods: 10000
+  reported_std: 2.0
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: mnist_parzen_eval
+  priority: headline
+- id: adv_nets_tfd_parzen
+  where: 'Table 1 (page 6), row ''Adversarial nets'', column TFD: 2057 +/- 26. The
+    +/- is the standard error across dataset folds (sigma cross-validated per fold),
+    not a std across seeds. Number of folds is not stated in the paper.'
+  evidence_page: 6
+  metric: parzen_log_likelihood
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 2057.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: 26.0
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: tfd_parzen_eval
+  priority: secondary
+- id: dbn_mnist_parzen
+  where: 'Table 1 (page 6), row ''DBN [3]'' (Bengio, Mesnil, Dauphin & Rifai 2013a),
+    column MNIST: 138 +/- 2 (+/- = SEM across test examples)'
+  evidence_page: 6
+  metric: parzen_log_likelihood
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 138.0
+  reported_precision: 0.5
+  n_periods: 10000
+  reported_std: 2.0
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: literature_baseline
+  priority: secondary
+- id: dbn_tfd_parzen
+  where: 'Table 1 (page 6), row ''DBN [3]'' (Bengio et al. 2013a), column TFD: 1909
+    +/- 66 (+/- = standard error across folds)'
+  evidence_page: 6
+  metric: parzen_log_likelihood
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 1909.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: 66.0
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: literature_baseline
+  priority: secondary
+- id: scae_mnist_parzen
+  where: 'Table 1 (page 6), row ''Stacked CAE [3]'' (Bengio et al. 2013a), column
+    MNIST: 121 +/- 1.6 (+/- = SEM across test examples)'
+  evidence_page: 6
+  metric: parzen_log_likelihood
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 121.0
+  reported_precision: 0.5
+  n_periods: 10000
+  reported_std: 1.6
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: literature_baseline
+  priority: secondary
+- id: scae_tfd_parzen
+  where: 'Table 1 (page 6), row ''Stacked CAE [3]'' (Bengio et al. 2013a), column
+    TFD: 2110 +/- 50 (bolded best TFD entry; +/- = standard error across folds)'
+  evidence_page: 6
+  metric: parzen_log_likelihood
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 2110.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: 50.0
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: literature_baseline
+  priority: secondary
+- id: gsn_mnist_parzen
+  where: 'Table 1 (page 6), row ''Deep GSN [6]'' (Bengio, Thibodeau-Laufer, Alain
+    & Yosinski 2014b), column MNIST: 214 +/- 1.1 (+/- = SEM across test examples)'
+  evidence_page: 6
+  metric: parzen_log_likelihood
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 214.0
+  reported_precision: 0.5
+  n_periods: 10000
+  reported_std: 1.1
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: literature_baseline
+  priority: secondary
+- id: gsn_tfd_parzen
+  where: 'Table 1 (page 6), row ''Deep GSN [6]'' (Bengio et al. 2014b), column TFD:
+    1890 +/- 29 (+/- = standard error across folds)'
+  evidence_page: 6
+  metric: parzen_log_likelihood
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 1890.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: 29.0
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: literature_baseline
+  priority: secondary
+data:
+  sources:
+  - canonical: mnist
+    description: MNIST handwritten digits [LeCun et al. 1998, ref 23]; Table 1 caption
+      states the MNIST comparison is against models of the real-valued (rather than
+      binary) version of the dataset.
+    substitute: torchvision
+  - canonical: toronto_face_database
+    description: Toronto Face Database (TFD) [Susskind et al. 2010, ref 28]; restricted-access
+      dataset used for the second Table 1 column. Not reproducible without a license.
+      Fold structure/number of folds not stated in the paper.
+    substitute: null
+  - canonical: cifar10
+    description: CIFAR-10 [Krizhevsky & Hinton 2009, ref 21]; used only for qualitative
+      sample figures (Figure 2c fully connected model, Figure 2d convolutional discriminator
+      / deconvolutional generator). No quantitative claim.
+    substitute: torchvision
+  universe:
+    primary_dataset: MNIST (real-valued, 28x28 grayscale, 784-dim flattened)
+    classes: 10 digit classes; GAN training is unconditional (labels unused; the paper
+      lists conditional models only as future work)
+    secondary_datasets: TFD (restricted) and CIFAR-10 (qualitative only); not attempted
+      under the CPU/15-min budget
+  frequency: none
+  preprocessing:
+    scaling: paper is silent; assumed pixel values scaled to [0,1] (real-valued, non-binarized
+      version per Table 1 caption) — see ambiguity input_scaling
+    flattening: images flattened to 784-dim vectors for MLP G and D (implied by MLP
+      architecture; not printed in paper)
+    augmentation: none stated in the paper
+    noise_input: noise supplied only to the bottommost layer of the generator (Section
+      5, page 5)
+    dropout: dropout applied in training the discriminator net (Section 5, page 5);
+      rate not stated
+  splits:
+    train: MNIST training set; split sizes not stated in the paper (50,000 if a 10,000-image
+      validation split is carved out; 60,000 otherwise) — see ambiguity validation_split
+    validation: a validation set is used to cross-validate the Parzen window sigma
+      (Section 5 / Table 1 caption); its size is not stated in the paper
+    test: MNIST test set; Table 1 MNIST number is mean log-likelihood on the test
+      set with SEM across examples. Test set size (10,000) is standard MNIST, not
+      printed in the paper.
+    tfd_protocol: per-fold evaluation on TFD; a different sigma cross-validated using
+      each fold's validation set, mean log-likelihood computed per fold, standard
+      error computed across folds (Table 1 caption)
+method:
+  signal: 'Adversarial (minimax) training: a generator MLP G maps noise z~p_z to data
+    space while a discriminator MLP D estimates the probability a sample came from
+    the data; the optimal discriminator is D*(x)=pdata/(pdata+pg) and at the game''s
+    equilibrium pg = pdata, D(x) = 1/2 and C(G) = -log 4.'
+  model:
+    generator: Multilayer perceptron; paper (Section 5) states only that generator
+      nets used a MIXTURE of rectifier linear and sigmoid activations, with noise
+      entering only the bottommost layer. Layer count/widths are NOT in the paper
+      (released code goodfeli/adversarial uses z(100) -> 1200 -> 1200 -> 784 for MNIST).
+    discriminator: 'Multilayer perceptron with maxout [10] activations and a single
+      scalar (sigmoid) output; dropout [17] applied during training. Widths/maxout
+      piece count NOT in the paper (released code: 784 -> maxout(240 units, 5 pieces)
+      -> maxout(240,5) -> 1).'
+    noise_prior: p_z(z) is not specified for the experiments; Figure 1's 1-D pedagogical
+      illustration says z is sampled uniformly 'in this case'. Algorithm 1 writes
+      the noise prior as p_g(z) (typo for p_z). Distribution/support assumed uniform
+      — see ambiguity noise_prior_dist.
+    k_discriminator_steps: 'k = 1 (Algorithm 1 caption, page 4: ''We used k = 1, the
+      least expensive option, in our experiments'')'
+    optimizer: minibatch stochastic gradient descent with momentum ('The gradient-based
+      updates can use any standard gradient-based learning rule. We used momentum
+      in our experiments.', Algorithm 1 note, page 4). Learning rate, momentum coefficient,
+      minibatch size m, and number of iterations are not printed.
+    generator_objective: Algorithm 1 prints descending the gradient of log(1 - D(G(z)));
+      Section 3 (page 3) states that in practice G is instead trained to maximize
+      log D(G(z)) for stronger early gradients (same fixed point)
+    loss: binary cross-entropy; D ascends the gradient of (1/m)Sum[log D(x) + log(1
+      - D(G(z)))], i.e. maximizes E[log D(x)] + E[log(1 - D(G(z)))]
+  evaluation:
+  - Discriminator value function / summed BCE tracked over training; check it approaches
+    log 4 = 1.3863 (equivalently V = -log 4) at equilibrium — this empirical diagnostic
+    is NOT defined in the paper, only the analytic value is
+  - Mean discriminator output on real and on generated batches; check both approach
+    0.5 (analytic equilibrium, Figure 1d)
+  - Gaussian Parzen-window log-likelihood of the test set under samples from G, with
+    sigma cross-validated on the validation set (Table 1, page 6) — the paper's only
+    quantitative evaluation; attempted only if it fits the compute budget
+  - Generated samples scored by a small digit classifier trained in the same script
+    on MNIST (mean max-softmax confidence, predicted-class entropy) — harness-invented
+    proxy, NOT present in the paper
+  - Qualitative sample grids (Figure 2a, page 6) and z-space linear interpolation
+    (Figure 3, page 7)
+  eval_protocol:
+    parzen_kernel: Gaussian Parzen window fit to samples generated by G (isotropic
+      kernel assumed; the paper says only 'Gaussian Parzen window')
+    parzen_sigma: single sigma obtained by cross-validation on the validation set
+      (Section 5 / Table 1 caption); for TFD a different sigma per fold
+    parzen_uncertainty_mnist: standard error of the mean computed across test examples
+      (Table 1 caption)
+    parzen_uncertainty_tfd: standard error computed across dataset folds, with sigma
+      cross-validated per fold (Table 1 caption)
+    n_generated_samples_for_parzen: not stated in paper (author code uses 10,000 samples)
+    parzen_log_base: not stated; natural log (nats) assumed
+    equilibrium_check_window: averaging window for the discriminator-loss diagnostic
+      is not defined by the paper (the paper gives only the analytic value -log 4)
+    reported_split: 'test set for the MNIST log-likelihood (Table 1 caption: ''mean
+      log-likelihood of samples on test set'')'
+  variants:
+    mnist_mlp_gan_cpu:
+      dataset: MNIST real-valued
+      scale: reduced-scale CPU run, <=15 minutes; smaller hidden widths / fewer steps
+        than the (unreported) paper configuration
+      generator_objective: non-saturating (maximize log D(G(z))), per Section 3
+      k: 1
+      optimizer: SGD with momentum (paper); hyperparameters not printed
+      metrics: discriminator loss vs log 4, mean D output on real and fake, classifier-confidence
+        proxy on samples
+    mnist_parzen_eval:
+      dataset: MNIST test set (10,000 examples; size not printed in paper)
+      estimator: Gaussian Parzen window over generated samples; sigma cross-validated
+        on validation set
+      uncertainty: SEM across test examples
+      status: untested unless a Parzen estimate fits in the CPU time budget
+    tfd_parzen_eval:
+      dataset: Toronto Face Database, per-fold evaluation (number of folds not stated)
+      estimator: Gaussian Parzen window; sigma cross-validated on each fold's validation
+        set
+      uncertainty: standard error across folds
+      status: not reproducible (restricted dataset)
+    literature_baseline:
+      source: 'numbers copied into Table 1 from prior work: DBN and Stacked CAE from
+        ref [3] (Bengio, Mesnil, Dauphin & Rifai 2013a), Deep GSN from ref [6] (Bengio,
+        Thibodeau-Laufer, Alain & Yosinski 2014b)'
+      status: external reference values, not re-run here
+baselines:
+- DBN [3] (Bengio et al. 2013a) — Parzen-window log-likelihood, Table 1
+- Stacked CAE [3] (Bengio et al. 2013a) — Parzen-window log-likelihood, Table 1
+- Deep GSN [6] (Bengio et al. 2014b) — Parzen-window log-likelihood, Table 1
+ambiguities:
+- id: lr_schedule
+  question: What learning-rate schedule is used for G and D?
+  config_key: lr_schedule
+  options:
+  - constant
+  - cosine
+  - step
+  - as_paper
+  default: constant
+  source: conventions_kb
+  reason: Paper only says 'we used momentum'; no learning rate or schedule is printed
+    (author code uses an exponentially decaying LR with momentum saturation). A constant
+    LR is the conventional minimal-assumption choice for a short CPU run.
+  sensitivity: high
+- id: augmentation
+  question: Is any train-time data augmentation applied to MNIST?
+  config_key: augmentation
+  options:
+  - none
+  - standard
+  - as_paper
+  default: none
+  source: conventions_kb
+  reason: No augmentation is mentioned anywhere in the paper for the MNIST GAN; unconditional
+    MNIST GAN training conventionally uses raw images.
+  sensitivity: low
+- id: input_scaling
+  question: How are MNIST pixel values scaled before being fed to D?
+  config_key: input_scaling
+  options:
+  - unit_interval_0_1
+  - minus1_to_1
+  - raw_0_255
+  default: unit_interval_0_1
+  source: conventions_kb
+  reason: The paper states no preprocessing; it only notes (Table 1 caption) that
+    the real-valued rather than binary version of MNIST is used. [0,1] scaling matches
+    a sigmoid generator output.
+  sensitivity: medium
+- id: validation_split
+  question: How is the validation set (used for Parzen sigma cross-validation) carved
+    out of MNIST?
+  config_key: validation_split
+  options:
+  - 50000_train_10000_val
+  - 60000_train_no_val
+  - 59000_train_1000_val
+  default: 50000_train_10000_val
+  source: conventions_kb
+  reason: The paper says sigma was cross-validated on 'the validation set' but never
+    states split sizes; the Pylearn2-era convention is the last 10,000 MNIST training
+    images.
+  sensitivity: medium
+- id: batch_vs_steps
+  question: When the batch size is reduced for the CPU budget, do we hold epochs or
+    optimizer steps fixed?
+  config_key: batch_vs_steps
+  options:
+  - epochs
+  - steps
+  default: steps
+  source: conventions_kb
+  reason: The paper states neither batch size nor number of epochs/iterations; reduced-scale
+    reruns should hold the number of update steps fixed so the adversarial game reaches
+    a comparable stage.
+  sensitivity: medium
+- id: mixed_precision
+  question: Train in fp32 or with mixed precision?
+  config_key: mixed_precision
+  options:
+  - fp32
+  - amp
+  default: fp32
+  source: conventions_kb
+  reason: CPU-only run; the 2014 paper used Theano float32. No precision statement
+    in the paper.
+  sensitivity: low
+- id: split
+  question: Is the reported log-likelihood computed on validation or test data?
+  config_key: split
+  options:
+  - validation
+  - test
+  default: test
+  source: paper_text
+  reason: 'Table 1 caption: ''the mean log-likelihood of samples on test set'', with
+    sigma cross-validated on the validation set.'
+  sensitivity: medium
+- id: generator_loss_form
+  question: Use the minimax generator loss log(1-D(G(z))) of Algorithm 1 or the non-saturating
+    maximize log D(G(z)) recommended in Section 3?
+  config_key: generator_objective
+  options:
+  - minimax
+  - non_saturating
+  default: non_saturating
+  source: paper_text
+  reason: Section 3 (page 3) states equation 1 may not provide sufficient gradient
+    and that in practice G is trained to maximize log D(G(z)); Algorithm 1 (page 4)
+    still prints the minimax form, so the paper is internally ambiguous about which
+    was actually run.
+  sensitivity: high
+- id: latent_dim
+  question: Dimensionality of the noise vector z?
+  config_key: latent_dim
+  options:
+  - '10'
+  - '64'
+  - '100'
+  - '128'
+  default: '100'
+  source: conventions_kb
+  reason: Not printed in the paper; the released code (goodfeli/adversarial) uses
+    a 100-dim noise vector for MNIST.
+  sensitivity: medium
+- id: noise_prior_dist
+  question: Is p_z uniform or Gaussian, and over what support?
+  config_key: noise_prior
+  options:
+  - uniform_-1_1
+  - uniform_0_1
+  - gaussian_0_1
+  default: uniform_-1_1
+  source: conventions_kb
+  reason: The paper never specifies p_z for the experiments; the Figure 1 caption's
+    'in this case uniformly' refers to the 1-D pedagogical illustration, not the MNIST
+    run. Author code uses a uniform prior.
+  sensitivity: medium
+- id: architecture_widths
+  question: Hidden layer widths of G and D (and number of maxout pieces in D)?
+  config_key: architecture
+  options:
+  - paper_code_1200_1200_G_240x5_D
+  - reduced_cpu_256_256_G_256_D
+  - reduced_cpu_512_512_G_512_D
+  default: reduced_cpu_512_512_G_512_D
+  source: guess
+  reason: 'The paper states only that G uses a mixture of rectifier and sigmoid activations
+    and D uses maxout; widths appear only in the released code (G: 1200-1200, D: maxout
+    240 units x 5 pieces). Full widths likely exceed the 15-minute CPU budget, so
+    a reduced width is used.'
+  sensitivity: high
+- id: network_depth
+  question: How many hidden layers do G and D have?
+  config_key: n_hidden_layers
+  options:
+  - 1_hidden_layer_each
+  - 2_hidden_layers_each
+  - 3_hidden_layers_each
+  default: 2_hidden_layers_each
+  source: conventions_kb
+  reason: The paper says only 'multilayer perceptron' and gives no depth; the released
+    MNIST code uses two hidden layers in both G and D.
+  sensitivity: medium
+- id: batch_size
+  question: Minibatch size m in Algorithm 1?
+  config_key: batch_size
+  options:
+  - '64'
+  - '100'
+  - '128'
+  default: '100'
+  source: conventions_kb
+  reason: Algorithm 1 calls it m without a value; author code uses 100 for MNIST.
+  sensitivity: medium
+- id: optimizer_hparams
+  question: Learning rate and momentum coefficient for the SGD updates?
+  config_key: optimizer
+  options:
+  - sgd_momentum_lr0.1_mom0.5
+  - sgd_momentum_lr0.01_mom0.9
+  - adam_lr2e-4_beta1_0.5
+  default: sgd_momentum_lr0.1_mom0.5
+  source: conventions_kb
+  reason: Paper says only 'We used momentum in our experiments'. Author code uses
+    SGD with momentum starting around 0.5; Adam(2e-4, 0.5) is the modern convention
+    and is listed as an alternative (departs from the paper's stated rule).
+  sensitivity: high
+- id: dropout_rate
+  question: Dropout probability in the discriminator (and whether it is applied to
+    D's input as well as hidden units)?
+  config_key: dropout_rate
+  options:
+  - '0.2'
+  - '0.5'
+  - '0.0'
+  default: '0.5'
+  source: conventions_kb
+  reason: Section 5 states dropout was applied in training D but gives no rate or
+    placement; 0.5 on hidden units is the Hinton et al. (2012b, ref 17) default cited
+    by the paper.
+  sensitivity: medium
+- id: k_steps
+  question: Number of discriminator steps per generator step?
+  config_key: k
+  options:
+  - '1'
+  - '2'
+  - '5'
+  default: '1'
+  source: paper_text
+  reason: 'Algorithm 1 caption (page 4): ''We used k = 1, the least expensive option,
+    in our experiments.'''
+  sensitivity: medium
+- id: training_budget
+  question: How many training iterations/epochs are run?
+  config_key: train_steps
+  options:
+  - fit_15min_cpu_budget
+  - 10_epochs
+  - 50_epochs
+  - as_paper
+  default: fit_15min_cpu_budget
+  source: guess
+  reason: The paper never states the number of training iterations or epochs; the
+    harness constrains total wall-clock to 15 minutes on CPU.
+  sensitivity: high
+- id: weight_init
+  question: Weight initialization scheme?
+  config_key: weight_init
+  options:
+  - glorot_uniform
+  - normal_0.02
+  - uniform_irange_0.005
+  default: glorot_uniform
+  source: conventions_kb
+  reason: Not stated in the paper; Pylearn2-era code used small uniform irange initializations.
+  sensitivity: low
+- id: equilibrium_metric_definition
+  question: How exactly is the 'discriminator loss near log 4' diagnostic computed?
+  config_key: equilibrium_metric
+  options:
+  - sum_bce_real_plus_fake_last_window
+  - mean_bce_real_plus_fake_full_epoch
+  - value_function_on_heldout_batch
+  default: sum_bce_real_plus_fake_last_window
+  source: guess
+  reason: The paper gives only the analytic equilibrium value -log 4 for V(D*,G) (Theorem
+    1); it defines no empirical estimator, averaging window, or evaluation split for
+    it.
+  sensitivity: high
+- id: sample_quality_classifier
+  question: What classifier scores the generated samples for 'digit-like with high
+    confidence'?
+  config_key: eval_classifier
+  options:
+  - small_mlp_trained_in_script
+  - small_cnn_trained_in_script
+  - pretrained_external
+  default: small_cnn_trained_in_script
+  source: guess
+  reason: This proxy check is not in the paper at all; it is introduced by the replication
+    harness, so architecture, training length and confidence threshold must be fixed
+    by us.
+  sensitivity: medium
+- id: parzen_n_samples
+  question: How many generated samples are used to fit the Parzen window, and over
+    what sigma grid is cross-validation run?
+  config_key: parzen_config
+  options:
+  - 10000_samples_logspace_sigma_grid
+  - 1000_samples_coarse_grid
+  - skip_parzen
+  default: skip_parzen
+  source: conventions_kb
+  reason: 'Paper states sigma was cross-validated on the validation set but gives
+    neither sample count nor grid (author code: 10,000 samples). Under a 15-minute
+    CPU budget the Parzen estimate is marked untested.'
+  sensitivity: high
+- id: parzen_log_base
+  question: Is the Parzen log-likelihood reported in nats (natural log) or bits (log2)?
+  config_key: parzen_log_base
+  options:
+  - natural_log_nats
+  - log2_bits
+  default: natural_log_nats
+  source: conventions_kb
+  reason: Table 1 does not state the log base; the Breuleux et al. (2011) procedure
+    it cites reports natural-log likelihoods.
+  sensitivity: low
+- id: n_seeds
+  question: How many random seeds are run and how are results aggregated?
+  config_key: n_seeds
+  options:
+  - '1'
+  - '3'
+  - '5'
+  default: '3'
+  source: guess
+  reason: The paper reports no seed variability for the GAN training itself (the +/-
+    values in Table 1 are SEM across test examples or across TFD folds), so the seed
+    protocol is ours to choose.
+  sensitivity: medium
+- id: data_range_activation
+  question: Generator output activation / target pixel range?
+  config_key: output_activation
+  options:
+  - sigmoid_0_1
+  - tanh_-1_1
+  default: sigmoid_0_1
+  source: guess
+  reason: Section 5 says only that the generator used a MIXTURE of rectifier and sigmoid
+    activations; it does not say the output layer is the sigmoid. Sigmoid output with
+    [0,1] targets is the conventional reading for real-valued MNIST.
+  sensitivity: low
+descriptive_stats:
+- metric: mnist_test_examples
+  value: 10000.0
+  where: Table 1 caption (page 6) implies SEM across MNIST test examples; the count
+    10,000 is the standard MNIST test set size and is NOT printed in the paper
+- metric: mnist_train_examples
+  value: 60000.0
+  where: Standard MNIST training set size; NOT printed in the paper
+- metric: mnist_input_dimension
+  value: 784.0
+  where: 28x28 flattened MNIST images; NOT printed in the paper
+- metric: table1_models_compared
+  value: 4.0
+  where: 'Table 1, page 6: DBN [3], Stacked CAE [3], Deep GSN [6], Adversarial nets'
+- metric: k_discriminator_steps
+  value: 1.0
+  where: Algorithm 1 caption, page 4
+- metric: adv_nets_mnist_minus_gsn_gap
+  value: 11.0
+  where: 'Derived from Table 1, page 6: 225 (Adversarial nets) - 214 (Deep GSN); the
+    gap itself is not printed in the paper'
+plan:
+  data_tier: A
+  compute_tier: 2
+  kind_of_test: re_implementation
+  target_claims:
+  - gan_equilibrium_d_loss
+  - gan_equilibrium_value_function
+  - gan_equilibrium_d_output_half
+  - adv_nets_mnist_parzen
+  - adv_nets_tfd_parzen
+  - dbn_mnist_parzen
+  - dbn_tfd_parzen
+  - scae_mnist_parzen
+  substitutions:
+    toronto_face_database: 'UNAVAILABLE: claims depending on this source are Untested'
+  tolerances:
+    adv_nets_mnist_parzen: 4.5
+    adv_nets_tfd_parzen: 52.5
+    dbn_mnist_parzen: 4.5
+    dbn_tfd_parzen: 132.5
+    scae_mnist_parzen: 3.7
+    scae_tfd_parzen: 100.5
+    gsn_mnist_parzen: 2.7
+    gsn_tfd_parzen: 58.5
+  success_criteria: 'CPU only. MLP GAN on MNIST (<=15 min). Checkable: D loss near
+    log 4 = 1.386 at equilibrium and samples classified as digits with high confidence
+    by a small classifier trained in the same script; Table 1 Parzen log-likelihood
+    225 is Untested unless a Parzen estimate fits in time. || Match on every headline
+    claim within its derived tolerance; all leakage tests pass; kind of test = re_implementation;
+    data tier A; compute tier 1. Tier B: same sign, significant, gap inside the substitution''s
+    predicted band.'
+  budget:
+    spec: 10
+    setup: 20
+    build: 25
+    run: 20
+    verify: 15
+    report: 5
+    hard_kill_minutes: 240
+    max_cost_usd: 150.0
+    run_timeout_s: 1200
+  seeds:
+  - 0
+  frozen_hash: 169bb97ab4c3c5096b338270a72805fcc9a18deb3a6366538a5f97f1c6d169df
+  frozen_at: '2026-09-15T15:58:18.960384+00:00'
