@@ -1,0 +1,1115 @@
+paper:
+  title: 'Direct Preference Optimization: Your Language Model is Secretly a Reward
+    Model'
+  authors:
+  - Rafael Rafailov
+  - Archit Sharma
+  - Eric Mitchell
+  - Stefano Ermon
+  - Christopher D. Manning
+  - Chelsea Finn
+  year: 2023
+  arxiv_id: '2305.18290'
+  version: v3
+  track: cs
+  family: train_and_eval
+claims:
+- id: tldr_dpo_winrate_temp0
+  where: Section 6.2 text ('DPO has a win rate of approximately 61% at a temperature
+    of 0.0'), consistent with Figure 2 (right), DPO curve at sampling temperature
+    0.0; GPT-4 (C) judge vs test-set reference summaries
+  evidence_page: 9
+  metric: win_rate
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 61.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: dpo_tldr
+  priority: headline
+- id: tldr_ppo_winrate_temp0
+  where: Section 6.2 text ('exceeding the performance of PPO at 57% at its optimal
+    sampling temperature of 0.0'), consistent with Figure 2 (right), PPO curve at
+    temperature 0.0
+  evidence_page: 9
+  metric: win_rate
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 57.0
+  reported_precision: 0.5
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ppo_tldr
+  priority: secondary
+- id: dpo_vs_ppo_human_headtohead
+  where: 'Section 6.2 text: DPO samples (temp 0.25) preferred 58% of the time over
+    PPO samples (temp 0) by human raters; same number as Table 2 ''Human win %'',
+    column DPO'
+  evidence_page: 9
+  metric: win_rate
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 58.0
+  reported_precision: 0.5
+  n_periods: 272
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: human_eval_dpo_vs_ppo
+  priority: headline
+- id: ood_dpo_temp0
+  where: Table 1, row DPO, column 'Temp 0' (GPT-4 win rate vs ground-truth CNN/DailyMail
+    summaries)
+  evidence_page: 9
+  metric: win_rate
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.36
+  reported_precision: 0.005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: dpo_ood_cnndm
+  priority: headline
+- id: ood_dpo_temp025
+  where: Table 1, row DPO, column 'Temp 0.25'
+  evidence_page: 9
+  metric: win_rate
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.31
+  reported_precision: 0.005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: dpo_ood_cnndm
+  priority: secondary
+- id: ood_ppo_temp0
+  where: Table 1, row PPO, column 'Temp 0'
+  evidence_page: 9
+  metric: win_rate
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.26
+  reported_precision: 0.005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ppo_ood_cnndm
+  priority: secondary
+- id: ood_ppo_temp025
+  where: Table 1, row PPO, column 'Temp 0.25'
+  evidence_page: 9
+  metric: win_rate
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.23
+  reported_precision: 0.005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: ppo_ood_cnndm
+  priority: secondary
+- id: tbl2_gpt4S_win_dpo
+  where: Table 2, row 'GPT-4 (S) win %', column DPO (DPO temp 0.25 vs PPO temp 0)
+  evidence_page: 10
+  metric: win_rate
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 47.0
+  reported_precision: 0.5
+  n_periods: 272
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: gpt4_S_judge
+  priority: secondary
+- id: tbl2_gpt4C_win_dpo
+  where: Table 2, row 'GPT-4 (C) win %', column DPO (DPO temp 0.25 vs PPO temp 0)
+  evidence_page: 10
+  metric: win_rate
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 54.0
+  reported_precision: 0.5
+  n_periods: 272
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: gpt4_C_judge
+  priority: secondary
+- id: tbl2_human_win_dpo
+  where: Table 2, row 'Human win %', column DPO
+  evidence_page: 10
+  metric: win_rate
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 58.0
+  reported_precision: 0.5
+  n_periods: 272
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: human_eval_dpo_vs_ppo
+  priority: secondary
+- id: tbl2_gpt4S_win_sft
+  where: Table 2, row 'GPT-4 (S) win %', column SFT (SFT temp 0.25 vs PPO temp 0)
+  evidence_page: 10
+  metric: win_rate
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 27.0
+  reported_precision: 0.5
+  n_periods: 122
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: gpt4_S_judge
+  priority: secondary
+- id: tbl2_gpt4C_win_sft
+  where: Table 2, row 'GPT-4 (C) win %', column SFT
+  evidence_page: 10
+  metric: win_rate
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 32.0
+  reported_precision: 0.5
+  n_periods: 122
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: gpt4_C_judge
+  priority: secondary
+- id: tbl2_human_win_sft
+  where: Table 2, row 'Human win %', column SFT
+  evidence_page: 10
+  metric: win_rate
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 43.0
+  reported_precision: 0.5
+  n_periods: 122
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: human_eval_sft_vs_ppo
+  priority: secondary
+- id: tbl2_gpt4S_win_ppo1
+  where: Table 2, row 'GPT-4 (S) win %', column PPO-1 (PPO temp 1.0 vs PPO temp 0)
+  evidence_page: 10
+  metric: win_rate
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 13.0
+  reported_precision: 0.5
+  n_periods: 199
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: gpt4_S_judge
+  priority: secondary
+- id: tbl2_gpt4C_win_ppo1
+  where: Table 2, row 'GPT-4 (C) win %', column PPO-1
+  evidence_page: 10
+  metric: win_rate
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 12.0
+  reported_precision: 0.5
+  n_periods: 199
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: gpt4_C_judge
+  priority: secondary
+- id: tbl2_human_win_ppo1
+  where: Table 2, row 'Human win %', column PPO-1
+  evidence_page: 10
+  metric: win_rate
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 17.0
+  reported_precision: 0.5
+  n_periods: 199
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: human_eval_ppo1_vs_ppo
+  priority: secondary
+- id: tbl2_gpt4S_h_agree_dpo
+  where: Table 2, row 'GPT-4 (S)-H agree', column DPO
+  evidence_page: 10
+  metric: agreement_rate
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 70.0
+  reported_precision: 0.5
+  n_periods: 272
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: gpt4_S_judge
+  priority: secondary
+- id: tbl2_gpt4C_h_agree_dpo
+  where: Table 2, row 'GPT-4 (C)-H agree', column DPO
+  evidence_page: 10
+  metric: agreement_rate
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 67.0
+  reported_precision: 0.5
+  n_periods: 272
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: gpt4_C_judge
+  priority: secondary
+- id: tbl2_hh_agree_dpo
+  where: Table 2, row 'H-H agree', column DPO (raw human-human agreement on DPO vs
+    PPO-0 comparisons)
+  evidence_page: 10
+  metric: agreement_rate
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 65.0
+  reported_precision: 0.5
+  n_periods: 272
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: human_eval_dpo_vs_ppo
+  priority: secondary
+- id: tbl2_gpt4S_h_agree_sft
+  where: Table 2, row 'GPT-4 (S)-H agree', column SFT
+  evidence_page: 10
+  metric: agreement_rate
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 77.0
+  reported_precision: 0.5
+  n_periods: 122
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: gpt4_S_judge
+  priority: secondary
+- id: tbl2_gpt4C_h_agree_sft
+  where: Table 2, row 'GPT-4 (C)-H agree', column SFT
+  evidence_page: 10
+  metric: agreement_rate
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 79.0
+  reported_precision: 0.5
+  n_periods: 122
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: gpt4_C_judge
+  priority: secondary
+- id: tbl2_gpt4S_h_agree_ppo1
+  where: Table 2, row 'GPT-4 (S)-H agree', column PPO-1
+  evidence_page: 10
+  metric: agreement_rate
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 86.0
+  reported_precision: 0.5
+  n_periods: 199
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: gpt4_S_judge
+  priority: secondary
+- id: tbl2_gpt4C_h_agree_ppo1
+  where: Table 2, row 'GPT-4 (C)-H agree', column PPO-1
+  evidence_page: 10
+  metric: agreement_rate
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 85.0
+  reported_precision: 0.5
+  n_periods: 199
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: gpt4_C_judge
+  priority: secondary
+- id: tbl2_hh_agree_ppo1
+  where: Table 2, row 'H-H agree', column PPO-1
+  evidence_page: 10
+  metric: agreement_rate
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 87.0
+  reported_precision: 0.5
+  n_periods: 199
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: human_eval_ppo1_vs_ppo
+  priority: secondary
+data:
+  sources:
+  - canonical: imdb
+    description: IMDb movie review dataset (Maas et al. 2011); prompts are review
+      prefixes of length 2-8 tokens; preference pairs generated synthetically with
+      the siebert/sentiment-roberta-large-english classifier as ground-truth reward
+      (4 completions sampled per prefix, 6 preference pairs per prefix, 25000 prefixes)
+      (Sec. 6 p.7; App. C.1 p.20)
+    substitute: null
+  - canonical: tldr_reddit_summarization
+    description: 'Reddit TL;DR summarization dataset (Volske et al. 2017) with human
+      preference comparisons gathered by Stiennon et al. 2020; SFT model = CarperAI/openai_summarize_tldr_sft
+      (GPT-J-6B), trained with the TRLX framework. Note: the preference data were
+      gathered on samples from a different, but similarly-trained, SFT model (Sec.
+      6 p.7)'
+    substitute: null
+  - canonical: anthropic_hh
+    description: Anthropic Helpful and Harmless dialogue dataset (Bai et al. 2022),
+      170k dialogues; evaluation on the subset of the test split with one step of
+      human-assistant interaction (Sec. 6 p.7, Sec. 6.2 p.9)
+    substitute: null
+  - canonical: cnn_dailymail
+    description: CNN/DailyMail news articles, test split; used only as an out-of-distribution
+      evaluation set for policies trained on Reddit TL;DR (Sec. 6.3 p.9)
+    substitute: null
+  - canonical: synthetic_preference_pairs
+    description: 'NOT from the paper: CPU-scale substitute for the replication; synthetic
+      prompt/completion pairs where the preferred completion carries a target attribute
+      (analogous to the IMDb positive-sentiment construction), enabling a ground-truth
+      scorer and exact win-rate computation without GPT-4'
+    substitute: null
+  universe:
+    sentiment_prompts: 25000 IMDb review prefixes of length 2-8 tokens (App. C.1)
+    sentiment_pairs: 4 sampled completions per prefix -> 6 preference pairs per prefix
+      (implies 150000 pairs; total count is derived, not printed in the paper)
+    dialogue_subset: Anthropic-HH test split restricted to single-turn (one step of
+      human-assistant interaction); number of evaluation prompts not stated
+    summarization_eval_set: TL;DR test split posts; baseline = human-written reference
+      summaries in the test set; number of evaluation posts not stated
+    ood_eval_set: CNN/DailyMail test split news articles; baseline = ground-truth
+      summaries; number of articles not stated
+    cpu_replication_universe: 'NOT from paper: small synthetic prompt set with a deterministic
+      attribute-based preference labeler; tiny GPT-2 or small transformer policy'
+  frequency: none
+  preprocessing:
+    sft_sentiment: 'gpt2-large fine-tuned on IMDB reviews. Paper is internally inconsistent:
+      Sec. 6 (p.7) says ''until convergence'' on the train split; App. C.1 (p.20)
+      says ''for 1 epoch'' on a subset. See ambiguity sft_imdb_stopping.'
+    preference_label_rule_sentiment: pair labeled yw > yl iff p(positive|x,yw) > p(positive|x,yl)
+      under siebert/sentiment-roberta-large-english (Sec. 6 p.7)
+    reference_policy_summarization: pi_ref = pi_SFT (CarperAI/openai_summarize_tldr_sft,
+      GPT-J-6B)
+    reference_policy_dialogue: no SFT model available; pi_ref = Preferred-FT of pre-trained
+      Pythia-2.8B on chosen completions only (Sec. 4 p.5, Sec. 6.2 p.9)
+    reward_model_baselines: RLHF reward model (for PPO / Best-of-N in the sentiment
+      setting) initialized from gpt2-large, trained 3 epochs on the preference data,
+      checkpoint with highest validation accuracy kept (App. C.1). Training details
+      of the reward model used for TL;DR/HH Best-of-N are not stated.
+    loss_masking: NOT stated in the paper; the objective is written over pi(y|x),
+      so log-probabilities are assumed to be taken over completion tokens only, conditioned
+      on the prompt (see ambiguity prompt_masking)
+  splits:
+    summarization: train on TL;DR preference train split; report win rates on TL;DR
+      test split
+    dialogue: train on Anthropic-HH train preferences; report win rates on the single-turn
+      subset of the test split
+    sentiment: train on generated IMDb preference pairs; evaluate average ground-truth
+      reward and sequence-level KL on a set of held-out test prompts every 100 training
+      steps until convergence (Sec. 6.1)
+    human_study: 150 DPO(0.25)-vs-PPO(0) comparisons with 2 raters each (275 judgments
+      collected; one volunteer did not respond), 100 PPO(1.0)-vs-PPO(0) comparisons
+      with 2 raters each (200 judgments), 125 SFT(0.25)-vs-PPO(0) comparisons with
+      1 rater each; tie judgments (~1%) discarded; Table 2 reports N = 272 / 199 /
+      122 after discards (App. D.3 p.27)
+method:
+  signal: 'Direct Preference Optimization: maximum-likelihood fit of a Bradley-Terry
+    preference model reparameterized through the policy, L_DPO = -E_{(x,yw,yl)} log
+    sigma( beta*(log pi_theta(yw|x) - log pi_ref(yw|x)) - beta*(log pi_theta(yl|x)
+    - log pi_ref(yl|x)) ) (Eq. 7, p.4); implicit reward r_hat(x,y) = beta * log(pi_theta(y|x)/pi_ref(y|x))'
+  model:
+    loss: -F.logsigmoid(beta * (pi_logratios - ref_logratios)) with pi_logratios =
+      logp_pi(yw)-logp_pi(yl), ref_logratios = logp_ref(yw)-logp_ref(yl) (Appendix
+      B code, p.20)
+    implicit_reward: rewards = beta * (pi_logps - ref_logps).detach() (Appendix B
+      code, p.20)
+    beta_default: '0.1 (Appendix B: ''unless noted otherwise'')'
+    beta_tldr: 0.5 (Appendix B; applies to TL;DR summarization only)
+    optimizer: RMSprop (Appendix B)
+    learning_rate: 1e-06 (Appendix B)
+    lr_warmup: linear warmup 0 -> 1e-6 over 150 steps; no post-warmup decay stated
+      (Appendix B)
+    batch_size: 64 (Appendix B); the paper does not say whether this counts preference
+      pairs or sequences (see ambiguity batch_unit)
+    policy_init: pi_theta initialized to pi_SFT (Sec. 3 p.4); where no SFT model exists
+      (Anthropic-HH), Preferred-FT on chosen completions provides both pi_ref and
+      the starting point (Sec. 4 p.5, Sec. 6.2 p.9)
+    reference_model: frozen pi_ref, no gradients (reference log-probs enter the loss
+      as a constant offset)
+    base_models_paper: GPT-2-large (IMDb sentiment), GPT-J-6B SFT (TL;DR), Pythia-2.8B
+      (Anthropic-HH); models up to 6B parameters
+    base_model_cpu_replication: 'NOT from paper: gpt2 (124M) or a small randomly-initialized
+      transformer, trained on CPU on synthetic preferences'
+    sentiment_sweep: 'Sec. 6.1 (p.8): policy-conservativeness sweep with beta in {0.05,
+      0.1, 1, 5} (DPO), target KL in {3,6,9,12} (PPO), alpha in {0.05,0.1,0.5,1} (unlikelihood),
+      random seeds for Preferred-FT; 22 runs in total'
+  evaluation:
+  - 'Unit test: DPO loss value on a hand-computed example (known logprobs, known beta)
+    matches closed form -log sigmoid(beta*((lp_w - lr_w) - (lp_l - lr_l))) (Eq. 7
+    / Appendix B code)'
+  - 'Unit test: gradient direction increases logp(yw) and decreases logp(yl), with
+    per-example weight sigma(r_hat(yl)-r_hat(yw)) (Sec. 4 gradient expression, p.5)'
+  - Implicit reward margin beta*[(logpi_w - logref_w) - (logpi_l - logref_l)] increases
+    over training steps (diagnostic, not a paper-reported number)
+  - Held-out preference accuracy (fraction of test pairs with positive implicit reward
+    margin) above 50% (diagnostic, not reported in the paper)
+  - Win rate of the DPO policy vs the baseline policy (GPT-4 (C) judge in the paper;
+    ground-truth attribute scorer in the CPU replication)
+  - Reward vs sequence-level KL(pi || pi_ref) frontier traced over the beta grid (paper
+    Figure 2 left); the paper claims DPO dominates the PPO frontier but does not claim
+    win rate is monotone in beta
+  - Out-of-distribution win rate on CNN/DailyMail with the 'news article' prompt variant
+    (Table 1)
+  eval_protocol:
+    judge_paper: gpt-4-0314 with the summarization (S) and (C) prompts and the dialogue
+      helpfulness prompt (Appendix C.2, p.20-21)
+    main_judge_prompt: GPT-4 (C) prompt is used for the main results in Section 6.2
+      (stated in Sec. 6.4)
+    presentation_order: order of the two summaries/responses randomized for every
+      evaluation (Appendix C.2)
+    baseline_summarization: human-written reference summaries in the TL;DR test set
+      (Sec. 6 Evaluation)
+    baseline_dialogue: the preferred (chosen) response in the Anthropic-HH test set
+      (Sec. 6 Evaluation)
+    baseline_table2: for Table 2 and the human study, every method is compared against
+      PPO sampled at temperature 0 (greedy)
+    summarization_temperature_grid: 0.0, 0.25, 0.5, 0.75, 1.0 (Figure 2 right)
+    dialogue_temperature_grid: 0.25, 0.5, 0.75, 1.0 (Figure 3 left); no temperature-0
+      point is shown for dialogue
+    temp0_decoding: temperature 0 corresponds to greedy decoding (paper refers to
+      'greedily-sampled PPO'); top-p/top-k settings are not stated
+    eval_cadence_sentiment: evaluate every 100 training steps until convergence (Sec.
+      6.1)
+    kl_definition: sequence-level KL(pi || pi_ref) = sum of per-timestep KL divergences
+      (Sec. 6.1 footnote 3)
+    tie_handling_human: human judgments labeled as ties (~1% of judgments) are ignored
+      (Appendix D.3); handling of ties for automated scorers is not specified (see
+      ambiguity tie_handling)
+    ood_prompt_edit: same GPT-4 (C) prompt with 'forum post' replaced by 'news article'
+      (Sec. 6.3)
+    judge_cpu_replication: 'NOT from paper: ground-truth attribute classifier / scoring
+      function replaces GPT-4; win rate = fraction of prompts where the DPO sample
+      scores higher than the baseline sample, with ties handled per the tie_handling
+      config'
+  variants:
+    dpo_tldr:
+      beta: 0.5
+      base_model: GPT-J-6B SFT (CarperAI/openai_summarize_tldr_sft)
+      sampling_temperature: 0.0 for the 61% headline number; full sweep 0.0-1.0 in
+        Figure 2 right
+      judge: GPT-4 (C) prompt, gpt-4-0314
+      baseline: reference summaries in TL;DR test set
+    ppo_tldr:
+      algorithm: PPO with a reward model learned from the preference data; sentiment-setting
+        modifications (reward normalization, tuned hyperparameters) also used for
+        learned-reward PPO
+      base_model: same GPT-J-6B SFT model as DPO and Preferred-FT
+      sampling_temperature: 0.0 (its optimal temperature)
+      judge: GPT-4 (C) prompt
+      baseline: reference summaries in TL;DR test set
+    dpo_ood_cnndm:
+      policy: DPO policy trained on Reddit TL;DR (no additional unlabeled prompts)
+      eval_set: CNN/DailyMail test split news articles
+      sampling_temperature: 0 and 0.25 (best TL;DR temperatures)
+      judge: GPT-4 (C) prompt with 'news article' substitution
+      baseline: ground-truth summaries in CNN/DailyMail
+    ppo_ood_cnndm:
+      policy: PPO policy trained on Reddit TL;DR (uses additional unlabeled TL;DR
+        prompts)
+      eval_set: CNN/DailyMail test split news articles
+      sampling_temperature: 0 and 0.25
+      judge: GPT-4 (C) prompt with 'news article' substitution
+    gpt4_S_judge:
+      prompt: 'GPT-4 (S) simple prompt: which summary better summarizes the important
+        points'
+      comparison_baseline: PPO at temperature 0
+      eval_subset: the same TL;DR comparisons used in the human study (Sec. 6.4);
+        the exact denominator used for the GPT-4 win % is not stated
+    gpt4_C_judge:
+      prompt: 'GPT-4 (C) concise prompt: better summary without unimportant or irrelevant
+        details, precise and concise'
+      comparison_baseline: PPO at temperature 0
+      eval_subset: the same TL;DR comparisons used in the human study (Sec. 6.4)
+    human_eval_dpo_vs_ppo:
+      judges: human volunteers, 2 per comparison
+      pairing: DPO temp 0.25 vs PPO temp 0
+      n_judgments: 150 comparisons, 275 judgments collected; N = 272 reported in Table
+        2 after discarding ties
+    human_eval_sft_vs_ppo:
+      judges: human volunteers, 1 per comparison
+      pairing: SFT temp 0.25 vs PPO temp 0
+      n_judgments: 125 comparisons sampled; N = 122 reported in Table 2 after discarding
+        ties
+    human_eval_ppo1_vs_ppo:
+      judges: human volunteers, 2 per comparison
+      pairing: PPO temp 1.0 vs PPO temp 0
+      n_judgments: 100 comparisons, 200 judgments collected; N = 199 reported in Table
+        2 after discarding ties
+    dpo_sentiment_frontier:
+      beta_grid: '{0.05, 0.1, 1, 5}'
+      base_model: gpt2-large SFT on IMDB
+      metric: average ground-truth reward (siebert sentiment classifier) vs sequence-level
+        KL to pi_ref, evaluated every 100 steps on test prompts
+    cpu_synthetic_dpo:
+      base_model: 'NOT from paper: gpt2 (124M) or tiny transformer, CPU only'
+      data: 'NOT from paper: synthetic preference pairs with target-attribute preferred
+        completions'
+      beta_grid: 'NOT from paper: {0.05, 0.1, 0.5} to trace a reward/KL frontier on
+        CPU'
+      metrics: implicit reward margin trajectory, held-out preference accuracy, win
+        rate vs pi_ref under a ground-truth scorer, reward vs sequence-level KL
+baselines:
+- PPO with learned reward model (reward normalization + tuned hyperparameters in the
+  sentiment setting)
+- PPO-GT (PPO with ground-truth sentiment reward, authors' implementation)
+- PPO-GT (TRL off-the-shelf implementation, TRL library hyperparameters)
+- Preferred-FT (supervised fine-tuning on the chosen completion yw, from the SFT model
+  in sentiment/summarization or a generic LM in dialogue)
+- SFT model
+- Unlikelihood training with optional coefficient alpha in [0,1] on the unlikelihood
+  term (sentiment only; excluded from summarization/dialogue because it degenerates,
+  Appendix C.3 and Table 3)
+- Best of N (N up to 128 for dialogue, up to 256 shown for summarization in Figure
+  4) reranked by a reward model learned from the preference data
+- GPT-J zero-shot prompting (summarization)
+- Pythia-2.8B 2-shot prompting (dialogue)
+- Reference/chosen completions in the dataset (evaluation baseline, not a trained
+  method)
+ambiguities:
+- id: lr_schedule
+  question: What learning-rate schedule is used after the 150-step warmup?
+  config_key: lr_schedule
+  options:
+  - constant
+  - cosine
+  - step
+  - as_paper
+  default: constant
+  source: conventions_kb
+  reason: Appendix B (p.20) states only linear warmup from 0 to 1e-6 over 150 steps
+    with RMSprop; no post-warmup decay is mentioned, so constant 1e-6 is the minimal
+    reading.
+  sensitivity: medium
+- id: augmentation
+  question: Is any train-time data augmentation applied to the preference pairs?
+  config_key: augmentation
+  options:
+  - none
+  - standard
+  - as_paper
+  default: none
+  source: conventions_kb
+  reason: Paper never mentions augmentation; LM preference fine-tuning conventionally
+    uses raw text pairs with no augmentation.
+  sensitivity: low
+- id: batch_vs_steps
+  question: When the batch size is reduced for CPU-scale training, do we hold epochs
+    or optimizer steps fixed?
+  config_key: batch_vs_steps
+  options:
+  - epochs
+  - steps
+  default: steps
+  source: conventions_kb
+  reason: Paper fixes batch size 64 and reports progress in fine-tuning steps (Figure
+    3 right, x-axis up to 3300 steps); reduced-scale runs should hold step counts,
+    not epochs.
+  sensitivity: medium
+- id: batch_unit
+  question: Does the batch size of 64 count preference pairs or individual sequences
+    (i.e., 32 pairs)?
+  config_key: batch_unit
+  options:
+  - pairs
+  - sequences
+  default: pairs
+  source: conventions_kb
+  reason: Appendix B says 'batch size of 64' without specifying; the reference code
+    indexes B sequence log-probs with T pair indices, leaving the unit undetermined.
+    Affects effective gradient noise and step count.
+  sensitivity: medium
+- id: mixed_precision
+  question: Is mixed precision used for training and log-prob computation?
+  config_key: mixed_precision
+  options:
+  - fp32
+  - amp
+  default: fp32
+  source: conventions_kb
+  reason: Paper does not state precision; CPU-only replication forces fp32, which
+    also makes the loss unit test exactly reproducible.
+  sensitivity: low
+- id: split
+  question: Are reported win rates computed on validation or test data?
+  config_key: split
+  options:
+  - validation
+  - test
+  default: test
+  source: paper_text
+  reason: Section 6.2 and Table 1 explicitly report win rates on the TL;DR, Anthropic-HH
+    and CNN/DailyMail test splits.
+  sensitivity: medium
+- id: logprob_aggregation
+  question: Are sequence log-probabilities summed over completion tokens or averaged
+    per token?
+  config_key: logprob_aggregation
+  options:
+  - sum
+  - mean
+  default: sum
+  source: conventions_kb
+  reason: The Appendix B code treats pi_logps as one scalar per sequence with no length
+    normalization, and the objective is written over sequence probabilities pi(y|x);
+    averaging would rescale the effective beta and the reward margin.
+  sensitivity: high
+- id: prompt_masking
+  question: Do the log-probabilities include prompt tokens or only completion tokens?
+  config_key: prompt_masking
+  options:
+  - completion_only
+  - prompt_and_completion
+  default: completion_only
+  source: conventions_kb
+  reason: Paper writes pi(y|x), implying conditioning on the prompt; masking of prompt
+    tokens is not stated explicitly but is standard.
+  sensitivity: high
+- id: reference_model_source
+  question: How is pi_ref constructed when no SFT model exists (e.g., Anthropic-HH)?
+  config_key: reference_model
+  options:
+  - frozen_sft_copy
+  - preferred_ft_on_chosen
+  - base_pretrained
+  default: preferred_ft_on_chosen
+  source: paper_text
+  reason: 'Section 4 (p.5) and Section 6.2 (p.9): pi_ref = pi_SFT when available,
+    otherwise pi_ref = argmax_pi E[log pi(yw|x)] (Preferred-FT on chosen completions),
+    which is then frozen. For TL;DR/sentiment, use frozen_sft_copy.'
+  sensitivity: high
+- id: beta_value
+  question: Which beta is used for the main CPU-scale run, and which grid for the
+    frontier check?
+  config_key: beta
+  options:
+  - '0.1'
+  - '0.5'
+  - '{0.05,0.1,0.5}'
+  - '{0.05,0.1,1,5}'
+  default: '0.1'
+  source: paper_text
+  reason: 'Appendix B: beta=0.1 unless noted; beta=0.5 only for TL;DR summarization.
+    Section 6.1 sweeps beta in {0.05,0.1,1,5} for the sentiment frontier; a smaller
+    3-point grid suffices on CPU.'
+  sensitivity: high
+- id: optimizer_and_lr
+  question: Which optimizer and learning rate for a tiny CPU model?
+  config_key: optimizer
+  options:
+  - rmsprop_1e-6_as_paper
+  - rmsprop_1e-5
+  - adamw_1e-5
+  default: rmsprop_1e-6_as_paper
+  source: paper_text
+  reason: Appendix B states RMSprop with lr 1e-6 and 150-step warmup; 1e-6 may be
+    too small to move a small model within a CPU budget, so an explicit lr override
+    may be needed and must be recorded.
+  sensitivity: high
+- id: train_steps
+  question: How many DPO optimizer steps are run?
+  config_key: max_steps
+  options:
+  - '500'
+  - '1000'
+  - 3300_as_figure3
+  - until_val_plateau
+  default: '1000'
+  source: guess
+  reason: Paper shows dialogue win-rate evolution up to ~3300 steps (Figure 3 right)
+    and says sentiment runs go 'until convergence', but never states a stopping rule
+    or step budget for the summarization/dialogue DPO runs.
+  sensitivity: medium
+- id: max_sequence_length
+  question: What maximum prompt/completion length is used for training and generation?
+  config_key: max_length
+  options:
+  - '64'
+  - '128'
+  - '256'
+  - '512'
+  default: '128'
+  source: guess
+  reason: Paper only refers to a 'maximum generation length' in sample tables (Tables
+    7, 9) without giving a number, and never states truncation lengths for training.
+  sensitivity: medium
+- id: eval_sampling_temperature
+  question: At which sampling temperature are win-rate generations produced?
+  config_key: eval_temperature
+  options:
+  - '0.0'
+  - '0.25'
+  - '0.7'
+  - '1.0'
+  - sweep_0_to_1
+  default: '0.0'
+  source: paper_text
+  reason: The headline TL;DR numbers (DPO 61%, PPO 57%) and the Table 1 'Temp 0' column
+    are at temperature 0 (greedy); temperature 0.25 is additionally needed for the
+    Table 1 second column and the human-study pairing. Figure 2 right sweeps 0.0-1.0.
+  sensitivity: medium
+- id: decoding_params
+  question: What nucleus/top-k truncation is used when sampling completions for evaluation?
+  config_key: decoding_params
+  options:
+  - pure_temperature_sampling
+  - top_p_0.95
+  - top_k_50
+  default: pure_temperature_sampling
+  source: guess
+  reason: The paper reports only sampling temperatures; no top-p or top-k setting
+    is given anywhere.
+  sensitivity: medium
+- id: n_eval_prompts
+  question: How many test prompts are used to compute each win rate (TL;DR, Anthropic-HH,
+    CNN/DailyMail) and the sentiment reward/KL points?
+  config_key: n_eval_prompts
+  options:
+  - '100'
+  - '256'
+  - '512'
+  - full_test_split
+  default: '256'
+  source: guess
+  reason: The paper never states the number of evaluation prompts for the GPT-4 win
+    rates or for the sentiment 'set of test prompts'; only the human-study comparison
+    counts (150/100/125) are given.
+  sensitivity: medium
+- id: gpt4_winrate_denominator
+  question: Are the Table 2 GPT-4 win percentages computed over unique comparisons
+    (150/100/125) or over the same judgment set as the humans (272/199/122)?
+  config_key: gpt4_winrate_denominator
+  options:
+  - unique_comparisons
+  - human_judgment_set
+  default: human_judgment_set
+  source: guess
+  reason: Table 2 lists a single 'N respondents' row per column, but GPT-4 judges
+    each comparison once; the paper does not say which denominator the GPT-4 win %
+    and the GPT-4-H agreement rows use.
+  sensitivity: medium
+- id: sft_imdb_stopping
+  question: Is the IMDb SFT model trained for exactly 1 epoch on a subset, or 'until
+    convergence' on the full train split?
+  config_key: sft_stopping
+  options:
+  - one_epoch_subset
+  - until_convergence_full_train
+  default: one_epoch_subset
+  source: paper_text
+  reason: Section 6 (p.7) says GPT-2-large is fine-tuned 'until convergence' on the
+    IMDB train split, while Appendix C.1 (p.20) says supervised fine-tuning on a subset
+    for 1 epoch; the two statements conflict and the appendix is the more operational
+    one.
+  sensitivity: medium
+- id: judge_substitute
+  question: What replaces GPT-4 as the win-rate judge in a CPU-only replication?
+  config_key: judge
+  options:
+  - gpt4_0314
+  - ground_truth_attribute_classifier
+  - implicit_reward_margin
+  default: ground_truth_attribute_classifier
+  source: conventions_kb
+  reason: Paper uses gpt-4-0314 (Appendix C.2), which requires API access; the IMDb
+    setting shows the authors themselves accept a ground-truth classifier reward when
+    one is available.
+  sensitivity: high
+- id: tie_handling
+  question: How are ties in the win-rate comparison counted?
+  config_key: tie_handling
+  options:
+  - discard
+  - count_half
+  - count_loss
+  default: discard
+  source: paper_text
+  reason: Appendix D.3 states human tie judgments (~1%) are ignored; the paper says
+    nothing about ties for an automated scorer, so the same discard rule is carried
+    over by default.
+  sensitivity: low
+- id: n_seeds
+  question: How many random seeds are averaged for the reported CPU-scale numbers?
+  config_key: n_seeds
+  options:
+  - '1'
+  - '3'
+  - '5'
+  default: '3'
+  source: conventions_kb
+  reason: Paper does not report seed counts or seed variance for the main win rates
+    (figure error bars appear to be over evaluation prompts, not seeds).
+  sensitivity: medium
+- id: synthetic_preference_rule
+  question: How are synthetic preference pairs constructed for the CPU replication?
+  config_key: preference_rule
+  options:
+  - classifier_prob_comparison
+  - deterministic_attribute_rule
+  - noisy_bt_sampling
+  default: deterministic_attribute_rule
+  source: conventions_kb
+  reason: Paper's IMDb construction compares classifier p(positive) between two sampled
+    completions (Sec. 6, p.7); a deterministic target-attribute rule is the cheapest
+    faithful analogue on CPU.
+  sensitivity: high
+- id: gradient_clipping
+  question: Is gradient clipping applied?
+  config_key: grad_clip
+  options:
+  - none
+  - '1.0'
+  - '10.0'
+  default: none
+  source: guess
+  reason: Not mentioned anywhere in the paper or Appendix B.
+  sensitivity: low
+- id: dropout_and_weight_decay
+  question: Are dropout/weight decay used during DPO fine-tuning?
+  config_key: regularization
+  options:
+  - none
+  - model_default
+  - weight_decay_0.01
+  default: model_default
+  source: guess
+  reason: Unstated; the implicit KL constraint against pi_ref is the only regularizer
+    described.
+  sensitivity: low
+descriptive_stats:
+- metric: imdb_prefix_count
+  value: 25000.0
+  where: Appendix C.1, p.20
+- metric: completions_sampled_per_prefix
+  value: 4.0
+  where: Appendix C.1, p.20
+- metric: preference_pairs_per_prefix
+  value: 6.0
+  where: Appendix C.1, p.20
+- metric: total_sentiment_preference_pairs
+  value: 150000.0
+  where: 'Derived (not printed in paper): 25000 prefixes x 6 pairs (Appendix C.1,
+    p.20)'
+- metric: imdb_prefix_length_min_tokens
+  value: 2.0
+  where: Appendix C.1, p.20
+- metric: imdb_prefix_length_max_tokens
+  value: 8.0
+  where: Appendix C.1, p.20
+- metric: anthropic_hh_dialogues
+  value: 170000.0
+  where: Section 6 Tasks, p.7
+- metric: sentiment_sweep_runs
+  value: 22.0
+  where: Section 6.1, p.8
+- metric: eval_interval_steps
+  value: 100.0
+  where: Section 6.1, p.8
+- metric: beta_default
+  value: 0.1
+  where: Appendix B, p.20
+- metric: beta_tldr
+  value: 0.5
+  where: Appendix B, p.20
+- metric: batch_size
+  value: 64.0
+  where: Appendix B, p.20
+- metric: learning_rate
+  value: 1.0e-06
+  where: Appendix B, p.20
+- metric: warmup_steps
+  value: 150.0
+  where: Appendix B, p.20
+- metric: sft_epochs_imdb
+  value: 1.0
+  where: Appendix C.1, p.20 (conflicts with 'until convergence' in Section 6, p.7)
+- metric: reward_model_epochs_imdb
+  value: 3.0
+  where: Appendix C.1, p.20
+- metric: ppo_batch_samples_per_step
+  value: 1024.0
+  where: Appendix C.1, p.20 (authors' PPO implementation in the sentiment setting)
+- metric: best_of_n_plateau_dialogue
+  value: 128.0
+  where: Section 6.2, p.9 ('Best of N plateaus at 128 completions'); Figure 4 caption
+    p.23 says performance plateaus after roughly 64-128 samples
+- metric: human_raters
+  value: 25.0
+  where: Appendix D.3, p.27 (one volunteer completed late and was excluded from the
+    analysis)
+- metric: judgments_per_rater
+  value: 25.0
+  where: Appendix D.3, p.27
+- metric: dpo_vs_ppo0_comparisons
+  value: 150.0
+  where: Appendix D.3, p.27
+- metric: ppo1_vs_ppo0_comparisons
+  value: 100.0
+  where: Appendix D.3, p.27
+- metric: sft_vs_ppo0_comparisons
+  value: 125.0
+  where: Appendix D.3, p.27
+- metric: dpo_ppo_judgments_collected
+  value: 275.0
+  where: Appendix D.3, p.27
+- metric: ppo_ppo_judgments_collected
+  value: 200.0
+  where: Appendix D.3, p.27
+- metric: n_respondents_dpo
+  value: 272.0
+  where: Table 2, row 'N respondents', column DPO, p.10
+- metric: n_respondents_sft
+  value: 122.0
+  where: Table 2, row 'N respondents', column SFT, p.10
+- metric: n_respondents_ppo1
+  value: 199.0
+  where: Table 2, row 'N respondents', column PPO-1, p.10
+- metric: human_tie_percentage
+  value: 1.0
+  where: Appendix D.3, p.27 ('about 1% of judgments')
+- metric: max_model_size_billions_params
+  value: 6.0
+  where: Section 2, p.2 and Section 7, p.10
+plan:
+  data_tier: C
+  compute_tier: 2
+  kind_of_test: mechanics_only
+  target_claims:
+  - tldr_dpo_winrate_temp0
+  - tldr_ppo_winrate_temp0
+  - dpo_vs_ppo_human_headtohead
+  - ood_dpo_temp0
+  - ood_dpo_temp025
+  - ood_ppo_temp0
+  - ood_ppo_temp025
+  - tbl2_gpt4S_win_dpo
+  substitutions:
+    imdb: 'UNAVAILABLE: claims depending on this source are Untested'
+    tldr_reddit_summarization: 'UNAVAILABLE: claims depending on this source are Untested'
+    anthropic_hh: 'UNAVAILABLE: claims depending on this source are Untested'
+    cnn_dailymail: 'UNAVAILABLE: claims depending on this source are Untested'
+    synthetic_preference_pairs: 'UNAVAILABLE: claims depending on this source are
+      Untested'
+  tolerances: {}
+  success_criteria: 'CPU only. Implement the DPO loss (Eq. 7) exactly and unit-test
+    it on a hand-computed case. Then a tiny policy (gpt2 or a small transformer) on
+    a synthetic preference set (e.g. prefer completions with a target attribute);
+    checkable: implicit reward margin rises and win-rate vs the reference model exceeds
+    50% and grows with beta. || Match on every headline claim within its derived tolerance;
+    all leakage tests pass; kind of test = mechanics_only; data tier C; compute tier
+    1. Tier B: same sign, significant, gap inside the substitution''s predicted band.'
+  budget:
+    spec: 10
+    setup: 20
+    build: 25
+    run: 20
+    verify: 15
+    report: 5
+    hard_kill_minutes: 240
+    max_cost_usd: 150.0
+    run_timeout_s: 1200
+  seeds:
+  - 0
+  frozen_hash: 23296a3175be78418de799f0991498bed6d6a352248e9824df946e82ecda1603
+  frozen_at: '2026-09-15T16:14:39.787483+00:00'
