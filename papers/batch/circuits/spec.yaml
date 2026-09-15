@@ -1,0 +1,811 @@
+paper:
+  title: A Mathematical Framework for Transformer Circuits
+  authors:
+  - Nelson Elhage
+  - Neel Nanda
+  - Catherine Olsson
+  - Tom Henighan
+  - Nicholas Joseph
+  - Ben Mann
+  - Amanda Askell
+  - Yuntao Bai
+  - Anna Chen
+  - Tom Conerly
+  - Nova DasSarma
+  - Dawn Drain
+  - Deep Ganguli
+  - Zac Hatfield-Dodds
+  - Danny Hernandez
+  - Andy Jones
+  - Jackson Kernion
+  - Liane Lovitt
+  - Kamal Ndousse
+  - Dario Amodei
+  - Tom Brown
+  - Jack Clark
+  - Jared Kaplan
+  - Sam McCandlish
+  - Chris Olah
+  year: 2021
+  arxiv_id: null
+  version: Transformer Circuits Thread, Dec 22 2021 (with follow-up summary and composition-diagram
+    correction added ~Feb 2023)
+  track: cs
+  family: train_and_eval
+claims:
+- id: c_copying_heads_10_of_12
+  where: 'Section ''Detecting Copying Behavior'' (inside ''One-Layer Attention-Only
+    Transformers''), text below the histogram of per-head OV eigenvalue positivity:
+    ''It appears that 10 out of 12 heads are significantly copying! (This agrees with
+    qualitative inspection of the expanded weights.)''. NOTE: the text does not name
+    the model; the section context is one-layer attention-only models and the head
+    count of 12 matches the n_heads=12 / d_head=64 configuration.'
+  evidence_page: null
+  metric: count_of_copying_heads
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 10.0
+  reported_precision: 0.5
+  n_periods: 12
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: one_layer_12head_64
+  priority: headline
+- id: c_kcomposition_layer0_heads
+  where: 'Section ''Analyzing a Two-Layer Model'', caption of the Q/K/V-composition
+    diagram: ''In practice, for this model, there is only significant K-composition,
+    and only with one layer 0 head.'' (This is the diagram the authors later flag
+    as buggy; see the ''Correction'' note.)'
+  evidence_page: null
+  metric: count_of_layer0_heads_with_significant_k_composition
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 1.0
+  reported_precision: 0.5
+  n_periods: 12
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: two_layer_12head_64_composition_buggy
+  priority: secondary
+- id: c_kcomposition_extra_heads_corrected
+  where: 'Comments & Replications, ''Correction: Attention Head Composition Diagram''
+    / ''Effect of Bug'': after correcting the Frobenius-norm identity bug, ''The main
+    addition is that two of the induction heads also rely on a head which attends
+    to the last several tokens, rather than just the previous token.'''
+  evidence_page: null
+  metric: count_of_induction_heads_composing_with_extra_layer0_head
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 2.0
+  reported_precision: 0.5
+  n_periods: 12
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: two_layer_12head_64_composition_corrected
+  priority: secondary
+data:
+  sources:
+  - canonical: custom_text_corpus
+    description: 'Training corpus for the toy attention-only language models: ''The
+      training dataset is as described in Kaplan et al.'' (Technical Details / Model
+      Details). No other training detail (size, mixture, token budget) is given; corpus
+      is proprietary and not publicly released.'
+    substitute: null
+  - canonical: synthetic_repeated_random_tokens
+    description: Evaluation sequence built by sampling tokens uniformly at random
+      from the ~50k vocabulary and repeating the sequence three times, with a special
+      <START> token placed at the start (section 'Function of Induction Heads' and
+      the random-token attention-pattern figure caption). Per-repeat sequence length
+      is not stated.
+    substitute: null
+  - canonical: natural_text_probe
+    description: 'Qualitative probe text: the first paragraph of ''Harry Potter and
+      the Philosopher''s Stone'', used for the value-weighted attention pattern figures
+      and for the raw attention/logit-effect figure for induction head 1:8.'
+    substitute: null
+  - canonical: model_weights
+    description: Trained weight matrices W_E, W_U, W_Q^h, W_K^h, W_V^h, W_O^h of the
+      zero-, one- and two-layer attention-only models; the copying, QK-matching and
+      composition diagnostics are computed purely from weights (no data required).
+    substitute: null
+  universe:
+    model_family: autoregressive, decoder-only, attention-only transformers (no MLP
+      layers); biases omitted in the analysis formulation
+    layer_counts: 0, 1 and 2 attention layers
+    d_model_rule: d_model = n_heads * d_head (stated for all models)
+    primary_config: n_heads = 12, d_head = 64 (=> d_model = 768) — 'typically' per
+      Technical Details
+    secondary_config: n_heads = 32, d_head = 128 (=> d_model = 4096), described as
+      'one explicitly noted example'
+    context_size: 2048 tokens, dense (non-sparse) attention
+    vocabulary: '~50,000 tokens; tokenizer name not stated. Described properties:
+      leading spaces merged onto words, whitespace collapsed, backslash not merged
+      into text tokens'
+    positional_mechanism: sinusoidal embeddings added immediately before multiplying
+      by W_Q and W_K (similar to Press et al.); positional information is NOT written
+      into the residual stream
+    heads_per_layer_two_layer_model: not explicitly stated for the analyzed two-layer
+      model; inferred as 12 per layer from 'typically n_heads=12'
+  frequency: none (token-level language modeling; a single trained model per configuration
+    is analyzed)
+  preprocessing:
+    tokenization: ~50k-token BPE-style vocabulary, spaces merged onto word starts,
+      whitespace collapsed so indentation is visible in single tokens; exact tokenizer
+      unspecified in paper
+    special_token: a special <START> token is placed at the start of the sequence
+      (induction heads attend to it as a default/null position)
+    layer_norm: the trained models DO apply layer normalization every time they read
+      off the residual stream; for analysis, everything except the variance rescaling
+      is folded into adjacent parameters, and the first attention layer's LN can alternatively
+      be applied to every vector of the embedding matrix and then ignored
+    biases: biases are not considered in the analyzed formulation (a model with biases
+      can be simulated without them by folding them into the weights)
+    weight_products: analysis uses W_OV = W_O W_V and W_QK = W_Q^T W_K, kept in factored
+      (low-rank) form; eigenvalues via lambda_i(AB)=lambda_i(BA); SVD via the factored
+      recipe in 'Working with Low-Rank Matrices'
+  splits:
+    train: language-modeling corpus 'as described in Kaplan et al.'; no split sizes,
+      token budget, or steps reported
+    eval_weights: 'no data split needed: copying / matching / composition statistics
+      are computed from trained weights only'
+    eval_behavioral: illustrative text (Harry Potter first paragraph) and synthetic
+      repeated-random-token sequences; no held-out corpus evaluation is reported
+    validation: not reported
+method:
+  signal: 'Reverse-engineer attention-only transformers by path-expanding the model
+    into end-to-end terms: logits = (Id (x) W_U W_E) + sum_h A^h (x) (W_U W_OV^h W_E)
+    + V-composition (''virtual attention head'') terms; layer-2 attention scores expand
+    into terms of the form A_q (x) A_k (x) W (e.g. Id (x) A^{h_-1} (x) W for the minimal
+    induction head). Diagnostics: (i) eigenvalue-positivity of the expanded OV circuit
+    W_U W_OV^h W_E as a ''copying'' summary statistic; (ii) eigenvalue-positivity
+    of the K-composition QK term as a ''same-token matching'' statistic; (iii) normalized
+    Frobenius composition scores between layer-1 and layer-2 heads with a random-matrix
+    baseline subtracted; (iv) value-weighted attention patterns and per-head logit
+    effects, inspected qualitatively; (v) frozen-attention iterative ablation to measure
+    marginal loss reduction of n-th order (V-composition) terms and of layer-1 vs
+    layer-2 first-order head terms.'
+  model:
+    architecture: 'decoder-only attention-only transformer: token embedding W_E ->
+      n_layers of multi-head attention (each head h(x) = (A^h (x) W_O^h W_V^h) x)
+      -> unembedding W_U'
+    attention: A^h = softmax*(x^T W_Q^{hT} W_K^h x) with autoregressive mask; paper's
+      equations omit any 1/sqrt(d_head) score scaling (see ambiguity amb_attention_scale);
+      dense attention over 2048 context
+    n_layers: 0, 1, 2
+    n_heads: 12 (primary) or 32 (one noted example)
+    d_head: 64 (primary) or 128 (one noted example)
+    d_model: n_heads * d_head = 768 (primary) or 4096 (secondary)
+    mlp: none (attention-only)
+    normalization: LayerNorm at each residual-stream read in the trained models; folded
+      away (except variance scaling) for analysis
+    positional: sinusoidal embeddings added just before W_Q / W_K; not added to the
+      residual stream
+    optimizer: not stated in paper
+    training_steps: not stated in paper
+    batch_size: not stated in paper
+  evaluation:
+  - 'copying score: positivity of the eigenvalue spectrum of the expanded OV circuit
+    W_U W_OV^h W_E per head; the paper states it uses ''the eigenvalue-based summary
+    statistic'' but never writes the formula or a threshold'
+  - histogram over heads of the copying summary statistic; the count of heads described
+    as 'significantly copying' is 10 of 12 in the one-layer model discussed
+  - 'QK ''same-matching'' score: eigenvalue positivity of the Id (x) A^{h_-1} (x)
+    W K-composition term for layer-2 heads; induction heads are reported to lie in
+    the extreme positive corner of the 2D (QK-positivity, OV-positivity) scatter'
+  - 'composition scores: ||W_QK^{h2 T} W_OV^{h1}||_F / (||W_QK^{h2 T}||_F ||W_OV^{h1}||_F)
+    for Q-composition, ||W_QK^{h2} W_OV^{h1}||_F / (||W_QK^{h2}||_F ||W_OV^{h1}||_F)
+    for K-composition, ||W_OV^{h2} W_OV^{h1}||_F / (||W_OV^{h2}||_F ||W_OV^{h1}||_F)
+    for V-composition, with the empirical expected value for random matrices of the
+    same shapes subtracted by default'
+  - value-weighted attention patterns (attention weight scaled by ||v_src^h||) inspected
+    qualitatively on natural text and on a repeated random token sequence; induction
+    heads show off-diagonal stripes shifted one token forward
+  - per-head logit effect (W_U W_O^h r^h_present)_next_token, shown qualitatively
+    for head 1:8
+  - 'n-th order term importance: iterative frozen-attention ablation (run 1 saves
+    attention patterns; run n replaces each head''s residual-stream contribution with
+    the value saved at step n-1) to obtain the marginal loss reduction of n-th order
+    V-composition terms; separately, first-order head terms are split into layer-1
+    vs layer-2 subsets. Results are shown as figures only; no numeric losses are printed
+    in the text'
+  - 'behavioral induction probe: value-weighted attention patterns of the two-layer
+    model on a uniformly-random token sequence repeated three times. NOTE: the paper
+    reports no per-position or per-repetition loss numbers for this probe; any loss-gap
+    metric is a replicator addition'
+  eval_protocol:
+    copying_statistic: eigenvalues of the low-rank product W_U W_OV^h W_E computed
+      efficiently via lambda_i(AB)=lambda_i(BA) at the d_head-dimensional bottleneck
+    copying_baseline: qualitative comparison against the eigenvalue distribution of
+      randomly initialized weights (empirically Ginibre-like; positive/negative symmetric).
+      No numeric threshold is given
+    composition_baseline: subtract the empirical expected composition score for random
+      matrices of the same shapes (distribution, sample count and scale matching unspecified)
+    known_bug: 'the published composition diagram applied a transposed-product identity
+      to the Frobenius norm: instead of ||W_Q^{h2 T} W_K^{h2} W_O^{h1} W_V^{h1}||_F
+      the code computed EITHER ||W_K^{h2} W_O^{h1} W_V^{h1} W_Q^{h2 T}||_F OR ||W_V^{h1}
+      W_Q^{h2 T} W_K^{h2} W_O^{h1}||_F (the correction note does not state which);
+      the analogous error applies to Q- and V-composition. Only this one diagram was
+      affected; the corrected figure shows additional composition'
+    induction_probe: uniformly sampled random tokens from the ~50k vocabulary, sequence
+      repeated three times, with a special <START> token at the start; per-repeat
+      length and number of probe sequences unspecified
+    loss_reporting: ablation results presented as figures; no printed numeric losses
+      or loss differences in the text
+    seeds: not stated; the paper analyzes a single model per configuration ('we reverse
+      engineer a single two-layer model')
+    checkpoint: not stated; diagnostics presumably on the trained model
+  variants:
+    zero_layer:
+      n_layers: 0
+      prediction: T = W_U W_E, whose optimal behavior is to approximate the bigram
+        log-likelihood
+    one_layer_12head_64:
+      n_layers: 1
+      n_heads: 12
+      d_head: 64
+      d_model: 768
+      diagnostic: expanded OV/QK skip-trigram tables; per-head OV eigenvalue plot
+        and copying histogram (source of the 10/12 claim)
+    one_layer_32head_128:
+      n_layers: 1
+      n_heads: 32
+      d_head: 128
+      d_model: 4096
+      diagnostic: large QK/OV entry tables (e.g. head 0:27 bracket/quote matching)
+    two_layer_12head_64_composition_buggy:
+      n_layers: 2
+      n_heads_per_layer: 12 (inferred; not explicitly stated for this model)
+      d_head: 64
+      composition_metric: as originally published, i.e. with the transposed Frobenius-norm
+        identity bug
+    two_layer_12head_64_composition_corrected:
+      n_layers: 2
+      n_heads_per_layer: 12 (inferred)
+      d_head: 64
+      composition_metric: corrected ||W_Q^{h2 T} W_K^{h2} W_O^{h1} W_V^{h1}||_F /
+        (||W_QK^{h2}||_F ||W_OV^{h1}||_F), random-matrix baseline subtracted
+    induction_eval_repeated_random:
+      input: uniformly sampled random tokens, sequence repeated 3x, <START> prepended
+      measurement: value-weighted attention patterns (qualitative in the paper); any
+        per-position loss metric is a replicator addition
+    term_ablation:
+      procedure: freeze attention patterns from a clean run, then iteratively substitute
+        each head's saved output from the previous run to cap path order n; take differences
+        of resulting losses
+      target: V-composition (virtual head) terms only; freezing attention patterns
+        is what restricts the ablation to V-composition
+baselines:
+- zero-layer transformer (bigram-only, W_U W_E)
+- one-layer attention-only transformer (skip-trigram / primitive copying in-context
+  learning; no induction heads, which the paper says only develop with at least two
+  attention layers)
+- randomly initialized weights of the same shapes (Ginibre-like eigenvalue spectrum;
+  expected Frobenius composition score baseline)
+- first-order-only ablated model (direct path + individual head terms, no virtual
+  attention heads)
+- layer-1-heads-only vs layer-2-heads-only first-order term subsets
+ambiguities:
+- id: amb_lr_schedule
+  question: What learning-rate schedule was used to train the toy attention-only models?
+  config_key: lr_schedule
+  options:
+  - constant
+  - cosine
+  - step
+  default: cosine
+  source: conventions_kb
+  reason: The paper references Kaplan et al. only for the training DATASET ('The training
+    dataset is as described in Kaplan et al.'); no optimizer, learning rate, or schedule
+    is stated anywhere. Linear warmup + cosine decay is the standard small-transformer
+    LM convention.
+  sensitivity: medium
+- id: amb_augmentation
+  question: Any train-time data augmentation / sequence perturbation?
+  config_key: augmentation
+  options:
+  - none
+  - standard
+  default: none
+  source: conventions_kb
+  reason: Autoregressive LM pretraining on contiguous token blocks; no augmentation
+    is mentioned anywhere in the paper.
+  sensitivity: low
+- id: amb_batch_vs_steps
+  question: If the batch size must be reduced for a smaller-scale replication, hold
+    epochs or optimizer steps fixed?
+  config_key: batch_vs_steps
+  options:
+  - epochs
+  - steps
+  default: steps
+  source: guess
+  reason: Paper gives neither batch size nor token budget; induction-head formation
+    is driven by tokens seen / optimization steps, so holding the step (token) budget
+    fixed is the safer choice.
+  sensitivity: high
+- id: amb_mixed_precision
+  question: Train in fp32 or mixed precision?
+  config_key: mixed_precision
+  options:
+  - fp32
+  - amp
+  default: fp32
+  source: conventions_kb
+  reason: Not stated in the paper; eigenvalue diagnostics on low-rank products of
+    large matrices are precision sensitive.
+  sensitivity: low
+- id: amb_split
+  question: Is the reported number computed on validation or test data?
+  config_key: split
+  options:
+  - validation
+  - test
+  - not_applicable
+  default: not_applicable
+  source: paper_text
+  reason: All three extracted claims (copying head count, K-composition head counts)
+    are weight-only statistics; no data split is involved. Behavioral figures use
+    illustrative/synthetic sequences, not a labelled split.
+  sensitivity: low
+- id: amb_training_corpus
+  question: Which corpus substitutes for the unavailable 'Kaplan et al.' training
+    dataset?
+  config_key: data.training_corpus
+  options:
+  - openwebtext
+  - the_pile_subset
+  - wikitext103
+  - c4_subset
+  - tiny_shakespeare
+  default: openwebtext
+  source: conventions_kb
+  reason: Paper cites the Kaplan et al. (2020) dataset, which is proprietary. A web-text-like
+    corpus containing code/LaTeX/HTML is needed for the described skip-trigram phenomena;
+    OpenWebText is the closest public proxy.
+  sensitivity: high
+- id: amb_tokenizer
+  question: Which tokenizer / vocabulary of ~50k tokens?
+  config_key: data.tokenizer
+  options:
+  - gpt2_bpe_50257
+  - custom_bpe_50k
+  - sentencepiece_32k
+  default: gpt2_bpe_50257
+  source: conventions_kb
+  reason: Paper states the vocabulary is ~50,000 tokens with leading-space merging,
+    whitespace collapsing, and backslash kept separate, but never names the tokenizer;
+    GPT-2 BPE matches the described properties most closely.
+  sensitivity: medium
+- id: amb_model_scale
+  question: What d_model / n_heads / d_head do we train?
+  config_key: model.size
+  options:
+  - paper_12x64_d768
+  - reduced_8x32_d256
+  - reduced_4x32_d128
+  default: paper_12x64_d768
+  source: paper_text
+  reason: Technical Details specifies n_heads=12, d_head=64, d_model = n_heads*d_head
+    = 768 for the primary models. The headline claim is '10 out of 12 heads', so the
+    head count must be 12 for the claim to be checkable; reduced configurations change
+    the denominator and cannot reproduce the claim as stated.
+  sensitivity: high
+- id: amb_context_length
+  question: Context length for training and evaluation?
+  config_key: model.n_ctx
+  options:
+  - '2048'
+  - '512'
+  - '256'
+  default: '2048'
+  source: paper_text
+  reason: 'Technical Details: ''Models have a context size of 2048 tokens and use
+    dense attention.'' The paper is not silent here; any reduction is a compute-driven
+    deviation and must be recorded as such, and must still be long enough for a 3x-repeated
+    random sequence.'
+  sensitivity: medium
+- id: amb_positional_mechanism
+  question: How is position injected?
+  config_key: model.positional
+  options:
+  - sinusoidal_into_qk_only
+  - learned_absolute_in_residual
+  - rotary
+  - none
+  default: sinusoidal_into_qk_only
+  source: paper_text
+  reason: 'Technical Details: ''adding sinusoidal embeddings immediately before multiplying
+    by W_Q and W_K''; the appendix confirms position never enters the residual stream,
+    which excludes pointer-arithmetic induction algorithms.'
+  sensitivity: high
+- id: amb_attention_scale
+  question: Are attention scores divided by sqrt(d_head) before the softmax?
+  config_key: model.attention_scale
+  options:
+  - one_over_sqrt_dhead
+  - none
+  default: one_over_sqrt_dhead
+  source: conventions_kb
+  reason: The paper writes A = softmax*(x^T W_Q^T W_K x) with no scaling factor, and
+    never mentions the temperature; standard transformer implementations (and trainability
+    at d_head=64) use 1/sqrt(d_head). This affects trained weight magnitudes and hence
+    the composition/eigenvalue diagnostics.
+  sensitivity: medium
+- id: amb_layernorm
+  question: Include LayerNorm in the trained model (the analysis folds it away)?
+  config_key: model.layer_norm
+  options:
+  - ln_as_trained
+  - none
+  - batch_norm
+  default: ln_as_trained
+  source: paper_text
+  reason: '''Our transformer models apply layer normalization every time they read
+    off from the residual stream''; LN is only folded away (except the variance scaling)
+    for analysis. The paper does not state whether LN is pre- or post-read beyond
+    ''every time they read off from the residual stream''.'
+  sensitivity: medium
+- id: amb_ln_folding_for_diagnostics
+  question: When computing the expanded OV/QK circuits for the eigenvalue diagnostics,
+    is the first-layer LayerNorm folded into W_E (and the LN gain folded into adjacent
+    weights), or are raw weights used?
+  config_key: eval.ln_folding
+  options:
+  - fold_ln_into_embedding
+  - raw_weights_no_folding
+  default: fold_ln_into_embedding
+  source: paper_text
+  reason: '''Handling Layer Normalization'' says everything but the variance normalization
+    can be folded into adjacent parameters, and that first-layer LN ''can alternatively
+    be applied to every vector of the embedding matrix and then ignored (for example,
+    we do this for skip-trigrams in our one-layer models)''. It is not stated whether
+    the copying-eigenvalue histogram used the folded or unfolded form.'
+  sensitivity: medium
+- id: amb_biases
+  question: Train with or without biases?
+  config_key: model.biases
+  options:
+  - no_biases
+  - with_biases
+  default: no_biases
+  source: paper_text
+  reason: Paper explicitly does not consider biases (noting they can be folded into
+    the weights); training without them keeps the path expansion exact. The paper
+    does not state whether the actual trained toy models had biases.
+  sensitivity: low
+- id: amb_optimizer
+  question: Optimizer and hyperparameters (lr, betas, weight decay, grad clip)?
+  config_key: train.optimizer
+  options:
+  - adamw_lr1e-3_wd0.1_clip1.0
+  - adam_lr6e-4_wd0.0
+  default: adamw_lr1e-3_wd0.1_clip1.0
+  source: conventions_kb
+  reason: Completely unstated in the paper (only the dataset is cited); small-transformer
+    convention used.
+  sensitivity: medium
+- id: amb_token_budget
+  question: How many training tokens / steps before evaluation?
+  config_key: train.token_budget
+  options:
+  - 1e8_tokens
+  - 1e9_tokens
+  - fixed_20k_steps
+  - until_induction_bump
+  default: fixed_20k_steps
+  source: guess
+  reason: Paper gives no training budget. Induction heads emerge as a phase change;
+    too short a run yields a two-layer model with no induction heads and would falsely
+    refute the composition claims.
+  sensitivity: high
+- id: amb_copying_claim_model
+  question: Which model does the '10 out of 12 heads are significantly copying' statement
+    refer to?
+  config_key: eval.copying_claim_model
+  options:
+  - one_layer_12head_64
+  - two_layer_12head_64_layer0
+  - two_layer_12head_64_all_heads
+  default: one_layer_12head_64
+  source: paper_text
+  reason: The sentence appears in 'Detecting Copying Behavior', a subsection of 'One-Layer
+    Attention-Only Transformers', and the count of 12 matches n_heads=12; but the
+    text never names the model or the layer explicitly.
+  sensitivity: high
+- id: amb_two_layer_heads_per_layer
+  question: How many attention heads per layer does the analyzed two-layer model have?
+  config_key: model.two_layer_heads_per_layer
+  options:
+  - '12'
+  - '8'
+  - as_shown_in_diagram
+  default: '12'
+  source: paper_text
+  reason: Technical Details says 'typically with n_heads=12 and d_head=64' for all
+    models in the paper, but the two-layer model's head count is never stated in the
+    text; it determines the denominator for the K-composition counts.
+  sensitivity: medium
+- id: amb_copying_score_definition
+  question: Exact formalization of the eigenvalue-based 'copying' summary statistic
+    for W_U W_OV^h W_E?
+  config_key: eval.copying_score
+  options:
+  - sum_positive_eig_over_sum_abs_eig
+  - fraction_of_eigs_with_positive_real_part
+  - trace_over_sum_abs_eig
+  - real_part_mean_over_abs_mean
+  default: sum_positive_eig_over_sum_abs_eig
+  source: conventions_kb
+  reason: The paper says only that it will 'continue to use the eigenvalue-based summary
+    statistic' and notes that sum of eigenvalues = trace = sum of diagonal; it never
+    writes the formula. The sum-of-positive-over-sum-of-absolute-eigenvalue ratio
+    is the convention adopted in the follow-up induction-heads literature.
+  sensitivity: high
+- id: amb_copying_threshold
+  question: What threshold makes a head 'significantly copying' (driving the 10/12
+    count)?
+  config_key: eval.copying_threshold
+  options:
+  - score_gt_0.5
+  - score_gt_0.7
+  - beyond_random_init_baseline_percentile_99
+  - manual_inspection
+  default: score_gt_0.7
+  source: guess
+  reason: The paper shows only a histogram and asserts 10 of 12 heads are 'significantly
+    copying' (agreeing with qualitative inspection); no numeric cutoff is printed.
+    The threshold fully determines whether the headline count reproduces.
+  sensitivity: high
+- id: amb_prefix_matching_score
+  question: How is an induction / prefix-matching score defined, since this paper
+    defines none?
+  config_key: eval.prefix_matching_score
+  options:
+  - mean_attn_to_token_after_earlier_copy_on_repeated_random
+  - qk_eigenvalue_positivity_of_kcomposition_term
+  - attn_logit_diff
+  - both_report_separately
+  default: mean_attn_to_token_after_earlier_copy_on_repeated_random
+  source: conventions_kb
+  reason: This paper checks induction heads only via (a) qualitative value-weighted
+    attention stripes on repeated random tokens and (b) QK/OV eigenvalue positivity;
+    the scalar prefix-matching score comes from the follow-up literature and is a
+    replicator addition.
+  sensitivity: high
+- id: amb_induction_head_identification
+  question: How are layer-2 'induction heads' identified for the corrected-composition
+    claim ('two of the induction heads')?
+  config_key: eval.induction_head_criterion
+  options:
+  - k_composition_with_prev_token_head_above_baseline
+  - positive_qk_and_ov_eigenvalue_corner
+  - attention_stripe_on_repeated_random_above_threshold
+  - manual_inspection
+  default: positive_qk_and_ov_eigenvalue_corner
+  source: paper_text
+  reason: The paper identifies induction heads qualitatively (attention patterns,
+    colouring in diagrams) and shows they occupy the extreme positive corner of the
+    (QK-positivity, OV-positivity) plane, but never states a numeric membership rule
+    or how many induction heads the two-layer model has.
+  sensitivity: high
+- id: amb_random_sequence_spec
+  question: 'Random-token probe specification: per-repeat sequence length and number
+    of probe sequences?'
+  config_key: eval.random_seq
+  options:
+  - len50_rep3_uniform_with_start
+  - len25_rep2_uniform_with_start
+  - half_context_rep3_uniform_with_start
+  default: len50_rep3_uniform_with_start
+  source: guess
+  reason: Paper fixes only that tokens are uniformly sampled from the vocabulary,
+    the sequence is repeated three times, and a special <START> token is placed at
+    the start; the per-repeat length and the number of sequences are not stated.
+  sensitivity: medium
+- id: amb_loss_gap_definition
+  question: How is any in-context 'loss gap' computed (a 2-layer vs 1-layer discriminator)?
+  config_key: eval.loss_gap
+  options:
+  - mean_loss_second_half_minus_first_half_of_repeated_seq
+  - loss_at_repeat2_minus_repeat1
+  - per_position_loss_curve_slope
+  - not_computed
+  default: mean_loss_second_half_minus_first_half_of_repeated_seq
+  source: guess
+  reason: The paper reports no loss-gap number; it shows only qualitative attention/logit
+    evidence and ablation bar charts with no printed values. Any such metric must
+    be defined by the replicator and cannot be scored against the paper.
+  sensitivity: high
+- id: amb_composition_random_baseline
+  question: How is the 'empirical expected amount for random matrices' subtracted
+    from composition scores?
+  config_key: eval.composition_baseline
+  options:
+  - mean_over_N_random_gaussian_pairs_same_shape
+  - mean_over_model_init_weights
+  - no_subtraction
+  default: mean_over_N_random_gaussian_pairs_same_shape
+  source: paper_text
+  reason: Caption says 'By default, we subtract off the empirical expected amount
+    for random matrices of the same shapes' without specifying the distribution, sample
+    count, or whether initialization scale is matched.
+  sensitivity: medium
+- id: amb_composition_bug
+  question: Reproduce the buggy (transposed Frobenius) composition score or the corrected
+    one — and, if buggy, which of the two transposed orderings?
+  config_key: eval.composition_formula
+  options:
+  - corrected
+  - buggy_transposed_K_first
+  - buggy_transposed_V_first
+  - both
+  default: both
+  source: paper_text
+  reason: The correction appendix says the published diagram computed EITHER ||W_K^{h2}
+    W_O^{h1} W_V^{h1} W_Q^{h2 T}||_F OR ||W_V^{h1} W_Q^{h2 T} W_K^{h2} W_O^{h1}||_F,
+    without saying which. The 'only one layer-0 head' claim (c_kcomposition_layer0_heads)
+    holds only under the buggy metric; the corrected metric underlies c_kcomposition_extra_heads_corrected.
+  sensitivity: high
+- id: amb_seeds
+  question: How many random seeds per configuration, and how are head-level counts
+    aggregated?
+  config_key: train.n_seeds
+  options:
+  - '1'
+  - '3'
+  - '5'
+  default: '1'
+  source: paper_text
+  reason: The paper analyzes a single trained model per configuration ('we reverse
+    engineer a single two-layer model') and reports no seed variability. Additional
+    seeds may be run for diagnostics but the paper-matching setting is one model per
+    configuration.
+  sensitivity: high
+- id: amb_eval_sample_count
+  question: How many random-token sequences / text documents are averaged for the
+    behavioral figures?
+  config_key: eval.n_eval_sequences
+  options:
+  - '1'
+  - '64'
+  - '256'
+  - '1024'
+  default: '1'
+  source: paper_text
+  reason: The paper shows single illustrative sequences (one random repeated sequence;
+    one Harry Potter paragraph) and reports no averaging; any averaging count is a
+    replicator addition that only affects non-claim diagnostics.
+  sensitivity: medium
+- id: amb_checkpoint
+  question: Which checkpoint are the weight diagnostics computed on?
+  config_key: eval.checkpoint
+  options:
+  - final
+  - best_val_loss
+  - last_of_cosine_decay
+  default: final
+  source: conventions_kb
+  reason: Not stated in the paper; conventionally the fully trained final checkpoint.
+  sensitivity: low
+- id: amb_low_rank_algebra
+  question: Compute eigen/SVD diagnostics on factored low-rank products or on the
+    expanded 50k x 50k matrices?
+  config_key: eval.matrix_algebra
+  options:
+  - factored_lambda_AB_equals_BA
+  - dense_expanded
+  default: factored_lambda_AB_equals_BA
+  source: paper_text
+  reason: The 'Working with Low-Rank Matrices' appendix prescribes keeping matrices
+    factored and using lambda_i(AB)=lambda_i(BA) and the factored SVD recipe; note
+    that misapplying this identity to Frobenius norms is exactly the documented bug,
+    so it must NOT be used for the composition scores.
+  sensitivity: low
+descriptive_stats:
+- metric: n_heads_primary_models
+  value: 12.0
+  where: 'Technical Details / Model Details: ''typically with n_heads=12 and d_head=64'''
+- metric: d_head_primary_models
+  value: 64.0
+  where: Technical Details / Model Details
+- metric: d_model_primary_models
+  value: 768.0
+  where: 'Technical Details / Model Details: d_model = n_heads * d_head = 12*64 (product
+    computed by us; 768 is not printed in the paper)'
+- metric: n_heads_secondary_model
+  value: 32.0
+  where: 'Technical Details / Model Details: ''one explicitly noted example where
+    n_heads=32 and d_head=128'''
+- metric: d_head_secondary_model
+  value: 128.0
+  where: Technical Details / Model Details
+- metric: d_model_secondary_model
+  value: 4096.0
+  where: 'Technical Details / Model Details: 32*128 (product computed by us; not printed)'
+- metric: n_context_tokens
+  value: 2048.0
+  where: 'Technical Details / Model Details: ''Models have a context size of 2048
+    tokens and use dense attention'''
+- metric: vocab_size_approx
+  value: 50000.0
+  where: 'Section ''Interpretation as Skip-Trigrams'': ''our vocabulary is ~50,000
+    tokens'''
+- metric: expanded_ov_matrix_entries_approx
+  value: 2500000000.0
+  where: 'Section ''Interpretation as Skip-Trigrams'': ''a single expanded OV matrix
+    has ~2.5 billion entries'''
+- metric: ov_qk_matrix_rank_primary
+  value: 64.0
+  where: 'Section ''Summarizing OV/QK Matrices'': ''They are 50,000 x 50,000 matrices,
+    but only rank d_head (64 or 128)'''
+- metric: ov_qk_matrix_rank_secondary
+  value: 128.0
+  where: 'Section ''Summarizing OV/QK Matrices'': ''only rank d_head (64 or 128)'''
+- metric: random_token_sequence_repeats
+  value: 3.0
+  where: 'Induction Heads figure caption: ''Attention heads are shown acting on a
+    random sequence of tokens, repeated three times'''
+- metric: mlp_share_of_standard_transformer_params
+  value: 0.6667
+  where: 'Section ''Where Does This Leave Us?'': ''MLP layers make up 2/3rds of a
+    standard transformer''s parameters'''
+- metric: d_mlp_over_d_model_ratio
+  value: 4.0
+  where: 'Section ''Subspaces and Residual Stream Bandwidth'': ''a single MLP layer
+    typically has four times more neurons than the residual stream has dimensions'''
+- metric: d_head_over_d_model_ratio_lower
+  value: 0.01
+  where: 'Section ''Three Kinds of Composition'': ''typical values of d_head/d_model
+    might vary from around 1/10 to 1/100'''
+- metric: d_head_over_d_model_ratio_upper
+  value: 0.1
+  where: 'Section ''Three Kinds of Composition'': ''typical values of d_head/d_model
+    might vary from around 1/10 to 1/100'''
+plan:
+  data_tier: C
+  compute_tier: 2
+  kind_of_test: mechanics_only
+  target_claims:
+  - c_copying_heads_10_of_12
+  - c_kcomposition_layer0_heads
+  - c_kcomposition_extra_heads_corrected
+  substitutions:
+    custom_text_corpus: 'UNAVAILABLE: claims depending on this source are Untested'
+    synthetic_repeated_random_tokens: 'UNAVAILABLE: claims depending on this source
+      are Untested'
+    natural_text_probe: 'UNAVAILABLE: claims depending on this source are Untested'
+    model_weights: 'UNAVAILABLE: claims depending on this source are Untested'
+  tolerances: {}
+  success_criteria: 'CPU only. Attention-only transformers on a synthetic repeated-random-token
+    task: a 2-layer model develops induction heads (prefix-matching + copying scores
+    high; second-half loss far below first-half), a 1-layer model cannot do in-context
+    copying. Report those scores and the loss gap. || Match on every headline claim
+    within its derived tolerance; all leakage tests pass; kind of test = mechanics_only;
+    data tier C; compute tier 1. Tier B: same sign, significant, gap inside the substitution''s
+    predicted band.'
+  budget:
+    spec: 10
+    setup: 20
+    build: 25
+    run: 20
+    verify: 15
+    report: 5
+    hard_kill_minutes: 240
+    max_cost_usd: 150.0
+    run_timeout_s: 1200
+  seeds:
+  - 0
+  frozen_hash: 783529a6fd8b4645c42ac023a7ff551d575dec355652d933e10bbded9df5c3ba
+  frozen_at: '2026-09-15T16:22:20.419689+00:00'
