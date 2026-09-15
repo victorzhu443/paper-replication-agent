@@ -1,0 +1,832 @@
+paper:
+  title: 'Batch Normalization: Accelerating Deep Network Training by Reducing Internal
+    Covariate Shift'
+  authors:
+  - Sergey Ioffe
+  - Christian Szegedy
+  year: 2015
+  arxiv_id: '1502.03167'
+  version: v3
+  track: cs
+  family: train_and_eval
+claims:
+- id: mnist_bn_beats_baseline_sign
+  where: 'Figure 1(a) (p.6) and Sec 4.1 text: "The batch-normalized network enjoys
+    the higher test accuracy" — sign/ordering claim only; the curves are not digitizable
+    to printed digits'
+  evidence_page: 6
+  metric: accuracy_gap
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.0
+  reported_precision: 0.0
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: mnist_bn_vs_baseline
+  priority: headline
+- id: inception_steps_to_72_2
+  where: Figure 3 (table on p.7), row 'Inception', column 'Steps to 72.2%'; also Sec
+    4.2.2 text '31 * 10^6 training steps'
+  evidence_page: 7
+  metric: training_steps
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 31000000.0
+  reported_precision: 50000.0
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: inception
+  priority: secondary
+- id: inception_max_acc
+  where: Figure 3 (table on p.7), row 'Inception', column 'Max accuracy' (single-crop
+    validation accuracy@1)
+  evidence_page: 7
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 72.2
+  reported_precision: 0.05
+  n_periods: 50000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: inception
+  priority: secondary
+- id: bn_baseline_steps_to_72_2
+  where: Figure 3 (table on p.7), row 'BN-Baseline', column 'Steps to 72.2%'
+  evidence_page: 7
+  metric: training_steps
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 13300000.0
+  reported_precision: 50000.0
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: bn_baseline
+  priority: secondary
+- id: bn_baseline_max_acc
+  where: Figure 3 (table on p.7), row 'BN-Baseline', column 'Max accuracy'
+  evidence_page: 7
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 72.7
+  reported_precision: 0.05
+  n_periods: 50000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: bn_baseline
+  priority: secondary
+- id: bn_x5_steps_to_72_2
+  where: Figure 3 (table on p.7), row 'BN-x5', column 'Steps to 72.2%'
+  evidence_page: 7
+  metric: training_steps
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 2100000.0
+  reported_precision: 50000.0
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: bn_x5
+  priority: secondary
+- id: bn_x5_max_acc
+  where: Figure 3 (table on p.7), row 'BN-x5', column 'Max accuracy'
+  evidence_page: 7
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 73.0
+  reported_precision: 0.05
+  n_periods: 50000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: bn_x5
+  priority: secondary
+- id: bn_x30_steps_to_72_2
+  where: Figure 3 (table on p.7), row 'BN-x30', column 'Steps to 72.2%'
+  evidence_page: 7
+  metric: training_steps
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 2700000.0
+  reported_precision: 50000.0
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: bn_x30
+  priority: secondary
+- id: bn_x30_max_acc
+  where: Figure 3 (table on p.7), row 'BN-x30', column 'Max accuracy'; Sec 4.2.2 adds
+    that 74.8% is reached after about 6*10^6 steps
+  evidence_page: 7
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 74.8
+  reported_precision: 0.05
+  n_periods: 50000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: bn_x30
+  priority: secondary
+- id: bn_x5_sigmoid_max_acc
+  where: Figure 3 (table on p.7), row 'BN-x5-Sigmoid', column 'Max accuracy' (the
+    'Steps to 72.2%' cell is blank — this variant never reaches 72.2%); also Sec 4.2.2
+    text
+  evidence_page: 7
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 69.8
+  reported_precision: 0.05
+  n_periods: 50000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: bn_x5_sigmoid
+  priority: secondary
+- id: bn_inception_single_crop_top1_err
+  where: Figure 4 (table on p.8), row 'BN-Inception single crop', column 'Top-1 error'
+  evidence_page: 8
+  metric: top1_error
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 25.2
+  reported_precision: 0.05
+  n_periods: 50000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: bn_inception_single_crop
+  priority: secondary
+- id: bn_inception_single_crop_top5_err
+  where: Figure 4 (table on p.8), row 'BN-Inception single crop', column 'Top-5 error'
+  evidence_page: 8
+  metric: top5_error
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 7.82
+  reported_precision: 0.005
+  n_periods: 50000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: bn_inception_single_crop
+  priority: secondary
+- id: bn_inception_multicrop_top1_err
+  where: Figure 4 (table on p.8), row 'BN-Inception multicrop', column 'Top-1 error'
+  evidence_page: 8
+  metric: top1_error
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 21.99
+  reported_precision: 0.005
+  n_periods: 50000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: bn_inception_multicrop
+  priority: secondary
+- id: bn_inception_multicrop_top5_err
+  where: Figure 4 (table on p.8), row 'BN-Inception multicrop', column 'Top-5 error'
+  evidence_page: 8
+  metric: top5_error
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 5.82
+  reported_precision: 0.005
+  n_periods: 50000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: bn_inception_multicrop
+  priority: secondary
+- id: bn_inception_ensemble_top1_err
+  where: Figure 4 (table on p.8), row 'BN-Inception ensemble', column 'Top-1 error'
+  evidence_page: 8
+  metric: top1_error
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 20.1
+  reported_precision: 0.05
+  n_periods: 50000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: bn_inception_ensemble
+  priority: secondary
+- id: bn_inception_ensemble_top5_err_val
+  where: Figure 4 (table on p.8), row 'BN-Inception ensemble', column 'Top-5 error'
+    (provided validation set, 50000 images); also Abstract (p.1) and Sec 4.2.3 (p.7)
+  evidence_page: 8
+  metric: top5_error
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 4.9
+  reported_precision: 0.05
+  n_periods: 50000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: bn_inception_ensemble
+  priority: headline
+- id: bn_inception_ensemble_top5_err_test
+  where: 'Figure 4 caption (p.8) and Sec 4.2.3 (p.7): 4.82% top-5 error on the 100000-image
+    ImageNet test set as reported by the ILSVRC test server (the Abstract rounds this
+    to 4.8%)'
+  evidence_page: 8
+  metric: top5_error
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 4.82
+  reported_precision: 0.005
+  n_periods: 100000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: bn_inception_ensemble_test
+  priority: secondary
+data:
+  sources:
+  - canonical: mnist
+    description: MNIST handwritten digit dataset (LeCun et al., 1998a); used in Sec
+      4.1 with a 28x28 binary image as input to a 3x100 sigmoid MLP. Paper does not
+      state train/test split sizes.
+    substitute: torchvision
+  - canonical: imagenet_ilsvrc2012
+    description: LSVRC2012 training data for training; the provided 50000-image validation
+      set for reported validation errors and for the accuracy@1 curves (single crop);
+      the 100000-image test set via the ILSVRC server. Sec 4.2/4.2.2/4.2.3, Figures
+      2-4. Not reproducible CPU-only (13.6M-parameter Inception variant, ~31e6 steps).
+    substitute: null
+  universe:
+    mnist_input: 28x28 binary image (784 inputs), 10 classes
+    mnist_eval_set: held-out MNIST test data (Sec 4.1 / Fig 1a); size not stated in
+      paper, standard 10,000-image test split assumed
+    imagenet_classes: 1000
+    imagenet_eval: held-out validation set; validation accuracy@1 computed with a
+      single crop per image for the training curves (Figs 2-3); Fig 4 also reports
+      144-crop and 6-model-ensemble numbers
+  frequency: per-training-step evaluation (accuracy reported vs number of SGD steps)
+  preprocessing:
+    mnist_binarization: paper says '28x28 binary image as input' (Sec 4.1); threshold/sampling
+      rule not specified
+    mnist_augmentation: none described
+    imagenet_augmentation: photometric distortions (reduced in strength for Modified
+      BN-Inception); within-shard shuffling enabled for Modified BN-Inception (Sec
+      4.2.1)
+    feature_scaling: no input standardization described beyond the stated MNIST binarization
+  splits:
+    mnist_train: MNIST training set (size not stated in paper; standard 60,000 images
+      assumed)
+    mnist_test: held-out test data used for Figure 1(a) accuracy curves
+    imagenet_train: LSVRC2012 training data
+    imagenet_val: provided validation set, 50000 images
+    imagenet_test: 100000 images, evaluated by the ILSVRC test server
+method:
+  signal: 'Batch Normalization: normalize each scalar activation (pre-nonlinearity
+    x=Wu, bias dropped) to zero mean / unit variance using mini-batch statistics with
+    epsilon added to the variance (Alg. 1), then apply a learned scale gamma and shift
+    beta; at inference use population statistics (E[x]=E_B[mu_B], Var[x]=m/(m-1)*E_B[sigma^2_B])
+    folded into a single linear transform (Alg. 2).'
+  model:
+    mnist_architecture: 'MLP: 784 -> 3 fully-connected hidden layers of 100 units
+      each -> 10-way fully-connected output with softmax/cross-entropy'
+    mnist_nonlinearity: sigmoid g(x)=1/(1+exp(-x)) in hidden layers
+    mnist_init: weights W initialized to small random Gaussian values (scale unspecified)
+    mnist_bn_placement: BN added to each hidden layer (Sec 4.1, 'as in Sec. 3.1'),
+      applied to the nonlinearity input x=Wu, per-activation gamma/beta; bias subsumed
+      by beta (Sec 3.2)
+    mnist_optimizer: SGD on mini-batches; optimizer variant, momentum, learning rate
+      and schedule are NOT stated for MNIST
+    mnist_batch_size: 60 examples per mini-batch
+    mnist_steps: 50000 training steps
+    bn_epsilon: epsilon added to the mini-batch variance for numerical stability (Alg.
+      1); value not stated
+    bn_param_init: initialization of gamma and beta is not stated in the paper
+    inference_statistics: population mean E_B[mu_B] and unbiased variance m/(m-1)*E_B[sigma^2_B]
+      estimated by averaging over training mini-batches (Alg. 2); the paper notes
+      moving averages may be used instead to track accuracy during training
+    imagenet_architecture: 'Inception variant (Sec 4.2 + Appendix Fig 5): 5x5 convs
+      replaced by two consecutive 3x3 convs with up to 128 filters, 13.6e6 parameters,
+      no fully-connected layers other than the top softmax, separable convolution
+      with depth multiplier 8 on the first conv layer, 3 (not 2) 28x28 inception modules,
+      stride-2 conv/pool inside modules 3c and 4e'
+    imagenet_optimizer: SGD with momentum (Sutskever et al., 2013), mini-batch size
+      32, large-scale distributed training; initial lr 0.0015 (Inception and BN-Baseline),
+      0.0075 (BN-x5, BN-x5-Sigmoid), 0.045 (BN-x30); learning rate decayed exponentially
+    imagenet_modified_bn_settings: 'Sec 4.2.1 changes applied ONLY to Modified BN-Inception
+      (BN-x5, BN-x30, BN-x5-Sigmoid), not to BN-Baseline: higher learning rate, Dropout
+      removed, L2 loss weight reduced by a factor of 5, learning rate lowered 6 times
+      faster, Local Response Normalization removed, within-shard shuffling enabled
+      (~1% val-accuracy gain), photometric distortions reduced'
+    imagenet_bn_placement: BN applied to the input of each nonlinearity, in a convolutional
+      way (one gamma/beta per feature map; effective mini-batch size m' = m*p*q),
+      keeping the rest of the architecture constant
+  evaluation:
+  - 'MNIST: fraction of correct predictions on held-out test data as a function of
+    training steps (Figure 1a); compare With-BN vs Without-BN at fixed step counts
+    within the plotted range 10K-50K'
+  - 'MNIST: distribution of a typical last-hidden-layer sigmoid input over training,
+    shown as {15,50,85}th percentiles (Figure 1b,c)'
+  - 'ImageNet: single-crop validation accuracy@1 vs training steps (Figure 2)'
+  - 'ImageNet: number of training steps required to reach Inception''s maximum accuracy
+    of 72.2%, and the maximum accuracy achieved (Figure 3 table)'
+  - 'ImageNet: top-1/top-5 error on the provided 50000-image validation set, single
+    crop / 144 crops / 6-model ensemble (Figure 4); 4.82% top-5 on the 100000-image
+    test set via ILSVRC server'
+  eval_protocol:
+    primary_metric: test-set classification accuracy (fraction correct) for MNIST;
+      validation accuracy@1 and top-1/top-5 error for ImageNet
+    report_points: accuracy at fixed step counts; Figure 1(a) plots 10K-50K steps,
+      total budget 50000 steps
+    inference_mode: BN network evaluated with frozen population statistics (Alg. 2)
+      or moving averages; baseline evaluated normally
+    seeds: not stated; a single run per configuration is implied (one curve per configuration,
+      no error bars)
+    paired_comparison: identical architecture/init/steps/batch size for With-BN and
+      Without-BN; only BN insertion differs
+  variants:
+    mnist_bn_vs_baseline:
+      description: paired comparison of the same 3x100 sigmoid MLP trained with and
+        without BN for 50000 steps, batch size 60; claim is that With-BN test accuracy
+        exceeds Without-BN
+      metric: accuracy gap (With BN minus Without BN) on held-out MNIST test data
+    mnist_without_bn:
+      bn: 'off'
+      architecture: 784-100-100-100-10, sigmoid hidden, cross-entropy; hidden layers
+        compute y=g(Wu+b) with bias
+      steps: 50000
+      batch_size: 60
+    mnist_with_bn:
+      bn: on, before each hidden sigmoid (per-activation), bias dropped/subsumed by
+        beta
+      architecture: 784-100-100-100-10, sigmoid hidden, cross-entropy
+      steps: 50000
+      batch_size: 60
+    inception:
+      bn: 'off'
+      initial_lr: 0.0015
+      dropout: 40% (stated in Sec 4.2.3 as the original Inception Dropout probability)
+      lrn: 'on (Sec 4.2.1: Inception benefits from Local Response Normalization)'
+      lr_decay: exponential
+    bn_baseline:
+      bn: on before each nonlinearity (convolutional BN)
+      initial_lr: 0.0015 (inherited from Inception; not restated in paper)
+      other: otherwise identical to Inception; none of the Sec 4.2.1 modifications
+        applied
+    bn_x5:
+      bn: 'on'
+      initial_lr: 0.0075 (5x Inception)
+      modifications: 'Sec 4.2.1: no Dropout, L2 loss weight reduced 5x, lr decay 6x
+        faster, no LRN, within-shard shuffling, reduced photometric distortion'
+      note: the same 5x lr increase applied to original Inception drove parameters
+        to machine infinity
+    bn_x30:
+      bn: 'on'
+      initial_lr: 0.045 (30x Inception)
+      modifications: same Sec 4.2.1 modifications as BN-x5
+    bn_x5_sigmoid:
+      bn: 'on'
+      nonlinearity: sigmoid g(t)=1/(1+exp(-t)) instead of ReLU
+      initial_lr: 0.0075
+      modifications: like BN-x5, i.e. all Sec 4.2.1 modifications
+    bn_inception_single_crop:
+      resolution: 224
+      crops: 1
+      models: 1
+      split: provided validation set (50000 images)
+    bn_inception_multicrop:
+      resolution: 224
+      crops: 144
+      models: 1
+      split: provided validation set (50000 images)
+    bn_inception_ensemble:
+      resolution: 224
+      crops: 144
+      models: '6 networks, each based on BN-x30 modified via some of: increased initial
+        weights in the convolutional layers; Dropout with probability 5% or 10%; non-convolutional
+        per-activation BN in the last hidden layers. Each reached max accuracy after
+        about 6e6 steps; prediction is the arithmetic average of class probabilities'
+      split: provided validation set (50000 images)
+    bn_inception_ensemble_test:
+      split: ImageNet test set, 100000 images, scored by the ILSVRC test server
+      models: same 6-network ensemble, 144 crops
+baselines:
+- Inception without Batch Normalization (ImageNet, initial lr 0.0015)
+- Inception with sigmoid and no BN (never better than 1/1000 accuracy)
+- MNIST 3x100 sigmoid MLP without Batch Normalization
+- GoogLeNet ensemble (6.67% top-5, 224 res, 144 crops, 7 models)
+- Deep Image low-res / high-res / ensemble (7.96% / 7.42% / 5.98% top-5; high-res
+  also 24.88 top-1)
+- He et al. (2015) ensemble (4.94% top-5, ILSVRC server)
+ambiguities:
+- id: lr_schedule
+  question: What learning-rate schedule is used for the MNIST experiment?
+  config_key: lr_schedule
+  options:
+  - constant
+  - cosine
+  - step
+  - as_paper
+  default: constant
+  source: conventions_kb
+  reason: Paper states no learning rate or schedule for the MNIST MLP (Sec 4.1); exponential
+    decay is described only for the ImageNet Inception models. Constant LR over the
+    50000 steps is the conventional default.
+  sensitivity: high
+- id: mnist_learning_rate_value
+  question: What learning rate is used for the MNIST network (must be held identical
+    for BN and non-BN for the paired claim)?
+  config_key: learning_rate
+  options:
+  - '0.001'
+  - '0.01'
+  - '0.1'
+  - tuned_per_variant
+  default: '0.1'
+  source: guess
+  reason: Not stated anywhere in the paper; a plain-SGD sigmoid MLP needs an lr of
+    order 0.1 to make visible progress in 50k steps of batch 60. The paired comparison
+    in Sec 4.1 implies the same lr for both networks.
+  sensitivity: high
+- id: augmentation
+  question: Is any train-time data augmentation applied to MNIST?
+  config_key: augmentation
+  options:
+  - none
+  - standard
+  - as_paper
+  default: none
+  source: conventions_kb
+  reason: Sec 4.1 describes no augmentation for the MNIST MLP (only Sec 4.2.1 mentions
+    photometric distortions, for ImageNet).
+  sensitivity: low
+- id: batch_vs_steps
+  question: Hold fixed number of optimizer steps or fixed number of epochs?
+  config_key: batch_vs_steps
+  options:
+  - epochs
+  - steps
+  default: steps
+  source: paper_text
+  reason: Paper trains 'for 50000 steps, with 60 examples per mini-batch' (Sec 4.1,
+    p.6), so steps are the fixed budget.
+  sensitivity: medium
+- id: mixed_precision
+  question: Train in fp32 or mixed precision?
+  config_key: mixed_precision
+  options:
+  - fp32
+  - amp
+  default: fp32
+  source: conventions_kb
+  reason: Not discussed in the paper; CPU-only replication implies fp32.
+  sensitivity: low
+- id: split
+  question: Is the reported MNIST accuracy on a validation split or the test split?
+  config_key: split
+  options:
+  - validation
+  - test
+  default: test
+  source: paper_text
+  reason: 'Sec 4.1 / Fig 1(a): ''the fraction of correct predictions by the two networks
+    on held-out test data''.'
+  sensitivity: medium
+- id: mnist_split_sizes
+  question: Which MNIST train/test sizes are used, since the paper never states them?
+  config_key: mnist_splits
+  options:
+  - train60000_test10000
+  - train50000_val10000_test10000
+  default: train60000_test10000
+  source: conventions_kb
+  reason: Sec 4.1 only says 'MNIST dataset' and 'held-out test data'; the standard
+    LeCun split is 60k train / 10k test. This also drives the n_periods used for the
+    MNIST claim.
+  sensitivity: low
+- id: optimizer
+  question: 'Which optimizer for MNIST: plain SGD, SGD+momentum, or Adagrad?'
+  config_key: optimizer
+  options:
+  - sgd
+  - sgd_momentum
+  - adagrad
+  default: sgd
+  source: conventions_kb
+  reason: Sec 4.1 only says the network was trained for 50000 steps with 60-example
+    mini-batches; Sec 3.1 mentions SGD and variants such as Adagrad only generically.
+    Plain SGD is the minimal assumption.
+  sensitivity: high
+- id: weight_init_scale
+  question: What is the std of the 'small random Gaussian' weight initialization?
+  config_key: init_std
+  options:
+  - '0.01'
+  - '0.05'
+  - glorot
+  - '0.1'
+  default: '0.05'
+  source: guess
+  reason: Sec 4.1 says only 'the weights W initialized to small random Gaussian values';
+    with sigmoid units the init scale strongly affects how slowly the non-BN baseline
+    trains.
+  sensitivity: high
+- id: input_binarization
+  question: How are MNIST pixels binarized to a '28x28 binary image'?
+  config_key: input_binarization
+  options:
+  - threshold_0.5
+  - threshold_0.3
+  - bernoulli_sample
+  - none_use_grayscale
+  default: threshold_0.5
+  source: conventions_kb
+  reason: Sec 4.1 says the input is a 28x28 binary image but gives no threshold or
+    sampling rule.
+  sensitivity: medium
+- id: bn_epsilon
+  question: Value of the BN epsilon added to the mini-batch variance?
+  config_key: bn_epsilon
+  options:
+  - 1e-3
+  - 1e-5
+  - 1e-8
+  default: 1e-5
+  source: conventions_kb
+  reason: Alg. 1 (p.3) introduces epsilon but never gives a value.
+  sensitivity: low
+- id: bn_param_init
+  question: How are the BN scale/shift parameters gamma and beta initialized?
+  config_key: bn_param_init
+  options:
+  - gamma1_beta0
+  - gamma_random_small_beta0
+  default: gamma1_beta0
+  source: conventions_kb
+  reason: Sec 3 states gamma and beta are learned and that gamma=sqrt(Var[x]), beta=E[x]
+    would recover the original activations, but never specifies their initial values,
+    which the code must set.
+  sensitivity: medium
+- id: bn_inference_stats
+  question: At evaluation time, use exact population statistics averaged over training
+    mini-batches (Alg. 2, with the unbiased m/(m-1) correction) or a running moving
+    average?
+  config_key: bn_inference_stats
+  options:
+  - population_unbiased
+  - moving_average
+  default: moving_average
+  source: paper_text
+  reason: Sec 3.1 / Alg. 2 prescribe the unbiased population estimate E_B[mu_B], m/(m-1)*E_B[sigma_B^2]
+    for the final inference network, but explicitly allow moving averages 'to track
+    the accuracy of a model as it trains', which is the setting of the Fig 1(a) curves.
+  sensitivity: medium
+- id: bn_moving_average_momentum
+  question: If moving averages are used, what decay/momentum is applied to the running
+    mean and variance?
+  config_key: bn_momentum
+  options:
+  - '0.9'
+  - '0.99'
+  - '0.999'
+  default: '0.9'
+  source: guess
+  reason: The paper mentions moving averages (Sec 3.1) without any decay constant;
+    the code needs one whenever bn_inference_stats=moving_average.
+  sensitivity: low
+- id: bn_on_output_layer
+  question: Is BN applied to the final 10-unit output layer as well as the 3 hidden
+    layers?
+  config_key: bn_layers
+  options:
+  - hidden_only
+  - hidden_plus_output
+  default: hidden_only
+  source: paper_text
+  reason: '''We added Batch Normalization to each hidden layer of the network'' (Sec
+    4.1, p.6).'
+  sensitivity: medium
+- id: bias_with_bn
+  question: Are layer biases kept when BN is inserted?
+  config_key: use_bias_with_bn
+  options:
+  - drop_bias
+  - keep_bias
+  default: drop_bias
+  source: paper_text
+  reason: 'Sec 3.2 (p.5): the bias is redundant because of the subsequent mean subtraction;
+    its role is subsumed by beta, so z=g(Wu+b) is replaced by z=g(BN(Wu)). The non-BN
+    baseline keeps its bias b.'
+  sensitivity: low
+- id: mnist_weight_decay
+  question: Is any weight decay / L2 regularization applied to the MNIST network?
+  config_key: weight_decay
+  options:
+  - '0.0'
+  - 1e-4
+  default: '0.0'
+  source: conventions_kb
+  reason: Sec 4.1 describes no regularizer for the MNIST MLP; L2 loss is discussed
+    only for ImageNet Inception (Sec 4.2.1).
+  sensitivity: low
+- id: eval_cadence_and_points
+  question: At which step counts is test accuracy recorded for the MNIST comparison?
+  config_key: eval_steps
+  options:
+  - every_500_steps
+  - '{10000,20000,30000,40000,50000}'
+  - end_only
+  default: '{10000,20000,30000,40000,50000}'
+  source: guess
+  reason: Figure 1(a) shows a continuous curve with x-axis ticks at 10K, 20K, 30K,
+    40K, 50K steps; the actual evaluation cadence is never stated.
+  sensitivity: medium
+- id: n_seeds
+  question: How many random seeds per configuration, and is the claim evaluated on
+    the mean?
+  config_key: n_seeds
+  options:
+  - '1'
+  - '3'
+  - '5'
+  default: '3'
+  source: conventions_kb
+  reason: Paper reports a single curve per configuration with no variance; multiple
+    seeds are needed to verify the sign of the accuracy gap.
+  sensitivity: medium
+- id: loss_and_output
+  question: Softmax cross-entropy over 10 logits with no BN on the logits?
+  config_key: loss
+  options:
+  - softmax_cross_entropy
+  - mse
+  default: softmax_cross_entropy
+  source: paper_text
+  reason: 'Sec 4.1: ''a fully-connected layer with 10 activations (one per class)
+    and cross-entropy loss''.'
+  sensitivity: low
+- id: shuffling
+  question: Are mini-batches drawn by shuffling the training set each epoch (MNIST)?
+  config_key: shuffle
+  options:
+  - shuffle_each_epoch
+  - sequential
+  - random_with_replacement
+  default: shuffle_each_epoch
+  source: conventions_kb
+  reason: Not stated for MNIST; thorough (within-shard) shuffling is discussed only
+    for the ImageNet pipeline (Sec 4.2.1).
+  sensitivity: low
+descriptive_stats:
+- metric: mnist_hidden_layers
+  value: 3.0
+  where: Sec 4.1, p.6
+- metric: mnist_units_per_hidden_layer
+  value: 100.0
+  where: Sec 4.1, p.6
+- metric: mnist_output_units
+  value: 10.0
+  where: Sec 4.1, p.6
+- metric: mnist_input_dim
+  value: 784.0
+  where: Sec 4.1, p.6 ('28x28 binary image as input')
+- metric: mnist_training_steps
+  value: 50000.0
+  where: Sec 4.1, p.6
+- metric: mnist_minibatch_size
+  value: 60.0
+  where: Sec 4.1, p.6
+- metric: inception_parameters
+  value: 13600000.0
+  where: Sec 4.2, p.6 ('13.6 * 10^6 parameters')
+- metric: imagenet_minibatch_size
+  value: 32.0
+  where: Sec 4.2, p.6
+- metric: imagenet_num_classes
+  value: 1000.0
+  where: Sec 4.2, p.6
+- metric: imagenet_validation_images
+  value: 50000.0
+  where: Figure 4 caption, p.8
+- metric: imagenet_test_images
+  value: 100000.0
+  where: Figure 4 caption, p.8
+- metric: ensemble_num_models
+  value: 6.0
+  where: Sec 4.2.3, p.7 and Figure 4, p.8
+- metric: bn_x30_steps_to_74_8_percent
+  value: 6000000.0
+  where: Sec 4.2.2, p.7 ('reaches 74.8% after 6*10^6 steps')
+- metric: bn_x5_speedup_factor_vs_inception
+  value: 14.0
+  where: Abstract p.1 and Sec 4.2.2, p.7 ('14 times fewer steps')
+- metric: shuffling_val_accuracy_gain_percent
+  value: 1.0
+  where: Sec 4.2.1, p.6 ('about 1% improvements in the validation accuracy')
+plan:
+  data_tier: A
+  compute_tier: 2
+  kind_of_test: re_implementation
+  target_claims:
+  - mnist_bn_beats_baseline_sign
+  - inception_steps_to_72_2
+  - inception_max_acc
+  - bn_baseline_steps_to_72_2
+  - bn_baseline_max_acc
+  - bn_x5_steps_to_72_2
+  - bn_x5_max_acc
+  - bn_x30_steps_to_72_2
+  substitutions:
+    imagenet_ilsvrc2012: 'UNAVAILABLE: claims depending on this source are Untested'
+  tolerances:
+    inception_max_acc: 0.45071536032450765
+    bn_baseline_max_acc: 0.44846806647459214
+    bn_x5_max_acc: 0.4470894105865831
+    bn_x30_max_acc: 0.43832563654747286
+    bn_x5_sigmoid_max_acc: 0.4606541123622166
+  success_criteria: 'CPU only. Section 4.1 / Figure 1: 3-layer fully-connected MNIST
+    net (100 units/layer, sigmoid) with vs without BN; BN reaches higher test accuracy
+    faster. Report accuracy after fixed step counts (e.g. 5k, 10k, 20k steps). ||
+    Match on every headline claim within its derived tolerance; all leakage tests
+    pass; kind of test = re_implementation; data tier A; compute tier 1. Tier B: same
+    sign, significant, gap inside the substitution''s predicted band.'
+  budget:
+    spec: 10
+    setup: 20
+    build: 25
+    run: 20
+    verify: 15
+    report: 5
+    hard_kill_minutes: 240
+    max_cost_usd: 150.0
+    run_timeout_s: 900
+  seeds:
+  - 0
+  - 1
+  frozen_hash: a5a2b6e4c2d1c3c1098cd5ca9e1202d40683dbcab8837c10066476f242e64a01
+  frozen_at: '2026-09-15T15:57:21.969457+00:00'
