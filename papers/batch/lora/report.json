@@ -5,35 +5,534 @@
   "kind_of_test": "re_implementation",
   "data_tier": "A",
   "compute_tier": 2,
-  "deviations": [],
-  "claims": [],
-  "leakage": [],
+  "deviations": [
+    "glue_sst2 -> UNAVAILABLE: claims depending on this source are Untested",
+    "glue_benchmark -> UNAVAILABLE: claims depending on this source are Untested",
+    "e2e_nlg -> UNAVAILABLE: claims depending on this source are Untested",
+    "wikisql -> UNAVAILABLE: claims depending on this source are Untested",
+    "samsum -> UNAVAILABLE: claims depending on this source are Untested",
+    "hf_pretrained_roberta_base -> UNAVAILABLE: claims depending on this source are Untested",
+    "hf_pretrained_roberta_large -> UNAVAILABLE: claims depending on this source are Untested",
+    "hf_pretrained_deberta_xxl -> UNAVAILABLE: claims depending on this source are Untested",
+    "hf_pretrained_gpt2_medium -> UNAVAILABLE: claims depending on this source are Untested",
+    "hf_pretrained_gpt2 -> UNAVAILABLE: claims depending on this source are Untested",
+    "gpt3_175b_checkpoint -> UNAVAILABLE: claims depending on this source are Untested",
+    "Table-1 checkpoint (gate): trainable_params_millions_roberta_base_ft paper=125.0 ours=None gap=None; trainable_params_millions_roberta_base_lora paper=0.3 ours=None gap=None; trainable_params_millions_roberta_large_ft paper=355.0 ours=None gap=None; trainable_params_millions_roberta_large_lora paper=0.8 ours=None gap=None; trainable_params_millions_deberta_xxl_ft paper=1500.0 ours=None gap=None; trainable_params_millions_deberta_xxl_lora paper=4.7 ours=None gap=None; trainable_params_millions_gpt2_medium_ft paper=354.92 ours=None gap=None; trainable_params_millions_gpt2_medium_lora paper=0.35 ours=None gap=None; trainable_params_millions_gpt2_large_ft paper=774.03 ours=None gap=None; trainable_params_millions_gpt2_large_lora paper=0.77 ours=None gap=None; trainable_params_millions_gpt3_ft paper=175255.8 ours=None gap=None; trainable_params_millions_gpt3_lora_small paper=4.7 ours=None gap=None; trainable_params_millions_gpt3_lora_large paper=37.7 ours=None gap=None; wikisql_train_examples paper=56355.0 ours=None gap=None; wikisql_validation_examples paper=8421.0 ours=None gap=None; samsum_train_examples paper=14732.0 ours=None gap=None; samsum_test_examples paper=819.0 ours=None gap=None; e2e_train_examples_approx paper=42000.0 ours=None gap=None; e2e_validation_examples_approx paper=4600.0 ours=None gap=None; e2e_test_examples_approx paper=4600.0 ours=None gap=None; dart_examples_approx paper=82000.0 ours=None gap=None; webnlg_examples_approx paper=22000.0 ours=None gap=None; mnli_full_train_examples_thousands paper=392.0 ours=None gap=None; gpt3_transformer_layers paper=96.0 ours=None gap=None; gpt3_d_model_full_rank paper=12288.0 ours=None gap=None; gpt3_lora_checkpoint_size_reduction_factor paper=10000.0 ours=None gap=None; gpt3_vram_full_ft_tb paper=1.2 ours=None gap=None; gpt3_lora_training_speedup_percent paper=25.0 ours=None gap=None; latency_trials_averaged paper=100.0 ours=None gap=None; gpt3_fewshot_mnli_m_accuracy paper=40.6 ours=None gap=None; gpt3_fewshot_rte_accuracy paper=69.0 ours=None gap=None"
+  ],
+  "claims": [
+    {
+      "claim_id": "rob_base_lora_sst2",
+      "paper_value": 95.1,
+      "our_value": 91.97247706422019,
+      "our_std": null,
+      "tolerance": 0.45,
+      "outcome": "Untested",
+      "note": "reduced scale (compute tier 2): ours=91.97 is not comparable to the paper-scale value; |gap|=3.128 > tol 0.45"
+    },
+    {
+      "claim_id": "rob_base_ft_sst2",
+      "paper_value": 94.8,
+      "our_value": 91.97247706422019,
+      "our_std": null,
+      "tolerance": 1.553756763465996,
+      "outcome": "Untested",
+      "note": "reduced scale (compute tier 2): ours=91.97 is not comparable to the paper-scale value; |gap|=2.828 > tol 1.554"
+    },
+    {
+      "claim_id": "rob_base_lora_trainable_params",
+      "paper_value": 0.3,
+      "our_value": 0.294912,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no derived tolerance; needs n_periods, t-stat or std"
+    },
+    {
+      "claim_id": "rob_base_ft_trainable_params",
+      "paper_value": 125.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "rob_base_lora_glue_avg",
+      "paper_value": 87.2,
+      "our_value": 91.97247706422019,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no derived tolerance; needs n_periods, t-stat or std"
+    },
+    {
+      "claim_id": "rob_base_ft_glue_avg",
+      "paper_value": 86.4,
+      "our_value": 91.97247706422019,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no derived tolerance; needs n_periods, t-stat or std"
+    },
+    {
+      "claim_id": "rob_base_lora_mnli",
+      "paper_value": 87.5,
+      "our_value": 91.97247706422019,
+      "our_std": null,
+      "tolerance": 0.65,
+      "outcome": "Untested",
+      "note": "reduced scale (compute tier 2): ours=91.97 is not comparable to the paper-scale value; |gap|=4.472 > tol 0.65"
+    },
+    {
+      "claim_id": "rob_base_ft_mnli",
+      "paper_value": 87.6,
+      "our_value": 91.97247706422019,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no derived tolerance; needs n_periods, t-stat or std"
+    },
+    {
+      "claim_id": "rob_base_lora_mrpc",
+      "paper_value": 89.7,
+      "our_value": 91.97247706422019,
+      "our_std": null,
+      "tolerance": 1.45,
+      "outcome": "Untested",
+      "note": "reduced scale (compute tier 2): ours=91.97 is not comparable to the paper-scale value; |gap|=2.272 > tol 1.45"
+    },
+    {
+      "claim_id": "rob_base_lora_cola",
+      "paper_value": 63.4,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "rob_large_lora_sst2",
+      "paper_value": 96.2,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "rob_large_ft_sst2",
+      "paper_value": 96.4,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "deberta_lora_glue_avg",
+      "paper_value": 91.3,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "deberta_ft_glue_avg",
+      "paper_value": 91.1,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "gpt2m_lora_e2e_bleu",
+      "paper_value": 70.4,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "gpt2m_ft_e2e_bleu",
+      "paper_value": 68.2,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "gpt3_lora_wikisql",
+      "paper_value": 73.4,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "gpt3_ft_wikisql",
+      "paper_value": 73.8,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "gpt3_lora_mnli_m",
+      "paper_value": 91.7,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "gpt3_ft_mnli_m",
+      "paper_value": 89.5,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "gpt3_lora_trainable_params",
+      "paper_value": 4.7,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "gpt3_ft_trainable_params",
+      "paper_value": 175255.8,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "gpt3_weighttype_qv_r4_wikisql",
+      "paper_value": 73.7,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "gpt3_weighttype_q_only_wikisql",
+      "paper_value": 70.4,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "gpt3_rank_r1_qv_wikisql",
+      "paper_value": 73.4,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "gpt3_rank_r4_qv_wikisql",
+      "paper_value": 73.7,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "gpt2m_rank_r4_e2e_bleu",
+      "paper_value": 70.38,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "gpt2m_rank_r4_val_loss",
+      "paper_value": 1.18,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "gpt3_lowdata_mnli100_lora",
+      "paper_value": 63.8,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "gpt3_lowdata_mnli100_ft",
+      "paper_value": 60.2,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "adapter_latency_batch1_lora",
+      "paper_value": 19.8,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "adapter_latency_batch1_adapterH",
+      "paper_value": 25.8,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    }
+  ],
+  "leakage": [
+    {
+      "test": "shuffle",
+      "passed": null,
+      "detail": "shuffled accuracy=50.92, unshuffled=91.97; no null reference (chance_level / accuracy_random_policy / accuracy_baseline) reported, test not judged"
+    },
+    {
+      "test": "contamination_scan",
+      "passed": null,
+      "detail": "not implemented in MVP: hash-based train/test near-duplicate scan"
+    }
+  ],
   "grid": [],
   "grid_range": null,
   "unexplained": [],
-  "ambiguities_used": [],
+  "ambiguities_used": [
+    {
+      "config_key": "base_model",
+      "default": "roberta_base_125m_as_paper",
+      "source": "paper_text",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "train_subset_size",
+      "default": "full_train_split",
+      "source": "paper_text",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "train_subset_sampling",
+      "default": "stratified_random_seed0",
+      "source": "guess",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "num_epochs",
+      "default": "60",
+      "source": "paper_text",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "batch_vs_steps",
+      "default": "steps",
+      "source": "conventions_kb",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "lr_schedule",
+      "default": "as_paper",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "learning_rate",
+      "default": "lora=5e-4,ft=2e-5",
+      "source": "paper_text",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "batch_size",
+      "default": "16",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "max_seq_len",
+      "default": "512",
+      "source": "paper_text",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "lora_rank",
+      "default": "8",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "lora_alpha",
+      "default": "8",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "lora_target_modules",
+      "default": "q_v_only",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "lora_layer_coverage",
+      "default": "all_layers",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "lora_dropout",
+      "default": "0.0",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "weight_decay",
+      "default": "0.01",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "n_seeds",
+      "default": "5_median",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "checkpoint_selection",
+      "default": "best_epoch_on_eval",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "error_bar_semantics",
+      "default": "std_over_seeds",
+      "source": "paper_text",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "split",
+      "default": "validation",
+      "source": "paper_text",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "mnli_metric",
+      "default": "overall_m_and_mm_accuracy",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "glue_avg_definition",
+      "default": "unweighted_mean_of_eight_task_metrics",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "wikisql_accuracy",
+      "default": "logical_form",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "gpt3_lora_4p7m_config",
+      "default": "rv_2",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "e2e_eval_script",
+      "default": "official_e2e_metrics_script",
+      "source": "conventions_kb",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "head_treatment",
+      "default": "trainable_not_counted",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "param_fraction_denominator",
+      "default": "all_base_params_incl_embeddings",
+      "source": "paper_text",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "mnli_transfer_init",
+      "default": "mnli_init_for_mrpc_rte_stsb",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "augmentation",
+      "default": "none",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "mixed_precision",
+      "default": "fp32",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "pooling",
+      "default": "last_non_pad_token",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    }
+  ],
   "grade": {
     "data_fidelity": "tier A checkpoint",
     "procedure_fidelity": "re-implemented, 0 unexplained",
-    "result": "no claims",
+    "result": "Untested",
     "integrity": "not_run",
-    "letter": "F"
+    "letter": "C"
   },
   "reproducibility": {
     "agent_version": "0.1.0",
-    "spec_frozen_hash": "fe8ba399176e0de1b7a807cc4e22a851efc224385a135df8897b6f7a50c2d4ad",
-    "frozen_at": "2026-09-15T16:17:34.869541+00:00",
+    "spec_frozen_hash": "2aa7b80bebda147e4174b15fcf902cd087ff89cc1a41f90e298e5a2a4d8bbc1c",
+    "frozen_at": "2026-09-16T17:46:01.628587+00:00",
     "env_lock_hash": "b4796a207a0b6fde",
-    "runs": [],
+    "runs": [
+      "full_roberta_base_ft_s0_c3f0ba765a59797c.json",
+      "full_roberta_base_lora_s0_1ee830f510fb28fa.json"
+    ],
     "work_dir": "/Users/vzhu/Developer/research-copy/runs/batch/lora/work",
-    "command": "/Users/vzhu/Developer/research-copy/evals/batch.py --reverify batchnorm dqn layernorm lora ppo worldmodels"
+    "command": "/Users/vzhu/Developer/research-copy/evals/batch.py --reverify lora ppo worldmodels"
   },
   "human_minutes": 0.0,
-  "wall_minutes": 137.52888514995576,
+  "wall_minutes": 45.077144134044644,
   "cost_usd": 0.0,
   "stages_completed": [
     "setup",
-    "build"
+    "build",
+    "run",
+    "verify"
   ],
-  "failure": "RuntimeError: build did not pass smoke: {'passed': False, 'problems': ['a SCALE=0.1 run took 2019s, so the full run would take ~337 min > timeout 25 min: reduce the default scale (steps/epochs/data/model) until SCALE=0.1 finishes in under 135s'], 'metrics': {'accuracy': 52.34375, 'accuracy_full_ft': 53.125, 'accuracy_gap_lora_minus_ft': -0.78125, 'glue_avg': 52.34375, 'glue_avg_full_ft': 53.125, 'trainable_parameters_millions': 0.294912, 'trainable_parameters_millions_ft': 124.05504, 'trainable_param_fraction_percent': 0.2377267380672321, '_intermediates': {'n_train_examples': 256, 'n_eval_examples': 128, 'steps': 16, 'batch_size': 16, 'eval_curve_lora': [[8, 52.34375], [16, 52.34375]], 'eval_curve_ft': [[8, 47.65625], [16, 53.125]], 'train_seconds': {'lora': 1851.6, 'ft': 2365.5}, 'config_used': {'base_model': 'roberta_base_125m_as_paper', 'train_subset_size': 'full_train_split', 'train_subset_sampling': 'stratified_random_seed0', 'num_epochs': '60', 'batch_vs_steps': 'steps', 'lr_schedule': 'as_paper', 'learning_rate': 'lora=5e-4,ft=2e-5', 'batch_size': '16', 'max_seq_len': '512', 'lora_rank': '8', 'lora_alpha': '8', 'lora_target_modules': 'q_v_only', 'lora_layer_coverage': 'all_layers', 'lora_dropout': '0.0', 'weight_decay': '0.01', 'n_seeds': '5_median', 'checkpoint_selection': 'best_epoch_on_eval', 'error_bar_semantics': 'std_over_seeds', 'split': 'validation', 'mnli_metric': 'overall_m_and_mm_accuracy', 'glue_avg_definition': 'unweighted_mean_of_eight_task_metrics', 'wikisql_accuracy': 'logical_form', 'gpt3_lora_4p7m_config': 'rv_2', 'e2e_eval_script': 'official_e2e_metrics_script', 'head_treatment': 'trainable_not_counted', 'param_fraction_denominator': 'all_base_params_incl_embeddings', 'mnli_transfer_init': 'mnli_init_for_mrpc_rte_stsb', 'augmentation': 'none', 'mixed_precision': 'fp32', 'pooling': 'last_non_pad_token', 'epochs': 1, 'n_examples': 2048}, 'glue_avg_note': \"only SST-2 was run; glue_avg is the unweighted mean over the 1 task run (= SST-2 accuracy), NOT the paper's 8-task average\", 'scale': {'base_model': 'roberta-base', 'train_examples_seen': 256, 'paper_train_examples': 67349, 'paper_epochs': 60, 'steps_run': 16, 'paper_equivalent_steps': 252558, 'n_seeds': 1, 'paper_n_seeds': 5, 'eval_examples': 128, 'smoke': True, 'scale_factor': 1.0}}}, 'scale_probe': {'scale_0.1_seconds': 2019, 'estimated_full_seconds': 20190, 'run_timeout_s': 1500}}"
+  "failure": null
 }

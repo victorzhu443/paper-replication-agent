@@ -22,16 +22,16 @@ obtained, under which conventions, whether it could have leaked, and what remain
 | Ioffe 2015 BatchNorm | CS | re implementation | A/2 | C | BN 96.5% vs no-BN 91.7% at 10k steps on both seeds (paper's direction) | shuffle n/a | $2.76 |
 | Goodfellow 2014 GAN | CS | re implementation | A/2 | C | MNIST GAN trains; shuffle test passes | shuffle P | $2.74 |
 | Mnih 2013 DQN | RL | conceptual replication | B/2 | C | CartPole DQN mean return 226, best episodes 500 | shuffle n/a | $2.35 |
-| Schulman 2017 PPO | RL | conceptual replication | B/2 | F | CartPole 500/500 on 3 seeds; clipping beats no-clip on 2 of 3 · failed: RuntimeError: build did not pass smoke: {'passed': False, 'p | — | $1.82 |
-| Ha 2018 World Models | RL | conceptual replication | B/2 | F | VAE loss 3169→0.7; MDN-RNN and CMA-ES controller beat random policy (t=23) · failed: RuntimeError: build did not pass smoke: {'passed': False, 'p | — | $17.15 |
+| Schulman 2017 PPO | RL | conceptual replication | B/2 | C | CartPole 500/500 on 3 seeds; clipping beats no-clip on 2 of 3 · t1_clip_eps02 Consistent; t1_clip_eps01 Consistent | shuffle n/a | $1.82 |
+| Ha 2018 World Models | RL | conceptual replication | B/2 | C | VAE loss 3169→0.7; MDN-RNN and CMA-ES controller beat random policy (t=23) | shuffle P | $17.15 |
 | Frankle 2019 Lottery Ticket | CS | re implementation | A/2 | C | winning tickets beat unpruned by 0.25–0.3 pts; early-stop speedup 2–3× | — | $4.75 |
-| Hu 2021 LoRA | CS | re implementation | A/2 | F | RoBERTa-base on SST-2 subset: LoRA 91.97% vs full FT 92.66% with 0.3M trainable params (paper's claim) · failed: RuntimeError: build did not pass smoke: {'passed': False, 'p | — | $5.75 |
+| Hu 2021 LoRA | CS | re implementation | A/2 | C | RoBERTa-base on SST-2 subset: LoRA 91.97% vs full FT 92.66% with 0.3M trainable params (paper's claim) | shuffle n/a | $5.75 |
 | Rafailov 2023 DPO | CS | re implementation | A/2 | C | DPO loss from Eq. 7: 98.5% held-out preference accuracy, 100% win rate vs reference, reward margin grows | shuffle P | $4.40 |
 | Elhage 2022 Toy Models of Superposition | CS | re implementation | A/2 | C | n=20, m=5: dense regime 5 features, sparse (S=0.99) 12.9 features in 5 dims; linear never superposes; antipodal pair 0.498 (paper 1/2) | shuffle n/a | $4.21 |
 | Elhage 2021 Transformer Circuits | CS | re implementation | A/2 | C | induction heads emerge in the 2-layer model: second-half loss 0.018 vs 3.3 first half (gap 3.28); 1-layer gap only 0.92 | shuffle n/a | $2.59 |
 | Meng 2022 ROME | CS | re implementation | A/2 | C | GPT-2 causal tracing: MLP restoration at the last subject token carries the effect (18.9 vs 0.77 for attention), peaking at an early layer | shuffle n/a | $9.80 |
 
-Sweep total: $78.70 in model calls for 14 papers. Reports: `papers/batch/<slug>/REPORT.md`. Updated 2026-09-16 13:46.
+Sweep total: $78.70 in model calls for 14 papers. Reports: `papers/batch/<slug>/REPORT.md`. Updated 2026-09-16 15:30.
 <!-- RESULTS:END -->
 
 **Reading a grade.** The letter is a fixed function of four axes (data fidelity, procedure fidelity,

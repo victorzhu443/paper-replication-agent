@@ -52,7 +52,7 @@
     "adaptive_kl_0.01": 198656,
     "fixed_kl_1": 198656
    },
-   "wall_time_s": 153.1023120880127,
+   "wall_time_s": 208.52405905723572,
    "config": {
     "env_suite": "gym_cartpole_v1_200k_steps",
     "lr_schedule": "constant",

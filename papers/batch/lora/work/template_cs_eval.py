@@ -33,6 +33,17 @@ def run_reproduce(workdir: Path, config: dict[str, Any], seed: int, timeout_s: i
     import signal
     proc = subprocess.Popen(["bash", "reproduce.sh"], cwd=workdir, env=env, stdout=subprocess.PIPE,
                             stderr=subprocess.PIPE, text=True, start_new_session=True)
+    # Independent wall-clock watchdog: kills the group at the deadline even if communicate()
+    # is blocked on a pipe held open by a grandchild.
+    import threading
+    def _watchdog():
+        try:
+            os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+        except (ProcessLookupError, PermissionError):
+            pass
+    wd = threading.Timer(timeout_s + 15, _watchdog)
+    wd.daemon = True
+    wd.start()
     try:
         stdout, stderr = proc.communicate(timeout=timeout_s)
     except subprocess.TimeoutExpired:
@@ -41,7 +52,9 @@ def run_reproduce(workdir: Path, config: dict[str, Any], seed: int, timeout_s: i
         except ProcessLookupError:
             pass
         proc.wait(timeout=30)
+        wd.cancel()
         raise RuntimeError(f"reproduce.sh timed out after {timeout_s}s (seed {seed}); process group killed")
+    wd.cancel()
     if proc.returncode != 0:
         raise RuntimeError(f"reproduce.sh failed (seed {seed}):\n{stderr[-3000:]}")
     if not out.exists():
