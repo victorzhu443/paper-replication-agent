@@ -135,11 +135,14 @@ def test_shuffle_skill_rule_handles_error_metrics():
     from replicator.verify.leakage import metric_skill, shuffle_test
     assert metric_skill("test_error", 8.5) == 91.5 and metric_skill("accuracy", 91.5) == 91.5
     # clean classifier: shuffled labels -> near-chance error -> passes
-    r = shuffle_test(lambda cfg, s: {"test_error": 85.7, "_shuffled": True}, {}, "test_error", 8.5)
+    r = shuffle_test(lambda cfg, s: {"test_error": 85.7, "_shuffled": True, "chance_level": 90.0}, {}, "test_error", 8.5)
     assert r.passed is True
     # leaky classifier: shuffled labels -> still low error -> fails
-    r2 = shuffle_test(lambda cfg, s: {"test_error": 9.0, "_shuffled": True}, {}, "test_error", 8.5)
+    r2 = shuffle_test(lambda cfg, s: {"test_error": 9.0, "_shuffled": True, "chance_level": 90.0}, {}, "test_error", 8.5)
     assert r2.passed is False
+    # no null reference reported: not judged (never a false F)
+    r3 = shuffle_test(lambda cfg, s: {"accuracy": 55.0, "_shuffled": True}, {}, "accuracy", 85.0)
+    assert r3.passed is None
 
 
 def test_shuffle_requires_acknowledgement():
@@ -147,7 +150,7 @@ def test_shuffle_requires_acknowledgement():
     # a script that ignores the flag returns the real number without _shuffled: not a leak verdict
     r = shuffle_test(lambda cfg, s: {"accuracy": 91.5}, {}, "accuracy", 91.5)
     assert r.passed is None and "acknowledge" in r.detail
-    r2 = shuffle_test(lambda cfg, s: {"accuracy": 91.5, "_shuffled": True}, {}, "accuracy", 91.5)
+    r2 = shuffle_test(lambda cfg, s: {"accuracy": 91.5, "_shuffled": True, "chance_level": 10.0}, {}, "accuracy", 91.5)
     assert r2.passed is False
 
 

@@ -38,6 +38,9 @@ Contract you must satisfy (the orchestrator checks it; saying you are done does 
   When REPLICATOR_CONFIG has "_shuffle_labels": true, shuffle the training labels (or targets /
   rewards where that is meaningful) within each batch or period BEFORE training and set
   "shuffled": true; if shuffling is meaningless for the method, leave "shuffled": false.
+  Always report a no-skill reference next to the headline metric so the shuffle test can judge:
+  "chance_level" (e.g. 0.5 or 50 for balanced binary accuracy), or "<metric>_random_policy" for
+  RL returns, or "<metric>_baseline" for a trivial baseline, in the same units as the metric.
   The full run (SCALE=1) MUST finish inside RUN_TIMEOUT_S on CPU; run_smoke times a SCALE=0.1 run
   and rejects the build if the extrapolated full run does not fit. Size the default accordingly.
   If the full run uses the paper's OWN configuration for a claim (same dataset, model size, and

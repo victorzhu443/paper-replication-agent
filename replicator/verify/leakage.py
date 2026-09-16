@@ -81,6 +81,13 @@ def shuffle_test(run_fn: Callable[[dict, int], dict], config: dict, headline: st
     # is only meaningful when the unshuffled baseline was itself a real effect, so it is used
     # only when no t-stat is available.
     null = null_reference(m, headline)
+    if t is None and null is None:
+        # Without a no-skill reference (chance level, random policy, baseline) the floor of the
+        # metric is not the null: 55% accuracy on a binary task is chance, not skill. Refuse to
+        # judge rather than fail falsely; the builder contract asks for the reference.
+        return LeakageResult(test="shuffle", passed=None,
+                             detail=f"shuffled {headline}={v:.4g}, unshuffled={baseline_value:.4g}; no null reference "
+                                    f"(chance_level / {headline}_random_policy / {headline}_baseline) reported, test not judged")
     if t is not None:
         survives = abs(t) > 2.0
     else:
