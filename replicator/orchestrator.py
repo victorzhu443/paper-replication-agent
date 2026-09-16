@@ -132,7 +132,7 @@ class Orchestrator:
             return lambda cfg, seed: mod.run(cfg, seed)
         def _cs(cfg, seed):
             r = cs_eval.run_reproduce(self.work, cfg, seed, timeout_s=spec.plan.budget.run_timeout_s)
-            return {**r["metrics"], "_shuffled": bool(r.get("shuffled")),
+            return {**r["metrics"], "_shuffled": bool(r.get("shuffled")), "_shuffle_na": bool(r.get("shuffle_not_applicable")),
                     "_intermediates": {"n_examples": r.get("n_examples"), "split": r.get("split"), "seed": r.get("seed"),
                                        "matched_scale": bool(r.get("matched_scale")), "scale": r.get("scale")}}
         return _cs
@@ -261,6 +261,8 @@ class Orchestrator:
                         rec.config = cfg
                     rec.metrics = {k: float(v) for k, v in m.items() if isinstance(v, (int, float)) and not k.startswith("_")}
                     rec.intermediates = m.get("_intermediates", {}) if isinstance(m.get("_intermediates"), dict) else {}
+                    if m.get("_shuffle_na"):
+                        rec.intermediates["shuffle_not_applicable"] = True
                     rec.data_hashes = m.get("_data_hashes", {}) if isinstance(m.get("_data_hashes"), dict) else {}
                 except Exception as e:  # noqa: BLE001
                     rec.error = f"{type(e).__name__}: {e}"
@@ -324,8 +326,11 @@ class Orchestrator:
             rs = by_variant.get(headline.method_variant) or by_variant.get("default") or []
             v = [r.metrics.get(headline.metric) for r in rs if headline.metric in r.metrics]
             base_val = float(np.mean(v)) if v else None
-        if headline and base_val is not None:
+        na = any((r.metrics or {}).get("_shuffle_na") or (r.intermediates or {}).get("shuffle_not_applicable") for r in recs)
+        if headline and base_val is not None and not na:
             report.leakage.append(leakage.shuffle_test(run_fn, base_cfg, headline.metric, base_val))
+        elif na:
+            report.leakage.append(LeakageResult(test="shuffle", passed=None, detail="not applicable: the pipeline declares no label/reward to shuffle (declared in metrics.json)"))
         if not is_cs:
             try:
                 mod = self._load_pipeline()

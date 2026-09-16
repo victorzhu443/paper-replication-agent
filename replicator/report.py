@@ -12,7 +12,8 @@ def grade(report: Report, spec: Spec) -> GradeVector:
     outcomes = [c.outcome for c in heads] or [c.outcome for c in report.claims]
     ran = [l for l in report.leakage if l.passed is not None]
     failed = [l for l in ran if l.passed is False]
-    integrity = "failed" if failed else ("passed" if ran else "not_run")
+    na = any(l.test == "shuffle" and l.passed is None and l.detail.startswith("not applicable") for l in report.leakage)
+    integrity = "failed" if failed else ("passed" if ran else ("not_applicable" if na else "not_run"))
     data_f = {"A": "tier A checkpoint", "B": "tier B gap measured", "C": "synthetic"}[report.data_tier]
     n_unexpl = len(report.unexplained)
     proc = "author code" if report.kind_of_test == "reproduction" else f"re-implemented, {n_unexpl} unexplained"
@@ -28,9 +29,9 @@ def grade(report: Report, spec: Spec) -> GradeVector:
         result = "Untested"
     if report.failure or integrity == "failed":
         letter = "F"
-    elif result == "all headline Match" and integrity == "passed" and report.data_tier == "A":
+    elif result == "all headline Match" and integrity in ("passed", "not_applicable") and report.data_tier == "A":
         letter = "A"
-    elif result in ("all headline Match", "Consistent") and integrity == "passed":
+    elif result in ("all headline Match", "Consistent") and integrity in ("passed", "not_applicable"):
         letter = "B"
     elif result in ("Untested", "no claims") or report.kind_of_test == "mechanics_only":
         letter = "C"

@@ -211,6 +211,12 @@ def _replicate_in_subprocess(slug: str) -> dict:
 
 
 def main(slugs: list[str]) -> None:
+    global GPU, OUT
+    if slugs and slugs[0] == "--matched":
+        # paper-scale plan (GPU_HINTS) for the named papers on this machine, compute tier 1, long timeouts
+        GPU = True
+        OUT = ROOT / "runs" / "batch_matched"
+        slugs = slugs[1:]
     if slugs and slugs[0] == "--reverify":
         rows = []
         for slug in slugs[1:]:

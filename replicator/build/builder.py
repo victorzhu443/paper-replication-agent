@@ -37,7 +37,8 @@ Contract you must satisfy (the orchestrator checks it; saying you are done does 
   {"seed": int, "split": str, "n_examples": int, "shuffled": bool, "metrics": {<metric>: value}}.
   When REPLICATOR_CONFIG has "_shuffle_labels": true, shuffle the training labels (or targets /
   rewards where that is meaningful) within each batch or period BEFORE training and set
-  "shuffled": true; if shuffling is meaningless for the method, leave "shuffled": false.
+  "shuffled": true; if shuffling is meaningless for the method (no labels or rewards: toy models,
+  causal tracing, generative-only), set "shuffle_not_applicable": true and say why in a comment.
   Always report a no-skill reference next to the headline metric so the shuffle test can judge:
   "chance_level" (e.g. 0.5 or 50 for balanced binary accuracy), or "<metric>_random_policy" for
   RL returns, or "<metric>_baseline" for a trivial baseline, in the same units as the metric.
