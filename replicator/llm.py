@@ -106,7 +106,7 @@ class LLM:
         if len(json.dumps(strict)) > self.GRAMMAR_LIMIT_BYTES:
             return self._call_json_guided(stage, system, content, schema, strict, model, effort, max_tokens)
         t0 = time.time()
-        with self.client.messages.stream(
+        with self.client.with_options(timeout=900.0, max_retries=2).messages.stream(
             model=model,
             max_tokens=max_tokens,
             system=[{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}],
@@ -130,7 +130,7 @@ class LLM:
         last_err = None
         for attempt in range(3):
             t0 = time.time()
-            with self.client.messages.stream(
+            with self.client.with_options(timeout=900.0, max_retries=2).messages.stream(
                 model=model, max_tokens=max_tokens,
                 system=[{"type": "text", "text": sys_text, "cache_control": {"type": "ephemeral"}}],
                 messages=msgs, thinking={"type": "adaptive"}, output_config={"effort": effort},
