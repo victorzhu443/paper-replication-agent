@@ -31,8 +31,12 @@ Contract you must satisfy (the orchestrator checks it; saying you are done does 
     build_features(raw: DataFrame) -> DataFrame with a 'date' column and the signal column(s).
   run() must honor config['_shuffle_labels'] by shuffling returns within each period.
 - CS families: write reproduce.sh (bash) and the code it calls. reproduce.sh reads env SEED,
-  SMOKE ('1' => tiny subset, one epoch), REPLICATOR_CONFIG (json), and writes METRICS_OUT as
+  SMOKE ('1' => tiny subset, one epoch), SCALE (float, default 1.0: multiply training steps /
+  epochs / data by it; SCALE=0.1 must run the same pipeline at one tenth the cost), RUN_TIMEOUT_S,
+  REPLICATOR_CONFIG (json), and writes METRICS_OUT as
   {"seed": int, "split": str, "n_examples": int, "metrics": {<metric>: value}}.
+  The full run (SCALE=1) MUST finish inside RUN_TIMEOUT_S on CPU; run_smoke times a SCALE=0.1 run
+  and rejects the build if the extrapolated full run does not fit. Size the default accordingly.
 - Every choice in the ambiguity list is a config key read from `config`, defaulting to the spec default.
 - Use pandas/numpy/statsmodels/torch. No network calls except through the provided data adapters.
 - Do not read the paper authors' code or clone repositories in re-implementation mode.

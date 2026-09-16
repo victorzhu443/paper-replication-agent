@@ -168,6 +168,21 @@ class Orchestrator:
                     return out
                 r = cs_eval.run_reproduce(self.work, cfg, 0, timeout_s=min(600, spec.plan.budget.run_timeout_s))
                 out["metrics"] = r["metrics"]
+                # Progressive scaling (design stage 7): a timed 10%-scale run extrapolates the full run.
+                t = time.time()
+                try:
+                    cs_eval.run_reproduce(self.work, {**spec.default_config(), "_scale": 0.1}, 0,
+                                          timeout_s=min(600, spec.plan.budget.run_timeout_s))
+                    t10 = time.time() - t
+                    est = t10 * 10
+                    out["scale_probe"] = {"scale_0.1_seconds": round(t10), "estimated_full_seconds": round(est),
+                                          "run_timeout_s": spec.plan.budget.run_timeout_s}
+                    if est > 0.9 * spec.plan.budget.run_timeout_s:
+                        out["problems"].append(f"a SCALE=0.1 run took {t10:.0f}s, so the full run would take ~{est/60:.0f} min > "
+                                               f"timeout {spec.plan.budget.run_timeout_s/60:.0f} min: reduce the default scale "
+                                               f"(steps/epochs/data/model) until SCALE=0.1 finishes in under {0.09*spec.plan.budget.run_timeout_s:.0f}s")
+                except Exception as e:  # noqa: BLE001
+                    out["problems"].append(f"SCALE=0.1 probe failed or exceeded 10 min: {str(e)[:300]}. reproduce.sh must honor SCALE.")
                 need = {c.metric for c in spec.claims if c.id in spec.plan.target_claims}
                 missing = [m for m in need if m not in r["metrics"]]
                 if missing:
@@ -223,7 +238,15 @@ class Orchestrator:
                 t = time.time()
                 rec = RunRecord(run_id=rid, purpose="full", config=cfg, seed=seed, started_at=datetime.now(timezone.utc).isoformat())
                 try:
-                    m = run_fn(cfg, seed)
+                    try:
+                        m = run_fn(cfg, seed)
+                    except RuntimeError as e:
+                        if "timed out" not in str(e) or spec.paper.track.value != "cs":
+                            raise
+                        self.log(f"run {rid} timed out; retrying once at SCALE=0.3")
+                        cfg = {**cfg, "_scale": 0.3}
+                        m = run_fn(cfg, seed)
+                        rec.config = cfg
                     rec.metrics = {k: float(v) for k, v in m.items() if isinstance(v, (int, float)) and not k.startswith("_")}
                     rec.intermediates = m.get("_intermediates", {}) if isinstance(m.get("_intermediates"), dict) else {}
                     rec.data_hashes = m.get("_data_hashes", {}) if isinstance(m.get("_data_hashes"), dict) else {}
