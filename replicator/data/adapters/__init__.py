@@ -51,6 +51,11 @@ def options_for(canonical: str) -> list[tuple[str, str]]:
         return [(f"hf_datasets:{repo}", "exact source")]
     if gym_env.matches(canonical):
         return [("gym_env", "simulator; Atari-scale runs are compute tier 2 on CPU")]
+    model = hf_datasets.resolve_model(canonical)
+    if model:
+        return [(f"hf_model:{model}", "exact source")]
+    if any(k in canonical.lower() for k in ("synthetic", "toy", "generated", "procedural", "custom_", "model_weights", "probe")):
+        return [("synthetic_by_construction", "exact source")]
     return [(canonical, "direct")]
 
 

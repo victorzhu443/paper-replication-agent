@@ -14,7 +14,36 @@ CANONICAL = {
     "imagenet": "ILSVRC/imagenet-1k", "cifar10_hf": "uoft-cs/cifar10", "mnist_hf": "ylecun/mnist",
     "wikitext103": "Salesforce/wikitext", "penn_treebank": "ptb-text-only/ptb_text_only", "penn_treebank_wsj": "ptb-text-only/ptb_text_only",
     "librispeech": "openslr/librispeech_asr", "coco": "detection-datasets/coco",
+    "glue_sst2": "stanfordnlp/sst2", "sst-2": "stanfordnlp/sst2", "glue_benchmark": "nyu-mll/glue",
+    "imdb": "stanfordnlp/imdb", "anthropic_hh": "Anthropic/hh-rlhf", "hh_rlhf": "Anthropic/hh-rlhf",
+    "cnn_dailymail": "abisee/cnn_dailymail", "samsum": "Samsung/samsum", "wikisql": "Salesforce/wikisql",
+    "e2e_nlg": "tuetschek/e2e_nlg", "counterfact_dataset": "azhx/counterfact", "counterfact": "azhx/counterfact",
+    "bookcorpus": "bookcorpus/bookcorpus", "tldr_reddit_summarization": "openai/summarize_from_feedback",
+    "openwebtext": "Skylion007/openwebtext", "wikitext": "Salesforce/wikitext", "zsre": "azhx/zsre",
 }
+
+# Pretrained checkpoints on the Hub count as exact sources (checkpoint_eval family)
+MODEL_HINTS = ("hf_pretrained", "huggingface_", "checkpoint", "pretrained_", "gpt2", "roberta", "bert", "llama", "t5")
+MODEL_IDS = {"gpt2": "gpt2", "gpt2_medium": "gpt2-medium", "gpt2_xl": "gpt2-xl", "roberta_base": "roberta-base",
+             "roberta_large": "roberta-large", "deberta_xxl": "microsoft/deberta-v2-xxlarge", "bert_base": "bert-base-uncased"}
+
+
+def resolve_model(canonical: str) -> str | None:
+    c = canonical.lower()
+    if not any(h in c for h in MODEL_HINTS):
+        return None
+    for k, v in MODEL_IDS.items():
+        if k in c:
+            return v
+    return "gpt2" if "gpt2" in c else None
+
+
+def probe_model(repo: str) -> tuple[bool, str]:
+    try:
+        r = httpx.get("https://huggingface.co/api/models/" + repo, timeout=20, follow_redirects=True)
+        return r.status_code == 200, f"HTTP {r.status_code} model {repo}"
+    except Exception as e:  # noqa: BLE001
+        return False, str(e)
 
 
 def resolve(canonical: str) -> str | None:

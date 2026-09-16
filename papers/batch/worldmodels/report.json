@@ -5,11 +5,7 @@
   "kind_of_test": "conceptual_replication",
   "data_tier": "B",
   "compute_tier": 2,
-  "deviations": [
-    "openai_gym_carracing_v0 -> UNAVAILABLE: claims depending on this source are Untested",
-    "vizdoom_takecover_v0 -> UNAVAILABLE: claims depending on this source are Untested",
-    "random_policy_rollout_dataset -> UNAVAILABLE: claims depending on this source are Untested"
-  ],
+  "deviations": [],
   "claims": [],
   "leakage": [],
   "grid": [],

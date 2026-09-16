@@ -6,7 +6,6 @@
   "data_tier": "A",
   "compute_tier": 2,
   "deviations": [
-    "toronto_face_database -> UNAVAILABLE: claims depending on this source are Untested",
     "Table-1 checkpoint (gate): mnist_test_examples paper=10000.0 ours=None gap=None; mnist_train_examples paper=60000.0 ours=None gap=None; mnist_input_dimension paper=784.0 ours=None gap=None; table1_models_compared paper=4.0 ours=None gap=None; k_discriminator_steps paper=1.0 ours=None gap=None; adv_nets_mnist_minus_gsn_gap paper=11.0 ours=None gap=None"
   ],
   "claims": [

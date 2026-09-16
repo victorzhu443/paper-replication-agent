@@ -8,9 +8,7 @@
 
 ## 1. Deviations from the paper
 
-- openai_gym_carracing_v0 -> UNAVAILABLE: claims depending on this source are Untested
-- vizdoom_takecover_v0 -> UNAVAILABLE: claims depending on this source are Untested
-- random_policy_rollout_dataset -> UNAVAILABLE: claims depending on this source are Untested
+- none recorded
 
 ## 2. Claims
 

@@ -5,11 +5,7 @@
   "kind_of_test": "conceptual_replication",
   "data_tier": "B",
   "compute_tier": 2,
-  "deviations": [
-    "openai_gym_mujoco -> UNAVAILABLE: claims depending on this source are Untested",
-    "ale_atari -> UNAVAILABLE: claims depending on this source are Untested",
-    "roboschool -> UNAVAILABLE: claims depending on this source are Untested"
-  ],
+  "deviations": [],
   "claims": [],
   "leakage": [],
   "grid": [],

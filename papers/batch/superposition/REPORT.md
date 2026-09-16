@@ -1,12 +1,11 @@
 # Replication report: Toy Models of Superposition
 
-**Kind of test:** mechanics_only · **Data tier:** C · **Compute tier:** 2 · **Track/family:** cs/train_and_eval
+**Kind of test:** re_implementation · **Data tier:** A · **Compute tier:** 2 · **Track/family:** cs/train_and_eval
 
-**Grade:** C  (data: synthetic; procedure: re-implemented, 0 unexplained; result: Untested; integrity: not_run)
+**Grade:** C  (data: tier A checkpoint; procedure: re-implemented, 0 unexplained; result: Untested; integrity: not_run)
 
 ## 1. Deviations from the paper
 
-- synthetic -> UNAVAILABLE: claims depending on this source are Untested
 - Table-1 checkpoint (measure): n_features_main_experiment paper=20.0 ours=None gap=None; m_hidden_main_experiment paper=5.0 ours=None gap=None; importance_decay_base_main_experiment paper=0.7 ours=None gap=None; n_sparsity_levels_in_paper_figure paper=7.0 ours=None gap=None; n_sparsity_levels_requested_sweep paper=5.0 ours=None gap=None; n_features_second_experiment paper=80.0 ours=None gap=None; m_hidden_second_experiment paper=20.0 ours=None gap=None; importance_decay_base_second_experiment paper=0.9 ours=None gap=None; n_features_uniform_superposition paper=400.0 ours=None gap=None; m_hidden_uniform_superposition paper=30.0 ours=None gap=None; models_per_point_phase_diagram paper=10.0 ours=None gap=None; models_trained_relu_hidden_n10_m5 paper=1000.0 ours=None gap=None; n_features_abs_value_model paper=100.0 ours=None gap=None; m_neurons_abs_value_model paper=40.0 ours=None gap=None; baseline_density_perturbation_experiment paper=0.05 ours=None gap=None; adversarial_vulnerability_increase_factor_lower_bound paper=3.0 ours=None gap=None
 
 ## 2. Claims

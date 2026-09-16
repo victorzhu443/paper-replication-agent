@@ -8,9 +8,7 @@
 
 ## 1. Deviations from the paper
 
-- openai_gym_mujoco -> UNAVAILABLE: claims depending on this source are Untested
-- ale_atari -> UNAVAILABLE: claims depending on this source are Untested
-- roboschool -> UNAVAILABLE: claims depending on this source are Untested
+- none recorded
 
 ## 2. Claims
 

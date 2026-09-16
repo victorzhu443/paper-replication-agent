@@ -137,8 +137,9 @@ class Orchestrator:
                                        "matched_scale": bool(r.get("matched_scale")), "scale": r.get("scale")}}
         return _cs
 
-    def smoke(self, spec: Spec) -> dict[str, Any]:
-        """Contract + invariants + a tiny run. Passing this is what ends the build stage."""
+    def smoke(self, spec: Spec, probe_scale: bool = True) -> dict[str, Any]:
+        """Contract + invariants + a tiny run. Passing this is what ends the build stage.
+        probe_scale=False skips the timed 10%-scale probe (re-verify of an already-run work dir)."""
         fam = family_kb(spec.paper.family.value)
         cfg = {**spec.default_config(), **fam.get("smoke", {}), "_smoke": True}
         out: dict[str, Any] = {"passed": False, "problems": []}
@@ -170,21 +171,10 @@ class Orchestrator:
                     return out
                 r = cs_eval.run_reproduce(self.work, cfg, 0, timeout_s=min(600, spec.plan.budget.run_timeout_s))
                 out["metrics"] = r["metrics"]
-                # Progressive scaling (design stage 7): a timed 10%-scale run extrapolates the full run.
-                t = time.time()
-                try:
-                    cs_eval.run_reproduce(self.work, {**spec.default_config(), "_scale": 0.1}, 0,
-                                          timeout_s=min(600, spec.plan.budget.run_timeout_s))
-                    t10 = time.time() - t
-                    est = t10 * 10
-                    out["scale_probe"] = {"scale_0.1_seconds": round(t10), "estimated_full_seconds": round(est),
-                                          "run_timeout_s": spec.plan.budget.run_timeout_s}
-                    if est > 0.9 * spec.plan.budget.run_timeout_s:
-                        out["problems"].append(f"a SCALE=0.1 run took {t10:.0f}s, so the full run would take ~{est/60:.0f} min > "
-                                               f"timeout {spec.plan.budget.run_timeout_s/60:.0f} min: reduce the default scale "
-                                               f"(steps/epochs/data/model) until SCALE=0.1 finishes in under {0.09*spec.plan.budget.run_timeout_s:.0f}s")
-                except Exception as e:  # noqa: BLE001
-                    out["problems"].append(f"SCALE=0.1 probe failed or exceeded 10 min: {str(e)[:300]}. reproduce.sh must honor SCALE.")
+                if probe_scale:
+                    self._scale_probe(spec, out)
+                else:
+                    out["scale_probe"] = "skipped (re-verify)"
                 need = {c.metric for c in spec.claims if c.id in spec.plan.target_claims}
                 missing = [m for m in need if m not in r["metrics"]]
                 if missing:
@@ -198,6 +188,25 @@ class Orchestrator:
         out["passed"] = not out["problems"]
         return out
 
+
+    def _scale_probe(self, spec: Spec, out: dict[str, Any]) -> None:
+        """Progressive scaling (design stage 7): time a SCALE=0.1 run and extrapolate the full run.
+        Rejects a build whose full run would not fit the per-run timeout."""
+        t = time.time()
+        try:
+            cs_eval.run_reproduce(self.work, {**spec.default_config(), "_scale": 0.1}, 0,
+                                  timeout_s=min(600, spec.plan.budget.run_timeout_s))
+            t10 = time.time() - t
+            est = t10 * 10
+            out["scale_probe"] = {"scale_0.1_seconds": round(t10), "estimated_full_seconds": round(est),
+                                  "run_timeout_s": spec.plan.budget.run_timeout_s}
+            if est > 0.9 * spec.plan.budget.run_timeout_s:
+                out["problems"].append(f"a SCALE=0.1 run took {t10:.0f}s, so the full run would take ~{est/60:.0f} min > "
+                                       f"timeout {spec.plan.budget.run_timeout_s/60:.0f} min: reduce the default scale "
+                                       f"(steps/epochs/data/model) until SCALE=0.1 finishes in under {0.09*spec.plan.budget.run_timeout_s:.0f}s")
+        except Exception as e:  # noqa: BLE001
+            out["problems"].append(f"SCALE=0.1 probe failed or exceeded 10 min: {str(e)[:300]}. reproduce.sh must honor SCALE.")
+
     # ------------------------------------------------------------------ stage 3: build
     def stage_build(self, spec: Spec, prebuilt: Path | None = None) -> dict[str, Any]:
         spec.assert_frozen()
@@ -206,7 +215,7 @@ class Orchestrator:
                 for f in prebuilt.iterdir():
                     if f.is_file():
                         shutil.copy(f, self.work / f.name)
-            sm = self.smoke(spec)
+            sm = self.smoke(spec, probe_scale=prebuilt.resolve() != self.work.resolve())
             res = {"smoke_passed": sm.get("passed"), "turns": 0, "prebuilt": str(prebuilt), "blacklist_hits": [], "last_smoke": sm}
         else:
             from .build.builder import Builder

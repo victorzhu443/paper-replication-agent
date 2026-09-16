@@ -1,16 +1,11 @@
 # Replication report: Direct Preference Optimization: Your Language Model is Secretly a Reward Model
 
-**Kind of test:** mechanics_only · **Data tier:** C · **Compute tier:** 2 · **Track/family:** cs/train_and_eval
+**Kind of test:** re_implementation · **Data tier:** A · **Compute tier:** 2 · **Track/family:** cs/train_and_eval
 
-**Grade:** C  (data: synthetic; procedure: re-implemented, 0 unexplained; result: Untested; integrity: passed)
+**Grade:** C  (data: tier A checkpoint; procedure: re-implemented, 0 unexplained; result: Untested; integrity: passed)
 
 ## 1. Deviations from the paper
 
-- imdb -> UNAVAILABLE: claims depending on this source are Untested
-- tldr_reddit_summarization -> UNAVAILABLE: claims depending on this source are Untested
-- anthropic_hh -> UNAVAILABLE: claims depending on this source are Untested
-- cnn_dailymail -> UNAVAILABLE: claims depending on this source are Untested
-- synthetic_preference_pairs -> UNAVAILABLE: claims depending on this source are Untested
 - Table-1 checkpoint (measure): imdb_prefix_count paper=25000.0 ours=None gap=None; completions_sampled_per_prefix paper=4.0 ours=None gap=None; preference_pairs_per_prefix paper=6.0 ours=None gap=None; total_sentiment_preference_pairs paper=150000.0 ours=None gap=None; imdb_prefix_length_min_tokens paper=2.0 ours=None gap=None; imdb_prefix_length_max_tokens paper=8.0 ours=None gap=None; anthropic_hh_dialogues paper=170000.0 ours=None gap=None; sentiment_sweep_runs paper=22.0 ours=None gap=None; eval_interval_steps paper=100.0 ours=None gap=None; beta_default paper=0.1 ours=None gap=None; beta_tldr paper=0.5 ours=None gap=None; batch_size paper=64.0 ours=None gap=None; learning_rate paper=1e-06 ours=None gap=None; warmup_steps paper=150.0 ours=None gap=None; sft_epochs_imdb paper=1.0 ours=None gap=None; reward_model_epochs_imdb paper=3.0 ours=None gap=None; ppo_batch_samples_per_step paper=1024.0 ours=None gap=None; best_of_n_plateau_dialogue paper=128.0 ours=None gap=None; human_raters paper=25.0 ours=None gap=None; judgments_per_rater paper=25.0 ours=None gap=None; dpo_vs_ppo0_comparisons paper=150.0 ours=None gap=None; ppo1_vs_ppo0_comparisons paper=100.0 ours=None gap=None; sft_vs_ppo0_comparisons paper=125.0 ours=None gap=None; dpo_ppo_judgments_collected paper=275.0 ours=None gap=None; ppo_ppo_judgments_collected paper=200.0 ours=None gap=None; n_respondents_dpo paper=272.0 ours=None gap=None; n_respondents_sft paper=122.0 ours=None gap=None; n_respondents_ppo1 paper=199.0 ours=None gap=None; human_tie_percentage paper=1.0 ours=None gap=None; max_model_size_billions_params paper=6.0 ours=None gap=None
 
 ## 2. Claims

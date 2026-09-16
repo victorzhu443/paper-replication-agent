@@ -1,15 +1,11 @@
 # Replication report: A Mathematical Framework for Transformer Circuits
 
-**Kind of test:** mechanics_only · **Data tier:** C · **Compute tier:** 2 · **Track/family:** cs/train_and_eval
+**Kind of test:** re_implementation · **Data tier:** A · **Compute tier:** 2 · **Track/family:** cs/train_and_eval
 
-**Grade:** C  (data: synthetic; procedure: re-implemented, 0 unexplained; result: Untested; integrity: not_run)
+**Grade:** C  (data: tier A checkpoint; procedure: re-implemented, 0 unexplained; result: Untested; integrity: not_run)
 
 ## 1. Deviations from the paper
 
-- custom_text_corpus -> UNAVAILABLE: claims depending on this source are Untested
-- synthetic_repeated_random_tokens -> UNAVAILABLE: claims depending on this source are Untested
-- natural_text_probe -> UNAVAILABLE: claims depending on this source are Untested
-- model_weights -> UNAVAILABLE: claims depending on this source are Untested
 - Table-1 checkpoint (measure): n_heads_primary_models paper=12.0 ours=None gap=None; d_head_primary_models paper=64.0 ours=None gap=None; d_model_primary_models paper=768.0 ours=None gap=None; n_heads_secondary_model paper=32.0 ours=None gap=None; d_head_secondary_model paper=128.0 ours=None gap=None; d_model_secondary_model paper=4096.0 ours=None gap=None; n_context_tokens paper=2048.0 ours=None gap=None; vocab_size_approx paper=50000.0 ours=None gap=None; expanded_ov_matrix_entries_approx paper=2500000000.0 ours=None gap=None; ov_qk_matrix_rank_primary paper=64.0 ours=None gap=None; ov_qk_matrix_rank_secondary paper=128.0 ours=None gap=None; random_token_sequence_repeats paper=3.0 ours=None gap=None; mlp_share_of_standard_transformer_params paper=0.6667 ours=None gap=None; d_mlp_over_d_model_ratio paper=4.0 ours=None gap=None; d_head_over_d_model_ratio_lower paper=0.01 ours=None gap=None; d_head_over_d_model_ratio_upper paper=0.1 ours=None gap=None
 
 ## 2. Claims

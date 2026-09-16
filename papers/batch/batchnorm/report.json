@@ -6,7 +6,6 @@
   "data_tier": "A",
   "compute_tier": 2,
   "deviations": [
-    "imagenet_ilsvrc2012 -> UNAVAILABLE: claims depending on this source are Untested",
     "tolerance for mnist_bn_beats_baseline_sign filled from our own SE (0.00135) at verify time, not frozen",
     "tolerance for inception_steps_to_72_2 filled from our own SE (5e+03) at verify time, not frozen",
     "tolerance for bn_baseline_steps_to_72_2 filled from our own SE (5e+03) at verify time, not frozen",

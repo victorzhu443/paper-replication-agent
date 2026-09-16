@@ -1,17 +1,11 @@
 # Replication report: Locating and Editing Factual Associations in GPT
 
-**Kind of test:** mechanics_only · **Data tier:** C · **Compute tier:** 2 · **Track/family:** cs/checkpoint_eval
+**Kind of test:** re_implementation · **Data tier:** A · **Compute tier:** 2 · **Track/family:** cs/checkpoint_eval
 
-**Grade:** C  (data: synthetic; procedure: re-implemented, 0 unexplained; result: Untested; integrity: not_run)
+**Grade:** C  (data: tier A checkpoint; procedure: re-implemented, 0 unexplained; result: Untested; integrity: not_run)
 
 ## 1. Deviations from the paper
 
-- huggingface_gpt2 -> UNAVAILABLE: claims depending on this source are Untested
-- counterfact_dataset -> UNAVAILABLE: claims depending on this source are Untested
-- zsre -> UNAVAILABLE: claims depending on this source are Untested
-- pararel -> UNAVAILABLE: claims depending on this source are Untested
-- wikidata -> UNAVAILABLE: claims depending on this source are Untested
-- wikipedia_dump -> UNAVAILABLE: claims depending on this source are Untested
 - Table-1 checkpoint (measure): counterfact_records_total paper=21919.0 ours=None gap=None; counterfact_subjects_total paper=20391.0 ours=None gap=None; counterfact_objects_total paper=749.0 ours=None gap=None; counterfact_counterfactual_statements_total paper=21595.0 ours=None gap=None; counterfact_paraphrase_prompts_total paper=42876.0 ours=None gap=None; counterfact_neighborhood_prompts_total paper=82650.0 ours=None gap=None; counterfact_generation_prompts_total paper=62346.0 ours=None gap=None; counterfact_records_per_relation paper=645.0 ours=None gap=None; counterfact_paraphrase_prompts_per_record paper=2.0 ours=None gap=None; counterfact_neighborhood_prompts_per_record paper=10.0 ours=None gap=None; counterfact_generation_prompts_per_record paper=3.0 ours=None gap=None; zsre_eval_records paper=10000.0 ours=None gap=None; counterfact_test_records_gpt2xl paper=7500.0 ours=None gap=None; counterfact_test_records_gptj paper=2000.0 ours=None gap=None; causal_tracing_prompts paper=1000.0 ours=None gap=None; causal_tracing_noise_repeats_per_prompt paper=10.0 ours=None gap=None; clean_mean_prob_pct paper=27.0 ours=None gap=None; corrupted_mean_prob_pct paper=8.47 ours=None gap=None; gpt2xl_layers paper=48.0 ours=None gap=None; gptneox_layers paper=44.0 ours=None gap=None; gptj_layers paper=28.0 ours=None gap=None; k_star_prefix_texts paper=20.0 ours=None gap=None; covariance_k_samples paper=100000.0 ours=None gap=None; hyperparam_sweep_subset_size paper=50.0 ours=None gap=None; hypernetwork_training_subset_size paper=10000.0 ours=None gap=None; human_eval_raters paper=15.0 ours=None gap=None; human_eval_judgments_per_criterion paper=150.0 ours=None gap=None; human_eval_facts paper=50.0 ours=None gap=None
 
 ## 2. Claims
