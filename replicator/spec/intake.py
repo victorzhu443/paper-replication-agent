@@ -67,5 +67,9 @@ def find_companions(text: str) -> list[str]:
 
 
 def _arxiv_version(text: str) -> str | None:
-    m = re.search(r"arXiv:\s*(\d{4}\.\d{4,5})(v\d+)?", text)
+    """The paper's own id is stamped in the left margin of page 1 as 'arXiv:ID [cat] date';
+    citations in the body look different. Prefer the stamped form; fall back to the first mention."""
+    m = re.search(r"arXiv:(\d{4}\.\d{4,5})(v\d+)?\s*\[[\w.\-]+\]\s+\d{1,2}\s+\w{3}\s+\d{4}", text)
+    if not m:
+        m = re.search(r"arXiv:\s*(\d{4}\.\d{4,5})(v\d+)?", text)
     return (m.group(1) + (m.group(2) or "")) if m else None
