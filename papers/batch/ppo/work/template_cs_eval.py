@@ -18,6 +18,7 @@ def run_reproduce(workdir: Path, config: dict[str, Any], seed: int, timeout_s: i
                   python: str | None = None) -> dict[str, Any]:
     env = {**os.environ, "SEED": str(seed), "REPLICATOR_CONFIG": json.dumps(config),
            "SMOKE": "1" if config.get("_smoke") else "0", "RUN_TIMEOUT_S": str(timeout_s),
+           "SCALE": str(config.get("_scale", 1.0)),
            "HF_HOME": os.environ.get("HF_HOME", str(Path(__file__).resolve().parents[2] / "data_cache" / "hf")),
            "TOKENIZERS_PARALLELISM": "false"}
     if python:

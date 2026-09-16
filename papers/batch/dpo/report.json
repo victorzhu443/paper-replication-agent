@@ -1,0 +1,425 @@
+{
+  "paper_title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+  "track": "cs",
+  "family": "train_and_eval",
+  "kind_of_test": "mechanics_only",
+  "data_tier": "C",
+  "compute_tier": 2,
+  "deviations": [
+    "imdb -> UNAVAILABLE: claims depending on this source are Untested",
+    "tldr_reddit_summarization -> UNAVAILABLE: claims depending on this source are Untested",
+    "anthropic_hh -> UNAVAILABLE: claims depending on this source are Untested",
+    "cnn_dailymail -> UNAVAILABLE: claims depending on this source are Untested",
+    "synthetic_preference_pairs -> UNAVAILABLE: claims depending on this source are Untested",
+    "Table-1 checkpoint (measure): imdb_prefix_count paper=25000.0 ours=None gap=None; completions_sampled_per_prefix paper=4.0 ours=None gap=None; preference_pairs_per_prefix paper=6.0 ours=None gap=None; total_sentiment_preference_pairs paper=150000.0 ours=None gap=None; imdb_prefix_length_min_tokens paper=2.0 ours=None gap=None; imdb_prefix_length_max_tokens paper=8.0 ours=None gap=None; anthropic_hh_dialogues paper=170000.0 ours=None gap=None; sentiment_sweep_runs paper=22.0 ours=None gap=None; eval_interval_steps paper=100.0 ours=None gap=None; beta_default paper=0.1 ours=None gap=None; beta_tldr paper=0.5 ours=None gap=None; batch_size paper=64.0 ours=None gap=None; learning_rate paper=1e-06 ours=None gap=None; warmup_steps paper=150.0 ours=None gap=None; sft_epochs_imdb paper=1.0 ours=None gap=None; reward_model_epochs_imdb paper=3.0 ours=None gap=None; ppo_batch_samples_per_step paper=1024.0 ours=None gap=None; best_of_n_plateau_dialogue paper=128.0 ours=None gap=None; human_raters paper=25.0 ours=None gap=None; judgments_per_rater paper=25.0 ours=None gap=None; dpo_vs_ppo0_comparisons paper=150.0 ours=None gap=None; ppo1_vs_ppo0_comparisons paper=100.0 ours=None gap=None; sft_vs_ppo0_comparisons paper=125.0 ours=None gap=None; dpo_ppo_judgments_collected paper=275.0 ours=None gap=None; ppo_ppo_judgments_collected paper=200.0 ours=None gap=None; n_respondents_dpo paper=272.0 ours=None gap=None; n_respondents_sft paper=122.0 ours=None gap=None; n_respondents_ppo1 paper=199.0 ours=None gap=None; human_tie_percentage paper=1.0 ours=None gap=None; max_model_size_billions_params paper=6.0 ours=None gap=None"
+  ],
+  "claims": [
+    {
+      "claim_id": "tldr_dpo_winrate_temp0",
+      "paper_value": 61.0,
+      "our_value": 100.0,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no derived tolerance; needs n_periods, t-stat or std"
+    },
+    {
+      "claim_id": "tldr_ppo_winrate_temp0",
+      "paper_value": 57.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no value produced"
+    },
+    {
+      "claim_id": "dpo_vs_ppo_human_headtohead",
+      "paper_value": 58.0,
+      "our_value": 100.0,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no derived tolerance; needs n_periods, t-stat or std"
+    },
+    {
+      "claim_id": "ood_dpo_temp0",
+      "paper_value": 0.36,
+      "our_value": 100.0,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no derived tolerance; needs n_periods, t-stat or std"
+    },
+    {
+      "claim_id": "ood_dpo_temp025",
+      "paper_value": 0.31,
+      "our_value": 100.0,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no derived tolerance; needs n_periods, t-stat or std"
+    },
+    {
+      "claim_id": "ood_ppo_temp0",
+      "paper_value": 0.26,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no value produced"
+    },
+    {
+      "claim_id": "ood_ppo_temp025",
+      "paper_value": 0.23,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no value produced"
+    },
+    {
+      "claim_id": "tbl2_gpt4S_win_dpo",
+      "paper_value": 47.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no value produced"
+    },
+    {
+      "claim_id": "tbl2_gpt4C_win_dpo",
+      "paper_value": 54.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "tbl2_human_win_dpo",
+      "paper_value": 58.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "tbl2_gpt4S_win_sft",
+      "paper_value": 27.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "tbl2_gpt4C_win_sft",
+      "paper_value": 32.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "tbl2_human_win_sft",
+      "paper_value": 43.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "tbl2_gpt4S_win_ppo1",
+      "paper_value": 13.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "tbl2_gpt4C_win_ppo1",
+      "paper_value": 12.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "tbl2_human_win_ppo1",
+      "paper_value": 17.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "tbl2_gpt4S_h_agree_dpo",
+      "paper_value": 70.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "tbl2_gpt4C_h_agree_dpo",
+      "paper_value": 67.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "tbl2_hh_agree_dpo",
+      "paper_value": 65.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "tbl2_gpt4S_h_agree_sft",
+      "paper_value": 77.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "tbl2_gpt4C_h_agree_sft",
+      "paper_value": 79.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "tbl2_gpt4S_h_agree_ppo1",
+      "paper_value": 86.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "tbl2_gpt4C_h_agree_ppo1",
+      "paper_value": 85.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "tbl2_hh_agree_ppo1",
+      "paper_value": 87.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    }
+  ],
+  "leakage": [
+    {
+      "test": "shuffle",
+      "passed": true,
+      "detail": "shuffled win_rate=50 (t=None), unshuffled=100"
+    },
+    {
+      "test": "contamination_scan",
+      "passed": null,
+      "detail": "not implemented in MVP: hash-based train/test near-duplicate scan"
+    }
+  ],
+  "grid": [],
+  "grid_range": null,
+  "unexplained": [],
+  "ambiguities_used": [
+    {
+      "config_key": "lr_schedule",
+      "default": "constant",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "augmentation",
+      "default": "none",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "batch_vs_steps",
+      "default": "steps",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "batch_unit",
+      "default": "pairs",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "mixed_precision",
+      "default": "fp32",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "split",
+      "default": "test",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "logprob_aggregation",
+      "default": "sum",
+      "source": "conventions_kb",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "prompt_masking",
+      "default": "completion_only",
+      "source": "conventions_kb",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "reference_model",
+      "default": "preferred_ft_on_chosen",
+      "source": "paper_text",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "beta",
+      "default": "0.1",
+      "source": "paper_text",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "optimizer",
+      "default": "rmsprop_1e-6_as_paper",
+      "source": "paper_text",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "max_steps",
+      "default": "1000",
+      "source": "guess",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "max_length",
+      "default": "128",
+      "source": "guess",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "eval_temperature",
+      "default": "0.0",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "decoding_params",
+      "default": "pure_temperature_sampling",
+      "source": "guess",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "n_eval_prompts",
+      "default": "256",
+      "source": "guess",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "gpt4_winrate_denominator",
+      "default": "human_judgment_set",
+      "source": "guess",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "sft_stopping",
+      "default": "one_epoch_subset",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "judge",
+      "default": "ground_truth_attribute_classifier",
+      "source": "conventions_kb",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "tie_handling",
+      "default": "discard",
+      "source": "paper_text",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "n_seeds",
+      "default": "3",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "preference_rule",
+      "default": "deterministic_attribute_rule",
+      "source": "conventions_kb",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "grad_clip",
+      "default": "none",
+      "source": "guess",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "regularization",
+      "default": "model_default",
+      "source": "guess",
+      "sensitivity": "low"
+    }
+  ],
+  "grade": {
+    "data_fidelity": "synthetic",
+    "procedure_fidelity": "re-implemented, 0 unexplained",
+    "result": "Untested",
+    "integrity": "passed",
+    "letter": "C"
+  },
+  "reproducibility": {
+    "agent_version": "0.1.0",
+    "spec_frozen_hash": "23296a3175be78418de799f0991498bed6d6a352248e9824df946e82ecda1603",
+    "frozen_at": "2026-09-15T16:14:39.787483+00:00",
+    "env_lock_hash": "98fa794f4e123348",
+    "runs": [
+      "full_dpo_ood_cnndm_s0_d648c024ba0f6f8f.json",
+      "full_dpo_tldr_s0_201f25a36e44068c.json",
+      "full_human_eval_dpo_vs_ppo_s0_0149cd1dc607932f.json"
+    ],
+    "work_dir": "/Users/vzhu/Developer/research-copy/runs/batch/dpo/work",
+    "command": "/Users/vzhu/Developer/research-copy/evals/batch.py"
+  },
+  "human_minutes": 0.0,
+  "wall_minutes": 8.86067565282186,
+  "cost_usd": 2.693483,
+  "stages_completed": [
+    "setup",
+    "build",
+    "run",
+    "verify"
+  ],
+  "failure": null
+}

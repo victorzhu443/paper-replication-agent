@@ -1,0 +1,89 @@
+{
+ "seed": 0,
+ "split": "test",
+ "n_examples": 256,
+ "shuffled": true,
+ "metrics": {
+  "win_rate": 50.0,
+  "win_rate_temp025": 57.28155339805825,
+  "agreement_rate": 65.35600423812866,
+  "held_out_pref_accuracy": 65.35600423812866,
+  "implicit_reward_margin_final": -0.0034113138914108275,
+  "implicit_reward_margin_delta": -0.003374651074409485,
+  "sequence_kl": 0.0033582537434995174,
+  "mean_attribute_score_policy": 0.0,
+  "mean_attribute_score_ref": 0.0,
+  "win_rate_grows_with_beta": 1.0,
+  "win_rate_beta_0.05": 50.0,
+  "kl_beta_0.05": 0.020064618438482285,
+  "margin_last_beta_0.05": -0.0009839460719376803,
+  "win_rate_beta_0.1": 50.0,
+  "kl_beta_0.1": 0.013982975855469704,
+  "margin_last_beta_0.1": -0.0016120775602757932,
+  "win_rate_beta_0.5": 50.0,
+  "kl_beta_0.5": 0.0033582537434995174,
+  "margin_last_beta_0.5": -0.0034113138914108275,
+  "_intermediates": {
+   "unit_tests": {
+    "loss_closed_form": true,
+    "implicit_reward": true,
+    "gradient_direction_and_weight": true
+   },
+   "n_pairs_total": 9410,
+   "n_pairs_train": 8469,
+   "n_pairs_test": 941,
+   "n_prefixes": 2000,
+   "config_used": {
+    "lr_schedule": "constant",
+    "augmentation": "none",
+    "batch_vs_steps": "steps",
+    "batch_unit": "pairs",
+    "mixed_precision": "fp32",
+    "split": "test",
+    "logprob_aggregation": "sum",
+    "prompt_masking": "completion_only",
+    "beta": 0.5,
+    "optimizer": "rmsprop_1e-6_as_paper",
+    "max_steps": 1000,
+    "max_length": 128,
+    "eval_temperature": 0.0,
+    "decoding_params": "pure_temperature_sampling",
+    "n_eval_prompts": 256,
+    "gpt4_winrate_denominator": "human_judgment_set",
+    "sft_stopping": "one_epoch_subset",
+    "judge": "GPT-4 (C) prompt, gpt-4-0314",
+    "tie_handling": "discard",
+    "n_seeds": 3,
+    "preference_rule": "deterministic_attribute_rule",
+    "grad_clip": "none",
+    "regularization": "model_default",
+    "beta_grid": [
+     0.05,
+     0.1,
+     0.5
+    ],
+    "lr_multiplier": 60.0
+   },
+   "train_seconds": 37.4079852104187,
+   "scale": {
+    "SCALE": 1.0,
+    "smoke": false,
+    "dpo_steps": 1000,
+    "sft_steps": 400,
+    "batch_pairs": 64,
+    "model": "TinyLM d=64 L=2 (substitute for GPT-J-6B)",
+    "vocab": 32,
+    "seq_len": 12,
+    "data": "synthetic attribute preference pairs (substitute for TL;DR/IMDb)",
+    "judge": "ground-truth attribute scorer (substitute for GPT-4)",
+    "lr_multiplier_vs_paper_1e-6": 60.0,
+    "n_eval_prompts": 256,
+    "beta_grid": [
+     0.05,
+     0.1,
+     0.5
+    ]
+   }
+  }
+ }
+}

@@ -1,0 +1,271 @@
+{
+  "paper_title": "A Mathematical Framework for Transformer Circuits",
+  "track": "cs",
+  "family": "train_and_eval",
+  "kind_of_test": "mechanics_only",
+  "data_tier": "C",
+  "compute_tier": 2,
+  "deviations": [
+    "custom_text_corpus -> UNAVAILABLE: claims depending on this source are Untested",
+    "synthetic_repeated_random_tokens -> UNAVAILABLE: claims depending on this source are Untested",
+    "natural_text_probe -> UNAVAILABLE: claims depending on this source are Untested",
+    "model_weights -> UNAVAILABLE: claims depending on this source are Untested",
+    "Table-1 checkpoint (measure): n_heads_primary_models paper=12.0 ours=None gap=None; d_head_primary_models paper=64.0 ours=None gap=None; d_model_primary_models paper=768.0 ours=None gap=None; n_heads_secondary_model paper=32.0 ours=None gap=None; d_head_secondary_model paper=128.0 ours=None gap=None; d_model_secondary_model paper=4096.0 ours=None gap=None; n_context_tokens paper=2048.0 ours=None gap=None; vocab_size_approx paper=50000.0 ours=None gap=None; expanded_ov_matrix_entries_approx paper=2500000000.0 ours=None gap=None; ov_qk_matrix_rank_primary paper=64.0 ours=None gap=None; ov_qk_matrix_rank_secondary paper=128.0 ours=None gap=None; random_token_sequence_repeats paper=3.0 ours=None gap=None; mlp_share_of_standard_transformer_params paper=0.6667 ours=None gap=None; d_mlp_over_d_model_ratio paper=4.0 ours=None gap=None; d_head_over_d_model_ratio_lower paper=0.01 ours=None gap=None; d_head_over_d_model_ratio_upper paper=0.1 ours=None gap=None"
+  ],
+  "claims": [
+    {
+      "claim_id": "c_copying_heads_10_of_12",
+      "paper_value": 10.0,
+      "our_value": 12.0,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no derived tolerance; needs n_periods, t-stat or std"
+    },
+    {
+      "claim_id": "c_kcomposition_layer0_heads",
+      "paper_value": 1.0,
+      "our_value": 10.0,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no derived tolerance; needs n_periods, t-stat or std"
+    },
+    {
+      "claim_id": "c_kcomposition_extra_heads_corrected",
+      "paper_value": 2.0,
+      "our_value": 0.0,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no derived tolerance; needs n_periods, t-stat or std"
+    }
+  ],
+  "leakage": [
+    {
+      "test": "shuffle",
+      "passed": null,
+      "detail": "headline metric 'count_of_copying_heads' has no known better-direction; shuffle test not run"
+    },
+    {
+      "test": "contamination_scan",
+      "passed": null,
+      "detail": "not implemented in MVP: hash-based train/test near-duplicate scan"
+    }
+  ],
+  "grid": [],
+  "grid_range": null,
+  "unexplained": [],
+  "ambiguities_used": [
+    {
+      "config_key": "lr_schedule",
+      "default": "cosine",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "augmentation",
+      "default": "none",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "batch_vs_steps",
+      "default": "steps",
+      "source": "guess",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "mixed_precision",
+      "default": "fp32",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "split",
+      "default": "not_applicable",
+      "source": "paper_text",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "data.training_corpus",
+      "default": "openwebtext",
+      "source": "conventions_kb",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "data.tokenizer",
+      "default": "gpt2_bpe_50257",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "model.size",
+      "default": "paper_12x64_d768",
+      "source": "paper_text",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "model.n_ctx",
+      "default": "2048",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "model.positional",
+      "default": "sinusoidal_into_qk_only",
+      "source": "paper_text",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "model.attention_scale",
+      "default": "one_over_sqrt_dhead",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "model.layer_norm",
+      "default": "ln_as_trained",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "eval.ln_folding",
+      "default": "fold_ln_into_embedding",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "model.biases",
+      "default": "no_biases",
+      "source": "paper_text",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "train.optimizer",
+      "default": "adamw_lr1e-3_wd0.1_clip1.0",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "train.token_budget",
+      "default": "fixed_20k_steps",
+      "source": "guess",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "eval.copying_claim_model",
+      "default": "one_layer_12head_64",
+      "source": "paper_text",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "model.two_layer_heads_per_layer",
+      "default": "12",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "eval.copying_score",
+      "default": "sum_positive_eig_over_sum_abs_eig",
+      "source": "conventions_kb",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "eval.copying_threshold",
+      "default": "score_gt_0.7",
+      "source": "guess",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "eval.prefix_matching_score",
+      "default": "mean_attn_to_token_after_earlier_copy_on_repeated_random",
+      "source": "conventions_kb",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "eval.induction_head_criterion",
+      "default": "positive_qk_and_ov_eigenvalue_corner",
+      "source": "paper_text",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "eval.random_seq",
+      "default": "len50_rep3_uniform_with_start",
+      "source": "guess",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "eval.loss_gap",
+      "default": "mean_loss_second_half_minus_first_half_of_repeated_seq",
+      "source": "guess",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "eval.composition_baseline",
+      "default": "mean_over_N_random_gaussian_pairs_same_shape",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "eval.composition_formula",
+      "default": "both",
+      "source": "paper_text",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "train.n_seeds",
+      "default": "1",
+      "source": "paper_text",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "eval.n_eval_sequences",
+      "default": "1",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "eval.checkpoint",
+      "default": "final",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "eval.matrix_algebra",
+      "default": "factored_lambda_AB_equals_BA",
+      "source": "paper_text",
+      "sensitivity": "low"
+    }
+  ],
+  "grade": {
+    "data_fidelity": "synthetic",
+    "procedure_fidelity": "re-implemented, 0 unexplained",
+    "result": "Untested",
+    "integrity": "not_run",
+    "letter": "C"
+  },
+  "reproducibility": {
+    "agent_version": "0.1.0",
+    "spec_frozen_hash": "783529a6fd8b4645c42ac023a7ff551d575dec355652d933e10bbded9df5c3ba",
+    "frozen_at": "2026-09-15T16:22:20.419689+00:00",
+    "env_lock_hash": "b4796a207a0b6fde",
+    "runs": [
+      "full_one_layer_12head_64_s0_3908eda2ff5d51cf.json",
+      "full_two_layer_12head_64_composition_buggy_s0_f85b7386d15918d3.json",
+      "full_two_layer_12head_64_composition_corrected_s0_9e4cd30a823ea390.json"
+    ],
+    "work_dir": "/Users/vzhu/Developer/research-copy/runs/batch/circuits/work",
+    "command": "/Users/vzhu/Developer/research-copy/evals/batch.py"
+  },
+  "human_minutes": 0.0,
+  "wall_minutes": 18.857288217544557,
+  "cost_usd": 1.630531,
+  "stages_completed": [
+    "setup",
+    "build",
+    "run",
+    "verify"
+  ],
+  "failure": null
+}

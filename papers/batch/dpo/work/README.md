@@ -1,0 +1,2 @@
+Family template: template_cs_eval.py. Write pipeline.py (finance) or reproduce.sh (CS).
+Config keys available: ['lr_schedule', 'augmentation', 'batch_vs_steps', 'batch_unit', 'mixed_precision', 'split', 'logprob_aggregation', 'prompt_masking', 'reference_model', 'beta', 'optimizer', 'max_steps', 'max_length', 'eval_temperature', 'decoding_params', 'n_eval_prompts', 'gpt4_winrate_denominator', 'sft_stopping', 'judge', 'tie_handling', 'n_seeds', 'preference_rule', 'grad_clip', 'regularization']

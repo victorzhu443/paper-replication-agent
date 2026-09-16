@@ -1,0 +1,50 @@
+{
+  "paper_title": "LoRA: Low-Rank Adaptation of Large Language Models",
+  "track": "cs",
+  "family": "train_and_eval",
+  "kind_of_test": "mechanics_only",
+  "data_tier": "C",
+  "compute_tier": 2,
+  "deviations": [
+    "glue_sst2 -> UNAVAILABLE: claims depending on this source are Untested",
+    "glue_benchmark -> UNAVAILABLE: claims depending on this source are Untested",
+    "e2e_nlg -> UNAVAILABLE: claims depending on this source are Untested",
+    "wikisql -> UNAVAILABLE: claims depending on this source are Untested",
+    "samsum -> UNAVAILABLE: claims depending on this source are Untested",
+    "hf_pretrained_roberta_base -> UNAVAILABLE: claims depending on this source are Untested",
+    "hf_pretrained_roberta_large -> UNAVAILABLE: claims depending on this source are Untested",
+    "hf_pretrained_deberta_xxl -> UNAVAILABLE: claims depending on this source are Untested",
+    "hf_pretrained_gpt2_medium -> UNAVAILABLE: claims depending on this source are Untested",
+    "hf_pretrained_gpt2 -> UNAVAILABLE: claims depending on this source are Untested",
+    "gpt3_175b_checkpoint -> UNAVAILABLE: claims depending on this source are Untested"
+  ],
+  "claims": [],
+  "leakage": [],
+  "grid": [],
+  "grid_range": null,
+  "unexplained": [],
+  "ambiguities_used": [],
+  "grade": {
+    "data_fidelity": "synthetic",
+    "procedure_fidelity": "re-implemented, 0 unexplained",
+    "result": "no claims",
+    "integrity": "not_run",
+    "letter": "F"
+  },
+  "reproducibility": {
+    "agent_version": "0.1.0",
+    "spec_frozen_hash": "fe8ba399176e0de1b7a807cc4e22a851efc224385a135df8897b6f7a50c2d4ad",
+    "frozen_at": "2026-09-15T16:17:34.869541+00:00",
+    "env_lock_hash": "b4796a207a0b6fde",
+    "runs": [],
+    "work_dir": "/Users/vzhu/Developer/research-copy/runs/batch/lora/work",
+    "command": "/Users/vzhu/Developer/research-copy/evals/batch.py --reverify batchnorm dqn layernorm lora ppo worldmodels"
+  },
+  "human_minutes": 0.0,
+  "wall_minutes": 0.0006413141886393229,
+  "cost_usd": 0.0,
+  "stages_completed": [
+    "setup"
+  ],
+  "failure": "SameFileError: PosixPath('/Users/vzhu/Developer/research-copy/runs/batch/lora/work/patch.py') and PosixPath('/Users/vzhu/Developer/research-copy/runs/batch/lora/work/patch.py') are the same file"
+}
