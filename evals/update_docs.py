@@ -35,6 +35,9 @@ NOTES = {
     "dqn": "CartPole DQN mean return 226, best episodes 500",
     "ppo": "CartPole 500/500 on 3 seeds; clipping beats no-clip on 2 of 3",
     "worldmodels": "VAE loss 3169→0.7; MDN-RNN and CMA-ES controller beat random policy (t=23)",
+    "lora": "RoBERTa-base on SST-2 subset: LoRA 91.97% vs full FT 92.66% with 0.3M trainable params (paper's claim)",
+    "dpo": "DPO loss from Eq. 7: 98.5% held-out preference accuracy, 100% win rate vs reference, reward margin grows",
+    "superposition": "n=20, m=5: dense regime 5 features, sparse (S=0.99) 12.9 features in 5 dims; linear never superposes; antipodal pair 0.498 (paper 1/2)",
 }
 
 
