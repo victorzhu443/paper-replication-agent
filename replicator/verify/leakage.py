@@ -23,11 +23,32 @@ def metric_known(metric: str) -> bool:
     return m in LOWER_IS_BETTER or m in HIGHER_IS_BETTER or any(m.endswith("_" + k) or m.startswith(k + "_") for k in LOWER_IS_BETTER | HIGHER_IS_BETTER)
 
 
-def metric_skill(metric: str, value: float) -> float:
+NULL_SUFFIXES = ("_random_policy", "_random", "_baseline", "_chance", "_null", "_no_skill")
+NULL_KEYS = ("random_policy_return", "chance_level", "chance_accuracy", "baseline_return")
+
+
+def null_reference(metrics: dict, headline: str) -> float | None:
+    """A pipeline-reported no-skill reference for the headline metric (random policy, chance,
+    baseline), if any. Without one the null is the metric's natural floor/ceiling."""
+    for suf in NULL_SUFFIXES:
+        v = metrics.get(headline + suf)
+        if isinstance(v, (int, float)):
+            return float(v)
+    for k in NULL_KEYS:
+        v = metrics.get(k)
+        if isinstance(v, (int, float)):
+            return float(v)
+    return None
+
+
+def metric_skill(metric: str, value: float, null: float | None = None) -> float:
     """Distance from 'no skill' on a better-is-larger scale. Error-type metrics are inverted
     against their ceiling (100 for percent, 1 for decimal); everything else is taken as-is."""
     m = metric.lower()
-    if m in LOWER_IS_BETTER or any(m.endswith("_" + k) for k in LOWER_IS_BETTER):
+    lower = m in LOWER_IS_BETTER or any(m.endswith("_" + k) for k in LOWER_IS_BETTER)
+    if null is not None:
+        return (null - value) if lower else (value - null)
+    if lower:
         if m in ("loss", "perplexity", "rmse", "mae", "mse"):
             return -abs(value)
         ceiling = 100.0 if value > 1.0 else 1.0
@@ -59,14 +80,16 @@ def shuffle_test(run_fn: Callable[[dict, int], dict], config: dict, headline: st
     # The leak indicator is a shuffled result that is still significant. The magnitude criterion
     # is only meaningful when the unshuffled baseline was itself a real effect, so it is used
     # only when no t-stat is available.
+    null = null_reference(m, headline)
     if t is not None:
         survives = abs(t) > 2.0
     else:
-        base_skill = metric_skill(headline, baseline_value)
-        shuf_skill = metric_skill(headline, v)
+        base_skill = metric_skill(headline, baseline_value, null)
+        shuf_skill = metric_skill(headline, v, null)
         survives = base_skill > 0 and shuf_skill > 0.5 * base_skill
     return LeakageResult(test="shuffle", passed=not survives,
-                         detail=f"shuffled {headline}={v:.4g} (t={t}), unshuffled={baseline_value:.4g}")
+                         detail=f"shuffled {headline}={v:.4g} (t={t}), unshuffled={baseline_value:.4g}"
+                                + (f", null reference={null:.4g}" if null is not None else ""))
 
 
 def future_perturbation_test(build_features: Callable[[pd.DataFrame], pd.DataFrame], raw: pd.DataFrame,

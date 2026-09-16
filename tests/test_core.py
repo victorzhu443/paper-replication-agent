@@ -149,3 +149,13 @@ def test_shuffle_requires_acknowledgement():
     assert r.passed is None and "acknowledge" in r.detail
     r2 = shuffle_test(lambda cfg, s: {"accuracy": 91.5, "_shuffled": True}, {}, "accuracy", 91.5)
     assert r2.passed is False
+
+
+def test_shuffle_uses_reported_null_reference():
+    from replicator.verify.leakage import shuffle_test
+    # RL: controller 55 vs random 37.8; shuffled targets give 30.9 (< random) -> effect destroyed -> pass
+    r = shuffle_test(lambda cfg, s: {"mean_return": 30.9, "mean_return_random_policy": 37.8, "_shuffled": True}, {}, "mean_return", 55.0)
+    assert r.passed is True and "null reference" in r.detail
+    # leaky: shuffled still far above random
+    r2 = shuffle_test(lambda cfg, s: {"mean_return": 52.0, "mean_return_random_policy": 37.8, "_shuffled": True}, {}, "mean_return", 55.0)
+    assert r2.passed is False
