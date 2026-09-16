@@ -119,11 +119,13 @@ class Builder:
     def run(self) -> dict[str, Any]:
         t0 = time.time()
         spec_text = self.spec.model_dump_json(indent=1)
-        import os as _os
-        envelope = (f"Compute envelope: CPU only (no GPU), {_os.cpu_count()} cores. Each full reproduce.sh run must "
+        from ..triage import COMPUTE_ENVELOPE as _env
+        hw = (f"GPU {_env['gpu_name']} ({_env['gpu_mem_gb']} GB), use device='cuda'" if _env["gpu"] else "CPU only (no GPU)")
+        envelope = (f"Compute envelope: {hw}, {_env['cores']} cores. Each full reproduce.sh run must "
                     f"finish within {self.spec.plan.budget.run_timeout_s // 60} minutes and the SMOKE=1 run within 5. "
                     f"Compute tier {self.spec.plan.compute_tier}: scale down (subset, fewer steps, smaller model) and "
-                    f"record what you scaled in metrics['_intermediates']['scale']. Prefer torch CPU; transformers/datasets/peft/"
+                    f"record what you scaled in metrics['_intermediates']['scale']. Compute tier 1 means run the paper's own "
+                    f"configuration and set matched_scale true. transformers/datasets/peft/"
                     f"gymnasium/ale-py are installed. Datasets and HF models cache under data_cache/.")
         messages: list[dict] = [{"role": "user", "content": textwrap.dedent(f"""
             Work directory contents are available via list_files. {envelope}

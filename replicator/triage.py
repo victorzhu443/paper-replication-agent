@@ -10,7 +10,23 @@ from .kb import family_kb
 from .schema import Budget, Plan, Spec
 from .verify.compare import freeze_tolerances
 
-COMPUTE_ENVELOPE = {"cores": 8, "ram_gb": 16, "gpu": False, "budget_minutes": 20}
+def detect_envelope() -> dict:
+    """What this machine can run. GPU presence decides compute tier and per-run budgets."""
+    import os as _os
+    env = {"cores": _os.cpu_count() or 4, "gpu": False, "gpu_name": None, "gpu_mem_gb": 0.0,
+           "budget_minutes": int(_os.environ.get("REPLICATOR_RUN_MINUTES", "20"))}
+    try:
+        import torch
+        if torch.cuda.is_available():
+            props = torch.cuda.get_device_properties(0)
+            env.update(gpu=True, gpu_name=props.name, gpu_mem_gb=round(props.total_memory / 1024**3, 1),
+                       budget_minutes=int(_os.environ.get("REPLICATOR_RUN_MINUTES", "180")))
+    except Exception:  # noqa: BLE001
+        pass
+    return env
+
+
+COMPUTE_ENVELOPE = detect_envelope()
 
 
 @dataclass
@@ -71,11 +87,18 @@ def triage(spec: Spec, reported_gpu_hours: float | None = None, user_data: dict[
     plan.data_tier = worst
 
     # ---- compute axis
-    if reported_gpu_hours is not None and reported_gpu_hours * 60 > COMPUTE_ENVELOPE["budget_minutes"]:
+    env = COMPUTE_ENVELOPE
+    notes.append(f"compute envelope: {env['cores']} cores, " + (f"GPU {env['gpu_name']} {env['gpu_mem_gb']} GB" if env["gpu"] else "no GPU")
+                 + f", per-run budget {env['budget_minutes']} min")
+    if reported_gpu_hours is not None and reported_gpu_hours * 60 > env["budget_minutes"] * (1.0 if env["gpu"] else 0.05):
         plan.compute_tier = 2
         notes.append(f"reported compute {reported_gpu_hours} GPU-h exceeds envelope -> compute tier 2 (reduced scale)")
+    elif not env["gpu"] and reported_gpu_hours is None and spec.paper.track.value == "cs":
+        plan.compute_tier = 2
+        notes.append("no GPU and no reported compute: CS papers default to compute tier 2 on CPU")
     else:
         plan.compute_tier = 1
+    plan.budget.run_timeout_s = max(plan.budget.run_timeout_s, env["budget_minutes"] * 60) if env["gpu"] else plan.budget.run_timeout_s
 
     # ---- kind of test
     if plan.data_tier == "C":

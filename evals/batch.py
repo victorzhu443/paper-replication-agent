@@ -19,7 +19,7 @@ from replicator.schema import Spec
 from replicator.spec.intake import fetch_arxiv, fetch_html_as_text
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "runs" / "batch"
+OUT = ROOT / "runs" / ("batch_gpu" if __import__("os").environ.get("REPLICATOR_GPU") else "batch")
 
 # slug -> paper. `hint` is the reduced-scale plan the triage/builder receive (compute tier 2, CPU only).
 PAPERS: dict[str, dict] = {
@@ -81,6 +81,28 @@ PAPERS: dict[str, dict] = {
 }
 
 
+GPU = bool(__import__("os").environ.get("REPLICATOR_GPU"))
+
+# Paper-scale plans for a single modern GPU (used when REPLICATOR_GPU=1). Hours are rough.
+GPU_HINTS = {
+    "attention": ("Full scale is 8 GPUs x 12 h. On one GPU: train the base Transformer on WMT14 EN-DE (HF wmt14 de-en) for as many "
+                  "steps as the time budget allows and compare against the paper's learning-curve/dev PPL; report BLEU with sacrebleu on newstest2014.", 6.0),
+    "resnet": ("Section 4.2 exactly: ResNet-20/32/44/56 and plain-20/56 on full CIFAR-10, 64k iterations, the paper's schedule; compare Table 6 errors.", 3.0),
+    "layernorm": ("Section 6.6 permutation-invariant MNIST at full scale plus one RNN experiment (e.g. the order-embedding or skip-thought is too big; use the MNIST and an attentive-reader-style small LSTM).", 1.0),
+    "batchnorm": ("Section 4.1 Figure 1 exactly: 3x100 sigmoid MLP on MNIST, 50k steps, with/without BN.", 0.5),
+    "gan": ("MNIST MLP GAN as in the paper; Parzen-window log-likelihood estimate (Table 1: 225 +/- 2).", 1.0),
+    "dqn": ("DQN on 2 Atari games (Breakout, Pong) with ale-py, 10M frames each or the time budget; compare Table 1.", 12.0),
+    "ppo": ("PPO on MuJoCo is license-free now via gymnasium[mujoco]: HalfCheetah, Hopper, Walker2d, 1M steps, 3 seeds; compare Figure 3 / Table 1.", 4.0),
+    "worldmodels": ("CarRacing-v3 (gymnasium[box2d]): 10k rollouts, VAE, MDN-RNN, CMA-ES controller; compare the 906 +/- 21 score.", 24.0),
+    "lottery": ("LeNet-300-100 MNIST and Conv-2/4/6 on CIFAR-10 with iterative pruning, 5 trials; compare Figures 3-5.", 3.0),
+    "lora": ("RoBERTa-base on full GLUE SST-2, MRPC, CoLA, RTE with LoRA r=8 vs full FT; compare Table 2.", 3.0),
+    "dpo": ("GPT-2 large on IMDb sentiment (Section 6.1 setting) with the released preference recipe; reward-KL frontier vs PPO not required.", 4.0),
+    "superposition": ("Exact: already paper scale on CPU; rerun with matched_scale true.", 0.2),
+    "circuits": ("2-layer attention-only model on a real corpus (openwebtext subset) as in the paper; induction-head scores.", 2.0),
+    "rome": ("GPT-2 XL causal tracing on 1000 CounterFact facts and ROME edits with the paper's efficacy/paraphrase/specificity metrics.", 3.0),
+}
+
+
 def log(msg: str) -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     line = f"{time.strftime('%H:%M:%S')} {msg}"
@@ -101,12 +123,14 @@ def spec_stage(slug: str) -> str:
         else:
             src = fetch_html_as_text(p["url"], d / "paper", slug)
         orch = Orchestrator(d, batch=True)
-        spec = orch.stage_spec(src, "cs", p["family"], hint=p["hint"], reported_gpu_hours=None)
-        spec.plan.compute_tier = 2
-        spec.plan.seeds = p["seeds"]
-        spec.plan.budget.run_timeout_s = p["timeout"]
+        hint, hours = (GPU_HINTS[slug][0], GPU_HINTS[slug][1]) if GPU and slug in GPU_HINTS else (p["hint"], None)
+        spec = orch.stage_spec(src, "cs", p["family"], hint=hint, reported_gpu_hours=hours)
+        if not GPU:
+            spec.plan.compute_tier = 2
+        spec.plan.seeds = [0, 1, 2] if GPU else p["seeds"]
+        spec.plan.budget.run_timeout_s = int(hours * 3600 * 1.5) if (GPU and hours) else p["timeout"]
         spec.plan.budget.build = 40
-        spec.plan.success_criteria = p["hint"] + " || " + spec.plan.success_criteria
+        spec.plan.success_criteria = hint + " || " + spec.plan.success_criteria
         spec.plan.frozen_hash = None
         spec.freeze()
         spec.save(d / "spec.yaml")
