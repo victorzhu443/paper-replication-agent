@@ -40,6 +40,10 @@ Contract you must satisfy (the orchestrator checks it; saying you are done does 
   "shuffled": true; if shuffling is meaningless for the method, leave "shuffled": false.
   The full run (SCALE=1) MUST finish inside RUN_TIMEOUT_S on CPU; run_smoke times a SCALE=0.1 run
   and rejects the build if the extrapolated full run does not fit. Size the default accordingly.
+  If the full run uses the paper's OWN configuration for a claim (same dataset, model size, and
+  training length, e.g. LeNet-300-100 on MNIST, a 3-layer MLP on MNIST, CartPole), add
+  "matched_scale": true to metrics.json so the comparison to the paper's number is made; leave it
+  false when you scaled anything down.
 - Every choice in the ambiguity list is a config key read from `config`, defaulting to the spec default.
 - Use pandas/numpy/statsmodels/torch. No network calls except through the provided data adapters.
 - Do not read the paper authors' code or clone repositories in re-implementation mode.

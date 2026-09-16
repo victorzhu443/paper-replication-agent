@@ -174,6 +174,18 @@ def reverify(slug: str) -> dict:
     return row
 
 
+def _replicate_in_subprocess(slug: str) -> dict:
+    """Fresh interpreter per paper: fixes to the package apply at the next paper, no restart."""
+    import subprocess
+    out = subprocess.run([sys.executable, "-c",
+                          f"import json; from evals.batch import replicate; print('ROW=' + json.dumps(replicate({slug!r}), default=str))"],
+                         cwd=ROOT, capture_output=True, text=True)
+    for line in out.stdout.splitlines()[::-1]:
+        if line.startswith("ROW="):
+            return json.loads(line[4:])
+    return {"slug": slug, "grade": "-", "failure": (out.stderr[-300:] or "subprocess produced no row").replace("\n", " ")}
+
+
 def main(slugs: list[str]) -> None:
     if slugs and slugs[0] == "--reverify":
         rows = []
@@ -192,10 +204,7 @@ def main(slugs: list[str]) -> None:
     rows: list[dict] = []
     for slug in slugs:
         log(f"replicate {slug} ...")
-        try:
-            row = replicate(slug)
-        except Exception as e:  # noqa: BLE001
-            row = {"slug": slug, "grade": "-", "failure": f"{type(e).__name__}: {str(e)[:80]}"}
+        row = _replicate_in_subprocess(slug)
         rows.append(row)
         log(f"{slug}: grade {row.get('grade')} claims [{row.get('claims')}] leakage [{row.get('leakage')}] {row.get('failure','')}")
         write_summary(rows)

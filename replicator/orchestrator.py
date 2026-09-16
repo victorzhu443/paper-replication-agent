@@ -133,7 +133,8 @@ class Orchestrator:
         def _cs(cfg, seed):
             r = cs_eval.run_reproduce(self.work, cfg, seed, timeout_s=spec.plan.budget.run_timeout_s)
             return {**r["metrics"], "_shuffled": bool(r.get("shuffled")),
-                    "_intermediates": {"n_examples": r.get("n_examples"), "split": r.get("split"), "seed": r.get("seed")}}
+                    "_intermediates": {"n_examples": r.get("n_examples"), "split": r.get("split"), "seed": r.get("seed"),
+                                       "matched_scale": bool(r.get("matched_scale")), "scale": r.get("scale")}}
         return _cs
 
     def smoke(self, spec: Spec) -> dict[str, Any]:
@@ -285,7 +286,7 @@ class Orchestrator:
             # tolerance fill from our own series when the analytic rule had nothing (recorded, not edited into the spec)
             tol_override = None
             if c.id not in spec.plan.tolerances:
-                fallback_se = std / np.sqrt(len(vals)) if (std and len(vals) > 1) else None
+                fallback_se = std / np.sqrt(len(vals)) if (std is not None and len(vals) > 1) else None
                 if fallback_se is None and rs and rs[0].metrics.get("t_stat") and c.metric in ("mean_return", "alpha", "alpha_ff3", "spread", "premium"):
                     fallback_se = abs(ours) / abs(rs[0].metrics["t_stat"])
                 tol_override = derived_tolerance(c, fallback_se)
