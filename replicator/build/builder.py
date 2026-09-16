@@ -38,6 +38,10 @@ Contract you must satisfy (the orchestrator checks it; saying you are done does 
    "matched_scale": bool, "metrics": {<metric>: value, "chance_level": <no-skill value>}}.
   run_smoke also runs the script with SCALE=0.1 and with _shuffle_labels=true and checks these
   fields; a build cannot finish until they are right.
+  For EVERY target claim in the spec, metrics must contain an entry keyed by the claim id holding
+  the value that claim is compared against (e.g. "c_dim_tetrahedron": 0.75), in the claim's units.
+  Several claims often share one metric name and differ only in what they measure; the claim-id
+  key is what makes the comparison unambiguous.
   When REPLICATOR_CONFIG has "_shuffle_labels": true, shuffle the training labels (or targets /
   rewards where that is meaningful) within each batch or period BEFORE training and set
   "shuffled": true; if shuffling is meaningless for the method (no labels or rewards: toy models,

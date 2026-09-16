@@ -45,6 +45,8 @@ def standard_error(c: Claim) -> float | None:
             se = math.sqrt(max(p * (1 - p), 1e-9) / T)
             return se * 100.0 if v > 1 else se
         return None
+    if m in ("dimensions_per_feature", "feature_dimensionality", "ratio", "fraction"):
+        return c.reported_std if c.reported_std is not None else (0.0 if c.reported_precision else None)
     if m in ("r2", "oos_r2"):
         return c.reported_std or 0.25  # points; refined by bootstrap when a series is available
     if m in ("bleu", "rouge", "meteor"):
@@ -60,4 +62,6 @@ def derived_tolerance(c: Claim, fallback_se: float | None = None) -> float | Non
         se = fallback_se
     if se is None:
         return None
-    return K * se + c.reported_precision
+    # numerical floor: a printed value is never more precise than 0.5% of itself (float and
+    # rounding noise); exact theoretical values (1/2, 3/4) still match to this slack
+    return max(K * se + c.reported_precision, 0.005 * abs(c.value))

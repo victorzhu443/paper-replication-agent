@@ -29,6 +29,8 @@ def compare_claim(spec: Spec, c: Claim, ours: Optional[float], our_std: Optional
     tol = spec.plan.tolerances.get(c.id)
     if tol is None and tolerance_override is not None:
         tol = tolerance_override
+    if tol is not None:
+        tol = max(tol, 0.005 * abs(c.value))  # numerical floor, see verify.tolerance
     if ours is None or (isinstance(ours, float) and math.isnan(ours)):
         return ClaimResult(claim_id=c.id, paper_value=c.value, outcome=Outcome.untested, tolerance=tol,
                            note="no value produced")

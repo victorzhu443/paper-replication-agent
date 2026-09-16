@@ -32,6 +32,24 @@ from .verify.tolerance import derived_tolerance
 TEMPLATE_DIR = Path(__file__).parent / "templates"
 
 
+def _claim_value(metrics: dict, c) -> float | None:
+    """Value a claim is compared against: metrics[claim_id] (the builder contract), else
+    metrics[metric], else a disambiguated key "<metric>_<token>" where the token comes from the
+    claim id (e.g. claim c_dim_tetrahedron, metric feature_dimensionality ->
+    feature_dimensionality_tetrahedron). Several claims sharing one metric name is the common case
+    the plain lookup gets wrong."""
+    if c.id in metrics:
+        return metrics[c.id]
+    tokens = [t for t in c.id.lower().replace("-", "_").split("_") if len(t) > 3 and t not in ("claim", "table", "figure")]
+    for k in metrics:
+        kl = k.lower()
+        if kl.startswith(c.metric.lower() + "_") and any(t in kl for t in tokens):
+            return metrics[k]
+    if c.metric in metrics:
+        return metrics[c.metric]
+    return None
+
+
 class Orchestrator:
     def __init__(self, run_root: Path, batch: bool = False, human_approve: Optional[Callable[[Spec, list[str]], bool]] = None):
         self.root = run_root
@@ -176,10 +194,10 @@ class Orchestrator:
                     self._verifier_preconditions(spec, cfg, r, out)
                 else:
                     out["scale_probe"] = "skipped (re-verify)"
-                need = {c.metric for c in spec.claims if c.id in spec.plan.target_claims}
-                missing = [m for m in need if m not in r["metrics"]]
+                targets = [c for c in spec.claims if c.id in spec.plan.target_claims]
+                missing = [c.id for c in targets if _claim_value(r["metrics"], c) is None]
                 if missing:
-                    out["problems"].append(f"metrics.json missing: {missing}")
+                    out["problems"].append(f"metrics.json must contain a value for each target claim, keyed by claim id: missing {missing}")
                 for k in ("seed", "split", "n_examples"):
                     if k not in r:
                         out["problems"].append(f"metrics.json missing field {k}")
@@ -328,7 +346,7 @@ class Orchestrator:
                 report.claims.append(ClaimResult(claim_id=c.id, paper_value=c.value, outcome=Outcome.untested, note="not targeted in plan"))
                 continue
             rs = by_variant.get(c.method_variant) or by_variant.get("default") or []
-            vals = [r.metrics[c.metric] for r in rs if c.metric in r.metrics]
+            vals = [v for r in rs for v in [_claim_value(r.metrics, c)] if v is not None]
             if not vals:
                 report.claims.append(compare.compare_claim(spec, c, None))
                 continue

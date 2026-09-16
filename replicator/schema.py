@@ -152,7 +152,7 @@ class Spec(BaseModel):
     # ----- freeze (principle 0.7)
     def frozen_payload(self) -> str:
         payload = {
-            "claims": [c.model_dump() for c in self.claims],
+            "claims": [c.model_dump(exclude_defaults=True) for c in self.claims],
             "tolerances": self.plan.tolerances,
             "target_claims": self.plan.target_claims,
             "success_criteria": self.plan.success_criteria,

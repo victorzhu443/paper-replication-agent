@@ -32,6 +32,9 @@ Rules:
 - descriptive_stats: the paper's Table 1 numbers we can check our data against (row counts, firms,
   means, split sizes).
 - Do not invent numbers. If a value is unreadable, omit the claim rather than guess.
+- A value read off a plot rather than printed gets reported_precision equal to the plot's
+  resolution (typically 2-5% of the axis range); a plateau "at about 1/2" is 0.5 with
+  reported_precision 0.02, not 0.
 - Directional claims ("the normalized network reaches higher accuracy", "matches the baseline in
   14x fewer steps", "ticket accuracy >= unpruned") are encoded with relation gt/ge/lt/le and value =
   the threshold (0 for "gap > 0", the baseline number for "exceeds the baseline"). Never encode a
