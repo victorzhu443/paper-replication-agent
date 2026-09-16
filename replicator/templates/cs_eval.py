@@ -1,5 +1,8 @@
 """CS/ML template. The contract is a `reproduce.sh` in the work dir that writes `metrics.json`:
-    {"seed": int, "split": str, "n_examples": int, "metrics": {"accuracy": 0.982, ...}}
+    {"seed": int, "split": str, "n_examples": int, "scale": float, "shuffled": bool,
+     "matched_scale": bool, "metrics": {"accuracy": 98.2, "chance_level": 10.0, ...}}
+The smoke gate runs the script three ways (SMOKE=1; SCALE=0.1; SMOKE=1 with _shuffle_labels) and
+checks the fields the verify stage depends on before the build may finish.
 One invocation per seed. The builder writes the code; this module only runs and parses.
 Oracle-first: if the repo already has an eval script for released weights, `reproduce.sh` calls it.
 """

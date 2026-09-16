@@ -219,7 +219,22 @@ def main(slugs: list[str]) -> None:
         slugs = slugs[1:]
     if slugs and slugs[0] == "--reverify":
         rows = []
-        for slug in slugs[1:]:
+        targets = slugs[1:]
+        if targets == ["auto"]:
+            # every paper that has a spec and either no report, a recorded failure, or a failed leakage test
+            targets = []
+            for slug in PAPERS:
+                d = OUT / slug
+                if not (d / "spec.yaml").exists():
+                    continue
+                rp = d / "report.json"
+                if not rp.exists():
+                    targets.append(slug); continue
+                r = json.loads(rp.read_text())
+                if r.get("failure") or any(l["passed"] is False for l in r.get("leakage", [])):
+                    targets.append(slug)
+            log(f"reverify auto: {targets}")
+        for slug in targets:
             log(f"reverify {slug} ...")
             row = reverify(slug)
             rows.append(row)

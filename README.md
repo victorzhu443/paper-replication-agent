@@ -115,6 +115,13 @@ Measured on the papers above with Claude Opus 5 (extraction, builder) and Claude
 
 ## What the sweep taught (fixes now in the code)
 
+- **A verifier must check its own preconditions or abstain.** Six papers were graded F for
+  leakage that did not exist because the shuffle test trusted properties of generated code it
+  had never checked. The smoke gate now runs the script with shuffled labels and at SCALE=0.1
+  and refuses the build until it acknowledges the shuffle, reports a no-skill reference, and
+  echoes its scale; at verify time a missing precondition means "not judged", never F.
+  `tests/test_cs_verify.py` has a fixture for every false-verdict mode the sweep produced.
+
 - A model call can stall for 15–20 minutes and produce nothing. Calls are capped at 5 minutes with
   one retry; a stalled turn counts as an empty turn, not a lost stage.
 - The builder will polish instead of testing. The prompt demands an early smoke call, and the

@@ -174,6 +174,28 @@ and pre-registration is a *commitment* property (cannot be undone), not a *timin
   how often does a human agree; and how often does it say Match on a pipeline a human calls
   leaking. Match rate rewards loose tolerances; calibration punishes them.
 
+### 0.9 A test verifies its own preconditions or abstains (added 2026-09-16)
+
+Learned from the 14-paper sweep, where six papers received F for "leakage" that did not exist.
+The shuffle test assumed things about code it had not written: that the generated script honored
+the shuffle flag, that the headline metric's better-direction was known, and that "no skill" meant
+zero. Each assumption was false for some paper. A verdict resting on an unverified assumption is
+worse than no verdict, because F is the most damaging output the system has. Two rules follow:
+
+- **Every assumption a verifier makes about the pipeline is checked at the build gate.** The
+  smoke gate runs the generated script three ways (SMOKE=1, SCALE=0.1, SMOKE=1 with shuffled
+  labels) and refuses the build unless the script echoes its scale, acknowledges the shuffle (or
+  declares it not applicable with a reason), and reports a no-skill reference for the headline
+  metric. A failure there costs one builder turn; the same failure downstream costs a grade.
+- **When a precondition cannot be established at verify time, the test abstains** ("not judged",
+  with the reason), and the report says so. Abstention on integrity keeps A unreachable, which is
+  the right pressure on the builder; a false F is not.
+
+The same rule generalises: the future-perturbation test checks that the feature builder is
+deterministic before comparing; the Match rule refuses to compare at reduced scale without a
+declared matched configuration. Every stage-level test in `tests/` now has a fixture for each
+false-verdict mode the sweep produced.
+
 ### 0.8 Missing information is filled from conventions or artifacts, never from reasoning
 
 What the paper does not say cannot be inferred by thinking harder. It can only be filled from
@@ -1466,3 +1488,26 @@ configuration at that scale (§2 stage 3, compute axis).
 
 Deferred per §9: Tiingo/WRDS adapters, contamination scan, block bootstrap, Hamilton, Docker
 sandbox, era images, Extend flag.
+
+## 11. What the 14-paper sweep taught (2026-09-15/16)
+
+Outcome: all 14 CS papers ran end to end on a CPU laptop for $78.70 in model calls; every paper's
+mechanism-level claim reproduced (see `README.md`); no paper-scale number could be compared
+because the machine is a CPU, so every CS grade is C. Six papers were first graded F by false
+leakage verdicts; re-verification corrected all six to C. Root causes and the fixes, first
+principles first:
+
+| Failure | Root cause | Fix in code |
+|---|---|---|
+| False F on shuffle (6 papers) | verifier assumed unverified properties of generated code (§0.9) | shuffled smoke run at the gate; acknowledgement + null reference + known direction required; abstain otherwise |
+| Stalled model calls ate build budgets | one call could consume the stage budget (§0.2) | 5-minute call cap, stalls are empty turns |
+| Builder polished instead of testing | the stop was owned by the orchestrator but the gate was never invoked | gate runs at budget expiry; prompt demands an early smoke |
+| Runs outlived their timeout | killing the shell wrapper leaves the trainer alive | process-group kill plus an independent watchdog thread |
+| Full runs 10× slower than smoke | no calibration between smoke and full scale | SCALE contract; timed 10%-scale probe rejects oversized defaults; one retry at 30% |
+| Copy-task BLEU vs WMT BLEU called a Mismatch | reduced-scale value compared to a paper-scale number | compute-tier-2 comparisons reported as values, not verdicts, unless the run declares matched scale |
+| Stale tier labels (8 papers) | triage ran before the adapters existed and labels were frozen into reports | HF datasets/models, gym, and synthetic sources resolve; re-triage relabels reports without rerunning |
+| A paper dropped from re-verification | sweep state inferred from files | `--reverify auto` selects from reports; each paper runs in a fresh process |
+
+What it takes to turn a C into an A is a property of the machine, not the agent: three papers
+(BatchNorm, Lottery Ticket, Toy Models of Superposition) are paper-scale on a CPU and are queued
+at matched scale; the rest need one GPU for 1–24 hours each (`evals/batch.py` GPU_HINTS).

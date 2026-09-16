@@ -173,6 +173,7 @@ class Orchestrator:
                 out["metrics"] = r["metrics"]
                 if probe_scale:
                     self._scale_probe(spec, out)
+                    self._verifier_preconditions(spec, cfg, r, out)
                 else:
                     out["scale_probe"] = "skipped (re-verify)"
                 need = {c.metric for c in spec.claims if c.id in spec.plan.target_claims}
@@ -206,6 +207,44 @@ class Orchestrator:
                                        f"(steps/epochs/data/model) until SCALE=0.1 finishes in under {0.09*spec.plan.budget.run_timeout_s:.0f}s")
         except Exception as e:  # noqa: BLE001
             out["problems"].append(f"SCALE=0.1 probe failed or exceeded 10 min: {str(e)[:300]}. reproduce.sh must honor SCALE.")
+
+    def _verifier_preconditions(self, spec: Spec, cfg: dict, r: dict, out: dict[str, Any]) -> None:
+        """Everything the verify stage will assume about the generated code is checked here, at
+        build time, where a failure costs one builder turn instead of a wrong verdict:
+        (1) SCALE is honored (metrics.json echoes it), (2) the shuffle flag is honored and moves
+        the headline, or the script declares shuffling not applicable, (3) a null reference for
+        the headline metric is reported so the shuffle test can be judged."""
+        head = next((c for c in spec.claims if c.priority == "headline"), spec.claims[0] if spec.claims else None)
+        if head is None:
+            return
+        hm = head.metric
+        if str(r.get("scale", "")) not in ("1", "1.0", "0.1"):
+            out["problems"].append('metrics.json must echo "scale": <SCALE> so the orchestrator can confirm SCALE is honored')
+        if r.get("shuffle_not_applicable"):
+            return
+        if hm not in r["metrics"]:
+            return  # already reported as a missing metric
+        try:
+            rs = cs_eval.run_reproduce(self.work, {**cfg, "_shuffle_labels": True}, 0,
+                                       timeout_s=min(600, spec.plan.budget.run_timeout_s))
+        except Exception as e:  # noqa: BLE001
+            out["problems"].append(f"shuffled SMOKE run failed: {str(e)[:200]}")
+            return
+        if not rs.get("shuffled"):
+            out["problems"].append('with REPLICATOR_CONFIG._shuffle_labels=true the script must shuffle labels/targets and write "shuffled": true '
+                                   '(or "shuffle_not_applicable": true with a reason if the method has no labels or rewards)')
+        from .verify.leakage import null_reference, metric_known
+        if null_reference(rs["metrics"], hm) is None and null_reference(r["metrics"], hm) is None and "t_stat" not in r["metrics"]:
+            out["problems"].append(f'report a no-skill reference for the headline metric "{hm}": "chance_level", "{hm}_random_policy", '
+                                   f'or "{hm}_baseline", in the same units, so the shuffle test can be judged')
+        if not metric_known(hm) and null_reference(r["metrics"], hm) is None:
+            out["problems"].append(f'headline metric "{hm}" has no known better-direction; either report a null reference for it or '
+                                   f'name it with a standard suffix (accuracy, error, loss, return, bleu, f1, ...)')
+        if rs.get("shuffled") and hm in rs["metrics"] and r["metrics"].get(hm) is not None:
+            if abs(float(rs["metrics"][hm]) - float(r["metrics"][hm])) < 1e-9:
+                out["problems"].append(f'the shuffled run reproduced the exact unshuffled "{hm}"; the shuffle is not reaching the training labels')
+        out["shuffle_precheck"] = {"unshuffled": r["metrics"].get(hm), "shuffled": rs["metrics"].get(hm),
+                                   "null": null_reference(rs["metrics"], hm)}
 
     # ------------------------------------------------------------------ stage 3: build
     def stage_build(self, spec: Spec, prebuilt: Path | None = None) -> dict[str, Any]:
