@@ -18,7 +18,7 @@ obtained, under which conventions, whether it could have leaked, and what remain
 | LeCun 1998 MLP-300 on MNIST, 3 seeds | CS | re-implementation | A/1 | C | 8.5% vs 4.7% error; convention grid 1.7–9.8% | shuffle P | $0 |
 | Vaswani 2017 Transformer | CS | re implementation | A/2 | C | attention 99.4% vs no-attention 9.9% token accuracy on a copy task; WMT BLEU not comparable · c_t2_big_ende_bleu Mismatch; c_t2_big_enfr_bleu Mismatch | shuffle P | $4.72 |
 | He 2015 ResNet | CS | re implementation | A/2 | C | build passed; full CIFAR runs exceeded the CPU time cap (fixed by the SCALE probe for later papers) | — | $4.90 |
-| Ba 2016 LayerNorm | CS | — | — | in progress | spec extracted | — | $10.73 |
+| Ba 2016 LayerNorm | CS | re implementation | A/2 | C | MNIST MLP baseline 98.4%; LN vs baseline comparison ran | shuffle n/a | $10.73 |
 | Ioffe 2015 BatchNorm | CS | re implementation | A/2 | C | BN 96.5% vs no-BN 91.7% at 10k steps on both seeds (paper's direction) | shuffle n/a | $2.76 |
 | Goodfellow 2014 GAN | CS | re implementation | A/2 | C | MNIST GAN trains; shuffle test passes | shuffle P | $2.74 |
 | Mnih 2013 DQN | RL | conceptual replication | B/2 | C | CartPole DQN mean return 226, best episodes 500 | shuffle n/a | $2.35 |
@@ -31,7 +31,7 @@ obtained, under which conventions, whether it could have leaked, and what remain
 | Elhage 2021 Transformer Circuits | CS | re implementation | A/2 | C | induction heads emerge in the 2-layer model: second-half loss 0.018 vs 3.3 first half (gap 3.28); 1-layer gap only 0.92 | shuffle n/a | $2.59 |
 | Meng 2022 ROME | CS | re implementation | A/2 | C | GPT-2 causal tracing: MLP restoration at the last subject token carries the effect (18.9 vs 0.77 for attention), peaking at an early layer | shuffle n/a | $9.80 |
 
-Sweep total: $78.70 in model calls for 14 papers. Reports: `papers/batch/<slug>/REPORT.md`. Updated 2026-09-16 15:30.
+Sweep total: $78.70 in model calls for 14 papers. Reports: `papers/batch/<slug>/REPORT.md`. Updated 2026-09-16 16:35.
 <!-- RESULTS:END -->
 
 **Reading a grade.** The letter is a fixed function of four axes (data fidelity, procedure fidelity,
