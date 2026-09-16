@@ -1,6 +1,6 @@
-# Paper Replication Agent — project summary for a resume
+# Research Replication Agent — project summary for a resume
 
-Repository: https://github.com/victorzhu443/paper-replication-agent
+Repository: https://github.com/victorzhu443/research-replication-agent
 Built September 12–15, 2026. Python 3.12, Anthropic Claude API (Opus 5 + Sonnet 5), pandas,
 statsmodels, PyTorch, pandera, pydantic, Hugging Face datasets/transformers/peft, gymnasium.
 About 3,400 lines of Python across 30 modules, 14 tests, 36 commits.

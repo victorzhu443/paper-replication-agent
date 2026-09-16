@@ -1440,7 +1440,7 @@ to work, which is the error the order exists to prevent.
 ## 10. Implementation status (updated 2026-09-15)
 
 The §9 MVP cut is implemented in `replicator/`; `README.md` has layout, commands, and the
-results table. Repository: https://github.com/victorzhu443/paper-replication-agent.
+results table. Repository: https://github.com/victorzhu443/research-replication-agent.
 
 | Piece | Status | Where |
 |---|---|---|

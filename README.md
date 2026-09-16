@@ -1,4 +1,4 @@
-# Paper replication agent
+# Research replication agent
 
 Reproduces a technical paper's headline results with an **attributable verdict**, for two tracks:
 quant-finance (cross-sectional anomalies, ML return prediction) and CS/ML (checkpoint evaluation,
