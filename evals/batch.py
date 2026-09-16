@@ -19,7 +19,9 @@ from replicator.schema import Spec
 from replicator.spec.intake import fetch_arxiv, fetch_html_as_text
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "runs" / ("batch_gpu" if __import__("os").environ.get("REPLICATOR_GPU") else "batch")
+_os = __import__("os")
+OUT = Path(_os.environ["REPLICATOR_OUT"]) if _os.environ.get("REPLICATOR_OUT") else \
+    ROOT / "runs" / ("batch_gpu" if _os.environ.get("REPLICATOR_GPU") else "batch")
 
 # slug -> paper. `hint` is the reduced-scale plan the triage/builder receive (compute tier 2, CPU only).
 PAPERS: dict[str, dict] = {
@@ -213,9 +215,12 @@ def _replicate_in_subprocess(slug: str) -> dict:
 def main(slugs: list[str]) -> None:
     global GPU, OUT
     if slugs and slugs[0] == "--matched":
-        # paper-scale plan (GPU_HINTS) for the named papers on this machine, compute tier 1, long timeouts
+        # paper-scale plan (GPU_HINTS) for the named papers on this machine, compute tier 1, long timeouts.
+        # Settings go through the environment so the per-paper subprocess sees the same mode and output dir.
         GPU = True
         OUT = ROOT / "runs" / "batch_matched"
+        _os.environ["REPLICATOR_GPU"] = "1"
+        _os.environ["REPLICATOR_OUT"] = str(OUT)
         slugs = slugs[1:]
     if slugs and slugs[0] == "--reverify":
         rows = []
