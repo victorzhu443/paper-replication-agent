@@ -38,6 +38,7 @@ NOTES = {
     "lora": "RoBERTa-base on SST-2 subset: LoRA 91.97% vs full FT 92.66% with 0.3M trainable params (paper's claim)",
     "dpo": "DPO loss from Eq. 7: 98.5% held-out preference accuracy, 100% win rate vs reference, reward margin grows",
     "superposition": "n=20, m=5: dense regime 5 features, sparse (S=0.99) 12.9 features in 5 dims; linear never superposes; antipodal pair 0.498 (paper 1/2)",
+    "circuits": "induction heads emerge in the 2-layer model: second-half loss 0.018 vs 3.3 first half (gap 3.28); 1-layer gap only 0.92",
 }
 
 

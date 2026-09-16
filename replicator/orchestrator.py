@@ -202,9 +202,10 @@ class Orchestrator:
     def stage_build(self, spec: Spec, prebuilt: Path | None = None) -> dict[str, Any]:
         spec.assert_frozen()
         if prebuilt is not None:
-            for f in prebuilt.iterdir():
-                if f.is_file():
-                    shutil.copy(f, self.work / f.name)
+            if prebuilt.resolve() != self.work.resolve():
+                for f in prebuilt.iterdir():
+                    if f.is_file():
+                        shutil.copy(f, self.work / f.name)
             sm = self.smoke(spec)
             res = {"smoke_passed": sm.get("passed"), "turns": 0, "prebuilt": str(prebuilt), "blacklist_hits": [], "last_smoke": sm}
         else:
