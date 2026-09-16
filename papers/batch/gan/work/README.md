@@ -1,0 +1,2 @@
+Family template: template_cs_eval.py. Write pipeline.py (finance) or reproduce.sh (CS).
+Config keys available: ['lr_schedule', 'augmentation', 'input_scaling', 'validation_split', 'batch_vs_steps', 'mixed_precision', 'split', 'generator_objective', 'latent_dim', 'noise_prior', 'architecture', 'n_hidden_layers', 'batch_size', 'optimizer', 'dropout_rate', 'k', 'train_steps', 'weight_init', 'equilibrium_metric', 'eval_classifier', 'parzen_config', 'parzen_log_base', 'n_seeds', 'output_activation']

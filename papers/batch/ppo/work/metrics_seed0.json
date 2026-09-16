@@ -1,0 +1,92 @@
+{
+ "seed": 0,
+ "split": "test",
+ "n_examples": 1191936,
+ "metrics": {
+  "mean_return": 500.0,
+  "mean_return_no_clip": 266.52,
+  "avg_normalized_score": 1.0,
+  "avg_normalized_score_no_clip": 0.5100413405242062,
+  "clip_minus_noclip": 233.48000000000002,
+  "random_policy_return": 23.47,
+  "mean_return__clip_0.2": 500.0,
+  "avg_normalized_score__clip_0.2": 1.0,
+  "mean_return__no_clip": 266.52,
+  "avg_normalized_score__no_clip": 0.5100413405242062,
+  "mean_return__clip_0.1": 500.0,
+  "avg_normalized_score__clip_0.1": 1.0,
+  "mean_return__clip_0.3": 500.0,
+  "avg_normalized_score__clip_0.3": 1.0,
+  "mean_return__adaptive_kl_0.01": 500.0,
+  "avg_normalized_score__adaptive_kl_0.01": 1.0,
+  "mean_return__fixed_kl_1": 500.0,
+  "avg_normalized_score__fixed_kl_1": 1.0,
+  "_intermediates": {
+   "scale": {
+    "env_substitute": "CartPole-v1 instead of 7 MuJoCo -v1 tasks (no MuJoCo, CPU only)",
+    "total_timesteps": 200000,
+    "paper_timesteps": 1000000,
+    "variants_run": [
+     "clip_0.2",
+     "no_clip",
+     "clip_0.1",
+     "clip_0.3",
+     "adaptive_kl_0.01",
+     "fixed_kl_1"
+    ],
+    "smoke": false
+   },
+   "episodes": {
+    "clip_0.2": 613,
+    "no_clip": 952,
+    "clip_0.1": 744,
+    "clip_0.3": 593,
+    "adaptive_kl_0.01": 648,
+    "fixed_kl_1": 623
+   },
+   "steps": {
+    "clip_0.2": 198656,
+    "no_clip": 198656,
+    "clip_0.1": 198656,
+    "clip_0.3": 198656,
+    "adaptive_kl_0.01": 198656,
+    "fixed_kl_1": 198656
+   },
+   "wall_time_s": 147.07404899597168,
+   "config": {
+    "env_suite": "gym_cartpole_v1_200k_steps",
+    "lr_schedule": "constant",
+    "augmentation": "none",
+    "batch_vs_steps": "steps",
+    "mixed_precision": "fp32",
+    "split": "test",
+    "eval_return_source": "train_episode_returns_last_100",
+    "episode_buffer_rule": "global_last_100_finished_episodes",
+    "seeds": "3",
+    "score_normalization_reference": "max_over_all_settings_and_seeds_per_env",
+    "advantage_normalization": "per_batch",
+    "obs_normalization": "none",
+    "entropy_coef": "0.0",
+    "shared_trunk": "separate",
+    "value_net_training": "same_mlp_same_adam_same_epochs_weight1",
+    "kl_estimator": "analytic_per_state",
+    "max_grad_norm": "none",
+    "clip_vloss": "none",
+    "rollout_length_and_actors": "T=2048,N=1",
+    "ppo_epochs_minibatch": "K=10,M=64",
+    "total_timesteps": "200000",
+    "noclip_update_rule": "same_K_epochs_ratio_objective",
+    "terminal_bootstrap": "bootstrap_on_truncation_zero_on_terminal",
+    "policy_std_parameterization": "state_independent_learned_logstd_init0",
+    "init_scheme": "orthogonal_sqrt2_policy0.01",
+    "adam_eps": "1e-5",
+    "atari_wrappers": "mnih2016_standard_deepmind_wrappers",
+    "atari_reward_clipping": "clip_train_report_raw",
+    "objective": "L^CLIP with epsilon=0.2",
+    "hyperparams": "Table 3 (p.10): T=2048, Adam 3e-4 constant, K=10 epochs, M=64, gamma=0.99, lambda=0.95; no entropy bonus; separate value network",
+    "envs": "7 MuJoCo -v1 tasks, 1M steps each, 3 seeds each",
+    "_shuffle_labels": "True"
+   }
+  }
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "seed": 0,
+ "split": "test",
+ "n_examples": 10000,
+ "metrics": {
+  "discriminator_loss": NaN,
+  "value_function_at_optimum": NaN,
+  "mean_discriminator_output": NaN,
+  "mean_d_output_real": NaN,
+  "mean_d_output_fake": NaN,
+  "sample_mean_confidence": NaN,
+  "sample_frac_confident_0.9": 0.0,
+  "sample_class_entropy": NaN,
+  "classifier_test_accuracy": 0.9847999811172485,
+  "parzen_log_likelihood": NaN,
+  "parzen_sem": NaN,
+  "parzen_sigma": 0.05011872336272722,
+  "_intermediates": {
+   "scale": {
+    "g_hidden": 512,
+    "d_hidden": 512,
+    "maxout_pieces": 5,
+    "train_steps_run": 20000,
+    "train_steps_requested": 20000,
+    "time_budget_s": 660.0,
+    "clf_steps": 2000,
+    "smoke": false,
+    "parzen": "skip_parzen",
+    "parzen_n_samples": 10000,
+    "parzen_cv_val_n": 1000
+   },
+   "n_train": 50000,
+   "n_val": 10000,
+   "n_test": 10000,
+   "train_wall_s": 282.6,
+   "d_loss_first50": 0.9626755578815938
+  }
+ }
+}

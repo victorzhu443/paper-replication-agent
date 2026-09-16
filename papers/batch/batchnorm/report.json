@@ -1,0 +1,346 @@
+{
+  "paper_title": "Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift",
+  "track": "cs",
+  "family": "train_and_eval",
+  "kind_of_test": "re_implementation",
+  "data_tier": "A",
+  "compute_tier": 2,
+  "deviations": [
+    "imagenet_ilsvrc2012 -> UNAVAILABLE: claims depending on this source are Untested",
+    "tolerance for mnist_bn_beats_baseline_sign filled from our own SE (0.00135) at verify time, not frozen",
+    "tolerance for inception_steps_to_72_2 filled from our own SE (5e+03) at verify time, not frozen",
+    "tolerance for bn_baseline_steps_to_72_2 filled from our own SE (5e+03) at verify time, not frozen",
+    "Table-1 checkpoint (gate): mnist_hidden_layers paper=3.0 ours=None gap=None; mnist_units_per_hidden_layer paper=100.0 ours=None gap=None; mnist_output_units paper=10.0 ours=None gap=None; mnist_input_dim paper=784.0 ours=None gap=None; mnist_training_steps paper=50000.0 ours=None gap=None; mnist_minibatch_size paper=60.0 ours=None gap=None; inception_parameters paper=13600000.0 ours=None gap=None; imagenet_minibatch_size paper=32.0 ours=None gap=None; imagenet_num_classes paper=1000.0 ours=None gap=None; imagenet_validation_images paper=50000.0 ours=None gap=None; imagenet_test_images paper=100000.0 ours=None gap=None; ensemble_num_models paper=6.0 ours=None gap=None; bn_x30_steps_to_74_8_percent paper=6000000.0 ours=None gap=None; bn_x5_speedup_factor_vs_inception paper=14.0 ours=None gap=None; shuffling_val_accuracy_gain_percent paper=1.0 ours=None gap=None"
+  ],
+  "claims": [
+    {
+      "claim_id": "mnist_bn_beats_baseline_sign",
+      "paper_value": 0.0,
+      "our_value": 0.009550000000000003,
+      "our_std": 0.0019091883092037035,
+      "tolerance": 0.0027000000000000353,
+      "outcome": "Untested",
+      "note": "reduced scale (compute tier 2): ours=0.00955 is not comparable to the paper-scale value; |gap|=0.00955 > tol 0.0027"
+    },
+    {
+      "claim_id": "inception_steps_to_72_2",
+      "paper_value": 31000000.0,
+      "our_value": 15000.0,
+      "our_std": 7071.067811865475,
+      "tolerance": 60000.0,
+      "outcome": "Untested",
+      "note": "reduced scale (compute tier 2): ours=1.5e+04 is not comparable to the paper-scale value; |gap|=3.098e+07 > tol 6e+04"
+    },
+    {
+      "claim_id": "inception_max_acc",
+      "paper_value": 72.2,
+      "our_value": 0.97575,
+      "our_std": 0.0014849242404917434,
+      "tolerance": 0.45071536032450765,
+      "outcome": "Untested",
+      "note": "reduced scale (compute tier 2): ours=0.9758 is not comparable to the paper-scale value; |gap|=71.22 > tol 0.4507"
+    },
+    {
+      "claim_id": "bn_baseline_steps_to_72_2",
+      "paper_value": 13300000.0,
+      "our_value": 15000.0,
+      "our_std": 7071.067811865475,
+      "tolerance": 60000.0,
+      "outcome": "Untested",
+      "note": "reduced scale (compute tier 2): ours=1.5e+04 is not comparable to the paper-scale value; |gap|=1.328e+07 > tol 6e+04"
+    },
+    {
+      "claim_id": "bn_baseline_max_acc",
+      "paper_value": 72.7,
+      "our_value": 0.97575,
+      "our_std": 0.0014849242404917434,
+      "tolerance": 0.44846806647459214,
+      "outcome": "Untested",
+      "note": "reduced scale (compute tier 2): ours=0.9758 is not comparable to the paper-scale value; |gap|=71.72 > tol 0.4485"
+    },
+    {
+      "claim_id": "bn_x5_steps_to_72_2",
+      "paper_value": 2100000.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no value produced"
+    },
+    {
+      "claim_id": "bn_x5_max_acc",
+      "paper_value": 73.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": 0.4470894105865831,
+      "outcome": "Untested",
+      "note": "no value produced"
+    },
+    {
+      "claim_id": "bn_x30_steps_to_72_2",
+      "paper_value": 2700000.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no value produced"
+    },
+    {
+      "claim_id": "bn_x30_max_acc",
+      "paper_value": 74.8,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "bn_x5_sigmoid_max_acc",
+      "paper_value": 69.8,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "bn_inception_single_crop_top1_err",
+      "paper_value": 25.2,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "bn_inception_single_crop_top5_err",
+      "paper_value": 7.82,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "bn_inception_multicrop_top1_err",
+      "paper_value": 21.99,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "bn_inception_multicrop_top5_err",
+      "paper_value": 5.82,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "bn_inception_ensemble_top1_err",
+      "paper_value": 20.1,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "bn_inception_ensemble_top5_err_val",
+      "paper_value": 4.9,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "bn_inception_ensemble_top5_err_test",
+      "paper_value": 4.82,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    }
+  ],
+  "leakage": [
+    {
+      "test": "shuffle",
+      "passed": false,
+      "detail": "shuffled accuracy_gap=0.0109 (t=None), unshuffled=0.00955"
+    },
+    {
+      "test": "contamination_scan",
+      "passed": null,
+      "detail": "not implemented in MVP: hash-based train/test near-duplicate scan"
+    }
+  ],
+  "grid": [],
+  "grid_range": null,
+  "unexplained": [],
+  "ambiguities_used": [
+    {
+      "config_key": "lr_schedule",
+      "default": "constant",
+      "source": "conventions_kb",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "learning_rate",
+      "default": "0.1",
+      "source": "guess",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "augmentation",
+      "default": "none",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "batch_vs_steps",
+      "default": "steps",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "mixed_precision",
+      "default": "fp32",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "split",
+      "default": "test",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "mnist_splits",
+      "default": "train60000_test10000",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "optimizer",
+      "default": "sgd",
+      "source": "conventions_kb",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "init_std",
+      "default": "0.05",
+      "source": "guess",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "input_binarization",
+      "default": "threshold_0.5",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "bn_epsilon",
+      "default": "1e-5",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "bn_param_init",
+      "default": "gamma1_beta0",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "bn_inference_stats",
+      "default": "moving_average",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "bn_momentum",
+      "default": "0.9",
+      "source": "guess",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "bn_layers",
+      "default": "hidden_only",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "use_bias_with_bn",
+      "default": "drop_bias",
+      "source": "paper_text",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "weight_decay",
+      "default": "0.0",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "eval_steps",
+      "default": "{10000,20000,30000,40000,50000}",
+      "source": "guess",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "n_seeds",
+      "default": "3",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "loss",
+      "default": "softmax_cross_entropy",
+      "source": "paper_text",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "shuffle",
+      "default": "shuffle_each_epoch",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    }
+  ],
+  "grade": {
+    "data_fidelity": "tier A checkpoint",
+    "procedure_fidelity": "re-implemented, 0 unexplained",
+    "result": "Untested",
+    "integrity": "failed",
+    "letter": "F"
+  },
+  "reproducibility": {
+    "agent_version": "0.1.0",
+    "spec_frozen_hash": "a5a2b6e4c2d1c3c1098cd5ca9e1202d40683dbcab8837c10066476f242e64a01",
+    "frozen_at": "2026-09-15T15:57:21.969457+00:00",
+    "env_lock_hash": "98fa794f4e123348",
+    "runs": [
+      "full_bn_baseline_s0_298e3ee1904fbd6a.json",
+      "full_bn_baseline_s1_298e3ee1904fbd6a.json",
+      "full_inception_s0_a93cd45caec315e9.json",
+      "full_inception_s1_a93cd45caec315e9.json",
+      "full_mnist_bn_vs_baseline_s0_848b8767dcda0a75.json",
+      "full_mnist_bn_vs_baseline_s1_848b8767dcda0a75.json"
+    ],
+    "work_dir": "/Users/vzhu/Developer/research-copy/runs/batch/batchnorm/work",
+    "command": "/Users/vzhu/Developer/research-copy/evals/batch.py"
+  },
+  "human_minutes": 0.0,
+  "wall_minutes": 10.83053798675537,
+  "cost_usd": 1.8682925,
+  "stages_completed": [
+    "setup",
+    "build",
+    "run",
+    "verify"
+  ],
+  "failure": null
+}

@@ -1,0 +1,2 @@
+Family template: template_cs_eval.py. Write pipeline.py (finance) or reproduce.sh (CS).
+Config keys available: ['lr_schedule', 'warmup_steps', 'attention_dropout', 'ppl_definition', 'length_penalty_form', 'vocab_sharing_enfr', 'base_enfr_config', 'checkpoint_interval', 'augmentation', 'batch_vs_steps', 'mixed_precision', 'split', 'reduced_task', 'bleu_tool', 'baseline_arch', 'checkpoint_averaging', 'beam_size', 'init', 'grad_clip', 'norm_placement', 'label_smoothing', 'n_seeds', 'enfr_reference_value', 'claim_status']

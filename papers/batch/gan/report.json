@@ -1,0 +1,304 @@
+{
+  "paper_title": "Generative Adversarial Nets",
+  "track": "cs",
+  "family": "train_and_eval",
+  "kind_of_test": "re_implementation",
+  "data_tier": "A",
+  "compute_tier": 2,
+  "deviations": [
+    "toronto_face_database -> UNAVAILABLE: claims depending on this source are Untested",
+    "Table-1 checkpoint (gate): mnist_test_examples paper=10000.0 ours=None gap=None; mnist_train_examples paper=60000.0 ours=None gap=None; mnist_input_dimension paper=784.0 ours=None gap=None; table1_models_compared paper=4.0 ours=None gap=None; k_discriminator_steps paper=1.0 ours=None gap=None; adv_nets_mnist_minus_gsn_gap paper=11.0 ours=None gap=None"
+  ],
+  "claims": [
+    {
+      "claim_id": "gan_equilibrium_d_loss",
+      "paper_value": 1.3863,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no value produced"
+    },
+    {
+      "claim_id": "gan_equilibrium_value_function",
+      "paper_value": -1.3863,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no value produced"
+    },
+    {
+      "claim_id": "gan_equilibrium_d_output_half",
+      "paper_value": 0.5,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no value produced"
+    },
+    {
+      "claim_id": "adv_nets_mnist_parzen",
+      "paper_value": 225.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": 4.5,
+      "outcome": "Untested",
+      "note": "no value produced"
+    },
+    {
+      "claim_id": "adv_nets_tfd_parzen",
+      "paper_value": 2057.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": 52.5,
+      "outcome": "Untested",
+      "note": "no value produced"
+    },
+    {
+      "claim_id": "dbn_mnist_parzen",
+      "paper_value": 138.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": 4.5,
+      "outcome": "Untested",
+      "note": "no value produced"
+    },
+    {
+      "claim_id": "dbn_tfd_parzen",
+      "paper_value": 1909.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": 132.5,
+      "outcome": "Untested",
+      "note": "no value produced"
+    },
+    {
+      "claim_id": "scae_mnist_parzen",
+      "paper_value": 121.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": 3.7,
+      "outcome": "Untested",
+      "note": "no value produced"
+    },
+    {
+      "claim_id": "scae_tfd_parzen",
+      "paper_value": 2110.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "gsn_mnist_parzen",
+      "paper_value": 214.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "gsn_tfd_parzen",
+      "paper_value": 1890.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    }
+  ],
+  "leakage": [
+    {
+      "test": "shuffle",
+      "passed": true,
+      "detail": "shuffled discriminator_loss=nan (t=None), unshuffled=nan"
+    },
+    {
+      "test": "contamination_scan",
+      "passed": null,
+      "detail": "not implemented in MVP: hash-based train/test near-duplicate scan"
+    }
+  ],
+  "grid": [],
+  "grid_range": null,
+  "unexplained": [],
+  "ambiguities_used": [
+    {
+      "config_key": "lr_schedule",
+      "default": "constant",
+      "source": "conventions_kb",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "augmentation",
+      "default": "none",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "input_scaling",
+      "default": "unit_interval_0_1",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "validation_split",
+      "default": "50000_train_10000_val",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "batch_vs_steps",
+      "default": "steps",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "mixed_precision",
+      "default": "fp32",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "split",
+      "default": "test",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "generator_objective",
+      "default": "non_saturating",
+      "source": "paper_text",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "latent_dim",
+      "default": "100",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "noise_prior",
+      "default": "uniform_-1_1",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "architecture",
+      "default": "reduced_cpu_512_512_G_512_D",
+      "source": "guess",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "n_hidden_layers",
+      "default": "2_hidden_layers_each",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "batch_size",
+      "default": "100",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "optimizer",
+      "default": "sgd_momentum_lr0.1_mom0.5",
+      "source": "conventions_kb",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "dropout_rate",
+      "default": "0.5",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "k",
+      "default": "1",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "train_steps",
+      "default": "fit_15min_cpu_budget",
+      "source": "guess",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "weight_init",
+      "default": "glorot_uniform",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "equilibrium_metric",
+      "default": "sum_bce_real_plus_fake_last_window",
+      "source": "guess",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "eval_classifier",
+      "default": "small_cnn_trained_in_script",
+      "source": "guess",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "parzen_config",
+      "default": "skip_parzen",
+      "source": "conventions_kb",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "parzen_log_base",
+      "default": "natural_log_nats",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "n_seeds",
+      "default": "3",
+      "source": "guess",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "output_activation",
+      "default": "sigmoid_0_1",
+      "source": "guess",
+      "sensitivity": "low"
+    }
+  ],
+  "grade": {
+    "data_fidelity": "tier A checkpoint",
+    "procedure_fidelity": "re-implemented, 0 unexplained",
+    "result": "Untested",
+    "integrity": "passed",
+    "letter": "C"
+  },
+  "reproducibility": {
+    "agent_version": "0.1.0",
+    "spec_frozen_hash": "169bb97ab4c3c5096b338270a72805fcc9a18deb3a6366538a5f97f1c6d169df",
+    "frozen_at": "2026-09-15T15:58:18.960384+00:00",
+    "env_lock_hash": "98fa794f4e123348",
+    "runs": [
+      "full_mnist_mlp_gan_cpu_s0_f2b6a6b621ce5a88.json",
+      "full_mnist_parzen_eval_s0_d67af5eba681b14b.json",
+      "full_tfd_parzen_eval_s0_c51f1a912005ad41.json"
+    ],
+    "work_dir": "/Users/vzhu/Developer/research-copy/runs/batch/gan/work",
+    "command": "/Users/vzhu/Developer/research-copy/evals/batch.py"
+  },
+  "human_minutes": 0.0,
+  "wall_minutes": 21.47932130098343,
+  "cost_usd": 1.9927920000000001,
+  "stages_completed": [
+    "setup",
+    "build",
+    "run",
+    "verify"
+  ],
+  "failure": null
+}

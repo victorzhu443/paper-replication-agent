@@ -1,0 +1,422 @@
+{
+  "paper_title": "Attention Is All You Need",
+  "track": "cs",
+  "family": "train_and_eval",
+  "kind_of_test": "re_implementation",
+  "data_tier": "A",
+  "compute_tier": 2,
+  "deviations": [
+    "Table-1 checkpoint (gate): wmt14_ende_training_sentence_pairs_millions paper=4.5 ours=None gap=None; wmt14_ende_shared_bpe_vocab_tokens paper=37000.0 ours=None gap=None; wmt14_enfr_training_sentences_millions paper=36.0 ours=None gap=None; wmt14_enfr_wordpiece_vocab_tokens paper=32000.0 ours=None gap=None; tokens_per_training_batch_source paper=25000.0 ours=None gap=None; tokens_per_training_batch_target paper=25000.0 ours=None gap=None; num_gpus paper=8.0 ours=None gap=None; base_step_time_seconds paper=0.4 ours=None gap=None; base_train_steps paper=100000.0 ours=None gap=None; base_train_hours paper=12.0 ours=None gap=None; big_step_time_seconds paper=1.0 ours=None gap=None; big_train_steps paper=300000.0 ours=None gap=None; big_train_days paper=3.5 ours=None gap=None; warmup_steps paper=4000.0 ours=None gap=None; adam_beta1 paper=0.9 ours=None gap=None; adam_beta2 paper=0.98 ours=None gap=None; adam_epsilon paper=1e-09 ours=None gap=None; base_params_millions paper=65.0 ours=None gap=None; big_params_millions paper=213.0 ours=None gap=None; parsing_wsj_training_sentences_thousands paper=40.0 ours=None gap=None; parsing_semisupervised_sentences_millions paper=17.0 ours=None gap=None; parsing_wsj_vocab_tokens_thousands paper=16.0 ours=None gap=None; parsing_semisup_vocab_tokens_thousands paper=32.0 ours=None gap=None; parsing_layers paper=4.0 ours=None gap=None; parsing_d_model paper=1024.0 ours=None gap=None; encoder_decoder_layers_base paper=6.0 ours=None gap=None; d_model_base paper=512.0 ours=None gap=None; d_ff_base paper=2048.0 ours=None gap=None; heads_base paper=8.0 ours=None gap=None; d_k_d_v_base paper=64.0 ours=None gap=None; dropout_base paper=0.1 ours=None gap=None; dropout_big_ende paper=0.3 ours=None gap=None; dropout_big_enfr paper=0.1 ours=None gap=None; label_smoothing paper=0.1 ours=None gap=None; beam_size_translation paper=4.0 ours=None gap=None; length_penalty_alpha_translation paper=0.6 ours=None gap=None; max_output_length_offset_translation paper=50.0 ours=None gap=None; checkpoints_averaged_base paper=5.0 ours=None gap=None; checkpoints_averaged_big paper=20.0 ours=None gap=None; beam_size_parsing paper=21.0 ours=None gap=None; length_penalty_alpha_parsing paper=0.3 ours=None gap=None; max_output_length_offset_parsing paper=300.0 ours=None gap=None"
+  ],
+  "claims": [
+    {
+      "claim_id": "c_t2_big_ende_bleu",
+      "paper_value": 28.4,
+      "our_value": 98.6851257975403,
+      "our_std": 0.22163708323505799,
+      "tolerance": 1.05,
+      "outcome": "Mismatch",
+      "note": "|gap|=70.29 > tol 1.05"
+    },
+    {
+      "claim_id": "c_t2_big_enfr_bleu",
+      "paper_value": 41.8,
+      "our_value": 98.6851257975403,
+      "our_std": 0.22163708323505799,
+      "tolerance": 1.05,
+      "outcome": "Mismatch",
+      "note": "|gap|=56.89 > tol 1.05"
+    },
+    {
+      "claim_id": "c_t2_base_ende_bleu",
+      "paper_value": 27.3,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": 1.05,
+      "outcome": "Untested",
+      "note": "no value produced"
+    },
+    {
+      "claim_id": "c_t2_base_enfr_bleu",
+      "paper_value": 38.1,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": 1.05,
+      "outcome": "Untested",
+      "note": "no value produced"
+    },
+    {
+      "claim_id": "c_t2_base_flops",
+      "paper_value": 3.3e+18,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no value produced"
+    },
+    {
+      "claim_id": "c_t2_big_flops",
+      "paper_value": 2.3e+19,
+      "our_value": 14482635574272.0,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no derived tolerance; needs n_periods, t-stat or std"
+    },
+    {
+      "claim_id": "c_t3_base_ppl_dev",
+      "paper_value": 4.92,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": 0.1034,
+      "outcome": "Untested",
+      "note": "no value produced"
+    },
+    {
+      "claim_id": "c_t3_base_bleu_dev",
+      "paper_value": 25.8,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": 1.05,
+      "outcome": "Untested",
+      "note": "no value produced"
+    },
+    {
+      "claim_id": "c_t3_base_params",
+      "paper_value": 65.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_t3_big_ppl_dev",
+      "paper_value": 4.33,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_t3_big_bleu_dev",
+      "paper_value": 26.4,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_t3_big_params",
+      "paper_value": 213.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_t3_A_h1_ppl",
+      "paper_value": 5.29,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_t3_A_h1_bleu",
+      "paper_value": 24.9,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_t3_A_h16_bleu",
+      "paper_value": 25.8,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_text_single_head_delta",
+      "paper_value": 0.9,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_t3_C_N2_ppl",
+      "paper_value": 6.11,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_t3_C_N2_bleu",
+      "paper_value": 23.7,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_t3_D_drop0_ppl",
+      "paper_value": 5.77,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_t3_D_drop0_bleu",
+      "paper_value": 24.6,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_t3_E_learned_pe_ppl",
+      "paper_value": 4.92,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_t3_E_learned_pe_bleu",
+      "paper_value": 25.7,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_t4_parse_wsj_only_f1",
+      "paper_value": 91.3,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_t4_parse_semisup_f1",
+      "paper_value": 92.7,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    }
+  ],
+  "leakage": [
+    {
+      "test": "shuffle",
+      "passed": true,
+      "detail": "shuffled bleu=0.04461 (t=None), unshuffled=98.69"
+    },
+    {
+      "test": "contamination_scan",
+      "passed": null,
+      "detail": "not implemented in MVP: hash-based train/test near-duplicate scan"
+    }
+  ],
+  "grid": [],
+  "grid_range": null,
+  "unexplained": [],
+  "ambiguities_used": [
+    {
+      "config_key": "lr_schedule",
+      "default": "as_paper",
+      "source": "paper_text",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "warmup_steps",
+      "default": "10_percent_of_total_steps",
+      "source": "conventions_kb",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "attention_dropout",
+      "default": "same_as_residual_p_drop",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "ppl_definition",
+      "default": "unsmoothed_ce",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "length_penalty_form",
+      "default": "gnmt_wu2016",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "vocab_sharing_enfr",
+      "default": "shared",
+      "source": "guess",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "base_enfr_config",
+      "default": "same_as_base_ende_100k_pdrop0.1",
+      "source": "paper_text",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "checkpoint_interval",
+      "default": "10_minutes_as_base",
+      "source": "paper_text",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "augmentation",
+      "default": "none",
+      "source": "paper_text",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "batch_vs_steps",
+      "default": "steps",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "mixed_precision",
+      "default": "fp32",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "split",
+      "default": "test",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "reduced_task",
+      "default": "reverse",
+      "source": "guess",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "bleu_tool",
+      "default": "sacrebleu_13a",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "baseline_arch",
+      "default": "mean_pooled_context_ffn",
+      "source": "guess",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "checkpoint_averaging",
+      "default": "none",
+      "source": "paper_text",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "beam_size",
+      "default": "1_greedy",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "init",
+      "default": "xavier_uniform",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "grad_clip",
+      "default": "none",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "norm_placement",
+      "default": "post_norm",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "label_smoothing",
+      "default": "0.1_as_paper",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "n_seeds",
+      "default": "3",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "enfr_reference_value",
+      "default": "41.8_table2",
+      "source": "paper_text",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "claim_status",
+      "default": "untested",
+      "source": "conventions_kb",
+      "sensitivity": "high"
+    }
+  ],
+  "grade": {
+    "data_fidelity": "tier A checkpoint",
+    "procedure_fidelity": "re-implemented, 0 unexplained",
+    "result": "Mismatch",
+    "integrity": "passed",
+    "letter": "C"
+  },
+  "reproducibility": {
+    "agent_version": "0.1.0",
+    "spec_frozen_hash": "12e3f385c46de4225c6a250a2028616d2b1768dd5cebcb210eae8c16bb0f15c3",
+    "frozen_at": "2026-09-15T15:53:29.208516+00:00",
+    "env_lock_hash": "98fa794f4e123348",
+    "runs": [
+      "full_base_dev_newstest2013_s0_a8135110cffb1e52.json",
+      "full_base_ende_s0_a82da3ae89942005.json",
+      "full_base_enfr_s0_eb204e4c9c67ca8b.json",
+      "full_big_ende_s0_9f197b1f566fa738.json",
+      "full_big_enfr_s0_3a61557c0efadcef.json"
+    ],
+    "work_dir": "/Users/vzhu/Developer/research-copy/runs/batch/attention/work",
+    "command": "/Users/vzhu/Developer/research-copy/evals/batch.py"
+  },
+  "human_minutes": 0.0,
+  "wall_minutes": 83.7196796854337,
+  "cost_usd": 0.5146135,
+  "stages_completed": [
+    "setup",
+    "build",
+    "run",
+    "verify"
+  ],
+  "failure": null
+}

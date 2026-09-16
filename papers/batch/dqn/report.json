@@ -1,0 +1,729 @@
+{
+  "paper_title": "Playing Atari with Deep Reinforcement Learning",
+  "track": "cs",
+  "family": "train_and_eval",
+  "kind_of_test": "mechanics_only",
+  "data_tier": "C",
+  "compute_tier": 2,
+  "deviations": [
+    "arcade_learning_environment -> UNAVAILABLE: claims depending on this source are Untested",
+    "human_expert_scores -> UNAVAILABLE: claims depending on this source are Untested",
+    "published_baseline_scores -> UNAVAILABLE: claims depending on this source are Untested",
+    "Table-1 checkpoint (measure): n_games_evaluated paper=7.0 ours=None gap=None; n_games_beating_prior_methods paper=6.0 ours=None gap=None; n_games_surpassing_human_expert paper=3.0 ours=None gap=None; training_frames_total paper=10000000.0 ours=None gap=None; replay_memory_frames paper=1000000.0 ours=None gap=None; minibatch_size paper=32.0 ours=None gap=None; epsilon_initial paper=1.0 ours=None gap=None; epsilon_final_train paper=0.1 ours=None gap=None; epsilon_anneal_frames paper=1000000.0 ours=None gap=None; epsilon_eval paper=0.05 ours=None gap=None; frame_skip_k_default paper=4.0 ours=None gap=None; frame_skip_k_space_invaders paper=3.0 ours=None gap=None; input_frames_stacked paper=4.0 ours=None gap=None; input_width_height paper=84.0 ours=None gap=None; downsampled_intermediate_height paper=110.0 ours=None gap=None; conv1_filters paper=16.0 ours=None gap=None; conv1_kernel paper=8.0 ours=None gap=None; conv1_stride paper=4.0 ours=None gap=None; conv2_filters paper=32.0 ours=None gap=None; conv2_kernel paper=4.0 ours=None gap=None; conv2_stride paper=2.0 ours=None gap=None; fc_hidden_units paper=256.0 ours=None gap=None; min_valid_actions paper=4.0 ours=None gap=None; max_valid_actions paper=18.0 ours=None gap=None; minibatch_updates_per_epoch paper=50000.0 ours=None gap=None; training_epochs_plotted paper=100.0 ours=None gap=None; eval_steps_per_curve_point paper=10000.0 ours=None gap=None; raw_frame_height paper=210.0 ours=None gap=None; raw_frame_width paper=160.0 ours=None gap=None; atari_color_palette_size paper=128.0 ours=None gap=None; atari_frame_rate_hz paper=60.0 ours=None gap=None; human_play_hours_per_game paper=2.0 ours=None gap=None; minutes_per_epoch_approx paper=30.0 ours=None gap=None"
+  ],
+  "claims": [
+    {
+      "claim_id": "c_dqn_breakout",
+      "paper_value": 168.0,
+      "our_value": 226.2266666666667,
+      "our_std": 74.3080516050134,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no derived tolerance; needs n_periods, t-stat or std"
+    },
+    {
+      "claim_id": "c_dqn_seaquest",
+      "paper_value": 1705.0,
+      "our_value": 226.2266666666667,
+      "our_std": 74.3080516050134,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no derived tolerance; needs n_periods, t-stat or std"
+    },
+    {
+      "claim_id": "c_dqn_pong",
+      "paper_value": 20.0,
+      "our_value": 226.2266666666667,
+      "our_std": 74.3080516050134,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no derived tolerance; needs n_periods, t-stat or std"
+    },
+    {
+      "claim_id": "c_dqn_brider",
+      "paper_value": 4092.0,
+      "our_value": 226.2266666666667,
+      "our_std": 74.3080516050134,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no derived tolerance; needs n_periods, t-stat or std"
+    },
+    {
+      "claim_id": "c_dqn_enduro",
+      "paper_value": 470.0,
+      "our_value": 226.2266666666667,
+      "our_std": 74.3080516050134,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no derived tolerance; needs n_periods, t-stat or std"
+    },
+    {
+      "claim_id": "c_dqn_qbert",
+      "paper_value": 1952.0,
+      "our_value": 226.2266666666667,
+      "our_std": 74.3080516050134,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no derived tolerance; needs n_periods, t-stat or std"
+    },
+    {
+      "claim_id": "c_dqn_sinvaders",
+      "paper_value": 581.0,
+      "our_value": 226.2266666666667,
+      "our_std": 74.3080516050134,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no derived tolerance; needs n_periods, t-stat or std"
+    },
+    {
+      "claim_id": "c_rand_brider",
+      "paper_value": 354.0,
+      "our_value": 226.2266666666667,
+      "our_std": 74.3080516050134,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "no derived tolerance; needs n_periods, t-stat or std"
+    },
+    {
+      "claim_id": "c_rand_breakout",
+      "paper_value": 1.2,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_rand_enduro",
+      "paper_value": 0.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_rand_pong",
+      "paper_value": -20.4,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_rand_qbert",
+      "paper_value": 157.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_rand_seaquest",
+      "paper_value": 110.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_rand_sinvaders",
+      "paper_value": 179.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_sarsa_brider",
+      "paper_value": 996.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_sarsa_breakout",
+      "paper_value": 5.2,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_sarsa_enduro",
+      "paper_value": 129.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_sarsa_pong",
+      "paper_value": -19.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_sarsa_qbert",
+      "paper_value": 614.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_sarsa_seaquest",
+      "paper_value": 665.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_sarsa_sinvaders",
+      "paper_value": 271.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_cont_brider",
+      "paper_value": 1743.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_cont_breakout",
+      "paper_value": 6.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_cont_enduro",
+      "paper_value": 159.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_cont_pong",
+      "paper_value": -17.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_cont_qbert",
+      "paper_value": 960.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_cont_seaquest",
+      "paper_value": 723.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_cont_sinvaders",
+      "paper_value": 268.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_human_brider",
+      "paper_value": 7456.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_human_breakout",
+      "paper_value": 31.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_human_enduro",
+      "paper_value": 368.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_human_pong",
+      "paper_value": -3.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_human_qbert",
+      "paper_value": 18900.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_human_seaquest",
+      "paper_value": 28010.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_human_sinvaders",
+      "paper_value": 3690.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_hnbest_brider",
+      "paper_value": 3616.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_hnbest_breakout",
+      "paper_value": 52.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_hnbest_enduro",
+      "paper_value": 106.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_hnbest_pong",
+      "paper_value": 19.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_hnbest_qbert",
+      "paper_value": 1800.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_hnbest_seaquest",
+      "paper_value": 920.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_hnbest_sinvaders",
+      "paper_value": 1720.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_hnpix_brider",
+      "paper_value": 1332.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_hnpix_breakout",
+      "paper_value": 4.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_hnpix_enduro",
+      "paper_value": 91.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_hnpix_pong",
+      "paper_value": -16.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_hnpix_qbert",
+      "paper_value": 1325.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_hnpix_seaquest",
+      "paper_value": 800.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_hnpix_sinvaders",
+      "paper_value": 1145.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_dqnbest_brider",
+      "paper_value": 5184.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_dqnbest_breakout",
+      "paper_value": 225.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_dqnbest_enduro",
+      "paper_value": 661.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_dqnbest_pong",
+      "paper_value": 21.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_dqnbest_qbert",
+      "paper_value": 4500.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_dqnbest_seaquest",
+      "paper_value": 1740.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "c_dqnbest_sinvaders",
+      "paper_value": 1075.0,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    }
+  ],
+  "leakage": [
+    {
+      "test": "shuffle",
+      "passed": false,
+      "detail": "shuffled mean_return=226.2 (t=None), unshuffled=226.2"
+    },
+    {
+      "test": "contamination_scan",
+      "passed": null,
+      "detail": "not implemented in MVP: hash-based train/test near-duplicate scan"
+    }
+  ],
+  "grid": [],
+  "grid_range": null,
+  "unexplained": [],
+  "ambiguities_used": [
+    {
+      "config_key": "lr_schedule",
+      "default": "constant",
+      "source": "conventions_kb",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "augmentation",
+      "default": "none",
+      "source": "paper_text",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "batch_vs_steps",
+      "default": "steps",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "mixed_precision",
+      "default": "fp32",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "split",
+      "default": "test",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "gamma",
+      "default": "0.99",
+      "source": "conventions_kb",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "target_network",
+      "default": "none_current_weights",
+      "source": "paper_text",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "target_sync_interval",
+      "default": "500",
+      "source": "guess",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "learning_starts",
+      "default": "1000",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "replay_capacity",
+      "default": "50000",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "replay_capacity_unit",
+      "default": "agent_steps_transitions",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "frame_count_definition",
+      "default": "agent_steps",
+      "source": "guess",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "train_freq",
+      "default": "1_per_step",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "epsilon_schedule",
+      "default": "linear_1_to_0.1_over_10pct_steps",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "loss_fn",
+      "default": "mse",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "optimizer",
+      "default": "rmsprop_0.95_decay",
+      "source": "guess",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "hidden_sizes",
+      "default": "[128,128]",
+      "source": "guess",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "eval_episodes",
+      "default": "unspecified",
+      "source": "paper_text",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "eval_checkpoint",
+      "default": "final_network",
+      "source": "guess",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "n_seeds",
+      "default": "3",
+      "source": "conventions_kb",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "eval_partial_episodes",
+      "default": "exclude",
+      "source": "guess",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "episodic_life",
+      "default": "game_over_only",
+      "source": "guess",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "downsample_method",
+      "default": "bilinear_bottom_crop",
+      "source": "guess",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "frame_stack_selection",
+      "default": "last_4_acted_frames",
+      "source": "guess",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "random_baseline_protocol",
+      "default": "same_steps_and_frameskip_as_dqn",
+      "source": "guess",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "weight_init",
+      "default": "kaiming",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "random_starts",
+      "default": "none",
+      "source": "paper_text",
+      "sensitivity": "low"
+    }
+  ],
+  "grade": {
+    "data_fidelity": "synthetic",
+    "procedure_fidelity": "re-implemented, 0 unexplained",
+    "result": "Untested",
+    "integrity": "failed",
+    "letter": "F"
+  },
+  "reproducibility": {
+    "agent_version": "0.1.0",
+    "spec_frozen_hash": "02e83d6b07a3c8d108e4ea27cbdbfa15f7557ef3336e679a3ad80f24b8dfe457",
+    "frozen_at": "2026-09-15T16:05:23.100757+00:00",
+    "env_lock_hash": "98fa794f4e123348",
+    "runs": [
+      "full_dqn_avg_eps_greedy_k3_s0_a4be4b062aa0ac38.json",
+      "full_dqn_avg_eps_greedy_s0_f95a880616082076.json",
+      "full_random_policy_s0_30d406037cd3759f.json"
+    ],
+    "work_dir": "/Users/vzhu/Developer/research-copy/runs/batch/dqn/work",
+    "command": "/Users/vzhu/Developer/research-copy/evals/batch.py"
+  },
+  "human_minutes": 0.0,
+  "wall_minutes": 8.304397130012513,
+  "cost_usd": 0.908383,
+  "stages_completed": [
+    "setup",
+    "build",
+    "run",
+    "verify"
+  ],
+  "failure": null
+}

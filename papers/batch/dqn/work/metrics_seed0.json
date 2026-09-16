@@ -1,0 +1,109 @@
+{
+  "seed": 0,
+  "split": "test",
+  "n_examples": 4126,
+  "metrics": {
+    "mean_return": 226.2266666666667,
+    "mean_return_std": 74.3080516050134,
+    "eval_mean_return_eps005": 210.10666666666665,
+    "best_episode_return": 500.0,
+    "random_policy_return": 25.04,
+    "median_return": 263.74,
+    "learning_gap": 201.1866666666667,
+    "mechanism_check_passed": 1.0,
+    "_intermediates": {
+      "scale": {
+        "substitute_env": "CartPole-v1 (ALE/Atari out of CPU reach)",
+        "total_env_steps_per_seed": 150000,
+        "n_seeds": 3,
+        "smoke": false,
+        "network": "MLP hidden=[128, 128] (paper: conv 16/32 + fc256)",
+        "atari_claims": "Untested"
+      },
+      "total_train_episodes": 4126,
+      "per_seed_last50": [
+        140.64,
+        274.3,
+        263.74
+      ],
+      "per_seed_eval_eps005": [
+        111.98,
+        172.34,
+        346.0
+      ],
+      "random_policy_episodes": 50,
+      "curve_tail_mean20": [
+        [
+          11.9,
+          10.1,
+          10.05,
+          11.2,
+          286.0,
+          214.0,
+          155.35,
+          143.45,
+          146.65,
+          137.73333333333332
+        ],
+        [
+          9.95,
+          12.0,
+          178.45,
+          231.5,
+          258.35,
+          179.65,
+          248.95,
+          296.1,
+          238.3,
+          190.0
+        ],
+        [
+          107.35,
+          106.5,
+          95.35,
+          104.0,
+          94.35,
+          102.7,
+          186.75,
+          183.2,
+          297.8,
+          381.6666666666667
+        ]
+      ],
+      "runtime_s": 111.2,
+      "config_used": {
+        "gamma": 0.99,
+        "hidden_sizes": [
+          128,
+          128
+        ],
+        "replay_capacity": 50000,
+        "learning_starts": 1000,
+        "target_network": "none_current_weights",
+        "target_sync_interval": 500,
+        "train_freq": "1_per_step",
+        "epsilon_schedule": "linear_1_to_0.1_over_10pct_steps",
+        "loss_fn": "mse",
+        "optimizer": "rmsprop_0.95_decay",
+        "lr_schedule": "constant",
+        "learning_rate": 0.0005,
+        "weight_init": "kaiming",
+        "split": "test",
+        "batch_vs_steps": "steps",
+        "mixed_precision": "fp32",
+        "augmentation": "none",
+        "eval_episodes": "unspecified",
+        "eval_checkpoint": "final_network",
+        "eval_partial_episodes": "exclude",
+        "episodic_life": "game_over_only",
+        "downsample_method": "bilinear_bottom_crop",
+        "frame_stack_selection": "last_4_acted_frames",
+        "frame_count_definition": "agent_steps",
+        "replay_capacity_unit": "agent_steps_transitions",
+        "random_baseline_protocol": "same_steps_and_frameskip_as_dqn",
+        "random_starts": "none",
+        "n_seeds": 3
+      }
+    }
+  }
+}

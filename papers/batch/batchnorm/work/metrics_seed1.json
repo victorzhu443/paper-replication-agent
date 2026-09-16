@@ -1,0 +1,86 @@
+{
+ "seed": 1,
+ "split": "test",
+ "n_examples": 10000,
+ "metrics": {
+  "acc_bn_10000": 0.9671,
+  "acc_nobn_10000": 0.9182,
+  "gap_10000": 0.048899999999999944,
+  "acc_bn_20000": 0.9706,
+  "acc_nobn_20000": 0.9564,
+  "gap_20000": 0.01419999999999999,
+  "acc_bn_30000": 0.9752,
+  "acc_nobn_30000": 0.9629,
+  "gap_30000": 0.012299999999999978,
+  "acc_bn_40000": 0.9748,
+  "acc_nobn_40000": 0.9662,
+  "gap_40000": 0.008600000000000052,
+  "acc_bn_50000": 0.9747,
+  "acc_nobn_50000": 0.9665,
+  "gap_50000": 0.008199999999999985,
+  "accuracy_gap": 0.008199999999999985,
+  "accuracy": 0.9747,
+  "training_steps": 10000.0,
+  "_intermediates": {
+   "scale": {
+    "full": true,
+    "steps": 50000
+   },
+   "n_train": 60000,
+   "n_eval": 10000,
+   "eval_steps": [
+    10000,
+    20000,
+    30000,
+    40000,
+    50000
+   ],
+   "curve_bn": {
+    "10000": 0.9671,
+    "20000": 0.9706,
+    "30000": 0.9752,
+    "40000": 0.9748,
+    "50000": 0.9747
+   },
+   "curve_nobn": {
+    "10000": 0.9182,
+    "20000": 0.9564,
+    "30000": 0.9629,
+    "40000": 0.9662,
+    "50000": 0.9665
+   },
+   "config": {
+    "lr_schedule": "constant",
+    "learning_rate": 0.1,
+    "augmentation": "none",
+    "batch_vs_steps": "steps",
+    "mixed_precision": "fp32",
+    "split": "test",
+    "mnist_splits": "train60000_test10000",
+    "optimizer": "sgd",
+    "init_std": 0.05,
+    "input_binarization": "threshold_0.5",
+    "bn_epsilon": 1e-05,
+    "bn_param_init": "gamma1_beta0",
+    "bn_inference_stats": "moving_average",
+    "bn_momentum": 0.9,
+    "bn_layers": "hidden_only",
+    "use_bias_with_bn": "drop_bias",
+    "weight_decay": 0.0,
+    "eval_steps": "{10000,20000,30000,40000,50000}",
+    "n_seeds": "3",
+    "loss": "softmax_cross_entropy",
+    "shuffle": "shuffle_each_epoch",
+    "steps": 50000,
+    "batch_size": 60,
+    "bn": "on before each nonlinearity (convolutional BN)",
+    "initial_lr": "0.0015 (inherited from Inception; not restated in paper)",
+    "other": "otherwise identical to Inception; none of the Sec 4.2.1 modifications applied"
+   },
+   "runtime_s": 63.3,
+   "untested_claims": [
+    "inception_*/bn_* ImageNet claims: ILSVRC2012 unavailable, CPU-only"
+   ]
+  }
+ }
+}

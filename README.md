@@ -11,19 +11,28 @@ obtained, under which conventions, whether it could have leaked, and what remain
 
 ## Results so far (2026-09-15, CPU-only laptop)
 
-| Paper | Track | Kind of test | Grade | What was reproduced | Cost |
-|---|---|---|---|---|---|
-| Jegadeesh–Titman 1993 momentum (OSAP Mom12m as ground truth) | finance | re-implementation, live builder | **A** | headline 1.32 vs 1.31 %/mo Match; t-stat 4.76 vs 3.74 Match; shuffle + future-perturbation pass | $0.93 |
-| LeCun 1998 MLP-300 on MNIST, 3 seeds | CS | re-implementation | C | runs cleanly; 8.5% vs 4.7% error; convention grid 1.7–9.8% shows the modern setup lands elsewhere | $0 (prebuilt) |
-| Vaswani 2017 Transformer | CS | reduced scale | C | attention 99.4% vs no-attention 9.9% token accuracy on a copy task; WMT BLEU not comparable | $6.18 |
-| He 2015 ResNet | CS | reduced scale | C | build passed; full CIFAR runs exceeded the CPU time cap (fixed by the SCALE probe for later papers) | $4.90 |
-| Goodfellow 2014 GAN | CS | reduced scale | C | MNIST GAN trains; shuffle test passes | $2.74 |
-| Frankle 2019 Lottery Ticket | CS | LeNet/MNIST (paper scale) | C | winning tickets beat unpruned by 0.25–0.3 pts; early-stop speedup 2–3× | $4.75 |
-| BatchNorm, LayerNorm, DQN, PPO, World Models | CS/RL | reduced scale | re-verifying | mechanism reproduced in each (BN 96.5% vs 91.7%; PPO 500/500 on 3 seeds; World Models controller beats random, t=23); graded F by a shuffle-test bug since fixed | $34.81 |
-| LoRA, DPO, Superposition, Circuits, ROME | CS | reduced scale | in progress | specs extracted (`papers/batch/*/spec.yaml`) | $13.40 |
+<!-- RESULTS:BEGIN -->
+| Paper | Track | Kind of test | Tiers | Grade | Headline claims | Leakage | Cost |
+|---|---|---|---|---|---|---|---|
+| Jegadeesh–Titman 1993 momentum (OSAP Mom12m as ground truth) | finance | re-implementation, live builder | A/1 | **A** | 1.32 vs 1.31 %/mo Match; t-stat 4.76 vs 3.74 Match | shuffle P, future-perturbation P | $0.93 |
+| LeCun 1998 MLP-300 on MNIST, 3 seeds | CS | re-implementation | A/1 | C | 8.5% vs 4.7% error; convention grid 1.7–9.8% | shuffle P | $0 |
+| Vaswani 2017 Transformer | CS | re implementation | A/2 | C | attention 99.4% vs no-attention 9.9% token accuracy on a copy task; WMT BLEU not comparable · c_t2_big_ende_bleu Mismatch; c_t2_big_enfr_bleu Mismatch | shuffle P | $4.72 |
+| He 2015 ResNet | CS | re implementation | A/2 | C | build passed; full CIFAR runs exceeded the CPU time cap (fixed by the SCALE probe for later papers) | — | $4.90 |
+| Ba 2016 LayerNorm | CS | re implementation | A/2 | F | MNIST MLP baseline 98.4%; LN vs baseline comparison ran | shuffle F | $10.73 |
+| Ioffe 2015 BatchNorm | CS | re implementation | A/2 | F | BN 96.5% vs no-BN 91.7% at 10k steps on both seeds (paper's direction) | shuffle F | $2.76 |
+| Goodfellow 2014 GAN | CS | re implementation | A/2 | C | MNIST GAN trains; shuffle test passes | shuffle P | $2.74 |
+| Mnih 2013 DQN | RL | mechanics only | C/2 | F | CartPole DQN mean return 226, best episodes 500 | shuffle F | $2.35 |
+| Schulman 2017 PPO | RL | mechanics only | C/2 | F | CartPole 500/500 on 3 seeds; clipping beats no-clip on 2 of 3 | shuffle F | $1.82 |
+| Ha 2018 World Models | RL | mechanics only | C/2 | F | VAE loss 3169→0.7; MDN-RNN and CMA-ES controller beat random policy (t=23) | shuffle F | $17.15 |
+| Frankle 2019 Lottery Ticket | CS | re implementation | A/2 | C | winning tickets beat unpruned by 0.25–0.3 pts; early-stop speedup 2–3× | — | $4.75 |
+| Hu 2021 LoRA | CS | — | — | in progress | spec extracted | — | $5.75 |
+| Rafailov 2023 DPO | CS | — | — | in progress | spec extracted | — | $1.71 |
+| Elhage 2022 Toy Models of Superposition | CS | — | — | in progress | spec extracted | — | $1.45 |
+| Elhage 2021 Transformer Circuits | CS | — | — | in progress | spec extracted | — | $0.96 |
+| Meng 2022 ROME | CS | — | — | in progress | spec extracted | — | $3.53 |
 
-Sweep total so far: about $65 in model calls for 14 papers. `PROJECT_SUMMARY.md` has the
-narrative version.
+Sweep total: $65.34 in model calls for 14 papers. Reports: `papers/batch/<slug>/REPORT.md`. Updated 2026-09-15 22:35.
+<!-- RESULTS:END -->
 
 **Reading a grade.** The letter is a fixed function of four axes (data fidelity, procedure fidelity,
 result, integrity). A: headline claims Match within pre-registered tolerances, leakage tests pass,
