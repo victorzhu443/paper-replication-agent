@@ -38,10 +38,11 @@ def fetch_html_as_text(url: str, dest: Path, name: str) -> Path:
 
 def render(pdf: Path, out: Path, dpi: int = 110) -> dict:
     out.mkdir(parents=True, exist_ok=True)
+    known = pdf.stem if re.fullmatch(r"\d{4}\.\d{4,5}(v\d+)?", pdf.stem) else None  # fetch_arxiv names files by id
     if pdf.suffix.lower() != ".pdf":
         full = pdf.read_text()
         (out / "paper.txt").write_text(full)
-        return {"n_pages": 0, "pages": [], "companions": find_companions(full), "arxiv_version": _arxiv_version(full)}
+        return {"n_pages": 0, "pages": [], "companions": find_companions(full), "arxiv_version": _arxiv_version(full, known)}
     doc = pymupdf.open(pdf)
     pages = []
     text_all = []
@@ -56,7 +57,7 @@ def render(pdf: Path, out: Path, dpi: int = 110) -> dict:
     full = "\n".join(text_all)
     (out / "paper.txt").write_text(full)
     return {"n_pages": len(pages), "pages": pages, "companions": find_companions(full),
-            "arxiv_version": _arxiv_version(full)}
+            "arxiv_version": _arxiv_version(full, known)}
 
 
 _LINK = re.compile(r"https?://(?:github\.com|gitlab\.com|zenodo\.org|osf\.io|huggingface\.co)/[\w\-./]+")
@@ -66,9 +67,12 @@ def find_companions(text: str) -> list[str]:
     return sorted(set(m.rstrip(".)") for m in _LINK.findall(text)))
 
 
-def _arxiv_version(text: str) -> str | None:
-    """The paper's own id is stamped in the left margin of page 1 as 'arXiv:ID [cat] date';
-    citations in the body look different. Prefer the stamped form; fall back to the first mention."""
+def _arxiv_version(text: str, known_id: str | None = None) -> str | None:
+    """If the paper was fetched by arXiv id, only the version suffix is read from the text (the
+    margin stamp 'arXiv:ID vN'); guessing the id from the body picks up citations."""
+    if known_id:
+        m = re.search(re.escape(known_id) + r"(v\d+)?", text)
+        return known_id + (m.group(1) if (m and m.group(1)) else "")
     m = re.search(r"arXiv:(\d{4}\.\d{4,5})(v\d+)?\s*\[[\w.\-]+\]\s+\d{1,2}\s+\w{3}\s+\d{4}", text)
     if not m:
         m = re.search(r"arXiv:\s*(\d{4}\.\d{4,5})(v\d+)?", text)
