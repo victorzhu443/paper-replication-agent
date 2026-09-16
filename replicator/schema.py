@@ -51,6 +51,8 @@ class Claim(BaseModel):
     sample_end: Optional[str] = None
     method_variant: str = Field("default", description="key into method.variants")
     priority: Literal["headline", "secondary", "descriptive"] = "secondary"
+    relation: Literal["eq", "gt", "ge", "lt", "le"] = Field(
+        "eq", description='"eq": the paper reports this number; "gt"/"lt": a directional claim ("A exceeds B", "reaches X in fewer steps"), value = threshold')
 
 
 class Ambiguity(BaseModel):

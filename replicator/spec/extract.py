@@ -32,6 +32,10 @@ Rules:
 - descriptive_stats: the paper's Table 1 numbers we can check our data against (row counts, firms,
   means, split sizes).
 - Do not invent numbers. If a value is unreadable, omit the claim rather than guess.
+- Directional claims ("the normalized network reaches higher accuracy", "matches the baseline in
+  14x fewer steps", "ticket accuracy >= unpruned") are encoded with relation gt/ge/lt/le and value =
+  the threshold (0 for "gap > 0", the baseline number for "exceeds the baseline"). Never encode a
+  directional claim as relation eq with value 0.
 - Mark the single most important result as priority=headline; at most three headline claims."""
 
 REFEREE_SYSTEM = """You are a referee checking a replication spec against the paper it was extracted from.

@@ -36,6 +36,12 @@ def compare_claim(spec: Spec, c: Claim, ours: Optional[float], our_std: Optional
         return ClaimResult(claim_id=c.id, paper_value=c.value, our_value=ours, our_std=our_std,
                            outcome=Outcome.untested, note="no derived tolerance; needs n_periods, t-stat or std")
     gap = ours - c.value
+    if c.relation != "eq":
+        # directional claim: judged as an inequality against the threshold, with the tolerance as slack
+        ok = {"gt": gap > 0, "ge": gap >= -tol, "lt": gap < 0, "le": gap <= tol}[c.relation]
+        return ClaimResult(claim_id=c.id, paper_value=c.value, our_value=ours, our_std=our_std, tolerance=tol,
+                           outcome=Outcome.match if ok else Outcome.mismatch,
+                           note=f"directional claim ({c.relation} {c.value:.4g}): ours={ours:.4g}")
     if abs(gap) <= tol:
         return ClaimResult(claim_id=c.id, paper_value=c.value, our_value=ours, our_std=our_std, tolerance=tol,
                            outcome=Outcome.match, note=f"|gap|={abs(gap):.4g} <= tol {tol:.4g}")

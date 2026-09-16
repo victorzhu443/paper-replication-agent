@@ -162,3 +162,14 @@ def test_shuffle_uses_reported_null_reference():
     # leaky: shuffled still far above random
     r2 = shuffle_test(lambda cfg, s: {"mean_return": 52.0, "mean_return_random_policy": 37.8, "_shuffled": True}, {}, "mean_return", 55.0)
     assert r2.passed is False
+
+
+def test_directional_claims_are_inequalities():
+    spec = Spec.load(ROOT / "papers/momentum_french/spec.yaml")
+    compare.freeze_tolerances(spec)
+    c = spec.claims[0].model_copy(update={"id": "dir", "relation": "gt", "value": 0.0})
+    spec.plan.tolerances["dir"] = 0.002
+    assert compare.compare_claim(spec, c, 0.035).outcome == Outcome.match
+    assert compare.compare_claim(spec, c, -0.01).outcome == Outcome.mismatch
+    c2 = c.model_copy(update={"relation": "eq"})
+    assert compare.compare_claim(spec, c2, 0.035).outcome == Outcome.mismatch  # the old encoding
