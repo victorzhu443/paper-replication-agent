@@ -53,20 +53,20 @@ implementation, then validated on 16 papers.
 | LeCun 1998 MLP-300 on MNIST, 3 seeds | CS | re-implementation | A/1 | C | 8.5% vs 4.7% error; convention grid 1.7–9.8% | shuffle P | $0 |
 | Vaswani 2017 Transformer | CS | re implementation | A/2 | C | attention 99.4% vs no-attention 9.9% token accuracy on a copy task; WMT BLEU not comparable · c_t2_big_ende_bleu Mismatch; c_t2_big_enfr_bleu Mismatch | shuffle P | $4.72 |
 | He 2015 ResNet | CS | re implementation | A/2 | C | build passed; full CIFAR runs exceeded the CPU time cap (fixed by the SCALE probe for later papers) | — | $4.90 |
-| Ba 2016 LayerNorm | CS | re implementation | A/2 | F | MNIST MLP baseline 98.4%; LN vs baseline comparison ran · failed: SameFileError: PosixPath('/Users/vzhu/Developer/research-cop | — | $10.73 |
-| Ioffe 2015 BatchNorm | CS | re implementation | A/2 | F | BN 96.5% vs no-BN 91.7% at 10k steps on both seeds (paper's direction) · failed: SameFileError: PosixPath('/Users/vzhu/Developer/research-cop | — | $2.76 |
+| Ba 2016 LayerNorm | CS | re implementation | A/2 | F | MNIST MLP baseline 98.4%; LN vs baseline comparison ran · failed: RuntimeError: build did not pass smoke: {'passed': False, 'p | — | $10.73 |
+| Ioffe 2015 BatchNorm | CS | re implementation | A/2 | C | BN 96.5% vs no-BN 91.7% at 10k steps on both seeds (paper's direction) | shuffle n/a | $2.76 |
 | Goodfellow 2014 GAN | CS | re implementation | A/2 | C | MNIST GAN trains; shuffle test passes | shuffle P | $2.74 |
-| Mnih 2013 DQN | RL | mechanics only | C/2 | F | CartPole DQN mean return 226, best episodes 500 · failed: SameFileError: PosixPath('/Users/vzhu/Developer/research-cop | — | $2.35 |
-| Schulman 2017 PPO | RL | mechanics only | C/2 | F | CartPole 500/500 on 3 seeds; clipping beats no-clip on 2 of 3 · failed: SameFileError: PosixPath('/Users/vzhu/Developer/research-cop | — | $1.82 |
-| Ha 2018 World Models | RL | mechanics only | C/2 | F | VAE loss 3169→0.7; MDN-RNN and CMA-ES controller beat random policy (t=23) · failed: SameFileError: PosixPath('/Users/vzhu/Developer/research-cop | — | $17.15 |
+| Mnih 2013 DQN | RL | mechanics only | C/2 | C | CartPole DQN mean return 226, best episodes 500 | shuffle n/a | $2.35 |
+| Schulman 2017 PPO | RL | mechanics only | C/2 | F | CartPole 500/500 on 3 seeds; clipping beats no-clip on 2 of 3 · failed: RuntimeError: build did not pass smoke: {'passed': False, 'p | — | $1.82 |
+| Ha 2018 World Models | RL | mechanics only | C/2 | F | VAE loss 3169→0.7; MDN-RNN and CMA-ES controller beat random policy (t=23) · failed: RuntimeError: build did not pass smoke: {'passed': False, 'p | — | $17.15 |
 | Frankle 2019 Lottery Ticket | CS | re implementation | A/2 | C | winning tickets beat unpruned by 0.25–0.3 pts; early-stop speedup 2–3× | — | $4.75 |
-| Hu 2021 LoRA | CS | mechanics only | C/2 | F | no successful run · failed: SameFileError: PosixPath('/Users/vzhu/Developer/research-cop | — | $5.75 |
-| Rafailov 2023 DPO | CS | mechanics only | C/2 | C | win_rate=100; win_rate_temp025=100; agreement_rate=98.5 | shuffle P | $4.40 |
-| Elhage 2022 Toy Models of Superposition | CS | mechanics only | C/2 | C | num_features_represented__relu_output_n20_m5_dense=5; num_features_represented__relu_output_n20_m5_s099=12.9; superposition_metric__relu_output_n20_m5_dense=1.4e-05 | shuffle n/a | $4.21 |
-| Elhage 2021 Transformer Circuits | CS | mechanics only | C/2 | C | count_of_copying_heads=12; copying_score_mean_1layer=0.996; copying_score_max_1layer=1 | shuffle n/a | $2.59 |
-| Meng 2022 ROME | CS | mechanics only | C/2 | C | average_total_effect=27.2; average_indirect_effect=22.2; average_indirect_effect_mlp=18.9 | shuffle n/a | $9.80 |
+| Hu 2021 LoRA | CS | mechanics only | C/2 | F | RoBERTa-base on SST-2 subset: LoRA 91.97% vs full FT 92.66% with 0.3M trainable params (paper's claim) · failed: RuntimeError: build did not pass smoke: {'passed': False, 'p | — | $5.75 |
+| Rafailov 2023 DPO | CS | mechanics only | C/2 | C | DPO loss from Eq. 7: 98.5% held-out preference accuracy, 100% win rate vs reference, reward margin grows | shuffle P | $4.40 |
+| Elhage 2022 Toy Models of Superposition | CS | mechanics only | C/2 | C | n=20, m=5: dense regime 5 features, sparse (S=0.99) 12.9 features in 5 dims; linear never superposes; antipodal pair 0.498 (paper 1/2) | shuffle n/a | $4.21 |
+| Elhage 2021 Transformer Circuits | CS | mechanics only | C/2 | C | induction heads emerge in the 2-layer model: second-half loss 0.018 vs 3.3 first half (gap 3.28); 1-layer gap only 0.92 | shuffle n/a | $2.59 |
+| Meng 2022 ROME | CS | mechanics only | C/2 | C | GPT-2 causal tracing: MLP restoration at the last subject token carries the effect (18.9 vs 0.77 for attention), peaking at an early layer | shuffle n/a | $9.80 |
 
-Sweep total: $78.70 in model calls for 14 papers. Reports: `papers/batch/<slug>/REPORT.md`. Updated 2026-09-15 23:37.
+Sweep total: $78.70 in model calls for 14 papers. Reports: `papers/batch/<slug>/REPORT.md`. Updated 2026-09-16 08:59.
 <!-- RESULTS:END -->
 
 ## How to read the grades

@@ -76,7 +76,7 @@
     "description": "paired comparison of the same 3x100 sigmoid MLP trained with and without BN for 50000 steps, batch size 60; claim is that With-BN test accuracy exceeds Without-BN",
     "metric": "accuracy gap (With BN minus Without BN) on held-out MNIST test data"
    },
-   "runtime_s": 59.8,
+   "runtime_s": 61.6,
    "untested_claims": [
     "inception_*/bn_* ImageNet claims: ILSVRC2012 unavailable, CPU-only"
    ]

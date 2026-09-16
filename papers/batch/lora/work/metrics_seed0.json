@@ -2,60 +2,60 @@
  "seed": 0,
  "split": "validation",
  "n_examples": 872,
- "shuffled": true,
+ "shuffled": false,
  "metrics": {
-  "accuracy": 50.91743119266055,
-  "accuracy_full_ft": 50.91743119266055,
-  "accuracy_gap_lora_minus_ft": 0.0,
-  "glue_avg": 50.91743119266055,
-  "glue_avg_full_ft": 50.91743119266055,
+  "accuracy": 71.10091743119266,
+  "accuracy_full_ft": 87.5,
+  "accuracy_gap_lora_minus_ft": -16.399082568807344,
+  "glue_avg": 71.10091743119266,
+  "glue_avg_full_ft": 87.5,
   "trainable_parameters_millions": 0.294912,
   "trainable_parameters_millions_ft": 124.05504,
   "trainable_param_fraction_percent": 0.2377267380672321,
   "_intermediates": {
-   "n_train_examples": 12800,
+   "n_train_examples": 1280,
    "n_eval_examples": 872,
-   "steps": 800,
+   "steps": 80,
    "batch_size": 16,
    "eval_curve_lora": [
     [
-     200,
+     20,
      50.91743119266055
     ],
     [
-     400,
-     50.91743119266055
+     40,
+     54.12844036697248
     ],
     [
-     600,
-     50.91743119266055
+     60,
+     49.08256880733945
     ],
     [
-     800,
-     50.91743119266055
+     80,
+     71.10091743119266
     ]
    ],
    "eval_curve_ft": [
     [
-     200,
+     20,
      50.91743119266055
     ],
     [
-     400,
-     50.91743119266055
+     40,
+     84.05963302752293
     ],
     [
-     600,
-     50.91743119266055
+     60,
+     87.38532110091744
     ],
     [
-     800,
-     50.91743119266055
+     80,
+     87.5
     ]
    ],
    "train_seconds": {
-    "lora": 224.2,
-    "ft": 457.9
+    "lora": 519.3,
+    "ft": 1493.7
    },
    "config_used": {
     "base_model": "roberta_base_125m_as_paper",
@@ -87,28 +87,21 @@
     "mnli_transfer_init": "mnli_init_for_mrpc_rte_stsb",
     "augmentation": "none",
     "mixed_precision": "fp32",
-    "pooling": "last_non_pad_token",
-    "model": "RoBERTa base 125M (HuggingFace), pretrained weights frozen",
-    "method": "LoRA rq = rv = 8, alpha = 8, on Wq and Wv of every layer",
-    "seq_len": "512 for all GLUE tasks (Table 9)",
-    "sst2_hparams": "batch size 16, 60 epochs, lr 5E-04, AdamW, linear schedule, warmup ratio 0.06 (Table 9)",
-    "reported": "median over 5 seeds, result of each run taken from the best epoch (Appendix D.1)",
-    "init_for_mrpc_rte_stsb": "LoRA modules initialized from the authors' best MNLI LoRA checkpoint; base model stays frozen",
-    "trainable_params": "0.3M (excludes the classification head)"
+    "pooling": "last_non_pad_token"
    },
    "glue_avg_note": "only SST-2 was run; glue_avg is the unweighted mean over the 1 task run (= SST-2 accuracy), NOT the paper's 8-task average",
    "scale": {
     "base_model": "roberta-base",
-    "train_examples_seen": 12800,
+    "train_examples_seen": 1280,
     "paper_train_examples": 67349,
     "paper_epochs": 60,
-    "steps_run": 800,
+    "steps_run": 80,
     "paper_equivalent_steps": 252558,
     "n_seeds": 1,
     "paper_n_seeds": 5,
     "eval_examples": 872,
     "smoke": false,
-    "scale_factor": 1.0
+    "scale_factor": 0.1
    }
   }
  }

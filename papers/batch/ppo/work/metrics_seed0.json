@@ -52,7 +52,7 @@
     "adaptive_kl_0.01": 198656,
     "fixed_kl_1": 198656
    },
-   "wall_time_s": 147.07404899597168,
+   "wall_time_s": 3216.737298965454,
    "config": {
     "env_suite": "gym_cartpole_v1_200k_steps",
     "lr_schedule": "constant",
@@ -82,10 +82,7 @@
     "adam_eps": "1e-5",
     "atari_wrappers": "mnih2016_standard_deepmind_wrappers",
     "atari_reward_clipping": "clip_train_report_raw",
-    "objective": "L^CLIP with epsilon=0.2",
-    "hyperparams": "Table 3 (p.10): T=2048, Adam 3e-4 constant, K=10 epochs, M=64, gamma=0.99, lambda=0.95; no entropy bonus; separate value network",
-    "envs": "7 MuJoCo -v1 tasks, 1M steps each, 3 seeds each",
-    "_shuffle_labels": "True"
+    "_scale": "0.1"
    }
   }
  }

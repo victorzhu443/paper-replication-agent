@@ -77,7 +77,7 @@
     "initial_lr": "0.0015 (inherited from Inception; not restated in paper)",
     "other": "otherwise identical to Inception; none of the Sec 4.2.1 modifications applied"
    },
-   "runtime_s": 63.3,
+   "runtime_s": 60.7,
    "untested_claims": [
     "inception_*/bn_* ImageNet claims: ILSVRC2012 unavailable, CPU-only"
    ]

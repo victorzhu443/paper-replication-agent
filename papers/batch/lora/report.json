@@ -41,10 +41,11 @@
     "command": "/Users/vzhu/Developer/research-copy/evals/batch.py --reverify batchnorm dqn layernorm lora ppo worldmodels"
   },
   "human_minutes": 0.0,
-  "wall_minutes": 0.0006413141886393229,
+  "wall_minutes": 137.52888514995576,
   "cost_usd": 0.0,
   "stages_completed": [
-    "setup"
+    "setup",
+    "build"
   ],
-  "failure": "SameFileError: PosixPath('/Users/vzhu/Developer/research-copy/runs/batch/lora/work/patch.py') and PosixPath('/Users/vzhu/Developer/research-copy/runs/batch/lora/work/patch.py') are the same file"
+  "failure": "RuntimeError: build did not pass smoke: {'passed': False, 'problems': ['a SCALE=0.1 run took 2019s, so the full run would take ~337 min > timeout 25 min: reduce the default scale (steps/epochs/data/model) until SCALE=0.1 finishes in under 135s'], 'metrics': {'accuracy': 52.34375, 'accuracy_full_ft': 53.125, 'accuracy_gap_lora_minus_ft': -0.78125, 'glue_avg': 52.34375, 'glue_avg_full_ft': 53.125, 'trainable_parameters_millions': 0.294912, 'trainable_parameters_millions_ft': 124.05504, 'trainable_param_fraction_percent': 0.2377267380672321, '_intermediates': {'n_train_examples': 256, 'n_eval_examples': 128, 'steps': 16, 'batch_size': 16, 'eval_curve_lora': [[8, 52.34375], [16, 52.34375]], 'eval_curve_ft': [[8, 47.65625], [16, 53.125]], 'train_seconds': {'lora': 1851.6, 'ft': 2365.5}, 'config_used': {'base_model': 'roberta_base_125m_as_paper', 'train_subset_size': 'full_train_split', 'train_subset_sampling': 'stratified_random_seed0', 'num_epochs': '60', 'batch_vs_steps': 'steps', 'lr_schedule': 'as_paper', 'learning_rate': 'lora=5e-4,ft=2e-5', 'batch_size': '16', 'max_seq_len': '512', 'lora_rank': '8', 'lora_alpha': '8', 'lora_target_modules': 'q_v_only', 'lora_layer_coverage': 'all_layers', 'lora_dropout': '0.0', 'weight_decay': '0.01', 'n_seeds': '5_median', 'checkpoint_selection': 'best_epoch_on_eval', 'error_bar_semantics': 'std_over_seeds', 'split': 'validation', 'mnli_metric': 'overall_m_and_mm_accuracy', 'glue_avg_definition': 'unweighted_mean_of_eight_task_metrics', 'wikisql_accuracy': 'logical_form', 'gpt3_lora_4p7m_config': 'rv_2', 'e2e_eval_script': 'official_e2e_metrics_script', 'head_treatment': 'trainable_not_counted', 'param_fraction_denominator': 'all_base_params_incl_embeddings', 'mnli_transfer_init': 'mnli_init_for_mrpc_rte_stsb', 'augmentation': 'none', 'mixed_precision': 'fp32', 'pooling': 'last_non_pad_token', 'epochs': 1, 'n_examples': 2048}, 'glue_avg_note': \"only SST-2 was run; glue_avg is the unweighted mean over the 1 task run (= SST-2 accuracy), NOT the paper's 8-task average\", 'scale': {'base_model': 'roberta-base', 'train_examples_seen': 256, 'paper_train_examples': 67349, 'paper_epochs': 60, 'steps_run': 16, 'paper_equivalent_steps': 252558, 'n_seeds': 1, 'paper_n_seeds': 5, 'eval_examples': 128, 'smoke': True, 'scale_factor': 1.0}}}, 'scale_probe': {'scale_0.1_seconds': 2019, 'estimated_full_seconds': 20190, 'run_timeout_s': 1500}}"
 }

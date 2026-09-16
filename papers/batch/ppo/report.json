@@ -33,10 +33,11 @@
     "command": "/Users/vzhu/Developer/research-copy/evals/batch.py --reverify batchnorm dqn layernorm lora ppo worldmodels"
   },
   "human_minutes": 0.0,
-  "wall_minutes": 0.0005325357119242351,
+  "wall_minutes": 53.726159866650896,
   "cost_usd": 0.0,
   "stages_completed": [
-    "setup"
+    "setup",
+    "build"
   ],
-  "failure": "SameFileError: PosixPath('/Users/vzhu/Developer/research-copy/runs/batch/ppo/work/metrics_seed1.json') and PosixPath('/Users/vzhu/Developer/research-copy/runs/batch/ppo/work/metrics_seed1.json') are the same file"
+  "failure": "RuntimeError: build did not pass smoke: {'passed': False, 'problems': ['a SCALE=0.1 run took 3218s, so the full run would take ~536 min > timeout 15 min: reduce the default scale (steps/epochs/data/model) until SCALE=0.1 finishes in under 81s'], 'metrics': {'mean_return': 84.91, 'mean_return_no_clip': 81.2, 'avg_normalized_score': 1.0, 'avg_normalized_score_no_clip': 0.9388394329047149, 'clip_minus_noclip': 3.7099999999999937, 'random_policy_return': 24.25, 'mean_return__clip_0.2': 84.91, 'avg_normalized_score__clip_0.2': 1.0, 'mean_return__no_clip': 81.2, 'avg_normalized_score__no_clip': 0.9388394329047149, '_intermediates': {'scale': {'env_substitute': 'CartPole-v1 instead of 7 MuJoCo -v1 tasks (no MuJoCo, CPU only)', 'total_timesteps': 12288, 'paper_timesteps': 1000000, 'variants_run': ['clip_0.2', 'no_clip'], 'smoke': True}, 'episodes': {'clip_0.2': 231, 'no_clip': 206}, 'steps': {'clip_0.2': 12288, 'no_clip': 12288}, 'wall_time_s': 4.9440529346466064, 'config': {'env_suite': 'gym_cartpole_v1_200k_steps', 'lr_schedule': 'constant', 'augmentation': 'none', 'batch_vs_steps': 'steps', 'mixed_precision': 'fp32', 'split': 'test', 'eval_return_source': 'train_episode_returns_last_100', 'episode_buffer_rule': 'global_last_100_finished_episodes', 'seeds': '3', 'score_normalization_reference': 'max_over_all_settings_and_seeds_per_env', 'advantage_normalization': 'per_batch', 'obs_normalization': 'none', 'entropy_coef': '0.0', 'shared_trunk': 'separate', 'value_net_training': 'same_mlp_same_adam_same_epochs_weight1', 'kl_estimator': 'analytic_per_state', 'max_grad_norm': 'none', 'clip_vloss': 'none', 'rollout_length_and_actors': 'T=2048,N=1', 'ppo_epochs_minibatch': 'K=10,M=64', 'total_timesteps': '200000', 'noclip_update_rule': 'same_K_epochs_ratio_objective', 'terminal_bootstrap': 'bootstrap_on_truncation_zero_on_terminal', 'policy_std_parameterization': 'state_independent_learned_logstd_init0', 'init_scheme': 'orthogonal_sqrt2_policy0.01', 'adam_eps': '1e-5', 'atari_wrappers': 'mnih2016_standard_deepmind_wrappers', 'atari_reward_clipping': 'clip_train_report_raw', 'epochs': '1', 'n_examples': '2048', '_smoke': 'True'}}}, 'scale_probe': {'scale_0.1_seconds': 3218, 'estimated_full_seconds': 32176, 'run_timeout_s': 900}}"
 }
