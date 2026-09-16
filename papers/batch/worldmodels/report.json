@@ -2,8 +2,8 @@
   "paper_title": "World Models",
   "track": "cs",
   "family": "train_and_eval",
-  "kind_of_test": "mechanics_only",
-  "data_tier": "C",
+  "kind_of_test": "conceptual_replication",
+  "data_tier": "B",
   "compute_tier": 2,
   "deviations": [
     "openai_gym_carracing_v0 -> UNAVAILABLE: claims depending on this source are Untested",
@@ -17,7 +17,7 @@
   "unexplained": [],
   "ambiguities_used": [],
   "grade": {
-    "data_fidelity": "synthetic",
+    "data_fidelity": "tier B gap measured",
     "procedure_fidelity": "re-implemented, 0 unexplained",
     "result": "no claims",
     "integrity": "not_run",

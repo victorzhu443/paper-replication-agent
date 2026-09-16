@@ -2,8 +2,8 @@
   "paper_title": "Playing Atari with Deep Reinforcement Learning",
   "track": "cs",
   "family": "train_and_eval",
-  "kind_of_test": "mechanics_only",
-  "data_tier": "C",
+  "kind_of_test": "conceptual_replication",
+  "data_tier": "B",
   "compute_tier": 2,
   "deviations": [
     "arcade_learning_environment -> UNAVAILABLE: claims depending on this source are Untested",
@@ -697,7 +697,7 @@
     }
   ],
   "grade": {
-    "data_fidelity": "synthetic",
+    "data_fidelity": "tier B gap measured",
     "procedure_fidelity": "re-implemented, 0 unexplained",
     "result": "Untested",
     "integrity": "not_run",

@@ -1,8 +1,8 @@
 # Replication report: Playing Atari with Deep Reinforcement Learning
 
-**Kind of test:** mechanics_only · **Data tier:** C · **Compute tier:** 2 · **Track/family:** cs/train_and_eval
+**Kind of test:** conceptual_replication · **Data tier:** B · **Compute tier:** 2 · **Track/family:** cs/train_and_eval
 
-**Grade:** C  (data: synthetic; procedure: re-implemented, 0 unexplained; result: Untested; integrity: not_run)
+**Grade:** C  (data: tier B gap measured; procedure: re-implemented, 0 unexplained; result: Untested; integrity: not_run)
 
 ## 1. Deviations from the paper
 
