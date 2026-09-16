@@ -7,13 +7,14 @@ from __future__ import annotations
 
 import pandas as pd
 
-from . import french, hf_datasets, localfile, torchvision_ds
+from . import french, gym_env, hf_datasets, localfile, torchvision_ds
 
 ADAPTERS = {
     "french_library": french,
     "local_file": localfile,
     "torchvision": torchvision_ds,
     "hf_datasets": hf_datasets,
+    "gym_env": gym_env,
 }
 
 # canonical source -> ordered substitutes, with the registry's known consequence
@@ -48,6 +49,8 @@ def options_for(canonical: str) -> list[tuple[str, str]]:
     repo = hf_datasets.resolve(canonical)
     if repo:
         return [(f"hf_datasets:{repo}", "exact source")]
+    if gym_env.matches(canonical):
+        return [("gym_env", "simulator; Atari-scale runs are compute tier 2 on CPU")]
     return [(canonical, "direct")]
 
 

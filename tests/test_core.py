@@ -91,7 +91,9 @@ def test_shuffle_test_on_leaky_vs_clean_pipeline():
         if cfg.get("_shuffle_labels"):
             # a pipeline that leaks through the label channel keeps the link even after 'shuffling'
             pass
-        return anomaly.stock_pipeline(p, None, {**cfg, "_shuffle_labels": False}, seed)
+        m = anomaly.stock_pipeline(p, None, {**cfg, "_shuffle_labels": False}, seed)
+        m["_shuffled"] = bool(cfg.get("_shuffle_labels"))  # acknowledges the flag but leaks through the label
+        return m
 
     base_clean = run_clean({"weighting": "EW", "quantile": 0.1}, 0)
     r = leakage.shuffle_test(run_clean, {"weighting": "EW", "quantile": 0.1}, "mean_return", base_clean["mean_return"])
@@ -133,8 +135,17 @@ def test_shuffle_skill_rule_handles_error_metrics():
     from replicator.verify.leakage import metric_skill, shuffle_test
     assert metric_skill("test_error", 8.5) == 91.5 and metric_skill("accuracy", 91.5) == 91.5
     # clean classifier: shuffled labels -> near-chance error -> passes
-    r = shuffle_test(lambda cfg, s: {"test_error": 85.7}, {}, "test_error", 8.5)
+    r = shuffle_test(lambda cfg, s: {"test_error": 85.7, "_shuffled": True}, {}, "test_error", 8.5)
     assert r.passed is True
     # leaky classifier: shuffled labels -> still low error -> fails
-    r2 = shuffle_test(lambda cfg, s: {"test_error": 9.0}, {}, "test_error", 8.5)
+    r2 = shuffle_test(lambda cfg, s: {"test_error": 9.0, "_shuffled": True}, {}, "test_error", 8.5)
+    assert r2.passed is False
+
+
+def test_shuffle_requires_acknowledgement():
+    from replicator.verify.leakage import shuffle_test
+    # a script that ignores the flag returns the real number without _shuffled: not a leak verdict
+    r = shuffle_test(lambda cfg, s: {"accuracy": 91.5}, {}, "accuracy", 91.5)
+    assert r.passed is None and "acknowledge" in r.detail
+    r2 = shuffle_test(lambda cfg, s: {"accuracy": 91.5, "_shuffled": True}, {}, "accuracy", 91.5)
     assert r2.passed is False

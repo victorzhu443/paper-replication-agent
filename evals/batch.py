@@ -155,7 +155,34 @@ def write_summary(rows: list[dict]) -> None:
     (OUT / "SUMMARY.md").write_text("\n".join(lines) + "\n")
 
 
+def reverify(slug: str) -> dict:
+    """Re-run run+verify+report on an existing work dir (no model calls unless the smoke gate
+    now fails), e.g. after a verify-stage fix. Deletes the old report first."""
+    d = OUT / slug
+    for f in ("REPORT.md", "report.json"):
+        (d / f).unlink(missing_ok=True)
+    for f in (d / "runs").glob("*.json") if (d / "runs").exists() else []:
+        f.unlink()
+    p = PAPERS[slug]
+    orch = Orchestrator(d, batch=True)
+    spec = Spec.load(d / "spec.yaml")
+    spec.plan.budget.build = max(spec.plan.budget.build, 40)
+    t0 = time.time()
+    rep = orch.replicate(spec, prebuilt=d / "work", do_grid=p["grid"])
+    row = _row(json.loads(rep.model_dump_json()))
+    row.update(slug=slug, minutes=round((time.time() - t0) / 60, 1), cost=round(orch.llm.cost_usd if orch.llm else 0, 2))
+    return row
+
+
 def main(slugs: list[str]) -> None:
+    if slugs and slugs[0] == "--reverify":
+        rows = []
+        for slug in slugs[1:]:
+            log(f"reverify {slug} ...")
+            row = reverify(slug)
+            rows.append(row)
+            log(f"{slug}: grade {row.get('grade')} claims [{row.get('claims')}] leakage [{row.get('leakage')}] {row.get('failure','')}")
+        return
     OUT.mkdir(parents=True, exist_ok=True)
     slugs = slugs or list(PAPERS)
     log(f"batch start: {slugs}")

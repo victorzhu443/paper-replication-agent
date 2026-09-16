@@ -96,6 +96,7 @@ def portfolio_pipeline(config: dict[str, Any], seed: int = 0) -> tuple[dict[str,
     h = int(config.get("holding_months", 1) or 1)
     df["ls"] = cohort.rolling(h, min_periods=h).mean() if h > 1 else cohort
     metrics = evaluate(df, ff3, config)
+    metrics["_shuffled"] = bool(config.get("_shuffle_labels"))
     if h > 1 and config.get("overlap_inference", "cohort") == "cohort":
         # Overlapping K-month holding: the rolling mean of one monthly-rebalanced series smooths
         # away variance that K distinct cohorts would keep, inflating a plain t-stat. Use the
@@ -144,7 +145,9 @@ def sort_portfolios(panel: pd.DataFrame, config: dict[str, Any]) -> pd.DataFrame
 def stock_pipeline(panel: pd.DataFrame, factors: pd.DataFrame | None, config: dict[str, Any], seed: int = 0) -> dict[str, float]:
     config = {**config, "_seed": seed}
     wide = sort_portfolios(_window(panel, config), config)
-    return evaluate(wide, factors, config)
+    m = evaluate(wide, factors, config)
+    m["_shuffled"] = bool(config.get("_shuffle_labels"))
+    return m
 
 
 def momentum_signal(panel: pd.DataFrame, lookback: int = 12, skip: int = 1) -> pd.DataFrame:

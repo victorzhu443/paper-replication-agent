@@ -58,7 +58,7 @@ with torch.no_grad():
     for x, y in te:
         correct += (model(x).argmax(1) == y).sum().item(); n += len(y)
 acc = correct / n
-json.dump({"seed": seed, "split": "test", "n_examples": n,
+json.dump({"seed": seed, "split": "test", "n_examples": n, "shuffled": shuffle_labels,
            "metrics": {"accuracy": acc * 100, "test_error": (1 - acc) * 100, "epochs": epochs, "train_seconds": time.time() - t0}},
           open(out, "w"))
 print(f"seed={seed} epochs={epochs} loss={loss_name} opt={opt_name} test_error={(1-acc)*100:.2f}%", file=sys.stderr)

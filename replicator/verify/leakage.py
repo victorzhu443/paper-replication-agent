@@ -13,14 +13,21 @@ import pandas as pd
 
 from ..schema import LeakageResult
 
-LOWER_IS_BETTER = {"test_error", "error_rate", "error", "loss", "perplexity", "rmse", "mae", "mse"}
+LOWER_IS_BETTER = {"test_error", "error_rate", "error", "loss", "perplexity", "rmse", "mae", "mse", "nll", "val_loss"}
+HIGHER_IS_BETTER = {"accuracy", "acc", "top1", "top5", "f1", "bleu", "rouge", "auc", "mean_return", "return", "reward",
+                    "episode_return", "sharpe", "mean_return_pct", "r2", "oos_r2", "t_stat", "exact_match", "win_rate"}
+
+
+def metric_known(metric: str) -> bool:
+    m = metric.lower()
+    return m in LOWER_IS_BETTER or m in HIGHER_IS_BETTER or any(m.endswith("_" + k) or m.startswith(k + "_") for k in LOWER_IS_BETTER | HIGHER_IS_BETTER)
 
 
 def metric_skill(metric: str, value: float) -> float:
     """Distance from 'no skill' on a better-is-larger scale. Error-type metrics are inverted
     against their ceiling (100 for percent, 1 for decimal); everything else is taken as-is."""
     m = metric.lower()
-    if m in LOWER_IS_BETTER:
+    if m in LOWER_IS_BETTER or any(m.endswith("_" + k) for k in LOWER_IS_BETTER):
         if m in ("loss", "perplexity", "rmse", "mae", "mse"):
             return -abs(value)
         ceiling = 100.0 if value > 1.0 else 1.0
@@ -41,6 +48,14 @@ def shuffle_test(run_fn: Callable[[dict, int], dict], config: dict, headline: st
     t = m.get("t_stat")
     if v is None:
         return LeakageResult(test="shuffle", passed=None, detail="headline missing from shuffled run")
+    if t is None and not metric_known(headline):
+        return LeakageResult(test="shuffle", passed=None,
+                             detail=f"headline metric '{headline}' has no known better-direction; shuffle test not run")
+    if not m.get("_shuffled"):
+        # A pipeline that ignores the flag reproduces its real number, which would read as a leak.
+        # Without an acknowledgement the test cannot distinguish the two, so it is not run.
+        return LeakageResult(test="shuffle", passed=None,
+                             detail="pipeline did not acknowledge the label shuffle (_shuffled flag absent); test not run")
     # The leak indicator is a shuffled result that is still significant. The magnitude criterion
     # is only meaningful when the unshuffled baseline was itself a real effect, so it is used
     # only when no t-stat is available.

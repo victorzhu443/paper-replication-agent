@@ -34,7 +34,10 @@ Contract you must satisfy (the orchestrator checks it; saying you are done does 
   SMOKE ('1' => tiny subset, one epoch), SCALE (float, default 1.0: multiply training steps /
   epochs / data by it; SCALE=0.1 must run the same pipeline at one tenth the cost), RUN_TIMEOUT_S,
   REPLICATOR_CONFIG (json), and writes METRICS_OUT as
-  {"seed": int, "split": str, "n_examples": int, "metrics": {<metric>: value}}.
+  {"seed": int, "split": str, "n_examples": int, "shuffled": bool, "metrics": {<metric>: value}}.
+  When REPLICATOR_CONFIG has "_shuffle_labels": true, shuffle the training labels (or targets /
+  rewards where that is meaningful) within each batch or period BEFORE training and set
+  "shuffled": true; if shuffling is meaningless for the method, leave "shuffled": false.
   The full run (SCALE=1) MUST finish inside RUN_TIMEOUT_S on CPU; run_smoke times a SCALE=0.1 run
   and rejects the build if the extrapolated full run does not fit. Size the default accordingly.
 - Every choice in the ambiguity list is a config key read from `config`, defaulting to the spec default.

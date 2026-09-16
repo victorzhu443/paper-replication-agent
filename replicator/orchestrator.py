@@ -132,7 +132,8 @@ class Orchestrator:
             return lambda cfg, seed: mod.run(cfg, seed)
         def _cs(cfg, seed):
             r = cs_eval.run_reproduce(self.work, cfg, seed, timeout_s=spec.plan.budget.run_timeout_s)
-            return {**r["metrics"], "_intermediates": {"n_examples": r.get("n_examples"), "split": r.get("split"), "seed": r.get("seed")}}
+            return {**r["metrics"], "_shuffled": bool(r.get("shuffled")),
+                    "_intermediates": {"n_examples": r.get("n_examples"), "split": r.get("split"), "seed": r.get("seed")}}
         return _cs
 
     def smoke(self, spec: Spec) -> dict[str, Any]:
