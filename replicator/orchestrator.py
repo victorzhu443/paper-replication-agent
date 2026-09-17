@@ -384,8 +384,17 @@ class Orchestrator:
             v = [r.metrics.get(headline.metric) for r in rs if headline.metric in r.metrics]
             base_val = float(np.mean(v)) if v else None
         na = any((r.metrics or {}).get("_shuffle_na") or (r.intermediates or {}).get("shuffle_not_applicable") for r in recs)
-        if headline and base_val is not None and not na:
+        # Decide judgeability BEFORE spending a full run on the shuffled pipeline: a t-stat, a
+        # reported null reference, or a metric with a known direction is required.
+        base_metrics = next((r.metrics for r in recs if headline and headline.metric in r.metrics), {}) if headline else {}
+        judgeable = bool(base_metrics) and ("t_stat" in base_metrics or leakage.null_reference(base_metrics, headline.metric) is not None
+                                             or leakage.metric_known(headline.metric))
+        if headline and base_val is not None and not na and judgeable:
             report.leakage.append(leakage.shuffle_test(run_fn, base_cfg, headline.metric, base_val))
+        elif headline and base_val is not None and not na:
+            report.leakage.append(LeakageResult(test="shuffle", passed=None,
+                                                detail=f"not judged: headline metric '{headline.metric}' has no t-stat, no reported null reference "
+                                                       f"(chance_level / {headline.metric}_random_policy / _baseline), and no known better-direction; shuffled run skipped"))
         elif na:
             report.leakage.append(LeakageResult(test="shuffle", passed=None, detail="not applicable: the pipeline declares no label/reward to shuffle (declared in metrics.json)"))
         if not is_cs:

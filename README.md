@@ -100,6 +100,8 @@ uv run python -m replicator.cli replicate 1706.03762 --track cs --family checkpo
 uv run python -m replicator.cli replicate paper.pdf --track finance --family cross_sectional_anomaly --osap Mom12m --dry-run
 
 # the 14-paper sweep (resumable; runs/batch/SUMMARY.md is rewritten after every paper)
+# on a laptop, keep it awake: subprocess timeouts use monotonic time and do not advance in sleep
+caffeinate -i uv run python -m evals.batch
 uv run python -m evals.batch            # all
 uv run python -m evals.batch ppo gan    # subset
 ```
