@@ -46,7 +46,7 @@ Sweep total: $78.70 in model calls for 14 papers. Reports: `papers/batch/<slug>/
 result, integrity). A: headline claims Match within pre-registered tolerances, leakage tests pass,
 open data. B: Consistent with attributed gaps. C: mechanics verified, numbers not (the usual outcome
 for a paper whose numbers need GPUs when you have a CPU). F: a leakage test failed or the pipeline
-did not run. `REPORT.md` always states the *kind of test* (reproduction / re-implementation /
+did not run. Not graded: the harness or the network failed before the paper was tested. `REPORT.md` always states the *kind of test* (reproduction / re-implementation /
 conceptual replication / mechanics only) and the compute tier, so a C on a reduced-scale run is
 not mistaken for a failed method.
 

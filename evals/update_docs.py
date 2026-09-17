@@ -84,8 +84,9 @@ def rows() -> list[str]:
         leak = ", ".join(f"{l['test'].replace('_', '-')} {'P' if l['passed'] else ('F' if l['passed'] is False else 'n/a')}"
                          for l in r.get("leakage", []) if l["test"] != "contamination_scan") or "—"
         fail = f" · failed: {r['failure'][:60]}" if r.get("failure") else ""
+        gl = "**A**" if g == "A" else ("not graded" if g == "N" else g)
         out.append(f"| {title} | {track} | {r.get('kind_of_test','-').replace('_',' ')} | {r.get('data_tier')}/{r.get('compute_tier')} | "
-                   f"{'**A**' if g == 'A' else g} | {cl}{fail} | {leak} | ${cost:.2f} |")
+                   f"{gl} | {cl}{fail} | {leak} | ${cost:.2f} |")
     out.append("")
     out.append(f"Sweep total: ${total:.2f} in model calls for {len(TITLES)} papers. Reports: `papers/batch/<slug>/REPORT.md`. "
                f"Updated {time.strftime('%Y-%m-%d %H:%M')}.")
@@ -118,7 +119,8 @@ def matched_rows() -> list[str]:
         leak = ", ".join(f"{l['test'].replace('_', '-')} {'P' if l['passed'] else ('F' if l['passed'] is False else 'n/a')}"
                          for l in r.get("leakage", []) if l["test"] != "contamination_scan") or "—"
         fail = f" · failed: {r['failure'][:60]}" if r.get("failure") else ""
-        out.append(f"| {TITLES[slug][0]} | {'**A**' if g == 'A' else g} | {cl}{fail} | {leak} | ${cost:.2f} |")
+        gl = "**A**" if g == "A" else ("not graded" if g == "N" else g)
+        out.append(f"| {TITLES[slug][0]} | {gl} | {cl}{fail} | {leak} | ${cost:.2f} |")
         n += 1
     return out if n else []
 

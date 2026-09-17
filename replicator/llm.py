@@ -106,15 +106,17 @@ class LLM:
         if len(json.dumps(strict)) > self.GRAMMAR_LIMIT_BYTES:
             return self._call_json_guided(stage, system, content, schema, strict, model, effort, max_tokens)
         t0 = time.time()
-        with self.client.with_options(timeout=900.0, max_retries=2).messages.stream(
-            model=model,
-            max_tokens=max_tokens,
-            system=[{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}],
-            messages=[{"role": "user", "content": content}],
-            thinking={"type": "adaptive"},
-            output_config={"effort": effort, "format": {"type": "json_schema", "schema": _strict_schema(schema)}},
-        ) as stream:
-            resp = stream.get_final_message()
+        def _go():
+            with self.client.with_options(timeout=900.0, max_retries=2).messages.stream(
+                model=model,
+                max_tokens=max_tokens,
+                system=[{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}],
+                messages=[{"role": "user", "content": content}],
+                thinking={"type": "adaptive"},
+                output_config={"effort": effort, "format": {"type": "json_schema", "schema": _strict_schema(schema)}},
+            ) as stream:
+                return stream.get_final_message()
+        resp = _with_transport_retry(_go, stage=stage)
         self._record(stage, model, resp, t0)
         if resp.stop_reason == "refusal":
             raise RuntimeError(f"model refused at stage {stage}: {resp.stop_details}")
@@ -130,12 +132,14 @@ class LLM:
         last_err = None
         for attempt in range(3):
             t0 = time.time()
-            with self.client.with_options(timeout=900.0, max_retries=2).messages.stream(
-                model=model, max_tokens=max_tokens,
-                system=[{"type": "text", "text": sys_text, "cache_control": {"type": "ephemeral"}}],
-                messages=msgs, thinking={"type": "adaptive"}, output_config={"effort": effort},
-            ) as stream:
-                resp = stream.get_final_message()
+            def _go(msgs=msgs):
+                with self.client.with_options(timeout=900.0, max_retries=2).messages.stream(
+                    model=model, max_tokens=max_tokens,
+                    system=[{"type": "text", "text": sys_text, "cache_control": {"type": "ephemeral"}}],
+                    messages=msgs, thinking={"type": "adaptive"}, output_config={"effort": effort},
+                ) as stream:
+                    return stream.get_final_message()
+            resp = _with_transport_retry(_go, stage=stage)
             self._record(stage if attempt == 0 else stage + ".repair", model, resp, t0)
             if resp.stop_reason == "refusal":
                 raise RuntimeError(f"model refused at stage {stage}: {resp.stop_details}")
@@ -186,7 +190,9 @@ class LLM:
                 thinking={"type": "adaptive"}, output_config={"effort": effort},
             ) as stream:
                 resp = stream.get_final_message()
-        except (anthropic.APITimeoutError, anthropic.APIConnectionError) as e:
+        except Exception as e:  # noqa: BLE001
+            if not _is_transport_error(e):
+                raise
             self.log_dir.mkdir(parents=True, exist_ok=True)
             with (self.log_dir / "llm_calls.jsonl").open("a") as f:
                 f.write(json.dumps({"stage": stage, "model": model, "error": type(e).__name__, "wall_seconds": time.time() - t0}) + "\n")
@@ -222,6 +228,27 @@ def _lenient_json(body: str):
         elif ch == '"':
             in_str = not in_str
     return json.loads("".join(out), strict=False)
+
+
+def _is_transport_error(e: Exception) -> bool:
+    name = type(e).__name__
+    return name in ("RemoteProtocolError", "ReadError", "ConnectError", "APIConnectionError", "APITimeoutError",
+                    "IncompleteRead", "ProtocolError") or "peer closed connection" in str(e)
+
+
+def _with_transport_retry(fn, attempts: int = 3, stage: str = ""):
+    """A connection that drops mid-stream surfaces as httpx RemoteProtocolError after the request
+    already succeeded, which the SDK's own retry does not cover. Retry the whole call."""
+    last = None
+    for i in range(attempts):
+        try:
+            return fn()
+        except Exception as e:  # noqa: BLE001
+            if not _is_transport_error(e):
+                raise
+            last = e
+            time.sleep(min(60, 5 * 2 ** i))
+    raise RuntimeError(f"stage {stage}: transport failed {attempts} times: {type(last).__name__}: {str(last)[:160]}")
 
 
 class CostCapExceeded(RuntimeError):

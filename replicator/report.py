@@ -27,7 +27,11 @@ def grade(report: Report, spec: Spec) -> GradeVector:
         result = "Mismatch"
     else:
         result = "Untested"
-    if report.failure or integrity == "failed":
+    infra = report.failure and any(k in report.failure for k in ("RemoteProtocolError", "APIConnectionError", "APITimeoutError",
+                                                                     "transport failed", "CostCapExceeded", "ReadTimeout"))
+    if infra:
+        letter = "N"  # not graded: the harness or the network failed, the paper was not tested
+    elif report.failure or integrity == "failed":
         letter = "F"
     elif result == "all headline Match" and integrity in ("passed", "not_applicable") and report.data_tier == "A":
         letter = "A"
@@ -48,7 +52,7 @@ def write(report: Report, spec: Spec, out_dir: Path) -> Path:
     md += [f"**Kind of test:** {report.kind_of_test} · **Data tier:** {report.data_tier} · **Compute tier:** {report.compute_tier} · "
            f"**Track/family:** {report.track}/{report.family}", ""]
     g = report.grade
-    md += [f"**Grade:** {g.letter}  (data: {g.data_fidelity}; procedure: {g.procedure_fidelity}; result: {g.result}; integrity: {g.integrity})", ""]
+    md += [f"**Grade:** {'not graded (infrastructure failure)' if g.letter == 'N' else g.letter}  (data: {g.data_fidelity}; procedure: {g.procedure_fidelity}; result: {g.result}; integrity: {g.integrity})", ""]
     if report.failure:
         md += [f"> **Run did not complete:** {report.failure}", ""]
     md += ["## 1. Deviations from the paper", ""] + ([f"- {d}" for d in report.deviations] or ["- none recorded"]) + [""]
