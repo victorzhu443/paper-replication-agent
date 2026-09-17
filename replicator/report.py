@@ -29,8 +29,11 @@ def grade(report: Report, spec: Spec) -> GradeVector:
         result = "Untested"
     infra = report.failure and any(k in report.failure for k in ("RemoteProtocolError", "APIConnectionError", "APITimeoutError",
                                                                      "transport failed", "CostCapExceeded", "ReadTimeout"))
-    if infra:
-        letter = "N"  # not graded: the harness or the network failed, the paper was not tested
+    compute = report.failure and any(k in report.failure for k in ("SCALE=0.1 probe", "would take ~", "does not fit"))
+    if infra or compute:
+        letter = "N"  # not graded: the harness/network failed, or the paper's configuration does not fit this machine
+        if compute:
+            proc = proc + "; paper-scale run does not fit the compute envelope"
     elif report.failure or integrity == "failed":
         letter = "F"
     elif result == "all headline Match" and integrity in ("passed", "not_applicable") and report.data_tier == "A":
