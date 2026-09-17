@@ -1,0 +1,66 @@
+{
+ "seed": 2,
+ "split": "test",
+ "n_examples": 10000,
+ "scale": 1.0,
+ "shuffled": false,
+ "matched_scale": true,
+ "metrics": {
+  "accuracy": 0.9752,
+  "accuracy_gap": 0.008199999999999985,
+  "steps_to_baseline_final_accuracy": 10000.0,
+  "activation_distribution_drift_reduction": 0.14947084143705405,
+  "mnist_bn_gt_nobn_final": 0.008199999999999985,
+  "mnist_bn_final_acc": 0.9752,
+  "mnist_nobn_final_acc": 0.967,
+  "mnist_bn_acc_at_10k": 0.9682,
+  "mnist_bn_faster_to_baseline_acc": 10000.0,
+  "mnist_bn_activation_stability": 0.14947084143705405,
+  "chance_level": 0.1,
+  "accuracy_gap_baseline": 0.0,
+  "steps_to_baseline_final_accuracy_baseline": 50000.0,
+  "activation_distribution_drift_reduction_baseline": 0.0,
+  "_intermediates": {
+   "scale": {
+    "scale": 1.0,
+    "smoke": false,
+    "steps_run": 50000,
+    "paper_steps": 50000,
+    "batch_size": 60,
+    "n_train_used": 60000,
+    "n_test_used": 10000
+   },
+   "bn_drift": 0.20743825318562018,
+   "baseline_drift": 0.35690909462267423,
+   "bn_curve_tail": [
+    [
+     49000,
+     0.9767
+    ],
+    [
+     49500,
+     0.9769
+    ],
+    [
+     50000,
+     0.9752
+    ]
+   ],
+   "nobn_curve_tail": [
+    [
+     49000,
+     0.9651
+    ],
+    [
+     49500,
+     0.9659
+    ],
+    [
+     50000,
+     0.967
+    ]
+   ],
+   "runtime_s": 60.13187098503113
+  }
+ }
+}

@@ -1,0 +1,125 @@
+{
+ "seed": 0,
+ "split": "test",
+ "n_examples": 55000,
+ "scale": 1.0,
+ "shuffled": true,
+ "matched_scale": false,
+ "metrics": {
+  "lenet_earlystop_38pct_faster": -75.0,
+  "lenet_testacc_gain_at_pm135": -0.22999999999999865,
+  "lenet_testacc_gain_at_50k": 3.535,
+  "lenet_speedup_vs_reinit_at_pm21": 1.0,
+  "lenet_pm_threshold_winning_ticket": 80.03756574004508,
+  "lenet_pm_threshold_reinit": 80.03756574004508,
+  "lenet_oneshot_faster_lower_bound": 100.0,
+  "conv4_testacc_gain_best": 0.0,
+  "early_stop_iteration_reduction": -75.0,
+  "test_accuracy_delta_vs_unpruned": -0.22999999999999865,
+  "early_stop_speedup_ratio_vs_reinit": 1.0,
+  "pm_threshold_accuracy_drop": 80.03756574004508,
+  "pm_lower_bound_faster_early_stop": 100.0,
+  "lenet_test_accuracy_unpruned": 11.26,
+  "lenet_test_accuracy_best_ticket": 13.920000000000002,
+  "conv4_test_accuracy_unpruned": 12.4,
+  "chance_level": 10.0,
+  "test_accuracy_delta_vs_unpruned_baseline": 0.0,
+  "early_stop_iteration_reduction_baseline": 0.0,
+  "_intermediates": {
+   "scale": {
+    "scale_arg": 1.0,
+    "smoke": true,
+    "lenet": "Lenet-300-100 paper config except iterations: Adam 1.2e-3, batch 60, 300 iters/round (paper 50000), 4 rounds, 2 trials",
+    "conv4": "SCALED DOWN: quarter width (16/16/32/32 channels), 120 iters/round (paper 25000), 2 rounds, 2 trials (paper 5), val/test eval subsets 500/1000",
+    "n_reinits": 1
+   },
+   "lenet_pm": [
+    100.0,
+    80.03756574004508,
+    64.06386175807664,
+    51.28136739293764,
+    41.05259203606311
+   ],
+   "lenet_es_iter": [
+    100.0,
+    250.0,
+    200.0,
+    100.0,
+    175.0
+   ],
+   "lenet_test_acc_es": [
+    11.26,
+    9.35,
+    12.84,
+    13.920000000000002,
+    11.030000000000001
+   ],
+   "lenet_test_acc_final": [
+    9.945,
+    9.76,
+    7.835000000000001,
+    9.975,
+    13.48
+   ],
+   "lenet_reinit_pm": [
+    100.0,
+    80.03756574004508,
+    64.06386175807664,
+    51.28136739293764,
+    41.05259203606311
+   ],
+   "lenet_reinit_es": [
+    200.0,
+    50.0,
+    250.0,
+    175.0,
+    175.0
+   ],
+   "lenet_reinit_acc": [
+    14.254999999999999,
+    11.945,
+    9.785,
+    14.0,
+    14.595
+   ],
+   "lenet_oneshot_pm": [
+    100.0,
+    90.01878287002253,
+    60.07513148009016,
+    30.131480090157776
+   ],
+   "lenet_oneshot_es": [
+    100.0,
+    150.0,
+    175.0,
+    225.0
+   ],
+   "lenet_oneshot_acc": [
+    11.26,
+    9.95,
+    12.42,
+    10.19
+   ],
+   "conv4_pm": [
+    100.0,
+    80.3139533356105,
+    64.53384876113402
+   ],
+   "conv4_es_iter": [
+    80.0,
+    120.0,
+    60.0
+   ],
+   "conv4_test_acc_es": [
+    12.4,
+    12.100000000000001,
+    10.65
+   ],
+   "n_train_mnist": 55000,
+   "n_val": 5000,
+   "n_test_mnist": 10000,
+   "runtime_s": 21.490746021270752,
+   "chain_s": 1.9582080841064453
+  }
+ }
+}

@@ -1,0 +1,128 @@
+{
+ "seed": 0,
+ "split": "test",
+ "n_examples": 55000,
+ "scale": 1.0,
+ "shuffled": false,
+ "matched_scale": false,
+ "metrics": {
+  "lenet_earlystop_38pct_faster": 0.0,
+  "lenet_testacc_gain_at_pm135": 0.6099999999999852,
+  "lenet_testacc_gain_at_50k": 0.6099999999999852,
+  "lenet_speedup_vs_reinit_at_pm21": 1.0,
+  "lenet_pm_threshold_winning_ticket": 41.05259203606311,
+  "lenet_pm_threshold_reinit": 80.03756574004508,
+  "lenet_oneshot_faster_lower_bound": 90.01878287002253,
+  "conv4_testacc_gain_best": 3.1499999999999986,
+  "early_stop_iteration_reduction": 0.0,
+  "test_accuracy_delta_vs_unpruned": 0.6099999999999852,
+  "early_stop_speedup_ratio_vs_reinit": 1.0,
+  "pm_threshold_accuracy_drop": 41.05259203606311,
+  "pm_lower_bound_faster_early_stop": 90.01878287002253,
+  "lenet_test_accuracy_unpruned": 94.33500000000001,
+  "lenet_test_accuracy_best_ticket": 94.945,
+  "conv4_test_accuracy_unpruned": 41.35,
+  "chance_level": 10.0,
+  "test_accuracy_delta_vs_unpruned_baseline": 0.0,
+  "early_stop_iteration_reduction_baseline": 0.0,
+  "_intermediates": {
+   "scale": {
+    "scale_arg": 1.0,
+    "smoke": true,
+    "lenet": "Lenet-300-100 paper config except iterations: Adam 1.2e-3, batch 60, 300 iters/round (paper 50000), 4 rounds, 2 trials",
+    "conv4": "SCALED DOWN: half width (32/32/64/64 channels), 200 iters/round (paper 25000), 3 rounds, 2 trials (paper 5), val/test eval subsets 500/1000",
+    "n_reinits": 1
+   },
+   "lenet_pm": [
+    100.0,
+    80.03756574004508,
+    64.06386175807664,
+    51.28136739293764,
+    41.05259203606311
+   ],
+   "lenet_es_iter": [
+    300.0,
+    300.0,
+    275.0,
+    300.0,
+    300.0
+   ],
+   "lenet_test_acc_es": [
+    94.33500000000001,
+    94.435,
+    94.735,
+    94.83500000000001,
+    94.945
+   ],
+   "lenet_test_acc_final": [
+    94.33500000000001,
+    94.435,
+    94.255,
+    94.83500000000001,
+    94.945
+   ],
+   "lenet_reinit_pm": [
+    100.0,
+    80.03756574004508,
+    64.06386175807664,
+    51.28136739293764,
+    41.05259203606311
+   ],
+   "lenet_reinit_es": [
+    300.0,
+    275.0,
+    300.0,
+    300.0,
+    300.0
+   ],
+   "lenet_reinit_acc": [
+    94.22999999999999,
+    93.94,
+    93.27000000000001,
+    93.225,
+    92.75999999999999
+   ],
+   "lenet_oneshot_pm": [
+    100.0,
+    90.01878287002253,
+    60.07513148009016,
+    30.131480090157776
+   ],
+   "lenet_oneshot_es": [
+    300.0,
+    250.0,
+    300.0,
+    300.0
+   ],
+   "lenet_oneshot_acc": [
+    94.33500000000001,
+    94.15,
+    94.795,
+    94.50999999999999
+   ],
+   "conv4_pm": [
+    100.0,
+    80.57481591272098,
+    64.97714136820163,
+    52.44727794471967
+   ],
+   "conv4_es_iter": [
+    200.0,
+    175.0,
+    200.0,
+    200.0
+   ],
+   "conv4_test_acc_es": [
+    41.35,
+    42.1,
+    42.6,
+    44.5
+   ],
+   "n_train_mnist": 55000,
+   "n_val": 5000,
+   "n_test_mnist": 10000,
+   "runtime_s": 139.47269582748413,
+   "chain_s": 6.512423992156982
+  }
+ }
+}

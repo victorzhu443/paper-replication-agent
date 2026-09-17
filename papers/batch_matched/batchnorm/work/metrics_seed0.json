@@ -1,0 +1,66 @@
+{
+ "seed": 0,
+ "split": "test",
+ "n_examples": 10000,
+ "scale": 1.0,
+ "shuffled": true,
+ "matched_scale": true,
+ "metrics": {
+  "accuracy": 0.0958,
+  "accuracy_gap": -0.017700000000000007,
+  "steps_to_baseline_final_accuracy": 500.0,
+  "activation_distribution_drift_reduction": 0.4590964122118981,
+  "mnist_bn_gt_nobn_final": -0.017700000000000007,
+  "mnist_bn_final_acc": 0.0958,
+  "mnist_nobn_final_acc": 0.1135,
+  "mnist_bn_acc_at_10k": 0.09,
+  "mnist_bn_faster_to_baseline_acc": 500.0,
+  "mnist_bn_activation_stability": 0.4590964122118981,
+  "chance_level": 0.1,
+  "accuracy_gap_baseline": 0.0,
+  "steps_to_baseline_final_accuracy_baseline": 50000.0,
+  "activation_distribution_drift_reduction_baseline": 0.0,
+  "_intermediates": {
+   "scale": {
+    "scale": 1.0,
+    "smoke": false,
+    "steps_run": 50000,
+    "paper_steps": 50000,
+    "batch_size": 60,
+    "n_train_used": 60000,
+    "n_test_used": 10000
+   },
+   "bn_drift": 0.16884381470761378,
+   "baseline_drift": 0.6279402269195119,
+   "bn_curve_tail": [
+    [
+     49000,
+     0.1005
+    ],
+    [
+     49500,
+     0.1275
+    ],
+    [
+     50000,
+     0.0958
+    ]
+   ],
+   "nobn_curve_tail": [
+    [
+     49000,
+     0.1028
+    ],
+    [
+     49500,
+     0.1135
+    ],
+    [
+     50000,
+     0.1135
+    ]
+   ],
+   "runtime_s": 60.4705331325531
+  }
+ }
+}

@@ -1,0 +1,616 @@
+paper:
+  title: 'Batch Normalization: Accelerating Deep Network Training by Reducing Internal
+    Covariate Shift'
+  authors:
+  - Sergey Ioffe
+  - Christian Szegedy
+  year: 2015
+  arxiv_id: '1502.03167'
+  version: v3
+  track: cs
+  family: train_and_eval
+claims:
+- id: mnist_bn_gt_nobn_final
+  where: 'Sec. 4.1 / Figure 1(a) caption, page 6: ''Batch Normalization helps the
+    network train faster and achieve higher accuracy''; text: ''The batch-normalized
+    network enjoys the higher test accuracy.'' Directional only - no numeric MNIST
+    accuracy is printed anywhere in the paper.'
+  evidence_page: 6
+  metric: accuracy_gap
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.0
+  reported_precision: 0.0
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: bn_minus_baseline
+  priority: headline
+  relation: gt
+- id: mnist_bn_final_acc
+  where: 'Figure 1(a), page 6, ''With BN'' (solid) curve at the right edge (50K steps).
+    NOT a printed number: value digitized from the plot (y-axis spans 0.7-1 with ticks
+    at 0.7/0.8/0.9/1); reported_precision below is plot-digitization uncertainty,
+    not half a printed digit.'
+  evidence_page: 6
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.98
+  reported_precision: 0.015
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: with_bn
+  priority: descriptive
+  relation: eq
+- id: mnist_nobn_final_acc
+  where: 'Figure 1(a), page 6, ''Without BN'' (dashed) curve at the right edge (50K
+    steps). NOT a printed number: value digitized from the plot (y-axis 0.7-1); reported_precision
+    is plot-digitization uncertainty, not half a printed digit.'
+  evidence_page: 6
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.97
+  reported_precision: 0.015
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: baseline_no_bn
+  priority: descriptive
+  relation: eq
+- id: mnist_bn_acc_at_10k
+  where: 'Figure 1(a), page 6, ''With BN'' curve at the 10K-steps gridline. NOT a
+    printed number: digitized from the plot; reported_precision is plot-digitization
+    uncertainty.'
+  evidence_page: 6
+  metric: accuracy
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.97
+  reported_precision: 0.02
+  n_periods: 10000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: with_bn
+  priority: descriptive
+  relation: eq
+- id: mnist_bn_faster_to_baseline_acc
+  where: 'Figure 1(a) caption, page 6: ''Batch Normalization helps the network train
+    faster''. Operationalized as: step at which the BN curve first reaches the non-BN
+    network''s 50K-step accuracy must be < 50,000. The 14x / 7%-of-steps speedup figures
+    in the Abstract and Sec. 1 refer to ImageNet (Figure 3, page 7), not to MNIST.'
+  evidence_page: 6
+  metric: steps_to_baseline_final_accuracy
+  units:
+    period: none
+    annualized: false
+    scale: count
+  value: 50000.0
+  reported_precision: 0.0
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: with_bn
+  priority: headline
+  relation: lt
+- id: mnist_bn_activation_stability
+  where: 'Figure 1(b,c) and caption, page 6: {15,50,85}th percentiles of the input
+    to one typical sigmoid in the last hidden layer over training, without BN (b)
+    vs with BN (c); caption: ''Batch Normalization makes the distribution more stable''.
+    Directional only - the paper prints no drift statistic.'
+  evidence_page: 6
+  metric: activation_distribution_drift_reduction
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.0
+  reported_precision: 0.0
+  n_periods: 50000
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: bn_minus_baseline
+  priority: secondary
+  relation: gt
+data:
+  sources:
+  - canonical: mnist
+    description: MNIST handwritten digit dataset (LeCun et al., 1998a), cited in Sec.
+      4.1. Paper states only '28x28 binary image as input', 10 output classes, and
+      that Fig. 1(a) plots 'the fraction of correct predictions ... on held-out test
+      data'. Split sizes (60,000 train / 10,000 test) are the standard MNIST convention
+      and are NOT stated in the paper.
+    substitute: torchvision
+  universe:
+    task: 10-class digit classification
+    input: 28x28 binary image (784 binary inputs), per Sec. 4.1
+    eval_population: 'held-out MNIST test set; paper says ''held-out test data'' without
+      stating size (convention: 10,000 images)'
+  frequency: none
+  preprocessing:
+    binarization: pixel intensities binarized to {0,1} ('28x28 binary image as input',
+      Sec. 4.1); threshold not stated in paper
+    flatten: images flattened to 784-dim vector for the fully-connected network (implied
+      by architecture; not stated explicitly)
+    normalization: no input mean/std standardization mentioned beyond binarization
+    augmentation: none mentioned for the MNIST experiment (photometric distortions
+      are discussed only for the ImageNet/Inception runs, Sec. 4.2.1)
+    shuffling: mini-batches of 60 examples; sampling/shuffling scheme unstated for
+      MNIST (within-shard shuffling is discussed only for ImageNet, Sec. 4.2.1)
+  splits:
+    train: MNIST training set (standard 60,000 images; size not stated in paper)
+    test: MNIST test set (standard 10,000 images), used as the 'held-out test data'
+      curve in Fig. 1(a)
+    validation: none held out separately in the paper
+    training_length: 50,000 SGD steps at mini-batch size 60 (Sec. 4.1); equals ~50
+      passes over a 60,000-image train set
+method:
+  signal: Insert the Batch Normalizing Transform (Alg. 1) at each hidden layer of
+    a 3x100 fully-connected sigmoid MNIST network and compare held-out test accuracy
+    vs training step, and sigmoid-input distribution stability, against the identical
+    network without BN.
+  model:
+    architecture: 784 -> FC100 -> FC100 -> FC100 -> FC10 (softmax); Sec. 4.1
+    hidden_nonlinearity: sigmoid g(x)=1/(1+exp(-x)); baseline hidden layer computes
+      y=g(Wu+b) (Sec. 4.1)
+    loss: cross-entropy over 10 classes (Sec. 4.1)
+    weight_init: '''weights W initialized to small random Gaussian values'' (Sec.
+      4.1); std not stated'
+    bn_placement: '''We added Batch Normalization to each hidden layer of the network,
+      as in Sec. 3.1'' (Sec. 4.1); per-activation (non-convolutional) BN. Placement
+      immediately before the nonlinearity, on x=Wu, and the dropping of the bias,
+      are stated generally in Sec. 3.2, not restated in Sec. 4.1.'
+    bn_params_init: gamma, beta learned (Alg. 1); initialization not stated (conventionally
+      gamma=1, beta=0)
+    bn_epsilon: constant epsilon added to mini-batch variance (Alg. 1); value not
+      stated
+    batch_size: 60 examples per mini-batch (Sec. 4.1)
+    training_steps: 50,000 steps (Sec. 4.1)
+    optimizer: not specified for MNIST; Sec. 4.1 only says the network was 'trained
+      ... for 50000 steps'. Momentum SGD is stated only for the ImageNet Inception
+      model (Sec. 4.2); Sec. 3.1 mentions SGD/Adagrad generically.
+    learning_rate: not stated for the MNIST experiment (0.0015/0.0075/0.045 in Sec.
+      4.2.2 apply to Inception on ImageNet only)
+  evaluation:
+  - Test accuracy (fraction of correct predictions) on held-out MNIST test data, plotted
+    vs number of training steps (Fig. 1a)
+  - Comparison of accuracy at matched step counts and at the final step between BN
+    and non-BN networks (directional claim only; no numbers printed)
+  - Evolution of the {15,50,85}th percentiles of the input to one typical sigmoid
+    in the last hidden layer over training (Fig. 1b,c)
+  eval_protocol:
+    metric: top-1 accuracy as a decimal fraction on the held-out test set (Fig. 1a
+      y-axis spans 0.7-1)
+    bn_inference_stats: 'Sec. 3.1 / Alg. 2: population statistics with unbiased variance
+      Var[x]=m/(m-1)*E_B[sigma_B^2]; the same paragraph notes ''Using moving averages
+      instead, we can track the accuracy of a model as it trains'', which is what
+      a per-step accuracy curve requires. Moving-average decay/window not stated.'
+    eval_cadence: curve plotted from 0 to 50K steps; evaluation interval not stated
+    reported_point: accuracy at/near 50,000 steps (right edge of Fig. 1a); paper prints
+      no value
+    seeds: number of runs/seeds not stated; Fig. 1(a) shows one curve per configuration
+      with no error bars
+  variants:
+    baseline_no_bn:
+      batch_norm: 'off'
+      architecture: 3 hidden FC layers of 100 sigmoid units, biases present (y=g(Wu+b),
+        Sec. 4.1)
+      steps: 50000
+      batch_size: 60
+    with_bn:
+      batch_norm: on, at each hidden layer, before the sigmoid, per-activation (non-convolutional)
+      bias: removed from BN-ed layers per Sec. 3.2 (role subsumed by beta); not restated
+        in Sec. 4.1
+      steps: 50000
+      batch_size: 60
+      other_hyperparams: assumed identical to baseline; the paper does not state whether
+        the learning rate was matched for MNIST (the learning-rate increase of Sec.
+        4.2.1 applies to ImageNet only)
+    bn_minus_baseline:
+      derivation: with_bn metric minus baseline_no_bn metric at the same step budget
+        and seed
+      for_activation_claim: drift statistic of the baseline's last-hidden-layer sigmoid-input
+        percentiles minus that of the BN network (statistic definition not given by
+        the paper; see ambiguity activation_drift_metric)
+baselines:
+- Identical 3x100 sigmoid MLP trained without Batch Normalization (same 50,000 steps,
+  mini-batch size 60, same small-random-Gaussian initialization scheme)
+ambiguities:
+- id: lr_schedule
+  question: What learning-rate schedule is used for the MNIST experiment?
+  config_key: lr_schedule
+  options:
+  - constant
+  - step
+  - exponential_decay
+  - cosine
+  default: constant
+  source: conventions_kb
+  reason: Sec. 4.1 states only 50,000 steps at batch size 60; no schedule is mentioned.
+    (Exponential decay is described only for Inception/ImageNet in Sec. 4.2.1.) A
+    constant LR is the conventional reading.
+  sensitivity: high
+- id: learning_rate_value
+  question: What base learning rate is used for the MNIST network?
+  config_key: learning_rate
+  options:
+  - '0.01'
+  - '0.1'
+  - '0.5'
+  - '0.001'
+  default: '0.1'
+  source: guess
+  reason: The paper never gives a learning rate for the MNIST experiment; the 0.0015/0.0075/0.045
+    values in Sec. 4.2.2 are ImageNet-only. A sigmoid MLP under plain SGD needs a
+    fairly large LR to move in 50K steps, and the BN-vs-baseline gap is sensitive
+    to this choice.
+  sensitivity: high
+- id: lr_matched_across_variants
+  question: Do the BN and non-BN MNIST networks use the same learning rate, or is
+    each tuned separately?
+  config_key: lr_bn_vs_baseline
+  options:
+  - same_lr_both
+  - tuned_separately
+  - higher_lr_for_bn
+  default: same_lr_both
+  source: paper_text
+  reason: Sec. 4.1 says the interest is 'the comparison between the baseline and batch-normalized
+    networks' and mentions no learning-rate change; the higher-learning-rate modification
+    is introduced only for ImageNet in Sec. 4.2.1. Still, the paper never states that
+    the LRs were matched.
+  sensitivity: high
+- id: augmentation
+  question: Is any train-time data augmentation applied to MNIST?
+  config_key: augmentation
+  options:
+  - none
+  - standard
+  default: none
+  source: paper_text
+  reason: No augmentation is mentioned for the MNIST experiment (only a 28x28 binary
+    image input); photometric distortions are discussed only for ImageNet (Sec. 4.2.1).
+  sensitivity: low
+- id: batch_vs_steps
+  question: Hold fixed number of optimization steps or fixed epochs if the batch size
+    must change?
+  config_key: batch_vs_steps
+  options:
+  - epochs
+  - steps
+  default: steps
+  source: paper_text
+  reason: Sec. 4.1 fixes 50,000 steps with 60 examples per mini-batch and Fig. 1(a)
+    plots accuracy vs steps, so the step budget is the invariant.
+  sensitivity: medium
+- id: batch_sampling
+  question: How are mini-batches drawn - reshuffled epochs or i.i.d. sampling with
+    replacement?
+  config_key: batch_sampling
+  options:
+  - shuffle_each_epoch
+  - random_with_replacement
+  - fixed_order
+  default: shuffle_each_epoch
+  source: conventions_kb
+  reason: The paper is silent on MNIST batch construction; Sec. 3.4 and 4.2.1 only
+    note that mini-batch composition matters (within-shard shuffling was an ImageNet
+    change).
+  sensitivity: medium
+- id: mixed_precision
+  question: Train in fp32 or with mixed precision?
+  config_key: mixed_precision
+  options:
+  - fp32
+  - amp
+  default: fp32
+  source: conventions_kb
+  reason: Not mentioned; 2015 paper predates AMP, and BN statistics in fp16 can shift
+    results slightly.
+  sensitivity: low
+- id: split
+  question: Is the reported Fig. 1(a) accuracy curve on a validation split or the
+    MNIST test split?
+  config_key: split
+  options:
+  - validation
+  - test
+  default: test
+  source: paper_text
+  reason: Fig. 1(a) caption says 'The test accuracy of the MNIST network' and the
+    text says 'held-out test data', i.e. the standard MNIST test set (size not stated
+    in the paper).
+  sensitivity: medium
+- id: optimizer_choice
+  question: Plain SGD, SGD with momentum, or Adagrad for the MNIST network?
+  config_key: optimizer
+  options:
+  - sgd
+  - sgd_momentum
+  - adagrad
+  default: sgd
+  source: conventions_kb
+  reason: Sec. 4.1 does not name an optimizer for MNIST; Sec. 3.1 mentions SGD variants
+    generically and momentum SGD is stated only for the ImageNet Inception runs (Sec.
+    4.2).
+  sensitivity: high
+- id: binarization_threshold
+  question: How are MNIST pixels binarized ('28x28 binary image')?
+  config_key: input_binarization
+  options:
+  - threshold_0.5
+  - threshold_0
+  - bernoulli_sample
+  - no_binarization_use_grayscale
+  default: threshold_0.5
+  source: conventions_kb
+  reason: Sec. 4.1 says the input is a 28x28 binary image but gives no threshold;
+    0.5 on [0,1]-scaled intensities is the standard choice.
+  sensitivity: low
+- id: weight_init_scale
+  question: What is the std of the 'small random Gaussian' weight initialization?
+  config_key: init_std
+  options:
+  - '0.01'
+  - '0.05'
+  - '0.1'
+  - glorot
+  default: '0.05'
+  source: guess
+  reason: Sec. 4.1 describes it only qualitatively as 'small random Gaussian values';
+    the init scale strongly affects how badly the sigmoid baseline saturates and hence
+    the BN-vs-baseline gap.
+  sensitivity: high
+- id: bn_epsilon_value
+  question: What epsilon is added to the mini-batch variance?
+  config_key: bn_eps
+  options:
+  - 1e-5
+  - 1e-3
+  - 1e-8
+  default: 1e-5
+  source: conventions_kb
+  reason: Algorithm 1 introduces epsilon as 'a constant added to the mini-batch variance
+    for numerical stability' but never gives its value.
+  sensitivity: low
+- id: bn_inference_statistics
+  question: At evaluation time, use the unbiased population estimate over training
+    mini-batches (Alg. 2) or exponential moving averages tracked during training?
+  config_key: bn_inference_stats
+  options:
+  - population_unbiased_alg2
+  - moving_average
+  - batch_stats
+  default: moving_average
+  source: paper_text
+  reason: Sec. 3.1 gives the Alg. 2 unbiased population estimate Var[x]=m/(m-1)E_B[sigma_B^2]
+    but adds 'Using moving averages instead, we can track the accuracy of a model
+    as it trains', which is what the Fig. 1(a) curve requires; the momentum/window
+    of the average is unstated.
+  sensitivity: medium
+- id: bn_placement_relative_to_nonlinearity
+  question: Is BN inserted before the sigmoid (on Wu) or after it?
+  config_key: bn_placement
+  options:
+  - before_sigmoid_on_Wu
+  - after_sigmoid
+  default: before_sigmoid_on_Wu
+  source: paper_text
+  reason: Sec. 3.2 and Sec. 5 state BN is applied to x=Wu immediately before the nonlinearity,
+    and Sec. 4.1 studies 'inputs to the sigmoid'; however Sec. 4.1 itself only cross-references
+    Sec. 3.1, which does not fix the placement.
+  sensitivity: high
+- id: bn_on_output_layer
+  question: Is BN applied only to the three hidden layers or also before the final
+    10-way softmax layer?
+  config_key: bn_layers
+  options:
+  - hidden_only
+  - hidden_and_output
+  default: hidden_only
+  source: paper_text
+  reason: 'Sec. 4.1: ''We added Batch Normalization to each hidden layer of the network''.'
+  sensitivity: medium
+- id: bias_handling_bn
+  question: Are biases removed from layers followed by BN in the MNIST network?
+  config_key: use_bias_with_bn
+  options:
+  - remove_bias
+  - keep_bias
+  default: remove_bias
+  source: paper_text
+  reason: Sec. 3.2 states the bias can be ignored since its role is subsumed by beta
+    (z=g(BN(Wu))); Sec. 4.1 describes the layer as y=g(Wu+b) and does not restate
+    the bias removal for the BN variant.
+  sensitivity: low
+- id: gamma_beta_init
+  question: Initialization of BN scale/shift parameters?
+  config_key: bn_affine_init
+  options:
+  - gamma=1,beta=0
+  - gamma~N(1,eps),beta=0
+  - learned_from_data_stats
+  default: gamma=1,beta=0
+  source: conventions_kb
+  reason: Not stated in the paper; Alg. 1 only says gamma, beta are learned.
+  sensitivity: low
+- id: num_seeds
+  question: How many random seeds/runs per configuration, and is the plotted curve
+    a single run or an average?
+  config_key: n_seeds
+  options:
+  - '1'
+  - '3'
+  - '5'
+  default: '3'
+  source: guess
+  reason: Fig. 1(a) shows a single curve per configuration with no seed count or error
+    bars; multiple seeds are needed to judge the BN-vs-baseline gap against plot-reading
+    uncertainty.
+  sensitivity: medium
+- id: eval_interval
+  question: At what step interval is test accuracy evaluated for the curve?
+  config_key: eval_every_steps
+  options:
+  - '100'
+  - '500'
+  - '1000'
+  default: '500'
+  source: conventions_kb
+  reason: Fig. 1(a) shows a smooth curve over 50K steps but no evaluation cadence
+    is given; affects the resolution of the 'steps to reach baseline accuracy' claim.
+  sensitivity: low
+- id: accuracy_comparison_point
+  question: Which point of the accuracy curve defines 'final accuracy' for the BN-vs-baseline
+    comparison?
+  config_key: accuracy_comparison_point
+  options:
+  - final_step
+  - max_over_training
+  - mean_of_last_k_evals
+  default: final_step
+  source: guess
+  reason: The paper only compares curves visually ('enjoys the higher test accuracy')
+    and prints no number; whether the comparison is at step 50,000, at the maximum,
+    or averaged over late evaluations is unspecified.
+  sensitivity: medium
+- id: tracked_activation_choice
+  question: Which sigmoid input is tracked for the Fig. 1(b,c) percentile plots?
+  config_key: tracked_unit
+  options:
+  - random_unit_last_hidden_layer
+  - fixed_index_unit_last_hidden_layer
+  - mean_over_units
+  default: random_unit_last_hidden_layer
+  source: paper_text
+  reason: Sec. 4.1 says 'one typical activation from the last hidden layer of each
+    network'; the specific unit index is unspecified.
+  sensitivity: low
+- id: activation_drift_metric
+  question: How is 'distribution stability' of the tracked sigmoid input quantified
+    for the mnist_bn_activation_stability claim?
+  config_key: drift_statistic
+  options:
+  - std_over_training_of_percentiles
+  - range_of_percentiles_over_training
+  - mean_abs_change_between_consecutive_evals
+  default: std_over_training_of_percentiles
+  source: guess
+  reason: Fig. 1(b,c) is purely visual; the paper defines no numeric drift statistic,
+    and the {15,50,85} percentiles must also be computed on some fixed data sample
+    (train batch vs test set) that the paper does not specify.
+  sensitivity: medium
+- id: percentile_data_source
+  question: Over which data are the {15,50,85}th percentiles of the sigmoid input
+    computed?
+  config_key: percentile_data
+  options:
+  - current_training_minibatch
+  - fixed_held_out_sample
+  - full_test_set
+  default: current_training_minibatch
+  source: guess
+  reason: Sec. 4.1/Fig. 1 say only that the distribution of one activation is shown
+    'over the course of training'; the evaluation set for the percentiles is never
+    stated.
+  sensitivity: low
+descriptive_stats:
+- metric: n_train_examples
+  value: 60000.0
+  where: Standard MNIST train split (dataset convention; not stated in the paper,
+    which only cites LeCun et al., 1998a)
+- metric: n_test_examples
+  value: 10000.0
+  where: Standard MNIST test split, used as the 'held-out test data' in Fig. 1(a)
+    (size not stated in the paper)
+- metric: input_dimension
+  value: 784.0
+  where: 'Derived from Sec. 4.1, page 6: ''28x28 binary image as input'''
+- metric: n_hidden_layers
+  value: 3.0
+  where: 'Sec. 4.1, page 6: ''3 fully-connected hidden layers'''
+- metric: units_per_hidden_layer
+  value: 100.0
+  where: 'Sec. 4.1, page 6: ''100 activations each'''
+- metric: n_output_classes
+  value: 10.0
+  where: 'Sec. 4.1, page 6: ''fully-connected layer with 10 activations (one per class)'''
+- metric: training_steps
+  value: 50000.0
+  where: 'Sec. 4.1, page 6: ''We trained the network for 50000 steps'''
+- metric: batch_size
+  value: 60.0
+  where: 'Sec. 4.1, page 6: ''60 examples per mini-batch'''
+- metric: bn_extra_params_per_activation
+  value: 2.0
+  where: 'Sec. 5, page 8: ''Batch Normalization adds only two extra parameters per
+    activation'''
+- metric: out_of_scope_inception_steps_to_72.2pct
+  value: 31000000.0
+  where: 'Figure 3 (table), page 7: Inception, 31.0e6 steps to 72.2% - ImageNet experiment,
+    not replicated by this spec'
+- metric: out_of_scope_bn_x5_steps_to_72.2pct
+  value: 2100000.0
+  where: 'Figure 3 (table), page 7: BN-x5, 2.1e6 steps to 72.2% (basis of the Abstract''s
+    ''14 times fewer training steps'') - ImageNet, not replicated'
+- metric: out_of_scope_ensemble_top5_val_error_percent
+  value: 4.9
+  where: 'Figure 4 (table), page 8: BN-Inception ensemble top-5 error on the 50,000-image
+    validation set = 4.9%; Sec. 4.2.3 reports 4.82% test error (Abstract rounds this
+    to 4.8%) - ImageNet, not replicated'
+plan:
+  data_tier: A
+  compute_tier: 2
+  kind_of_test: re_implementation
+  target_claims:
+  - mnist_bn_gt_nobn_final
+  - mnist_bn_faster_to_baseline_acc
+  - mnist_bn_activation_stability
+  substitutions: {}
+  tolerances:
+    mnist_bn_final_acc: 0.0178
+    mnist_nobn_final_acc: 0.0184117444218464
+    mnist_bn_acc_at_10k: 0.023411744421846396
+  success_criteria: 'Section 4.1 Figure 1 exactly: 3x100 sigmoid MLP on MNIST, 50k
+    steps, with/without BN. || Match on every headline claim within its derived tolerance;
+    all leakage tests pass; kind of test = re_implementation; data tier A; compute
+    tier 2. Tier B: same sign, significant, gap inside the substitution''s predicted
+    band.'
+  budget:
+    spec: 10
+    setup: 20
+    build: 40
+    run: 20
+    verify: 15
+    report: 5
+    hard_kill_minutes: 240
+    max_cost_usd: 150.0
+    run_timeout_s: 2700
+  seeds:
+  - 0
+  - 1
+  - 2
+  frozen_hash: b35bdd058933e15aaa320013c4cc6c6d8f882d9900acedea9f0d8f5845c9de3f
+  frozen_at: '2026-09-17T19:39:00.725811+00:00'

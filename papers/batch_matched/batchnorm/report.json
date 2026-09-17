@@ -1,0 +1,258 @@
+{
+  "paper_title": "Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift",
+  "track": "cs",
+  "family": "train_and_eval",
+  "kind_of_test": "re_implementation",
+  "data_tier": "A",
+  "compute_tier": 2,
+  "deviations": [
+    "tolerance for mnist_bn_gt_nobn_final filled from our own SE (0.000318) at verify time, not frozen",
+    "tolerance for mnist_bn_faster_to_baseline_acc filled from our own SE (601) at verify time, not frozen",
+    "tolerance for mnist_bn_activation_stability filled from our own SE (0.0743) at verify time, not frozen",
+    "Table-1 checkpoint (gate): n_train_examples paper=60000.0 ours=None gap=None; n_test_examples paper=10000.0 ours=None gap=None; input_dimension paper=784.0 ours=None gap=None; n_hidden_layers paper=3.0 ours=None gap=None; units_per_hidden_layer paper=100.0 ours=None gap=None; n_output_classes paper=10.0 ours=None gap=None; training_steps paper=50000.0 ours=None gap=None; batch_size paper=60.0 ours=None gap=None; bn_extra_params_per_activation paper=2.0 ours=None gap=None; out_of_scope_inception_steps_to_72.2pct paper=31000000.0 ours=None gap=None; out_of_scope_bn_x5_steps_to_72.2pct paper=2100000.0 ours=None gap=None; out_of_scope_ensemble_top5_val_error_percent paper=4.9 ours=None gap=None"
+  ],
+  "claims": [
+    {
+      "claim_id": "mnist_bn_gt_nobn_final",
+      "paper_value": 0.0,
+      "our_value": 0.00883333333333336,
+      "our_std": 0.0005507570547286503,
+      "tolerance": 0.0006359594676113435,
+      "outcome": "Match",
+      "note": "directional claim (gt 0): ours=0.008833"
+    },
+    {
+      "claim_id": "mnist_bn_final_acc",
+      "paper_value": 0.98,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "mnist_nobn_final_acc",
+      "paper_value": 0.97,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "mnist_bn_acc_at_10k",
+      "paper_value": 0.97,
+      "our_value": null,
+      "our_std": null,
+      "tolerance": null,
+      "outcome": "Untested",
+      "note": "not targeted in plan"
+    },
+    {
+      "claim_id": "mnist_bn_faster_to_baseline_acc",
+      "paper_value": 50000.0,
+      "our_value": 10833.333333333334,
+      "our_std": 1040.8329997330663,
+      "tolerance": 1201.850425154663,
+      "outcome": "Match",
+      "note": "directional claim (lt 5e+04): ours=1.083e+04"
+    },
+    {
+      "claim_id": "mnist_bn_activation_stability",
+      "paper_value": 0.0,
+      "our_value": 0.26366324180497225,
+      "our_std": 0.12862439868338435,
+      "tolerance": 0.14852266240841142,
+      "outcome": "Match",
+      "note": "directional claim (gt 0): ours=0.2637"
+    }
+  ],
+  "leakage": [
+    {
+      "test": "shuffle",
+      "passed": true,
+      "detail": "shuffled accuracy_gap=-0.0177 (t=None), unshuffled=0.008833, null reference=0"
+    },
+    {
+      "test": "contamination_scan",
+      "passed": null,
+      "detail": "not implemented in MVP: hash-based train/test near-duplicate scan"
+    }
+  ],
+  "grid": [],
+  "grid_range": null,
+  "unexplained": [],
+  "ambiguities_used": [
+    {
+      "config_key": "lr_schedule",
+      "default": "constant",
+      "source": "conventions_kb",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "learning_rate",
+      "default": "0.1",
+      "source": "guess",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "lr_bn_vs_baseline",
+      "default": "same_lr_both",
+      "source": "paper_text",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "augmentation",
+      "default": "none",
+      "source": "paper_text",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "batch_vs_steps",
+      "default": "steps",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "batch_sampling",
+      "default": "shuffle_each_epoch",
+      "source": "conventions_kb",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "mixed_precision",
+      "default": "fp32",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "split",
+      "default": "test",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "optimizer",
+      "default": "sgd",
+      "source": "conventions_kb",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "input_binarization",
+      "default": "threshold_0.5",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "init_std",
+      "default": "0.05",
+      "source": "guess",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "bn_eps",
+      "default": "1e-5",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "bn_inference_stats",
+      "default": "moving_average",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "bn_placement",
+      "default": "before_sigmoid_on_Wu",
+      "source": "paper_text",
+      "sensitivity": "high"
+    },
+    {
+      "config_key": "bn_layers",
+      "default": "hidden_only",
+      "source": "paper_text",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "use_bias_with_bn",
+      "default": "remove_bias",
+      "source": "paper_text",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "bn_affine_init",
+      "default": "gamma=1,beta=0",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "n_seeds",
+      "default": "3",
+      "source": "guess",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "eval_every_steps",
+      "default": "500",
+      "source": "conventions_kb",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "accuracy_comparison_point",
+      "default": "final_step",
+      "source": "guess",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "tracked_unit",
+      "default": "random_unit_last_hidden_layer",
+      "source": "paper_text",
+      "sensitivity": "low"
+    },
+    {
+      "config_key": "drift_statistic",
+      "default": "std_over_training_of_percentiles",
+      "source": "guess",
+      "sensitivity": "medium"
+    },
+    {
+      "config_key": "percentile_data",
+      "default": "current_training_minibatch",
+      "source": "guess",
+      "sensitivity": "low"
+    }
+  ],
+  "grade": {
+    "data_fidelity": "tier A checkpoint",
+    "procedure_fidelity": "re-implemented, 0 unexplained",
+    "result": "all headline Match",
+    "integrity": "passed",
+    "letter": "A"
+  },
+  "reproducibility": {
+    "agent_version": "0.1.0",
+    "spec_frozen_hash": "b35bdd058933e15aaa320013c4cc6c6d8f882d9900acedea9f0d8f5845c9de3f",
+    "frozen_at": "2026-09-17T19:39:00.725811+00:00",
+    "env_lock_hash": "b4796a207a0b6fde",
+    "runs": [
+      "full_bn_minus_baseline_s0_ef9efd2f1f55d18f.json",
+      "full_bn_minus_baseline_s1_ef9efd2f1f55d18f.json",
+      "full_bn_minus_baseline_s2_ef9efd2f1f55d18f.json",
+      "full_with_bn_s0_be84ce3fb877d399.json",
+      "full_with_bn_s1_be84ce3fb877d399.json",
+      "full_with_bn_s2_be84ce3fb877d399.json"
+    ],
+    "work_dir": "/Users/vzhu/Developer/research-copy/runs/batch_matched/batchnorm/work",
+    "command": "-c"
+  },
+  "human_minutes": 0.0,
+  "wall_minutes": 10.080200334390005,
+  "cost_usd": 1.277403,
+  "stages_completed": [
+    "setup",
+    "build",
+    "run",
+    "verify"
+  ],
+  "failure": null
+}
