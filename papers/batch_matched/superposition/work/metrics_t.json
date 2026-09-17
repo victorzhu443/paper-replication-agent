@@ -1,0 +1,79 @@
+{
+ "seed": 0,
+ "split": "test",
+ "n_examples": 18432000,
+ "scale": 0.3,
+ "shuffled": false,
+ "matched_scale": false,
+ "metrics": {
+  "dimensions_per_feature": 0.9976165294647217,
+  "dimensions_per_feature_sticky_half": 0.9976165294647217,
+  "dimensions_per_feature_dense_end": 1.0005799531936646,
+  "dimensions_per_feature_random_init_baseline": 2.958223377778229,
+  "adversarial_vulnerability_ratio": 2.086732864379883,
+  "feature_dimensionality": 0.5,
+  "chance_level": 2.958223377778229,
+  "feature_dimensionality_digon": 0.5,
+  "feature_dimensionality_triangle": 0.6666665077209473,
+  "feature_dimensionality_pentagon": 0.3999224901199341,
+  "feature_dimensionality_tetrahedron": 0.7329347133636475,
+  "feature_dimensionality_square_antiprism": 0.3725355267524719,
+  "_intermediates": {
+   "scale": {
+    "n": 400,
+    "m": 30,
+    "training_steps": 3000,
+    "batch_size": 1024,
+    "sparsity_grid_points": 6,
+    "restarts_dstar": 1,
+    "geometry_steps": 1200,
+    "geometry_restarts": 2,
+    "note": "paper n=400,m=30 uniform ReLU-output model; restarts reduced to 1 for the D* sweep (paper states none), geometry fits reduced"
+   },
+   "dstar_curve": [
+    [
+     1.0,
+     1.0005799531936646
+    ],
+    [
+     1.5848931924611136,
+     0.9976165294647217
+    ],
+    [
+     2.51188643150958,
+     0.575265645980835
+    ],
+    [
+     3.981071705534973,
+     0.4547711908817291
+    ],
+    [
+     6.309573444801933,
+     0.3195202350616455
+    ],
+    [
+     10.0,
+     0.2244757115840912
+    ]
+   ],
+   "sweep_loss": [
+    34.65810012817383,
+    41.7564697265625,
+    33.69001007080078,
+    23.837467193603516,
+    16.048297882080078,
+    10.210641860961914
+   ],
+   "adv_ratio_curve": [
+    0.9996305704116821,
+    0.9395051598548889,
+    1.4838719367980957,
+    1.617846965789795,
+    1.880397915840149,
+    2.086732864379883
+   ],
+   "sticky_cluster_size": 1,
+   "wall_s": 63.74977993965149
+  }
+ }
+}

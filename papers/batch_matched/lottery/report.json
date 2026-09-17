@@ -1,0 +1,38 @@
+{
+  "paper_title": "The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks",
+  "track": "cs",
+  "family": "train_and_eval",
+  "kind_of_test": "re_implementation",
+  "data_tier": "A",
+  "compute_tier": 2,
+  "deviations": [],
+  "claims": [],
+  "leakage": [],
+  "grid": [],
+  "grid_range": null,
+  "unexplained": [],
+  "ambiguities_used": [],
+  "grade": {
+    "data_fidelity": "tier A checkpoint",
+    "procedure_fidelity": "re-implemented, 0 unexplained",
+    "result": "no claims",
+    "integrity": "not_run",
+    "letter": "F"
+  },
+  "reproducibility": {
+    "agent_version": "0.1.0",
+    "spec_frozen_hash": "f66481c9ab4587999adb710345756cfe703168ebdfaee1f331e01594dfd2693e",
+    "frozen_at": "2026-09-16T23:26:32.068740+00:00",
+    "env_lock_hash": "b4796a207a0b6fde",
+    "runs": [],
+    "work_dir": "/Users/vzhu/Developer/research-copy/runs/batch_matched/lottery/work",
+    "command": "-c"
+  },
+  "human_minutes": 0.0,
+  "wall_minutes": 16.95523403485616,
+  "cost_usd": 2.887978,
+  "stages_completed": [
+    "setup"
+  ],
+  "failure": "RemoteProtocolError: peer closed connection without sending complete message body (incomplete chunked read)"
+}

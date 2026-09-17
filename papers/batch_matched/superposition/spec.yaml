@@ -1,0 +1,1159 @@
+paper:
+  title: Toy Models of Superposition
+  authors:
+  - Nelson Elhage
+  - Tristan Hume
+  - Catherine Olsson
+  - Nicholas Schiefer
+  - Tom Henighan
+  - Shauna Kravec
+  - Zac Hatfield-Dodds
+  - Robert Lasenby
+  - Dawn Drain
+  - Carol Chen
+  - Roger Grosse
+  - Sam McCandlish
+  - Jared Kaplan
+  - Dario Amodei
+  - Martin Wattenberg
+  - Christopher Olah
+  year: 2022
+  arxiv_id: null
+  version: Transformer Circuits Thread, Sept 14 2022
+  track: cs
+  family: train_and_eval
+claims:
+- id: c_dstar_sticky_half
+  where: The Geometry of Superposition / Uniform Superposition, dimensions-per-feature
+    plot (D* = m/||W||_F^2 vs 1/(1-S)); text states the curve is 'sticky' at 1 and
+    1/2, with the plateau marked by a dotted line at exactly 1/2
+  evidence_page: 17
+  metric: dimensions_per_feature
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.5
+  reported_precision: 0.0
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: relu_output_uniform
+  priority: headline
+  relation: eq
+- id: c_dstar_dense_one
+  where: The Geometry of Superposition / Uniform Superposition, dimensions-per-feature
+    plot, dense end (1/(1-S) near 1); dotted 'sticky' line at exactly 1
+  evidence_page: 17
+  metric: dimensions_per_feature
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 1.0
+  reported_precision: 0.0
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: relu_output_uniform
+  priority: headline
+  relation: eq
+- id: c_adversarial_vulnerability_3x
+  where: 'Relationship to Adversarial Robustness, text: ''vulnerability to adversarial
+    examples sharply increases as superposition forms (increasing by >3x)''. NOTE:
+    this is a stated LOWER BOUND on the increase, not a point estimate; the accompanying
+    figure y-axis runs to ~8x at the sparsest end, so a reproduction should check
+    ratio > 3, not ratio == 3.'
+  evidence_page: 29
+  metric: adversarial_vulnerability_ratio
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 3.0
+  reported_precision: 0.0
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: adversarial_eval_uniform
+  priority: secondary
+  relation: eq
+- id: c_dim_tetrahedron
+  where: Why These Geometric Structures? (feature dimensionality scatter/line figure),
+    line labelled exactly 3/4 (tetrahedron, 4 feats in 3 dims)
+  evidence_page: 19
+  metric: feature_dimensionality
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.75
+  reported_precision: 0.0
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: relu_output_uniform
+  priority: secondary
+  relation: eq
+- id: c_dim_triangle
+  where: Why These Geometric Structures? (feature dimensionality figure), line labelled
+    exactly 2/3 (triangle, 3 feats in 2 dims)
+  evidence_page: 19
+  metric: feature_dimensionality
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.6666666666666666
+  reported_precision: 0.0
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: relu_output_uniform
+  priority: secondary
+  relation: eq
+- id: c_dim_digon
+  where: Why These Geometric Structures? (feature dimensionality figure), line labelled
+    exactly 1/2 (digon / antipodal pair, 2 feats in 1 dim)
+  evidence_page: 19
+  metric: feature_dimensionality
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.5
+  reported_precision: 0.0
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: relu_output_uniform
+  priority: secondary
+  relation: eq
+- id: c_dim_pentagon
+  where: Why These Geometric Structures? (feature dimensionality figure), line labelled
+    exactly 2/5 (pentagon, 5 feats in 2 dims)
+  evidence_page: 19
+  metric: feature_dimensionality
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.4
+  reported_precision: 0.0
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: relu_output_uniform
+  priority: secondary
+  relation: eq
+- id: c_dim_square_antiprism
+  where: Why These Geometric Structures? (feature dimensionality figure), line labelled
+    exactly 3/8 (square antiprism, 8 feats in 3 dims)
+  evidence_page: 19
+  metric: feature_dimensionality
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.375
+  reported_precision: 0.0
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: relu_output_uniform
+  priority: secondary
+  relation: eq
+- id: c_dim_antipodal_formula
+  where: 'Feature Dimensionality section text: ''each feature participating in an
+    antipodal pair will have a dimensionality of D = 1/(1+1) = 1/2'' (analytic, not
+    a fitted number)'
+  evidence_page: 18
+  metric: feature_dimensionality
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.5
+  reported_precision: 0.0
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: relu_output_uniform
+  priority: descriptive
+  relation: eq
+- id: c_pentagon_digon_threshold
+  where: 'Perturbing a Single Feature, Digon (Square) Solutions caption: ''When the
+    sparsity of the varied point falls below a certain critical threshold (~2.5x less
+    than others) the pentagon solution changes to two digons''. Value is the stated
+    factor 2.5 expressed as ''x less dense than the other features''; on the figure''s
+    Relative Feature Density (1-S) axis (0.1x to 10x) this corresponds to a relative
+    density of about 1/2.5 = 0.4x (see ambiguity amb_pentagon_threshold_direction).'
+  evidence_page: 22
+  metric: relative_feature_density_phase_threshold
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 2.5
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: nonuniform_pentagon_n5m2
+  priority: secondary
+  relation: eq
+- id: c_adv_train_norm_to_kill_superposition
+  where: 'Relationship to Adversarial Robustness (adversarial TRAINING paragraph),
+    text: ''attacks had to be made unreasonably large (80% input L2 norm) to fully
+    eliminate it'' — note this is the adversarial-training experiment, not the 0.1-norm
+    evaluation attack'
+  evidence_page: 30
+  metric: attack_l2_norm_fraction_of_input
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.8
+  reported_precision: 0.005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: adversarial_training_uniform
+  priority: secondary
+  relation: eq
+- id: c_relu_hidden_all_monosemantic_boundary
+  where: Visualizing Superposition in Terms of Neurons (figure), regime label 'All
+    Monosemantic Neurons (approximately 0.5 <= 1-S)'
+  evidence_page: 33
+  metric: feature_density_regime_boundary
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.5
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: relu_hidden_n10m5
+  priority: secondary
+  relation: eq
+- id: c_relu_hidden_3feat_2neuron_low
+  where: Visualizing Superposition in Terms of Neurons (figure), regime label 'Three
+    Features in Two Neurons (approximately 0.2 <= 1-S <= 0.5)' — lower bound of the
+    stated range
+  evidence_page: 33
+  metric: feature_density_regime_boundary
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.2
+  reported_precision: 0.05
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: relu_hidden_n10m5
+  priority: secondary
+  relation: eq
+- id: c_relu_hidden_5feat_3neuron
+  where: Visualizing Superposition in Terms of Neurons (figure), regime label 'Five
+    Features in Three Neurons (1-S = 0.15)'
+  evidence_page: 33
+  metric: feature_density_regime_point
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.15
+  reported_precision: 0.005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: relu_hidden_n10m5
+  priority: secondary
+  relation: eq
+- id: c_relu_hidden_6feat_4neuron
+  where: Visualizing Superposition in Terms of Neurons (figure), regime label 'Six
+    Features in Four Neurons (1-S = 0.12)'
+  evidence_page: 33
+  metric: feature_density_regime_point
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.12
+  reported_precision: 0.005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: relu_hidden_n10m5
+  priority: secondary
+  relation: eq
+- id: c_relu_hidden_8feat_5neuron_low
+  where: Visualizing Superposition in Terms of Neurons (figure), regime label 'Eight
+    Features in Five Neurons (0.05 <= 1-S <= 0.08)' — lower bound of the stated range
+  evidence_page: 33
+  metric: feature_density_regime_boundary
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.05
+  reported_precision: 0.005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: relu_hidden_n10m5
+  priority: secondary
+  relation: eq
+- id: c_relu_hidden_feature_pairs
+  where: Visualizing Superposition in Terms of Neurons (figure), regime label 'Features
+    are Pairs of Neurons (1-S <= 0.04)'
+  evidence_page: 33
+  metric: feature_density_regime_boundary
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.04
+  reported_precision: 0.005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: relu_hidden_n10m5
+  priority: secondary
+  relation: eq
+- id: c_corr_no_features_collapsed
+  where: 'Collapsing of Correlated Features figure, panel label ''No Features Collapsed:
+    Approximately 1-S <= 0.05'''
+  evidence_page: 25
+  metric: feature_density_regime_boundary
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.05
+  reported_precision: 0.005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: correlated_n6m2_collapse
+  priority: secondary
+  relation: eq
+- id: c_corr_all_sets_collapsed_low
+  where: 'Collapsing of Correlated Features figure, panel label ''All Sets of Features
+    Collapsed: Approximately 0.25 <= 1-S <= 0.5'' (lower bound)'
+  evidence_page: 25
+  metric: feature_density_regime_boundary
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.25
+  reported_precision: 0.005
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: correlated_n6m2_collapse
+  priority: secondary
+  relation: eq
+- id: c_energy_level_jump_peak
+  where: 'Phenomenon 1: Discrete ''Energy Level'' Jumps, Feature Dimensionality vs
+    training-step plot; dotted line labelled exactly 1/sqrt(2) which one feature transiently
+    reaches (the other dotted line is at 1/2)'
+  evidence_page: 27
+  metric: feature_dimensionality
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.7071067811865476
+  reported_precision: 0.0
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: learning_dynamics_uniform
+  priority: secondary
+  relation: eq
+- id: c_confused_feature_weight
+  where: 'Comments & Replications (Tom McGrath, external replication — NOT an original-author
+    result), Figure 1c discussion: novel ''confused feature'' phase where W1 ~= W2
+    ~= 1/sqrt(2) in the closed-form (bias-free) analysis of the n=2, m=1 ReLU output
+    model; Figure 1c parameters S = 0.1, I_2 = 0.8'
+  evidence_page: 52
+  metric: weight_magnitude
+  units:
+    period: none
+    annualized: false
+    scale: decimal
+  value: 0.7071067811865476
+  reported_precision: 0.0
+  n_periods: null
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: mcgrath_closed_form_n2m1
+  priority: secondary
+  relation: eq
+data:
+  sources:
+  - canonical: synthetic
+    description: Synthetic sparse feature vectors x in R^n. Each coordinate x_i is
+      0 with probability S_i and otherwise uniform on [0,1] (footnote 8 notes this
+      uniform choice is arbitrary). For the absolute-value computation task the non-zero
+      value is instead uniform on [-1,1] and the target is y = abs(x). All experiments
+      use the same sparsity for all features, S_i = S. Correlated feature sets share
+      a single zero/non-zero draw (non-zero magnitudes independent); anticorrelated
+      feature sets are entirely zero with probability S and otherwise exactly one
+      randomly chosen member is uniform on [0,1] with the rest zero.
+    substitute: synthetic_by_construction
+  universe:
+    features_n: 'n varies by experiment: 2, 3, 4, 5, 6, 8, 10, 20, 80, 100, 400'
+    hidden_m: 'm varies by experiment: 1, 2, 3, 5, 6, 10, 20, 30, 40'
+    importance_curve: I_i = r^i with r in {0.7 (n=20,m=5), 0.75 (ReLU hidden n=10,m=5),
+      0.8 (abs value n=100,m=40), 0.9 (n=80,m=20)}; I_i = 1 (uniform) for the uniform-superposition
+      geometry and the n=5,m=2 perturbation experiment; for the phase diagrams the
+      first feature has importance 1.0 and the 'extra' feature's relative importance
+      is swept 0.1x to 10x
+    sparsity_grid: 1-S in {1.0, 0.3, 0.1, 0.03, 0.01, 0.003, 0.001} for the basic-results
+      and abs-value sweeps; 1/(1-S) log-spaced from 1 to ~10 for the D*, feature-dimensionality
+      and adversarial curves; feature density (1-S) from 1.0 down to 0.01 on the phase-diagram
+      y-axis (paper text on p.14 says 'sparsity ... from 1.0 to 0.01' but the figure
+      axis is labelled Feature Density (1-S))
+    target: identity (x' reconstructing x; footnote 5 calls this an autoencoder) for
+      the linear / ReLU-output / ReLU-hidden models; y = abs(x) for the computation-in-superposition
+      model
+  frequency: not_applicable_synthetic_iid_samples
+  preprocessing:
+    normalization: none; raw sampled feature vectors are the model input
+    loss_weighting: weighted MSE L = sum_x sum_i I_i (x_i - x'_i)^2 (importance is
+      a scalar multiplier on MSE, footnote 1)
+    canonicalization_for_plots: for m=2 experiments solutions are rotated and flipped
+      to a consistent orientation; for the abs-value model each hidden unit is rescaled
+      (row of W1 by alpha, column of W2 by 1/alpha) so the largest-magnitude W1 weight
+      into that neuron has magnitude 1 (footnote 15); neuron order in the ReLU-hidden
+      stack plots was chosen by hand, and in the abs-value stack plots sorted by importance
+      of the largest feature
+  splits:
+    train: i.i.d. samples drawn from the synthetic distribution during training (no
+      fixed finite train set stated; batch size and sampling cadence are not stated)
+    eval: fresh samples from the same distribution; the paper defines no held-out
+      validation/test split (most reported metrics are pure functions of the learned
+      weights, plus loss on the same distribution)
+    model_selection: 'stated only for some experiments: n=2,m=1 phase diagram trains
+      ten models per grid point, discards the highest-loss one and averages the rest
+      (p.14); the n=10,m=5 ReLU hidden model trains 1000 models per sparsity and shows
+      the lowest-loss one (p.32); m=2 geometry experiments fit each model ''multiple
+      times'' and keep the lowest loss (p.23). No restart/selection rule is stated
+      for the n=400,m=30 D* sweep, the n=20/n=80 basic-results sweeps, the abs-value
+      sweeps, or the n=3,m=2 phase diagram.'
+method:
+  signal: Train small linear / ReLU toy models (autoencoder-style reconstruction,
+    and an abs-value computation task) on synthetic sparse features of varying importance,
+    then measure how many features are represented and how they are geometrically
+    arranged (superposition).
+  model:
+    linear_model: h = Wx; x' = W^T h + b  (equivalently x' = W^T W x + b)
+    relu_output_model: h = Wx; x' = ReLU(W^T h + b) = ReLU(W^T W x + b) (tied weights,
+      learned output bias). Note p.14 writes the same model as ReLU(W^T W x - b);
+      since b is learned and unconstrained the two differ only in the sign convention
+      of the learned parameter (see amb_bias_sign).
+    relu_hidden_layer_model: h = ReLU(Wx); x' = ReLU(W^T h + b) (tied weights, privileged
+      basis, no hidden-layer bias — p.34 notes that if a hidden bias were given the
+      model would set it positive and linearize the neurons)
+    abs_value_model: h = ReLU(W1 x); y' = ReLU(W2 h + b), weights untied, target y
+      = abs(x), x_i uniform on [-1,1] when active
+    loss: importance-weighted mean squared error, L = sum_x sum_i I_i (x_i - x'_i)^2
+      (same form for the abs-value model)
+    regularization_variant: optional L1 penalty lambda*||h||_1 on hidden activations
+      as a way to remove superposition (p.42; discussed qualitatively, lambda never
+      specified, no quantitative claim)
+  evaluation:
+  - dimensions per feature D* = m / ||W||_F^2 as a function of 1/(1-S)
+  - per-feature dimensionality D_i = ||W_i||^2 / sum_j (W_i_hat . W_j)^2
+  - per-feature superposition score sum_{j != i} (W_i_hat . W_j)^2 together with the
+    norm ||W_i||
+  - visual inspection of W^T W, W, neuron stacked bar plots, and feature geometry
+    graphs (nodes = features, edge weights = |dot product| of feature embeddings)
+  - 'phase classification of the ''extra'' feature: not represented / dedicated dimension
+    / in superposition, empirical diagram vs closed-form theoretical prediction'
+  - adversarial vulnerability ratio (L' - L)/(L'_0 - L_0) under analytic optimal L2
+    attacks, compared against features per dimension 1/D* = ||W||_F^2/m
+  - training-time trajectories of per-feature dimensionality and of the loss (log
+    step axis)
+  eval_protocol:
+    adversarial_attack: analytic per-feature optimal L2 attack lambda (W^T W)_i /
+      ||(W^T W)_i||_2; the attack that most harms performance is taken; max L2 attack
+      norm = 0.1 of the average input norm. (Gradient-descent attacks were tried first
+      but failed due to gradient masking in very sparse regimes.)
+    adversarial_training: 'separate brief experiment: analytic optimal attack against
+      a RANDOM feature during training; superposition only fully eliminated at attack
+      norms of 80% of the input L2 norm'
+    phase_diagram_protocol: 'n=2,m=1: first feature importance 1.0, extra-feature
+      relative importance swept 0.1x to 10x, feature density (1-S) swept 1.0 down
+      to 0.01; train ten models per grid point, discard the highest-loss model, average
+      the rest. n=3,m=2: same axes and the ''extra feature'' is the third; restart/averaging
+      count NOT stated in the paper.'
+    phase_classification: empirical phase diagrams are colored jointly by ||W_i||
+      and by the superposition score sum_j (W_i_hat . W_j)^2 (0 to >=1); no numeric
+      decision thresholds for 'not represented / dedicated / superposition' are given
+      (see amb_phase_classification_thresholds)
+    restart_selection: 'm=2 geometry experiments and the n=10,m=5 ReLU hidden layer
+      model: fit each configuration many times and report the lowest-loss solution
+      (explicitly 1000 fits for the ReLU hidden model, ''multiple times'' for m=2)'
+    metric_basis_independence: '||W||_F^2 and D_i are basis independent, so they remain
+      valid in the dense / non-privileged regime (p.17)'
+  variants:
+    relu_output_uniform:
+      n,m: 400, 30
+      importance: I_i = 1 (uniform)
+      model: ReLU output, tied weights, learned bias
+      sweep: 1/(1-S) log-spaced from 1 to ~10
+      restarts: not stated in the paper
+    relu_output_small:
+      n,m: 20, 5
+      importance: I_i = 0.7^i
+      sweep: 1-S in {1.0, 0.3, 0.1, 0.03, 0.01, 0.003, 0.001}
+    relu_output_large:
+      n,m: 80, 20
+      importance: I_i = 0.9^i
+      sweep: 1-S in {1.0, 0.3, 0.1, 0.03, 0.01, 0.003, 0.001}
+    linear_output:
+      model: linear model x' = W^T W x + b (no output ReLU)
+      n,m: 20, 5 (p.11 figure) and 80, 20 (p.12 figure), matching the paired ReLU-output
+        sweeps
+      sparsity: 'shown at 1-S = 0.001 but labelled ''(or any)'': if optimized well
+        enough the solution does not depend on sparsity'
+      expectation: learns the top-m most important features orthogonally (PCA-like)
+    phase_diagram_n2m1:
+      n,m: 2, 1
+      model: ReLU output model, written on p.14 as ReLU(W^T W x - b)
+      importances: first feature 1.0; extra feature relative importance swept 0.1x
+        to 10x
+      sparsity: feature density (1-S) from 1.0 down to 0.01
+      restarts: 10 models per grid point, drop the highest-loss one, average the rest
+      theory_solutions: closed-form losses for W = [1,0] (extra feature not represented),
+        W = [0,1] (dedicated dimension, other feature dropped), W = [1,-1] (antipodal
+        superposition)
+    phase_diagram_n3m2:
+      n,m: 3, 2
+      importances: extra (third) feature relative importance swept 0.1x to 10x; feature
+        density 1.0 to 0.01
+      theory_solutions: 'four solutions: W perp [0,0,1], W perp [1,0,0], W perp [0,1,1],
+        W perp [1,1,0]; the joint-superposition solution W perp [1,1,1] is explicitly
+        NOT considered'
+      restarts: not stated in the paper (the 'ten models, drop worst' protocol is
+        stated only for the n=2,m=1 experiment) — see amb_n3m2_restarts
+    mcgrath_closed_form_n2m1:
+      provenance: external replication comment by Tom McGrath (DeepMind), not an original-author
+        experiment
+      method: exact closed-form expected loss for the n=2, m=1 ReLU output model,
+        IGNORING bias terms; ReLU handled by restricting the domain of integration;
+        loss surface plotted over (W1, W2) and minima solved for directly
+      figure_parameters: 'Figure 1a: S = 0.1, I_2 = 0.1; Figure 1b: S = 0.7, I_2 =
+        0.2; Figure 1c: S = 0.1, I_2 = 0.8 (novel ''confused feature'' phase W1 ~=
+        W2 ~= 1/sqrt(2))'
+      symmetry: solutions identified up to (W1,W2) -> (-W1,-W2)
+    nonuniform_pentagon_n5m2:
+      n,m: 5, 2
+      importance: I = 1 (uniform)
+      baseline_density: 1-S = 0.05 for all features; one feature's relative density
+        varied 0.1x to 10x
+      restarts: multiple fits per configuration, lowest-loss solution retained (count
+        not stated); sub-optimal solutions retained for the loss-curve scatter plot
+      note: pentagon solutions sit off the unit circle because ||W_i|| = 1/(1 - b_i)
+    correlated_anticorrelated_m2_small:
+      m: 2
+      configurations: (a) 2 sets of 2 correlated features (n=4); (b) 2 sets of 2 anticorrelated
+        features (n=4); (c) 3 sets of 2 correlated features (n=6)
+      display: five independently trained models shown per configuration, rotated/flipped
+        to a consistent orientation
+      sparsity_importance: not stated for these panels
+    correlated_n6m2_collapse:
+      n,m: 6, 2
+      structure: 3 sets of 2 correlated features (both zero or both non-zero; non-zero
+        values independent)
+      sweep: feature density 1-S from ~0.5 (fully PCA-like) down to <=0.05 (no collapse,
+        hexagon with correlated features side-by-side)
+    correlated_local_basis_n20m10:
+      n,m: 20, 10
+      structure: 2 sets of 10 correlated features
+      output: W^T W visualization showing local orthogonal bases within each correlated
+        set
+      sparsity_importance: not stated
+    relu_hidden_n10m5:
+      n,m: 10, 5
+      importance: I_i = 0.75^i
+      model: 'ReLU hidden layer, tied weights: h = ReLU(Wx), x'' = ReLU(W^T h + b)'
+      restarts: 1000 fits per sparsity level, lowest-loss model reported
+    relu_hidden_privileged_comparison:
+      configurations: 'p.31 figure ''A Privileged Basis Makes W Directly Interpretable'':
+        a no-superposition case, 6 features in 5 dimensions, and 8 features in 5 dimensions'
+      models_compared: linear hidden layer vs ReLU hidden layer, raw W visualized
+      sparsity_importance: not stated for this figure
+    abs_value_n100m40:
+      n,m: 100, 40
+      importance: I_i = 0.8^i
+      task: y = abs(x), x_i uniform [-1,1] when active, untied W1/W2, output bias
+        b
+      sweep: 1-S in {1.0, 0.3, 0.1, 0.03, 0.01, 0.003, 0.001}
+      note: 'footnote 16: these specific n,m values were chosen because the abs-value
+        model learns more easily with more neurons while staying small enough to visualize'
+    abs_value_n3m6:
+      n,m: 3, 6
+      expectation: two neurons per feature implementing ReLU(x_i) + ReLU(-x_i)
+      importance_sparsity: not stated for this demonstration
+      visualization_rescaling: per-hidden-unit rescaling so the largest |W1| weight
+        into the neuron is 1 (footnote 15)
+    adversarial_eval_uniform:
+      base_models: uniform ReLU output models across the sparsity sweep (same setup
+        as relu_output_uniform)
+      attack: analytic optimal per-feature L2 attack lambda (W^T W)_i/||(W^T W)_i||_2,
+        max norm 0.1 of the average input norm, worst-case over features
+      metric: (L' - L)/(L'_0 - L_0), relative to a non-superposition model; plotted
+        against 1/D* = ||W||_F^2/m
+    adversarial_training_uniform:
+      base_models: same uniform ReLU output setup, trained adversarially
+      attack_during_training: analytic optimal attack against a RANDOM feature (for
+        efficiency)
+      finding: superposition reduced; fully eliminated only at attack norm = 80% of
+        input L2 norm (qualitative, no curve reported)
+    learning_dynamics_uniform:
+      base_model: uniform ReLU output model (same setup as relu_output_uniform) in
+        a regime where all features converge into digons; the specific sparsity level
+        is not stated
+      logging: per-feature dimensionality and loss vs training step, ~1e2 to 1e5 steps
+        (log axis); loss shown in the narrow band ~0.053-0.054
+    learning_dynamics_correlated_n6m3:
+      n,m: 6, 3
+      structure: 2 sets of 3 correlated features
+      initialization: weights initialized randomly close to zero (step A)
+      logging: 3D feature-embedding trajectories and loss curve over ~1e2 to ~5e4
+        training steps (log axis), loss from ~1e0 down to ~1e-4; regimes A->B (push
+        apart one axis) -> C (expand into triangles) -> D (rotate into antiprism /
+        octahedron)
+      sparsity_importance: not stated
+baselines:
+- linear model (no output ReLU) which learns the top-m features orthogonally, i.e.
+  a PCA-like solution with D* = m/||W||_F^2 = 1 and no superposition
+- PCA / principal-component collapse solution for correlated features in the dense
+  regime ((a+b)/sqrt(2) retained, (a-b)/sqrt(2) discarded)
+- non-superposition model (dedicated dimension per feature) used as the denominator
+  (L'_0 - L_0) in the adversarial vulnerability ratio
+- closed-form 'toy model of the toy model' losses for specific weight configurations
+  (n=2,m=1 and n=3,m=2 theoretical phase diagrams)
+- compressed sensing lower bound m = Omega(k log(n/k)), with k = O((1-S)n) giving
+  m = Omega(-n(1-S)log(1-S)), as an upper bound on achievable superposition
+ambiguities:
+- id: amb_lr_schedule
+  question: What learning-rate schedule is used to train the toy models?
+  config_key: lr_schedule
+  options:
+  - constant
+  - cosine
+  - step
+  - as_paper
+  default: constant
+  source: conventions_kb
+  reason: The article never states any optimizer or schedule; a constant learning
+    rate is the convention for models this small.
+  sensitivity: medium
+- id: amb_augmentation
+  question: Is any train-time data augmentation applied?
+  config_key: augmentation
+  options:
+  - none
+  - standard
+  - as_paper
+  default: none
+  source: conventions_kb
+  reason: Data is synthetic and resampled from the generative distribution; augmentation
+    is meaningless and never mentioned.
+  sensitivity: low
+- id: amb_batch_vs_steps
+  question: When batch size differs from the (unstated) original, hold epochs or optimization
+    steps fixed?
+  config_key: batch_vs_steps
+  options:
+  - epochs
+  - steps
+  default: steps
+  source: conventions_kb
+  reason: There is no finite dataset (samples are drawn from a distribution), so only
+    a step budget is meaningful; the paper's loss curves are plotted against training
+    steps.
+  sensitivity: medium
+- id: amb_mixed_precision
+  question: Train in fp32 or mixed precision?
+  config_key: mixed_precision
+  options:
+  - fp32
+  - amp
+  default: fp32
+  source: conventions_kb
+  reason: Not stated; models are tiny and the reported geometric structures are sensitive
+    to optimization noise, so full precision is safer.
+  sensitivity: low
+- id: amb_split
+  question: Are the reported numbers computed on a validation split or on held-out
+    (test) samples?
+  config_key: split
+  options:
+  - validation
+  - test
+  default: test
+  source: conventions_kb
+  reason: No split is defined; metrics are either pure functions of the learned weights
+    (D*, D_i) or losses on fresh samples from the same distribution, which we treat
+    as test samples.
+  sensitivity: low
+- id: amb_optimizer
+  question: Which optimizer is used?
+  config_key: optimizer
+  options:
+  - adam
+  - adamw
+  - sgd
+  default: adam
+  source: conventions_kb
+  reason: The article never names an optimizer (it only refers generically to gradient
+    descent); Adam is the standard choice for such toy models.
+  sensitivity: medium
+- id: amb_learning_rate
+  question: What learning rate?
+  config_key: learning_rate
+  options:
+  - 1e-3
+  - 3e-3
+  - 1e-2
+  - 3e-4
+  default: 1e-3
+  source: conventions_kb
+  reason: Unstated anywhere in the article; 1e-3 is the standard Adam default.
+  sensitivity: medium
+- id: amb_training_steps
+  question: How many optimization steps per model?
+  config_key: training_steps
+  options:
+  - '5000'
+  - '10000'
+  - '50000'
+  - '100000'
+  default: '10000'
+  source: guess
+  reason: No step count is stated for any of the main sweeps; the only step information
+    is the learning-dynamics loss curves, which run to ~1e5 steps (p.27) and ~5e4
+    steps (p.28).
+  sensitivity: high
+- id: amb_batch_size
+  question: What batch size (number of synthetic samples per gradient step)?
+  config_key: batch_size
+  options:
+  - '512'
+  - '1024'
+  - '4096'
+  - resample_full_expectation
+  default: '1024'
+  source: guess
+  reason: Never stated; batch size controls gradient noise, which the paper says matters
+    for whether the optimal geometry is found (p.23).
+  sensitivity: medium
+- id: amb_data_resampling
+  question: Is a fresh synthetic batch drawn every step, or is a fixed dataset reused?
+  config_key: data_resampling
+  options:
+  - fresh_each_step
+  - fixed_dataset
+  default: fresh_each_step
+  source: conventions_kb
+  reason: The loss is written as an expectation/integral over the data distribution
+    (p.13), implying online sampling, but the article never says so explicitly.
+  sensitivity: medium
+- id: amb_bias_sign
+  question: Is the output bias added or subtracted (ReLU(W^T W x + b) as on p.10 vs
+    ReLU(W^T W x - b) as on p.14)?
+  config_key: bias_sign
+  options:
+  - plus_b
+  - minus_b
+  default: plus_b
+  source: paper_text
+  reason: The paper uses both conventions in different sections; since b is learned
+    and unconstrained the two are equivalent up to the sign of the learned parameter,
+    but any reported bias values / bias initialization flip sign.
+  sensitivity: low
+- id: amb_bias_init
+  question: How is the output bias b initialized (and is it present in every model)?
+  config_key: bias_init
+  options:
+  - zeros
+  - small_random
+  - no_bias
+  default: zeros
+  source: conventions_kb
+  reason: The paper says a bias is included in the linear, ReLU-output and ReLU-hidden
+    output layers (and that negative biases matter for superposition) but never gives
+    its initialization; the ReLU-hidden model has no hidden-layer bias by design (p.34).
+  sensitivity: medium
+- id: amb_weight_init
+  question: How are W (and W1, W2) initialized?
+  config_key: weight_init
+  options:
+  - pytorch_default_kaiming_uniform
+  - small_gaussian_0.01
+  - xavier_uniform
+  default: pytorch_default_kaiming_uniform
+  source: guess
+  reason: Not stated except that 'weights are initialized randomly close to zero'
+    (p.28); initialization determines which local geometric minimum is reached.
+  sensitivity: high
+- id: amb_restarts
+  question: How many restarts per configuration for experiments where the paper does
+    not state a restart count (e.g. the n=400,m=30 D* sweep, the basic-results sweeps,
+    the abs-value models)?
+  config_key: n_restarts
+  options:
+  - '1'
+  - '5'
+  - '10'
+  - as_paper_where_stated
+  default: as_paper_where_stated
+  source: paper_text
+  reason: Paper states 10 fits (drop worst, average) for the n=2,m=1 phase diagram,
+    1000 fits (keep best) for the n=10,m=5 ReLU hidden model, and 'multiple fits,
+    keep lowest loss' for m=2 geometry; other sweeps have no stated restart count.
+  sensitivity: high
+- id: amb_n3m2_restarts
+  question: How many models per grid point are trained (and how aggregated) for the
+    n=3, m=2 empirical phase diagram?
+  config_key: n3m2_restarts
+  options:
+  - same_as_n2m1_ten_drop_worst
+  - '1'
+  - 10_mean_no_drop
+  default: same_as_n2m1_ten_drop_worst
+  source: guess
+  reason: The 'train ten models per point and discard the highest loss' protocol is
+    stated only for the n=2,m=1 experiment (p.14); the paper is silent for the n=3,m=2
+    diagram (p.16).
+  sensitivity: medium
+- id: amb_phase_grid_resolution
+  question: What grid resolution is used along the relative-importance (0.1x-10x)
+    and feature-density (0.01-1.0) axes of the empirical phase diagrams?
+  config_key: phase_grid_resolution
+  options:
+  - 20x20
+  - 40x40
+  - 60x60
+  - 100x100
+  default: 40x40
+  source: guess
+  reason: The paper gives the axis ranges (log-spaced) but never the number of grid
+    points, which sets both compute cost and the apparent sharpness of the phase boundary.
+  sensitivity: medium
+- id: amb_phase_classification_thresholds
+  question: What numeric thresholds classify the 'extra' feature as not represented
+    vs in superposition vs given a dedicated dimension?
+  config_key: phase_classification_thresholds
+  options:
+  - norm_lt_0.1_not_represented__superposition_score_gt_0.1_superposition
+  - norm_lt_0.5_not_represented__superposition_score_gt_0.5_superposition
+  - continuous_2d_colormap_no_thresholds
+  default: continuous_2d_colormap_no_thresholds
+  source: paper_text
+  reason: The empirical phase diagrams are colored by a continuous 2D map over ||W_i||
+    and sum_j (W_i_hat . W_j)^2 (legend on p.15/16); the paper never states discrete
+    decision thresholds, so exact phase-fraction comparisons require a choice.
+  sensitivity: high
+- id: amb_pentagon_threshold_direction
+  question: Does the '~2.5x' pentagon-to-digon threshold mean the varied feature's
+    density is 1/2.5 = 0.4x that of the others, or that its relative density value
+    on the plot axis is 2.5x?
+  config_key: pentagon_threshold_direction
+  options:
+  - relative_density_0.4x_varied_feature_sparser
+  - relative_density_2.5x_varied_feature_denser
+  default: relative_density_0.4x_varied_feature_sparser
+  source: paper_text
+  reason: The caption says the pentagon collapses when the varied point's sparsity
+    'falls below a certain critical threshold (~2.5x less than others)', and the loss-crossover
+    figure places the digon/pentagon boundary at the sparse (sub-1.0x) end of the
+    0.1x-10x relative-density axis.
+  sensitivity: medium
+- id: amb_adv_baseline_model
+  question: How is the 'non-superposition model' baseline (L'_0, L_0) in the adversarial
+    vulnerability ratio (L'-L)/(L'_0-L_0) constructed?
+  config_key: adv_baseline_model
+  options:
+  - dense_end_model_of_same_sweep
+  - linear_model_top_m_features
+  - hand_constructed_identity_on_top_m_features
+  default: dense_end_model_of_same_sweep
+  source: guess
+  reason: p.29 labels the y-axis 'Relative to Non-Superposition Model' and the curve
+    starts at 1x at the dense end, but the paper never defines which model supplies
+    L_0 and L'_0.
+  sensitivity: high
+- id: amb_adv_lambda
+  question: How is the attack scale lambda set in the analytic adversarial attack?
+  config_key: adv_attack_scale
+  options:
+  - 0.1_of_average_input_l2_norm
+  - fixed_absolute_0.1
+  - tuned_per_model
+  default: 0.1_of_average_input_l2_norm
+  source: paper_text
+  reason: Paper states 'allowing a max L2 attack norm of 0.1 of the average input
+    norm' (p.29) but does not define the average-input-norm estimator (analytic vs
+    sample-based, and over which sparsity level).
+  sensitivity: medium
+- id: amb_sparsity_grid
+  question: How many sparsity points and what spacing for the D*, feature-dimensionality
+    and adversarial curves?
+  config_key: sparsity_grid
+  options:
+  - 20_log_spaced_1_to_10
+  - 40_log_spaced_1_to_10
+  - as_paper_discrete_7_points
+  default: 40_log_spaced_1_to_10
+  source: guess
+  reason: The axis is labelled 1/(1-S) on a log scale from 1 to ~10, but the number
+    of trained models along it is not given.
+  sensitivity: medium
+- id: amb_eval_sample_size
+  question: How many samples are used to estimate the reported loss / adversarial
+    loss ratios?
+  config_key: eval_samples
+  options:
+  - '10000'
+  - '100000'
+  - '1000000'
+  default: '100000'
+  source: conventions_kb
+  reason: Not stated; in very sparse regimes large samples are needed for a stable
+    loss estimate.
+  sensitivity: low
+- id: amb_importance_indexing
+  question: Is the importance curve I_i = r^i zero-indexed (most important feature
+    has I = 1)?
+  config_key: importance_indexing
+  options:
+  - zero_indexed
+  - one_indexed
+  default: zero_indexed
+  source: paper_text
+  reason: Paper writes I_i = 0.7^i (etc.) and orders features most-to-least important,
+    implying the first feature has importance 1, but the index base is never stated;
+    footnote 14 notes uniform rescaling of all importances does not change optimal
+    solutions.
+  sensitivity: low
+- id: amb_dstar_aggregation
+  question: Is D* = m/||W||_F^2 taken from a single model per sparsity level or averaged/minimum
+    over restarts?
+  config_key: dstar_aggregation
+  options:
+  - single_model
+  - mean_over_restarts
+  - lowest_loss_of_restarts
+  default: lowest_loss_of_restarts
+  source: conventions_kb
+  reason: The paper emphasizes selecting lowest-loss solutions elsewhere to expose
+    the sticky points, but the aggregation rule for the n=400,m=30 D* curve itself
+    is not stated.
+  sensitivity: medium
+- id: amb_energy_jump_sparsity
+  question: At which sparsity level (and with which seed) is the 'energy level jumps'
+    model trained?
+  config_key: energy_jump_sparsity
+  options:
+  - 1-S=0.1
+  - 1-S=0.03
+  - any_sparsity_where_all_features_become_digons
+  default: any_sparsity_where_all_features_become_digons
+  source: paper_text
+  reason: p.26 only says 'pick one model where all features converge into digons'
+    from the uniform-superposition setup; no sparsity value or seed is given, and
+    the reported 1/sqrt(2) transient depends on the specific run.
+  sensitivity: high
+- id: amb_seed_count
+  question: How many random seeds are used for reported curves and how is seed variability
+    reported?
+  config_key: n_seeds
+  options:
+  - '1'
+  - '3'
+  - '5'
+  - '10'
+  default: '5'
+  source: guess
+  reason: No seed count or error bars are reported anywhere in the article except
+    the 10-model phase-diagram averaging and the 1000-fit lowest-loss selection.
+  sensitivity: medium
+descriptive_stats:
+- metric: n_features_uniform_geometry
+  value: 400.0
+  where: Uniform Superposition, p.17 ('a model with n = 400 features')
+- metric: m_hidden_uniform_geometry
+  value: 30.0
+  where: Uniform Superposition, p.17 ('m = 30 hidden dimensions')
+- metric: importance_uniform_geometry
+  value: 1.0
+  where: Uniform Superposition, p.17 (I_i = 1)
+- metric: n_features_basic_results
+  value: 20.0
+  where: Basic Results parameter box, p.11 (n = 20)
+- metric: m_hidden_basic_results
+  value: 5.0
+  where: Basic Results parameter box, p.11 (m = 5)
+- metric: importance_decay_basic_results
+  value: 0.7
+  where: Basic Results parameter box, p.11 (I_i = 0.7^i)
+- metric: n_features_larger_model
+  value: 80.0
+  where: Basic Results, p.12 (n = 80)
+- metric: m_hidden_larger_model
+  value: 20.0
+  where: Basic Results, p.12 (m = 20)
+- metric: importance_decay_larger_model
+  value: 0.9
+  where: Basic Results, p.12 (I_i = 0.9^i)
+- metric: models_per_phase_diagram_point
+  value: 10.0
+  where: Superposition as a Phase Change, p.14 ('train ten models for each point ...
+    discarding the model with the highest loss'); stated only for the n=2, m=1 diagram
+- metric: n_features_pentagon_perturbation
+  value: 5.0
+  where: Perturbing a Single Feature, p.22 (n = 5)
+- metric: m_hidden_pentagon_perturbation
+  value: 2.0
+  where: Perturbing a Single Feature, p.22 (m = 2)
+- metric: baseline_feature_density_pentagon
+  value: 0.05
+  where: Perturbing a Single Feature, p.22 (1-S = 0.05 baseline)
+- metric: n_features_local_orthogonal_basis
+  value: 20.0
+  where: Local Almost-Orthogonal Bases figure, p.25 (2 sets of 10 correlated features,
+    n = 20)
+- metric: m_hidden_local_orthogonal_basis
+  value: 10.0
+  where: Local Almost-Orthogonal Bases figure, p.25 (m = 10)
+- metric: n_features_relu_hidden
+  value: 10.0
+  where: Visualizing Superposition in Terms of Neurons, p.32 (n = 10)
+- metric: m_neurons_relu_hidden
+  value: 5.0
+  where: Visualizing Superposition in Terms of Neurons, p.32 (m = 5)
+- metric: importance_decay_relu_hidden
+  value: 0.75
+  where: Visualizing Superposition in Terms of Neurons, p.32 (I^i = 0.75^i)
+- metric: restarts_relu_hidden
+  value: 1000.0
+  where: Visualizing Superposition in Terms of Neurons, p.32 ('we trained 1000 models
+    and visualized the one with the lowest loss')
+- metric: n_features_abs_value_sweep
+  value: 100.0
+  where: Superposition vs Sparsity (abs value), p.36 (n = 100)
+- metric: m_neurons_abs_value_sweep
+  value: 40.0
+  where: Superposition vs Sparsity (abs value), p.36 (m = 40)
+- metric: importance_decay_abs_value_sweep
+  value: 0.8
+  where: Superposition vs Sparsity (abs value), p.36 (I_i = 0.8^i)
+- metric: n_features_abs_value_demo
+  value: 3.0
+  where: Computation in Superposition / Basic Results, p.36 (n = 3 features)
+- metric: m_neurons_abs_value_demo
+  value: 6.0
+  where: Computation in Superposition / Basic Results, p.36 (m = 6 hidden neurons)
+- metric: adversarial_max_attack_norm_fraction
+  value: 0.1
+  where: Relationship to Adversarial Robustness, p.29 ('max L2 attack norm of 0.1
+    of the average input norm')
+- metric: n_correlated_geometry_features
+  value: 6.0
+  where: Collapsing of Correlated Features, p.25 (six features in three correlated
+    pairs, m = 2)
+- metric: n_features_learning_dynamics_geometry
+  value: 6.0
+  where: 'Phenomenon 2: Learning as Geometric Transformations, p.27 (n = 6 features
+    as 2 sets of 3 correlated features)'
+- metric: m_hidden_learning_dynamics_geometry
+  value: 3.0
+  where: 'Phenomenon 2: Learning as Geometric Transformations, p.27 (m = 3 dimensions)'
+plan:
+  data_tier: A
+  compute_tier: 2
+  kind_of_test: re_implementation
+  target_claims:
+  - c_dstar_sticky_half
+  - c_dstar_dense_one
+  - c_adversarial_vulnerability_3x
+  - c_dim_tetrahedron
+  - c_dim_triangle
+  - c_dim_digon
+  - c_dim_pentagon
+  - c_dim_square_antiprism
+  substitutions: {}
+  tolerances: {}
+  success_criteria: 'Exact: already paper scale on CPU; rerun with matched_scale true.
+    || Match on every headline claim within its derived tolerance; all leakage tests
+    pass; kind of test = re_implementation; data tier A; compute tier 2. Tier B: same
+    sign, significant, gap inside the substitution''s predicted band.'
+  budget:
+    spec: 10
+    setup: 20
+    build: 40
+    run: 20
+    verify: 15
+    report: 5
+    hard_kill_minutes: 240
+    max_cost_usd: 150.0
+    run_timeout_s: 1080
+  seeds:
+  - 0
+  - 1
+  - 2
+  frozen_hash: fe9468f7daf146c61363bf33b3130137cf6c184f90e646b8e0274d561cae3b87
+  frozen_at: '2026-09-16T23:26:32.122893+00:00'

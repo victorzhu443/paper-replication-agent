@@ -1,0 +1,1580 @@
+paper:
+  title: 'The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks'
+  authors:
+  - Jonathan Frankle
+  - Michael Carbin
+  year: 2019
+  arxiv_id: '1803.03635'
+  version: v5
+  track: cs
+  family: train_and_eval
+claims:
+- id: lenet_earlystop_38pct_faster
+  where: Section 2 text, p.4 ('early-stopping occurs 38% earlier than for the original
+    network'), summarizing Figure 4a left panel at Pm=21%
+  evidence_page: 4
+  metric: early_stop_iteration_reduction
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 38.0
+  reported_precision: 0.5
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: lenet_iterative
+  priority: headline
+  relation: eq
+- id: lenet_testacc_gain_at_pm135
+  where: Section 2 text, p.4 ('improving by more than 0.3 percentage points when Pm
+    = 13.5%' — paper states a lower bound, not a point estimate), Figure 4a middle
+    panel (test accuracy at early-stop)
+  evidence_page: 4
+  metric: test_accuracy_delta_vs_unpruned
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 0.3
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: lenet_iterative
+  priority: headline
+  relation: eq
+- id: conv4_testacc_gain_best
+  where: Section 3 text, p.6 ('Test accuracy improves at best ... 3.5 for Conv-4 (Pm
+    = 11.1%)'), Figure 5 top-right (test accuracy at early-stop)
+  evidence_page: 6
+  metric: test_accuracy_delta_vs_unpruned
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 3.5
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv4_iterative
+  priority: headline
+  relation: eq
+- id: lenet_testacc_gain_at_50k
+  where: Section 2 text, p.4 ('test accuracy improvement of up to 0.35 percentage
+    points' at iteration 50,000), Figure 4b
+  evidence_page: 4
+  metric: test_accuracy_delta_vs_unpruned
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 0.35
+  reported_precision: 0.005
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: lenet_iterative
+  priority: secondary
+  relation: eq
+- id: lenet_speedup_vs_reinit_at_pm21
+  where: Section 2 'Random reinitialization', p.4 ('the winning ticket reaches minimum
+    validation loss 2.51x faster than when reinitialized') at Pm=21%
+  evidence_page: 4
+  metric: early_stop_speedup_ratio_vs_reinit
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 2.51
+  reported_precision: 0.005
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: lenet_iterative_vs_reinit
+  priority: secondary
+  relation: eq
+- id: lenet_pm_threshold_winning_ticket
+  where: Section 2 'Random reinitialization', p.4 ('drops off from the original accuracy
+    when Pm = 21.1%, compared to 2.9% for the winning ticket')
+  evidence_page: 4
+  metric: pm_threshold_accuracy_drop
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 2.9
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: lenet_iterative
+  priority: secondary
+  relation: eq
+- id: lenet_pm_threshold_reinit
+  where: Section 2 'Random reinitialization', p.4 ('The average reinitialized iterative
+    winning ticket's test accuracy drops off from the original accuracy when Pm =
+    21.1%')
+  evidence_page: 4
+  metric: pm_threshold_accuracy_drop
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 21.1
+  reported_precision: 0.05
+  n_periods: 15
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: lenet_random_reinit
+  priority: secondary
+  relation: eq
+- id: lenet_oneshot_faster_lower_bound
+  where: Section 2 'One-shot pruning', p.5 ('When 67.5% >= Pm >= 17.6%, the average
+    winning tickets reach minimum validation accuracy earlier than the original network'),
+    Figure 4c left panel
+  evidence_page: 5
+  metric: pm_lower_bound_faster_early_stop
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 17.6
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: lenet_oneshot
+  priority: secondary
+  relation: eq
+- id: lenet_oneshot_higher_acc_lower_bound
+  where: Section 2 'One-shot pruning', p.5 ('When 95.0% >= Pm >= 5.17%, test accuracy
+    is higher than the original network'), Figure 4c right panel
+  evidence_page: 5
+  metric: pm_lower_bound_higher_test_accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 5.17
+  reported_precision: 0.005
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: lenet_oneshot
+  priority: secondary
+  relation: eq
+- id: conv2_speedup_best
+  where: Section 3 text, p.6 ('reach minimum validation loss at best 3.5x faster for
+    Conv-2 (Pm = 8.8%)'), Figure 5 top-left
+  evidence_page: 6
+  metric: early_stop_speedup_ratio_vs_unpruned
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 3.5
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv2_iterative
+  priority: secondary
+  relation: eq
+- id: conv4_speedup_best
+  where: Section 3 text, p.6 ('3.5x for Conv-4 (Pm = 9.2%)'), Figure 5 top-left
+  evidence_page: 6
+  metric: early_stop_speedup_ratio_vs_unpruned
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 3.5
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv4_iterative
+  priority: secondary
+  relation: eq
+- id: conv6_speedup_best
+  where: Section 3 text, p.6 ('2.5x for Conv-6 (Pm = 15.1%)'), Figure 5 top-left
+  evidence_page: 6
+  metric: early_stop_speedup_ratio_vs_unpruned
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 2.5
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv6_iterative
+  priority: secondary
+  relation: eq
+- id: conv2_testacc_gain_best
+  where: Section 3 text, p.6 ('Test accuracy improves at best 3.4 percentage points
+    for Conv-2 (Pm = 4.6%)'), Figure 5 top-right
+  evidence_page: 6
+  metric: test_accuracy_delta_vs_unpruned
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 3.4
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv2_iterative
+  priority: secondary
+  relation: eq
+- id: conv6_testacc_gain_best
+  where: Section 3 text, p.6 ('3.3 for Conv-6 (Pm = 26.4%)'), Figure 5 top-right
+  evidence_page: 6
+  metric: test_accuracy_delta_vs_unpruned
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 3.3
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv6_iterative
+  priority: secondary
+  relation: eq
+- id: conv246_pm_threshold_above_original
+  where: Section 3 text, p.6 ('All three networks remain above their original average
+    test accuracy when Pm > 2%'), Figure 5 top-right
+  evidence_page: 6
+  metric: pm_lower_bound_above_original_test_accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 2.0
+  reported_precision: 0.5
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv6_iterative
+  priority: secondary
+  relation: eq
+- id: conv2_dropout_initial_gain
+  where: Section 3 'Dropout', p.6 ('Dropout increases initial test accuracy (2.1 ...
+    for Conv-2)'); unpruned network, test accuracy at early-stop, Figure 6 right vs
+    Figure 5 top-right
+  evidence_page: 6
+  metric: test_accuracy_delta_dropout_vs_no_dropout_unpruned
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 2.1
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv2_dropout
+  priority: secondary
+  relation: eq
+- id: conv4_dropout_initial_gain
+  where: Section 3 'Dropout', p.6 ('3.0 ... for Conv-4'); unpruned network, test accuracy
+    at early-stop, Figure 6 right vs Figure 5 top-right
+  evidence_page: 6
+  metric: test_accuracy_delta_dropout_vs_no_dropout_unpruned
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 3.0
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv4_dropout
+  priority: secondary
+  relation: eq
+- id: conv6_dropout_initial_gain
+  where: Section 3 'Dropout', p.6 ('2.4 percentage points on average for ... Conv-6');
+    unpruned network, test accuracy at early-stop, Figure 6 right vs Figure 5 top-right
+  evidence_page: 6
+  metric: test_accuracy_delta_dropout_vs_no_dropout_unpruned
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 2.4
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv6_dropout
+  priority: secondary
+  relation: eq
+- id: conv2_dropout_pruning_extra_gain
+  where: Section 3 'Dropout', p.6 ('iterative pruning increases it further (up to
+    an additional 2.3 ... percentage points, respectively, on average)' — Conv-2)
+  evidence_page: 6
+  metric: test_accuracy_delta_pruned_vs_unpruned_with_dropout
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 2.3
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv2_dropout
+  priority: secondary
+  relation: eq
+- id: conv4_dropout_pruning_extra_gain
+  where: Section 3 'Dropout', p.6 ('up to an additional ... 4.6 ... percentage points'
+    — Conv-4)
+  evidence_page: 6
+  metric: test_accuracy_delta_pruned_vs_unpruned_with_dropout
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 4.6
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv4_dropout
+  priority: secondary
+  relation: eq
+- id: conv6_dropout_pruning_extra_gain
+  where: Section 3 'Dropout', p.6 ('up to an additional ... 4.7 percentage points'
+    — Conv-6)
+  evidence_page: 6
+  metric: test_accuracy_delta_pruned_vs_unpruned_with_dropout
+  units:
+    period: none
+    annualized: false
+    scale: points
+  value: 4.7
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv6_dropout
+  priority: secondary
+  relation: eq
+- id: resnet18_best_ticket_acc_lr001
+  where: Section 4 'Resnet-18', p.8 ('89.5% when 41.7% >= Pm >= 21.9%'); test accuracy
+    at iteration 30K, Figure 8 right panel
+  evidence_page: 8
+  metric: test_accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 89.5
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: resnet18_lr001_global
+  priority: secondary
+  relation: eq
+- id: resnet18_unpruned_acc_lr01
+  where: Section 4 'Resnet-18', p.8 ('the original network's accuracy at the higher
+    learning rate (90.5%)'); unpruned, test accuracy at iteration 30K, Figure 8 right
+    panel
+  evidence_page: 8
+  metric: test_accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 90.5
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: resnet18_lr01_global
+  priority: secondary
+  relation: eq
+- id: resnet18_warmup_acc_at_pm271
+  where: Section 4 'Resnet-18', p.8 ('reaching 90.5% test accuracy with learning rate
+    0.03 (warmup, k = 20000) at Pm = 27.1%'); test accuracy at iteration 30K, Figure
+    8 right panel
+  evidence_page: 8
+  metric: test_accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 90.5
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: resnet18_warmup20k_lr003_global
+  priority: secondary
+  relation: eq
+- id: resnet18_warmup_pm_threshold
+  where: Section 4 'Resnet-18', p.8 ('For these hyperparameters, we still find winning
+    tickets when Pm >= 11.8%')
+  evidence_page: 8
+  metric: pm_lower_bound_winning_ticket
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 11.8
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: resnet18_warmup20k_lr003_global
+  priority: secondary
+  relation: eq
+- id: vgg19_lr001_pm_within_1pp
+  where: Section 4 'VGG-19', p.8 ('subnetworks that remain within 1 percentage point
+    of the original accuracy while Pm >= 3.5%'; paper notes these are NOT winning
+    tickets), Figure 7 right panel (112K)
+  evidence_page: 8
+  metric: pm_lower_bound_within_1pp_of_original
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 3.5
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: vgg19_lr001_global
+  priority: secondary
+  relation: eq
+- id: vgg19_warmup_pm_threshold_global
+  where: Section 4 'VGG-19', p.8 ('Warmup makes it possible to find winning tickets,
+    exceeding this initial accuracy when Pm >= 1.5%') at lr 0.1 with k=10,000, global
+    pruning, Figure 7
+  evidence_page: 8
+  metric: pm_lower_bound_winning_ticket
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 1.5
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: vgg19_warmup10k_lr01_global
+  priority: secondary
+  relation: eq
+- id: vgg19_warmup_pm_threshold_layerwise
+  where: Appendix I.1, p.39 ('When training VGG-19 with learning rate 0.1 and warmup
+    to iteration 10,000, we find winning tickets when Pm >= 6.9% for layer-wise pruning
+    vs. Pm >= 1.5% for global pruning'), Figures 38/40
+  evidence_page: 39
+  metric: pm_lower_bound_winning_ticket
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 6.9
+  reported_precision: 0.05
+  n_periods: 5
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: vgg19_warmup10k_lr01_layerwise
+  priority: secondary
+  relation: eq
+- id: conv2_unpruned_val_acc_lr0002
+  where: Appendix H.2, p.31 ('lower initial validation accuracy (65.2% vs 67.6%)')
+    — 67.6% is unpruned Conv-2 at Adam lr 0.0002, validation accuracy at early-stop,
+    Figure 32 top-right
+  evidence_page: 31
+  metric: val_accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 67.6
+  reported_precision: 0.05
+  n_periods: 3
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv2_iterative_appendix_val
+  priority: secondary
+  relation: eq
+- id: conv2_pruned_val_acc_lr0002
+  where: Appendix H.2, p.31 ('70.9%, a 3.3 percentage point increase' for Conv-2 at
+    lr 0.0002, pruned to 3% of original size), Figure 32 top-right
+  evidence_page: 31
+  metric: val_accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 70.9
+  reported_precision: 0.05
+  n_periods: 3
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv2_iterative_appendix_val
+  priority: secondary
+  relation: eq
+- id: conv2_earlystop_speedup_appendix
+  where: 'Appendix H.2, p.31 (''learning rate 0.0002 shows the highest proportional
+    decrease in early-stopping times: 4.8x (when pruned to 8.8% of the original network
+    size)''), Figure 32 top-left'
+  evidence_page: 31
+  metric: early_stop_speedup_ratio_vs_unpruned
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 4.8
+  reported_precision: 0.05
+  n_periods: 3
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv2_iterative_appendix_val
+  priority: secondary
+  relation: eq
+- id: conv4_pruned_val_acc_lr0003
+  where: Appendix H.2, p.31 ('3.7 percentage point improvement to 78.6% when 5.4%
+    of weights remain') for Conv-4 at Adam lr 0.0003, Figure 32 middle-right
+  evidence_page: 31
+  metric: val_accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 78.6
+  reported_precision: 0.05
+  n_periods: 3
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv4_iterative_appendix_val
+  priority: secondary
+  relation: eq
+- id: conv4_earlystop_speedup_appendix
+  where: Appendix H.2, p.31 ('improvements in early-stopping time (4.27x when 11.1%
+    of weights remain)') for Conv-4 at lr 0.0003, Figure 32 middle-left
+  evidence_page: 31
+  metric: early_stop_speedup_ratio_vs_unpruned
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 4.27
+  reported_precision: 0.005
+  n_periods: 3
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv4_iterative_appendix_val
+  priority: secondary
+  relation: eq
+- id: conv6_pruned_val_acc_lr0003
+  where: Appendix H.2, p.31 ('Validation accuracy improves by 2.4 percentage points
+    to 81.5% when 9.31% of weights remain') for Conv-6 at Adam lr 0.0003, Figure 32
+    bottom-right
+  evidence_page: 31
+  metric: val_accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 81.5
+  reported_precision: 0.05
+  n_periods: 3
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv6_iterative_appendix_val
+  priority: secondary
+  relation: eq
+- id: conv6_earlystop_speedup_appendix
+  where: Appendix H.2, p.31 ('early-stopping times improve by 2.61x when pruned to
+    11.9%') for Conv-6 at lr 0.0003, Figure 32 bottom-left
+  evidence_page: 31
+  metric: early_stop_speedup_ratio_vs_unpruned
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 2.61
+  reported_precision: 0.005
+  n_periods: 3
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv6_iterative_appendix_val
+  priority: secondary
+  relation: eq
+- id: conv4_dropout_unpruned_val_acc
+  where: Appendix H.5, p.36 ('With dropout, the unpruned Conv-4 architecture reaches
+    an average validation accuracy of 77.6%'), Figure 36 middle-right
+  evidence_page: 36
+  metric: val_accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 77.6
+  reported_precision: 0.05
+  n_periods: 3
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv4_dropout_appendix_val
+  priority: secondary
+  relation: eq
+- id: conv4_dropout_ticket_val_acc
+  where: Appendix H.5, p.36 ('The dropout-trained winning tickets reach 82.6% average
+    validation accuracy when pruned to 7.6%'), Figure 36 middle-right
+  evidence_page: 36
+  metric: val_accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 82.6
+  reported_precision: 0.05
+  n_periods: 3
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv4_dropout_appendix_val
+  priority: secondary
+  relation: eq
+- id: conv4_dropout_speedup
+  where: Appendix H.5, p.36 ('Early-stopping times improve by up to 1.58x (when pruned
+    to 7.6%)'), Figure 36 middle-left
+  evidence_page: 36
+  metric: early_stop_speedup_ratio_vs_unpruned
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 1.58
+  reported_precision: 0.005
+  n_periods: 3
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv4_dropout_appendix_val
+  priority: secondary
+  relation: eq
+- id: conv6_dropout_unpruned_val_acc
+  where: Appendix H.5, p.36 ('With dropout, the unpruned Conv-6 architecture reaches
+    an average validation accuracy of 81.3%'), Figure 36 bottom-right
+  evidence_page: 36
+  metric: val_accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 81.3
+  reported_precision: 0.05
+  n_periods: 3
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv6_dropout_appendix_val
+  priority: secondary
+  relation: eq
+- id: conv6_dropout_ticket_val_acc
+  where: Appendix H.5, p.36 ('reaching 84.8% average validation accuracy when pruned
+    to 10.5%'), Figure 36 bottom-right
+  evidence_page: 36
+  metric: val_accuracy
+  units:
+    period: none
+    annualized: false
+    scale: percent
+  value: 84.8
+  reported_precision: 0.05
+  n_periods: 3
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv6_dropout_appendix_val
+  priority: secondary
+  relation: eq
+- id: conv6_dropout_speedup
+  where: Appendix H.5, p.36 ('a 1.5x average improvement when the network is pruned
+    to 15.1%'), Figure 36 bottom-left
+  evidence_page: 36
+  metric: early_stop_speedup_ratio_vs_unpruned
+  units:
+    period: none
+    annualized: false
+    scale: none
+  value: 1.5
+  reported_precision: 0.05
+  n_periods: 3
+  reported_std: null
+  reported_t_stat: null
+  sample_start: null
+  sample_end: null
+  method_variant: conv6_dropout_appendix_val
+  priority: secondary
+  relation: eq
+data:
+  sources:
+  - canonical: mnist
+    description: MNIST handwritten digits, 60,000 train / 10,000 test, 28x28 grayscale,
+      10 classes; used for Lenet-300-100 experiments (Section 2, Appendices B-G).
+    substitute: torchvision
+  - canonical: cifar10
+    description: CIFAR-10 (Krizhevsky & Hinton 2009), 50,000 train / 10,000 test 32x32
+      color (three-channel) images, 10 classes; used for Conv-2/4/6 (Section 3) and
+      VGG-19 / Resnet-18 (Section 4).
+    substitute: torchvision
+  universe:
+    task: image classification (10-way), supervised
+    architectures_mnist: Lenet-300-100 fully connected (hidden 300, 100; output 10),
+      266K weights (Figure 2; Appendix G.1)
+    architectures_cifar_small: Conv-2 (conv 64,64,pool + FC 256,256,10; 4.3M total
+      / 38K conv weights), Conv-4 (64,64,pool,128,128,pool + FC 256,256,10; 2.4M /
+      260K), Conv-6 (64,64,pool,128,128,pool,256,256,pool + FC 256,256,10; 1.7M /
+      1.1M) — scaled-down VGG variants, 3x3 convs, maxpool stride 2 after every two
+      convs (Figure 2; Appendix H.1)
+    architectures_cifar_deep: 'VGG-19 for CIFAR10 (Liu et al. 2019 variant; 20.0M
+      params; five groups of 3x3 convs, first four followed by maxpool stride 2, last
+      followed by average pooling, then one dense output layer of 5120 params). Resnet-18
+      (He et al. 2016 CIFAR variant; 20 layers: initial conv 16 channels, then 3x[16,16],
+      3x[32,32], 3x[64,64] residual pairs, avg-pool, FC 10; 271,000 params per Section
+      4, listed as 274K total / 270K conv in Figure 2)'
+    init: Gaussian Glorot (Glorot & Bengio 2010) for all networks
+  frequency: not time-series; training measured in iterations (mini-batch steps) with
+    validation/test evaluation every 100 iterations
+  preprocessing:
+    mnist_augmentation: none stated in paper
+    conv246_augmentation: not stated in paper (Appendix H.1 silent; assume none)
+    vgg_resnet_augmentation: random flips and random four-pixel pads and crops (Appendix
+      I.3; Appendix I.2 states VGG-19 uses the same procedure)
+    input_normalization: not stated in paper for either dataset (see ambiguity input_normalization)
+    shuffling: training set shuffled at each epoch (Appendices G.1, H.1)
+    batch_sizes: Lenet 60, Conv-2/4/6 60, Resnet-18 128, VGG-19 64 (Figure 2; Appendices
+      G.1, H.1, I.2, I.3)
+    weight_decay: 0.0001 for VGG-19 and Resnet-18 (Appendices I.2, I.3); none stated
+      for Lenet/Conv-2/4/6
+    batchnorm: used for VGG-19 and Resnet-18 only (Appendices I.2, I.3)
+    dropout: only in the dedicated dropout experiments for Conv-2/4/6 (rate 0.5, Section
+      3 / Appendix H.5); placement unspecified
+  splits:
+    mnist_train: 55,000 (60,000 minus 5,000 randomly sampled validation) (Appendix
+      G.1)
+    mnist_validation: 5,000 randomly sampled from the training set (Appendix G.1)
+    mnist_test: 10,000 (Appendix G.1)
+    cifar10_train: 45,000 (50,000 minus 5,000 randomly sampled validation) (Appendices
+      H.1, I.3)
+    cifar10_validation: 5,000 randomly sampled from the training set (Appendices H.1,
+      I.3)
+    cifar10_test: 10,000 (Appendix H.1)
+    reporting_rule: main-body figures report TEST accuracy (at the early-stopping
+      iteration determined by minimum VALIDATION loss, or at fixed iterations for
+      VGG-19/Resnet-18); appendix hyperparameter-selection sweeps (G, H, I) report
+      VALIDATION accuracy at the early-stopping iteration
+method:
+  signal: 'Iterative magnitude pruning with weight rewinding (Appendix B ''Strategy
+    1: iterative pruning with resetting''): train the dense net for j iterations,
+    prune the lowest-magnitude surviving weights (s% per round; equivalently p^(1/n)%
+    of the weights surviving the previous round over n rounds), reset the remaining
+    weights to their original initialization theta_0, and repeat; the resulting sparse
+    subnetwork f(x; m*theta_0) is a ''winning ticket''. One-shot pruning (train once,
+    prune p% in a single step, reset) is used only for Lenet in Figures 4c/4a.'
+  model:
+    lenet: Lenet-300-100 FC; Adam lr=1.2e-3 (0.0012); 50,000 iterations per round;
+      batch 60; layer-wise pruning, each layer independently at 20% per round, output
+      layer at half rate (10% per round)
+    conv2: 'conv 64,64,pool + FC 256,256,10; Adam lr=2e-4; 20,000 iterations per round;
+      batch 60; layer-wise: conv 10%/round, fc 20%/round, output layer 10%/round (half
+      of fc rate)'
+    conv4: 'conv 64,64,pool,128,128,pool + FC 256,256,10; Adam lr=3e-4; 25,000 iterations
+      per round; batch 60; layer-wise: conv 10%/round, fc 20%/round, output layer
+      10%/round'
+    conv6: 'conv 64,64,pool,128,128,pool,256,256,pool + FC 256,256,10; Adam lr=3e-4;
+      30,000 iterations per round; batch 60; layer-wise: conv 15%/round, fc 20%/round,
+      output layer 10%/round'
+    conv_dropout: dropout rate 0.5; training iterations tripled (60K Conv-2 / 75K
+      Conv-4 / 90K Conv-6); Adam lr 0.0003 (Conv-2) and 0.0002 (Conv-4, Conv-6) per
+      Figure 6 caption and Appendix H.5; pruning rates as selected in H.4 (conv 10/10/15%,
+      fc 20%, output 10%)
+    resnet18: 20-layer CIFAR Resnet; SGD with momentum 0.9; three stages of 20,000
+      / 5,000 / 5,000 iterations (30,000 total) with lr x0.1 at 20,000 and 25,000
+      (0.1-0.01-0.001 schedule shape); batch 128; weight decay 1e-4; batchnorm; global
+      pruning across convolutional layers at 20%/round; the 2560 downsample params
+      and 640 FC output params are NOT pruned (Figure 2 'fc0%', Appendix I.3)
+    vgg19: VGG-19 for CIFAR10 (Liu et al. 2019); SGD with momentum 0.9; 160 epochs
+      = 112,480 iterations with lr x0.1 at 80 and 120 epochs; batch 64; weight decay
+      1e-4; batchnorm; global pruning across convolutional layers at 20%/round; the
+      5120 output-layer params are NOT pruned (Figure 2 'fc0%', Appendix I.2)
+    warmup: 'linear learning-rate warmup from 0 to the initial lr over k iterations:
+      k=10,000 for VGG-19 at lr 0.1; k=20,000 for Resnet-18 at lr 0.03 (Section 4,
+      Appendix I.5)'
+    initial_learning_rates_studied: VGG-19 and Resnet-18 each run at lr 0.1 (original)
+      and 0.01 plus the warmup settings; iterative pruning finds winning tickets only
+      at the lower rate or with warmup
+    loss: softmax cross-entropy (not stated explicitly in the paper)
+  evaluation:
+  - Early-stopping iteration = iteration of minimum validation loss, computed retroactively
+    (proxy for learning speed; Appendix C)
+  - Test accuracy at the early-stopping iteration
+  - Training accuracy at the early-stopping iteration and at the end of training (Appendix
+    D, Figures 12/13)
+  - 'Test accuracy at fixed iterations: 50K for Lenet (Figure 4b); 20K/25K/30K for
+    Conv-2/4/6 (Figure 5 bottom right); 10K/20K/30K for Resnet-18 (Figure 8); 30K/60K/112K
+    for VGG-19 (Figure 7)'
+  - For VGG-19 and Resnet-18 early-stopping time is NOT reported (entangled with learning-rate
+    schedules); only accuracy at fixed iterations
+  - Curves plotted vs percent of weights remaining Pm = ||m||_0 / |theta|
+  eval_protocol:
+    trials_main_body: 5 trials per point; lines are averages, error bars are min/max
+      across trials (Figures 3/4/5 captions; Appendix H.1)
+    trials_appendix: 3 trials per point in the hyperparameter appendices (G.1, H.1);
+      lines are averages with min/max error bars
+    reinit_trials: each winning ticket randomly reinitialized 3 times -> 15 runs per
+      point (Section 2 p.4; Figure 5 caption)
+    random_sampling_trials_figure1: randomly sampled sparse networks in Figure 1 are
+      averages of ten trials; winning-ticket solid lines are averages of five trials
+    eval_interval: validation and test loss/accuracy measured every 100 training iterations
+      (Appendices G.1, H.1)
+    training_length: each round trains the full specified number of iterations regardless
+      of early stopping; no validation/test data influences training
+    mask_handling: mask m held fixed during training (pruned weights stay zero)
+    pruning_scope: layer-wise, each layer independently, for Lenet and Conv-2/4/6
+      (output layer at half the fc rate); global across convolutional layers for VGG-19
+      and Resnet-18, with output/downsample params unpruned
+    pruning_criterion: lowest-magnitude weights measured at the END of the round's
+      training (|theta_j|), then survivors rewound to theta_0
+  variants:
+    lenet_iterative:
+      dataset: MNIST
+      arch: Lenet-300-100
+      optimizer: Adam lr=0.0012
+      iterations: 50000 per round, batch 60
+      pruning: iterative, layer-wise, 20%/round (output layer 10%/round), survivors
+        reset to theta_0 each round
+      metric_split: test accuracy at min-validation-loss iteration (and at iteration
+        50,000 for Figure 4b)
+      pm_levels_plotted: Figure 4a/4b axis ticks 100, 51.3, 26.3, 13.5, 7.0, 3.6,
+        1.9, 1.0, 0.5, 0.3 (log axis; data at every 20%-per-round level)
+      trials: 5
+    lenet_oneshot:
+      pruning: 'one-shot: train once, prune p% of each layer in a single step (output
+        layer at half rate), reset survivors to theta_0, retrain'
+      pm_grid: not enumerated in the paper; Figure 4c x-axis TICK LABELS are 100,
+        87.5, 75.0, 62.6, 50.1, 37.6, 25.1, 12.7, but the text cites Pm = 95.0%, 67.5%,
+        17.6%, 5.17% and Figure 4a reproduces one-shot results on a log axis down
+        to Pm ~= 0.3% (see ambiguity oneshot_pm_grid)
+      metric_split: test accuracy at min-validation-loss iteration
+      trials: 5
+    lenet_random_reinit:
+      init: mask from iterative pruning retained, weights resampled theta_0' ~ D_theta
+        (Gaussian Glorot) on a per-layer basis
+      trials: 15 (3 reinits x 5 tickets)
+    lenet_iterative_vs_reinit:
+      comparison: ratio of the average early-stopping iteration of the random-reinit
+        runs to that of the winning tickets at Pm=21%
+      trials: 5 winning-ticket runs vs 15 reinit runs
+    conv2_iterative:
+      dataset: CIFAR-10
+      optimizer: Adam lr=0.0002
+      iterations: 20000 per round, batch 60
+      pruning: layer-wise, conv 10%/round, fc 20%/round, output 10%/round
+      metric_split: test (accuracy at early-stop; also at iteration 20,000)
+      trials: 5
+    conv4_iterative:
+      optimizer: Adam lr=0.0003
+      iterations: 25000 per round, batch 60
+      pruning: layer-wise, conv 10%/round, fc 20%/round, output 10%/round
+      metric_split: test (accuracy at early-stop; also at iteration 25,000)
+      trials: 5
+    conv6_iterative:
+      optimizer: Adam lr=0.0003
+      iterations: 30000 per round, batch 60
+      pruning: layer-wise, conv 15%/round, fc 20%/round, output 10%/round
+      metric_split: test (accuracy at early-stop; also at iteration 30,000)
+      trials: 5
+    conv2_iterative_appendix_val:
+      metric_split: validation accuracy at early-stop (Appendix H.2, Figure 32 top)
+      trials: 3
+      optimizer: Adam lr=0.0002 (selected rate; sweep spans 0.0001-0.0008)
+      pruning_during_lr_sweep: 'temporary rates used before the H.4 selection: fc
+        20%, conv 10%, output 10% per round'
+    conv4_iterative_appendix_val:
+      metric_split: validation accuracy at early-stop (Appendix H.2, Figure 32 middle)
+      trials: 3
+      optimizer: Adam lr=0.0003
+      pruning_during_lr_sweep: 'temporary rates used before the H.4 selection: fc
+        20%, conv 10%, output 10% per round'
+    conv6_iterative_appendix_val:
+      metric_split: validation accuracy at early-stop (Appendix H.2, Figure 32 bottom)
+      trials: 3
+      optimizer: Adam lr=0.0003
+      pruning_during_lr_sweep: 'temporary rates used before the H.4 selection: fc
+        20%, conv 10%, output 10% per round (NOT the final conv 15%); consistent with
+        the Figure 32 bottom x-axis 100, 61.8, 39.4, 25.8, 17.3, 11.9, ...'
+    conv2_dropout:
+      dropout: rate 0.5
+      optimizer: Adam lr=0.0003 (Figure 6 caption)
+      iterations: 60000 (3x non-dropout)
+      pruning: layer-wise, conv 10%/round, fc 20%/round, output 10%/round
+      metric_split: test accuracy at early-stop (Figure 6)
+      trials: 5
+    conv4_dropout:
+      dropout: rate 0.5
+      optimizer: Adam lr=0.0002 (Figure 6 caption)
+      iterations: 75000 (3x non-dropout)
+      pruning: layer-wise, conv 10%/round, fc 20%/round, output 10%/round
+      metric_split: test accuracy at early-stop (Figure 6)
+      trials: 5
+    conv6_dropout:
+      dropout: rate 0.5
+      optimizer: Adam lr=0.0002 (Figure 6 caption)
+      iterations: 90000 (3x non-dropout)
+      pruning: layer-wise, conv 15%/round, fc 20%/round, output 10%/round
+      metric_split: test accuracy at early-stop (Figure 6)
+      trials: 5
+    conv4_dropout_appendix_val:
+      metric_split: validation accuracy at early-stop (Appendix H.5, Figure 36 middle)
+      trials: 3
+      optimizer: Adam lr=0.0002 with dropout 0.5, 75,000 iterations
+      pruning: layer-wise, conv 10%/round, fc 20%/round, output 10%/round (rates from
+        H.4)
+    conv6_dropout_appendix_val:
+      metric_split: validation accuracy at early-stop (Appendix H.5, Figure 36 bottom)
+      trials: 3
+      optimizer: Adam lr=0.0002 with dropout 0.5, 90,000 iterations
+      pruning: layer-wise, conv 15%/round, fc 20%/round, output 10%/round (rates from
+        H.4); consistent with the Figure 36 bottom x-axis 100, 56.2, 31.9, 18.2, 10.5,
+        ...
+    resnet18_lr001_global:
+      optimizer: SGD momentum 0.9, initial lr 0.01, x0.1 at 20,000 and 25,000 iterations
+      iterations: 30000, batch 128
+      pruning: global across conv layers, 20%/round; downsample (2560) and FC output
+        (640) params unpruned
+      metric_split: test accuracy at iteration 30K (Figure 8); no early-stopping metric
+      trials: 5
+    resnet18_lr01_global:
+      optimizer: SGD momentum 0.9, initial lr 0.1, x0.1 at 20,000 and 25,000 iterations
+      pruning: global across conv layers, 20%/round
+      metric_split: test accuracy at iteration 30K (Figure 8)
+      trials: 5
+    resnet18_warmup20k_lr003_global:
+      optimizer: SGD momentum 0.9, lr 0.03 with linear warmup from 0 over k=20,000
+        iterations, then x0.1 decays at 20,000 and 25,000
+      pruning: global across conv layers, 20%/round
+      metric_split: test accuracy at iteration 30K (Figure 8)
+      trials: 5
+    vgg19_lr001_global:
+      optimizer: SGD momentum 0.9, initial lr 0.01, x0.1 at 80 and 120 epochs
+      iterations: 112480 (160 epochs), batch 64
+      pruning: global across conv layers, 20%/round; output layer (5120 params) unpruned
+      metric_split: test accuracy at 30K / 60K / 112K iterations (Figure 7)
+      trials: 5
+    vgg19_warmup10k_lr01_global:
+      optimizer: SGD momentum 0.9, lr 0.1 with linear warmup from 0 over k=10,000
+        iterations, then x0.1 at 80 and 120 epochs
+      pruning: global across conv layers, 20%/round
+      metric_split: test accuracy at 112K iterations (Figure 7 right)
+      trials: 5
+    vgg19_warmup10k_lr01_layerwise:
+      pruning: layer-wise pruning of conv layers instead of global (Appendix I.1,
+        Figures 38/40), 20%/round; output layer unpruned
+      optimizer: SGD momentum 0.9, lr 0.1, linear warmup k=10,000
+      metric_split: test accuracy at 112K iterations (Figure 40)
+      trials: 5
+baselines:
+- Unpruned original (dense) network trained with identical hyperparameters
+- 'Random reinitialization: winning-ticket mask with freshly sampled Gaussian Glorot
+  weights (3 reinits per ticket)'
+- 'Random sparsity: randomly sampled sparse subnetworks with matching parameter count
+  (Appendix E, Figure 14; Figure 1 dashed lines, average of ten trials)'
+- One-shot magnitude pruning with rewinding (Lenet, Figure 4c)
+- Prune at iteration 0 (magnitude pruning before any training, Appendix F.4)
+- Iterative pruning with continued training (Strategy 2, Appendix B) vs resetting
+  (Strategy 1)
+- Reinitialization sampled from the winning-ticket initialization distribution D_m
+  (Appendix F.3)
+- Adding Gaussian noise of 0.5/1/2/3 sigma to winning-ticket initializations (Appendix
+  F.7)
+ambiguities:
+- id: lr_schedule
+  question: What learning-rate schedule is used during each training round?
+  config_key: lr_schedule
+  options:
+  - constant
+  - cosine
+  - step
+  - as_paper
+  default: as_paper
+  source: paper_text
+  reason: Paper states constant Adam learning rates for Lenet (0.0012), Conv-2 (2e-4),
+    Conv-4/6 (3e-4); three-stage step decay (x0.1) for Resnet-18 at 20K/25K iterations
+    and VGG-19 at 80/120 epochs, plus optional linear warmup over k iterations.
+  sensitivity: high
+- id: augmentation
+  question: What train-time data augmentation is applied for each dataset/architecture?
+  config_key: augmentation
+  options:
+  - none
+  - standard
+  - as_paper
+  default: as_paper
+  source: paper_text
+  reason: Appendix I.3 states random flips and random four-pixel pads/crops for Resnet-18,
+    and I.2 says VGG-19 uses the same procedure. The paper is silent for MNIST/Lenet
+    and Conv-2/4/6, so those are assumed unaugmented (that part is an inference, not
+    a stated choice).
+  sensitivity: high
+- id: batch_vs_steps
+  question: When batch size or compute budget changes, hold epochs or optimization
+    steps fixed?
+  config_key: batch_vs_steps
+  options:
+  - epochs
+  - steps
+  default: steps
+  source: paper_text
+  reason: Paper specifies training length in iterations with fixed batch sizes (50K/60,
+    20K/60, 25K/60, 30K/60, 30K/128, 112,480/64) and reports early-stopping iterations,
+    so steps must be held fixed in any reduced-scale replication.
+  sensitivity: high
+- id: mixed_precision
+  question: Train in full precision or mixed precision?
+  config_key: mixed_precision
+  options:
+  - fp32
+  - amp
+  default: fp32
+  source: conventions_kb
+  reason: Not mentioned; 2018-era TensorFlow experiments were fp32. Magnitude-pruning
+    thresholds are sensitive to numerical noise, so keep fp32 at least for the pruning
+    criterion.
+  sensitivity: low
+- id: split
+  question: Are the headline numbers validation or test accuracy?
+  config_key: split
+  options:
+  - validation
+  - test
+  default: test
+  source: paper_text
+  reason: Appendices G.1/H.1 state main-body results are evaluated on the test set,
+    while the hyperparameter-selection appendices (G, H, I) use the 5,000-example
+    validation set; the early-stopping iteration itself always comes from minimum
+    validation loss.
+  sensitivity: high
+- id: prune_biases_and_bn
+  question: Are biases and batchnorm parameters pruned, or only weight matrices/convolution
+    kernels?
+  config_key: prune_parameter_types
+  options:
+  - weights_only
+  - weights_and_biases
+  - weights_biases_bn
+  default: weights_only
+  source: conventions_kb
+  reason: Paper describes pruning 'connections'/weights per layer and gives counts
+    that match weight tensors only (Lenet 266K = 784*300+300*100+100*10; output layer
+    1,000). Biases and BN parameters are conventionally left dense and are never mentioned
+    as pruned.
+  sensitivity: medium
+- id: n_pruning_rounds
+  question: How many iterative pruning rounds are run (i.e., what final target sparsity
+    per architecture)?
+  config_key: n_pruning_rounds
+  options:
+  - per_arch_axis_limits
+  - fixed_15_rounds
+  - fixed_20_rounds
+  - custom
+  default: per_arch_axis_limits
+  source: paper_text
+  reason: 'No round count is stated; inferred from plotted x-axes: Lenet to Pm=0.3%
+    (~26 rounds at 20%/round), Conv-2/4/6 to ~1.0-1.3%, Resnet-18 to 5.5%, VGG-19
+    to 0.1%. Section 6 says networks are trained ''15 or more times consecutively''.'
+  sensitivity: medium
+- id: trials_and_seeds
+  question: How many independent trials (seeds) per configuration, and how are error
+    bars formed?
+  config_key: n_trials
+  options:
+  - '3'
+  - '5'
+  - '15'
+  default: '5'
+  source: paper_text
+  reason: Main-body figures average 5 trials with min/max error bars; appendix sweeps
+    use 3; random-reinit points aggregate 15 runs (3 reinits per trial); Figure 1
+    random-sampling lines average 10 trials. Seed values themselves are not given.
+  sensitivity: medium
+- id: validation_split_seed
+  question: How is the 5,000-example validation set sampled from the training set,
+    and is it fixed across trials?
+  config_key: val_split_seed
+  options:
+  - fixed_random_seed_shared
+  - resampled_per_trial
+  - last_5000_examples
+  default: fixed_random_seed_shared
+  source: conventions_kb
+  reason: Paper says 'randomly sampled a 5,000-example validation set' but gives no
+    seed and does not say whether it is re-drawn per trial; a single fixed split is
+    conventional and keeps early-stopping comparable across pruning levels.
+  sensitivity: low
+- id: adam_hyperparameters
+  question: What Adam beta1/beta2/epsilon are used?
+  config_key: adam_betas_eps
+  options:
+  - tf_defaults_0.9_0.999_1e-8
+  - pytorch_defaults_0.9_0.999_1e-8
+  - custom
+  default: tf_defaults_0.9_0.999_1e-8
+  source: conventions_kb
+  reason: Only the Adam learning rate is reported; framework defaults assumed (original
+    implementation was TensorFlow).
+  sensitivity: low
+- id: dropout_placement
+  question: Where is dropout (rate 0.5) applied in Conv-2/4/6?
+  config_key: dropout_placement
+  options:
+  - fc_layers_only
+  - after_each_maxpool_and_fc
+  - all_layers
+  default: after_each_maxpool_and_fc
+  source: guess
+  reason: Section 3 only states 'a dropout rate of 0.5'; placement is unspecified
+    and materially changes the dropout baselines (2.1/3.0/2.4 pp gains and the 77.6%/81.3%
+    unpruned validation accuracies).
+  sensitivity: medium
+- id: conv_padding_and_pooling
+  question: Convolution padding and pooling details for Conv-2/4/6 and VGG-19?
+  config_key: conv_padding
+  options:
+  - same
+  - valid
+  default: same
+  source: conventions_kb
+  reason: Paper states 3x3 convolutions and maxpool stride 2 after every two convs,
+    but not padding; 'same' padding reproduces the stated parameter counts (e.g.,
+    Conv-2 4.3M total / 38K conv).
+  sensitivity: low
+- id: pruning_strategy_resetting
+  question: Does each pruning round retrain from the original initialization or continue
+    from trained weights?
+  config_key: iterative_strategy
+  options:
+  - reset_to_theta0_each_round
+  - continued_training
+  default: reset_to_theta0_each_round
+  source: paper_text
+  reason: 'Appendix B: main-body results use Strategy 1 (iterative pruning with resetting),
+    which dominates Strategy 2 in Figures 9 and 10.'
+  sensitivity: high
+- id: output_layer_rate
+  question: At what rate is the output layer pruned relative to other layers?
+  config_key: output_layer_prune_rate
+  options:
+  - half_of_other_layers
+  - same_as_other_layers
+  - not_pruned
+  default: half_of_other_layers
+  source: paper_text
+  reason: 'Section 2 and Appendices G.4/H.1: connections to outputs pruned at half
+    the rate (10% when fc layers are at 20%) for Lenet and Conv-2/4/6; for VGG-19/Resnet-18
+    the output layer (5120 / 640 params) and Resnet downsample params (2560) are not
+    pruned at all.'
+  sensitivity: medium
+- id: early_stop_definition
+  question: How is the early-stopping iteration computed?
+  config_key: early_stop_criterion
+  options:
+  - min_validation_loss_every_100_iters
+  - min_validation_loss_every_epoch
+  - max_validation_accuracy
+  default: min_validation_loss_every_100_iters
+  source: paper_text
+  reason: 'Appendix C and G.1/H.1: iteration of minimum validation loss, evaluated
+    every 100 training iterations, computed retroactively over the full fixed-length
+    run. Note some appendix figures (17, 18, 25) label the axis ''Early-Stop Iteration
+    (Test)''.'
+  sensitivity: high
+- id: loss_function
+  question: What training objective is used?
+  config_key: loss
+  options:
+  - softmax_cross_entropy
+  - other
+  default: softmax_cross_entropy
+  source: conventions_kb
+  reason: Never stated; standard for 10-way classification and required to produce
+    the 'validation loss' curves of Figure 11.
+  sensitivity: low
+- id: pm_denominator
+  question: Over which parameters is Pm = ||m||_0 / |theta| computed — all network
+    weights (counting unpruned layers as fully remaining), only prunable weights,
+    or all parameters including biases/BN?
+  config_key: pm_denominator
+  options:
+  - all_weight_tensors_incl_unpruned_layers
+  - prunable_weights_only
+  - all_params_incl_biases_and_bn
+  default: all_weight_tensors_incl_unpruned_layers
+  source: guess
+  reason: Paper defines Pm over |theta| but never says whether the unpruned output/downsample
+    layers (VGG-19 5120; Resnet-18 640+2560) or biases enter the denominator; this
+    shifts every plotted x-axis value and hence the Pm thresholds in the claims.
+  sensitivity: medium
+- id: oneshot_pm_grid
+  question: At which Pm levels is one-shot Lenet pruning run, and are all levels derived
+    from a single trained network or from separate training runs?
+  config_key: oneshot_pm_grid
+  options:
+  - single_trained_run_many_thresholds
+  - separate_run_per_level
+  - figure4c_tick_levels_only
+  default: single_trained_run_many_thresholds
+  source: guess
+  reason: Figure 4c tick labels (100...12.7) are only axis labels; the text cites
+    Pm = 95.0%, 67.5%, 17.6%, 5.17% and Figure 4a reproduces one-shot lines down to
+    Pm ~= 0.3%, so the grid is finer and deeper than the labels and is never enumerated.
+  sensitivity: medium
+- id: random_sparsity_layer_distribution
+  question: For the random-sparsity baseline, how are the surviving weights distributed
+    across layers?
+  config_key: random_sparsity_allocation
+  options:
+  - match_per_layer_counts_of_winning_ticket
+  - uniform_global_random
+  - uniform_per_layer_rate
+  default: match_per_layer_counts_of_winning_ticket
+  source: guess
+  reason: Appendix E only says 'random sparse subnetworks with the same number of
+    parameters as those found via iterative pruning'; per-layer allocation is unspecified
+    and changes the baseline substantially.
+  sensitivity: medium
+- id: reinit_distribution_scale
+  question: When randomly reinitializing a winning ticket, is the Glorot scale computed
+    from the ORIGINAL dense layer dimensions or from the surviving (sparse) fan-in/fan-out?
+  config_key: reinit_glorot_scale
+  options:
+  - original_dense_layer_dims
+  - sparse_surviving_dims
+  default: original_dense_layer_dims
+  source: conventions_kb
+  reason: Paper only writes theta_0' ~ D_theta; since D_theta is the original initialization
+    distribution, dense-layer fan-in/fan-out is the natural reading, but it is not
+    stated explicitly.
+  sensitivity: medium
+- id: glorot_normal_variant
+  question: Which Gaussian Glorot parameterization is used (std = sqrt(2/(fan_in+fan_out)),
+    truncated vs untruncated normal)?
+  config_key: glorot_variant
+  options:
+  - normal_std_sqrt2_over_fanin_plus_fanout
+  - truncated_normal_same_std
+  - other
+  default: normal_std_sqrt2_over_fanin_plus_fanout
+  source: conventions_kb
+  reason: Paper says 'Gaussian Glorot' without giving the variance formula or truncation;
+    the initialization-distribution figures (15/16, x-range about +/-0.25) are consistent
+    with the standard Glorot normal std.
+  sensitivity: low
+- id: warmup_schedule_interaction
+  question: How does linear warmup interact with the step decay, and is warmup reapplied
+    in every pruning round?
+  config_key: warmup_interaction
+  options:
+  - warmup_then_original_step_decay_every_round
+  - warmup_only_in_first_round
+  - warmup_replaces_first_stage
+  default: warmup_then_original_step_decay_every_round
+  source: guess
+  reason: Section 4 / Appendix I.5 only state 'linear learning rate warmup from 0
+    to the initial learning rate over k iterations'; for Resnet-18 k=20,000 coincides
+    with the first lr drop, so the composition of warmup and decay (and whether it
+    recurs each round) is unspecified and materially affects the 90.5% warmup result.
+  sensitivity: high
+- id: speedup_ratio_aggregation
+  question: Are the reported 'x faster' early-stopping ratios computed as the ratio
+    of averaged early-stop iterations, or the average of per-trial ratios?
+  config_key: speedup_aggregation
+  options:
+  - ratio_of_trial_averages
+  - average_of_per_trial_ratios
+  default: ratio_of_trial_averages
+  source: guess
+  reason: Paper reports figures such as 2.51x, 3.5x, 4.27x, 2.61x, 1.58x from averaged
+    curves but never states the aggregation order; the two choices differ numerically
+    with only 3-5 trials.
+  sensitivity: medium
+- id: input_normalization
+  question: How are input pixels scaled/normalized for MNIST and CIFAR-10?
+  config_key: input_normalization
+  options:
+  - scale_0_1
+  - per_channel_standardize
+  - raw_0_255
+  default: scale_0_1
+  source: guess
+  reason: The paper never describes input preprocessing beyond augmentation for VGG-19/Resnet-18;
+    scaling affects absolute accuracies (e.g., Conv-2 ~67.6% unpruned) and the magnitude
+    distribution used by pruning.
+  sensitivity: medium
+descriptive_stats:
+- metric: mnist_train_examples
+  value: 60000.0
+  where: Appendix G.1, p.24
+- metric: mnist_test_examples
+  value: 10000.0
+  where: Appendix G.1, p.24
+- metric: mnist_validation_examples
+  value: 5000.0
+  where: Appendix G.1, p.24
+- metric: mnist_train_after_split
+  value: 55000.0
+  where: Appendix G.1, p.24
+- metric: cifar10_train_examples
+  value: 50000.0
+  where: Appendix H.1, p.29
+- metric: cifar10_test_examples
+  value: 10000.0
+  where: Appendix H.1, p.29
+- metric: cifar10_validation_examples
+  value: 5000.0
+  where: Appendix H.1, p.29; Appendix I.3, p.40
+- metric: cifar10_train_after_split
+  value: 45000.0
+  where: Appendix H.1, p.29; Appendix I.3, p.40
+- metric: lenet_total_weights
+  value: 266000.0
+  where: Figure 2, p.3 ('266K'); Appendix G.4, p.27
+- metric: lenet_output_layer_weights
+  value: 1000.0
+  where: Appendix G.4, p.27
+- metric: conv2_total_weights
+  value: 4300000.0
+  where: Figure 2, p.3 ('4.3M / 38K')
+- metric: conv2_conv_weights
+  value: 38000.0
+  where: Figure 2, p.3
+- metric: conv4_total_weights
+  value: 2400000.0
+  where: Figure 2, p.3 ('2.4M / 260K')
+- metric: conv4_conv_weights
+  value: 260000.0
+  where: Figure 2, p.3
+- metric: conv6_total_weights
+  value: 1700000.0
+  where: Figure 2, p.3 ('1.7M / 1.1M')
+- metric: conv6_conv_weights
+  value: 1100000.0
+  where: Figure 2, p.3
+- metric: resnet18_total_weights
+  value: 271000.0
+  where: Section 4, p.8 ('It has 271,000 parameters'); Figure 2, p.3 lists 274K total
+    / 270K conv
+- metric: vgg19_total_weights
+  value: 20000000.0
+  where: Figure 2, p.3 ('20.0M'); Section 4, p.8 ('20 million parameters')
+- metric: lenet_training_iterations
+  value: 50000.0
+  where: Figure 2, p.3; Appendix G.1
+- metric: conv2_training_iterations
+  value: 20000.0
+  where: Figure 2, p.3
+- metric: conv4_training_iterations
+  value: 25000.0
+  where: Figure 2, p.3
+- metric: conv6_training_iterations
+  value: 30000.0
+  where: Figure 2, p.3
+- metric: conv2_dropout_training_iterations
+  value: 60000.0
+  where: Appendix H.5, p.33
+- metric: conv4_dropout_training_iterations
+  value: 75000.0
+  where: Appendix H.5, p.33
+- metric: conv6_dropout_training_iterations
+  value: 90000.0
+  where: Appendix H.5, p.33
+- metric: resnet18_training_iterations
+  value: 30000.0
+  where: Figure 2, p.3; Section 4, p.8; Appendix I.3, p.40
+- metric: vgg19_training_iterations
+  value: 112480.0
+  where: Section 4, p.7 ('160 epochs (112,480 iterations)'); Appendix I.2
+- metric: batch_size_mnist_and_conv246
+  value: 60.0
+  where: Figure 2, p.3; Appendices G.1/H.1
+- metric: batch_size_resnet18
+  value: 128.0
+  where: Figure 2, p.3; Appendix I.3
+- metric: batch_size_vgg19
+  value: 64.0
+  where: Figure 2, p.3; Appendix I.2
+- metric: trials_main_body
+  value: 5.0
+  where: Figure 3/4/5 captions, pp.4-6; Appendix H.1, p.29
+- metric: trials_appendix
+  value: 3.0
+  where: Appendices G.1, p.24; H.1, p.29
+- metric: reinit_runs_per_point
+  value: 15.0
+  where: Section 2, p.4 ('15 total per point in Figure 4'); Figure 5 caption, p.6
+- metric: random_sampling_trials_figure1
+  value: 10.0
+  where: Figure 1 caption, p.2
+- metric: fc_share_of_params_conv2_percent
+  value: 99.0
+  where: Appendix H.6, p.36
+- metric: fc_share_of_params_conv4_percent
+  value: 89.0
+  where: Appendix H.6, p.36
+- metric: fc_share_of_params_conv6_percent
+  value: 35.0
+  where: Appendix H.6, p.36
+- metric: vgg19_first_conv_params
+  value: 1728.0
+  where: Section 4 'Global pruning', p.7
+- metric: vgg19_second_conv_params
+  value: 36864.0
+  where: Section 4 'Global pruning', p.7
+- metric: vgg19_last_conv_params
+  value: 2350000.0
+  where: Section 4 'Global pruning', p.7 ('the last has 2.35 million')
+- metric: vgg19_output_layer_params_unpruned
+  value: 5120.0
+  where: Appendix I.2, p.39
+- metric: resnet18_unpruned_downsample_params
+  value: 2560.0
+  where: Appendix I.3, p.40
+- metric: resnet18_unpruned_fc_params
+  value: 640.0
+  where: Appendix I.3, p.40
+- metric: eval_interval_iterations
+  value: 100.0
+  where: Appendices G.1, p.24; H.1, p.29
+- metric: vgg19_warmup_iterations_k
+  value: 10000.0
+  where: Section 4, p.8; Appendix I.5, p.40
+- metric: resnet18_warmup_iterations_k
+  value: 20000.0
+  where: Section 4, p.8; Appendix I.5, p.40
+plan:
+  data_tier: A
+  compute_tier: 2
+  kind_of_test: re_implementation
+  target_claims:
+  - lenet_earlystop_38pct_faster
+  - lenet_testacc_gain_at_pm135
+  - conv4_testacc_gain_best
+  - lenet_testacc_gain_at_50k
+  - lenet_speedup_vs_reinit_at_pm21
+  - lenet_pm_threshold_winning_ticket
+  - lenet_pm_threshold_reinit
+  - lenet_oneshot_faster_lower_bound
+  substitutions: {}
+  tolerances: {}
+  success_criteria: 'LeNet-300-100 MNIST and Conv-2/4/6 on CIFAR-10 with iterative
+    pruning, 5 trials; compare Figures 3-5. || Match on every headline claim within
+    its derived tolerance; all leakage tests pass; kind of test = re_implementation;
+    data tier A; compute tier 2. Tier B: same sign, significant, gap inside the substitution''s
+    predicted band.'
+  budget:
+    spec: 10
+    setup: 20
+    build: 40
+    run: 20
+    verify: 15
+    report: 5
+    hard_kill_minutes: 240
+    max_cost_usd: 150.0
+    run_timeout_s: 16200
+  seeds:
+  - 0
+  - 1
+  - 2
+  frozen_hash: f66481c9ab4587999adb710345756cfe703168ebdfaee1f331e01594dfd2693e
+  frozen_at: '2026-09-16T23:26:32.068740+00:00'

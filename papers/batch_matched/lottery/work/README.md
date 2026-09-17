@@ -1,0 +1,2 @@
+Family template: template_cs_eval.py. Write pipeline.py (finance) or reproduce.sh (CS).
+Config keys available: ['lr_schedule', 'augmentation', 'batch_vs_steps', 'mixed_precision', 'split', 'prune_parameter_types', 'n_pruning_rounds', 'n_trials', 'val_split_seed', 'adam_betas_eps', 'dropout_placement', 'conv_padding', 'iterative_strategy', 'output_layer_prune_rate', 'early_stop_criterion', 'loss', 'pm_denominator', 'oneshot_pm_grid', 'random_sparsity_allocation', 'reinit_glorot_scale', 'glorot_variant', 'warmup_interaction', 'speedup_aggregation', 'input_normalization']
