@@ -449,7 +449,24 @@ class Orchestrator:
         report.wall_minutes = self.elapsed_min()
         report.human_minutes = self.human_minutes
         report.cost_usd = self.llm.cost_usd if self.llm else 0.0
+        diag: dict[str, Any] = {}
+        br = self.work / "build_result.json"
+        if br.exists():
+            b = json.loads(br.read_text())
+            ls = b.get("last_smoke") or {}
+            diag["build"] = {k: b.get(k) for k in ("smoke_passed", "turns", "timeouts", "seconds", "blacklist_hits")}
+            diag["smoke_problems"] = ls.get("problems")
+            diag["scale_probe"] = ls.get("scale_probe")
+            diag["shuffle_precheck"] = ls.get("shuffle_precheck")
+        if self.runs_dir.exists():
+            errs = []
+            for rp in sorted(self.runs_dir.glob("*.json")):
+                r = json.loads(rp.read_text())
+                if r.get("error"):
+                    errs.append({"run": rp.stem[:48], "error": r["error"][:160]})
+            diag["run_errors"] = errs
         report.reproducibility = {
+            "diagnostics": diag,
             "agent_version": __version__, "spec_frozen_hash": spec.plan.frozen_hash, "frozen_at": spec.plan.frozen_at,
             "env_lock_hash": json.loads((self.work / "setup.json").read_text()).get("env_lock_hash") if (self.work / "setup.json").exists() else None,
             "runs": sorted(p.name for p in self.runs_dir.glob("*.json")) if self.runs_dir.exists() else [],

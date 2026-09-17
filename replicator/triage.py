@@ -34,10 +34,43 @@ class TriageNote:
     lines: list[str]
 
 
+_UP = ("beats", "outperform", "higher", "exceed", "greater", "improve", "gain", "better", "faster convergence", "increase")
+_DOWN = ("fewer", "lower", "less", "reduce", "faster", "shorter", "smaller", "decrease", "below")
+
+
+def lint_spec(spec: Spec) -> list[str]:
+    """Deterministic repairs of extraction patterns that produced wrong verdicts in the sweeps.
+    Every repair is returned as a note and recorded in plan.substitutions so the report shows it.
+    (1) a directional claim encoded as relation eq with value 0 becomes gt/lt from its wording;
+    (2) a value read off a plot with reported_precision 0 gets a 2% precision floor;
+    (3) a claim with neither n_periods, reported_std, reported_t_stat nor precision is flagged."""
+    notes = []
+    for c in spec.claims:
+        text = (c.where + " " + c.id).lower()
+        if c.relation == "eq" and c.value == 0 and c.metric.lower() not in ("alpha", "mean_return", "return"):
+            if any(k in text for k in _UP) and not any(k in text for k in ("fewer", "lower", "reduce")):
+                c.relation = "gt"; notes.append(f"lint: {c.id} 'eq 0' read as directional 'gt 0' from its wording")
+            elif any(k in text for k in _DOWN):
+                c.relation = "lt"; notes.append(f"lint: {c.id} 'eq 0' read as directional 'lt 0' from its wording")
+            else:
+                notes.append(f"lint: {c.id} is 'eq 0' with no direction in its wording; left as is (likely untestable)")
+        if c.reported_precision == 0 and any(k in text for k in ("plot", "figure", "fig.", "curve", "axis", "read off", "about", "approximately", "roughly", "~")):
+            c.reported_precision = round(0.02 * abs(c.value), 10) if c.value else 0.01
+            notes.append(f"lint: {c.id} value read from a plot/approximate wording with precision 0; floor set to {c.reported_precision}")
+        if c.priority == "headline" and not (c.n_periods or c.reported_std or c.reported_t_stat or c.reported_precision):
+            notes.append(f"lint: headline {c.id} has no n_periods/std/t-stat/precision; tolerance will come from our own runs only")
+    return notes
+
+
 def triage(spec: Spec, reported_gpu_hours: float | None = None, user_data: dict[str, str] | None = None) -> TriageNote:
     notes: list[str] = []
     plan = spec.plan
     user_data = user_data or {}
+    lint = lint_spec(spec)
+    notes += lint
+    for i, l in enumerate(lint):
+        if "left as is" not in l and "will come from" not in l:
+            plan.substitutions[f"lint_{i+1}"] = l
 
     # ---- data axis. Author code is not data; an unavailable source makes the claims that need it
     # Untested rather than pulling the whole paper to tier C, unless nothing at all is available.

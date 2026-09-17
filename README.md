@@ -137,6 +137,37 @@ $50–100 of GPU time plus ~$60 of model calls. Put `data_cache/` on a persisten
 datasets survive instance restarts. Full WMT14 Transformer training and Atari-scale DQN remain
 multi-GPU or multi-day jobs; their plans compare against the paper's smaller reported points.
 
+## Unattended operation: what runs without a person, and what does not
+
+Runs alone, deterministically, from `replicate <paper> --batch` or `evals.batch`:
+intake, extraction with transport retries and JSON repair, the spec lint (directional claims
+encoded as "eq 0" are read from their wording; plot-read values get a precision floor; every
+repair is recorded in the report), triage and the freeze, the build loop whose stop the
+orchestrator owns, the build gate (smoke, 10%-scale probe, shuffled smoke, claim-id-keyed
+metrics, null reference), sandboxed runs with process-group timeouts and watchdogs, one retry
+at 30% scale on timeout, the Match rule with derived tolerances, the three leakage tests that
+abstain when their preconditions fail, the convention grid, grading (A/B/C/F, or "not graded"
+for infrastructure and compute-fit failures), and a report that always appears with a
+diagnostics section holding what the gate and the runs reported. The sweep resumes, refuses to
+run twice on one directory, re-verifies from reports (`--reverify auto`), and regenerates the
+results tables (`evals.update_docs`). `uv run pytest` is the self-check: 21 tests including a
+hermetic end-to-end replication and a fixture for every false-verdict mode seen so far.
+
+Still needs a person:
+- **Compute.** Paper-scale CS runs need a GPU; on a CPU the agent grades C honestly.
+- **Credentials and data licences.** WRDS/CRSP, Hugging Face tokens for gated datasets.
+- **The optional checkpoint.** Interactive mode shows the spec once; batch mode auto-approves.
+  Claims the extractor marks as recalled rather than read, and ambiguities marked "guess",
+  are where a five-minute review pays most.
+- **Laptop hygiene.** Long chains must run under `caffeinate` and in their own process session;
+  a sleeping laptop stops subprocess timeouts (monotonic time) and a killed terminal session
+  takes its children with it. On a server this is `tmux` + `scripts/gpu_run.sh`.
+- **Reading the verdict.** The system is calibrated to prefer "not judged" over a false F, so an
+  abstained leakage test caps a paper at C until the generated script reports a chance level.
+
+What is not deterministic: the model calls (extraction, referee, builder turns). Everything
+downstream of the frozen spec is; runs are seeded, hashed, and recorded.
+
 ## What a run costs and how long it takes
 
 Measured on the papers above with Claude Opus 5 (extraction, builder) and Claude Sonnet 5

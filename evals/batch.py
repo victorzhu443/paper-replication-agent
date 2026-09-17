@@ -113,7 +113,18 @@ def log(msg: str) -> None:
         f.write(line + "\n")
 
 
-def spec_stage(slug: str) -> str:
+def spec_stage(slug: str, attempts: int = 2) -> str:
+    msg = ""
+    for i in range(attempts):
+        msg = _spec_stage_once(slug)
+        if "FAILED" not in msg:
+            return msg
+        (OUT / slug / "spec_error.txt").unlink(missing_ok=True)
+        time.sleep(30)
+    return msg + f" (after {attempts} attempts)"
+
+
+def _spec_stage_once(slug: str) -> str:
     p = PAPERS[slug]
     d = OUT / slug
     d.mkdir(parents=True, exist_ok=True)
@@ -212,6 +223,23 @@ def _replicate_in_subprocess(slug: str) -> dict:
     return {"slug": slug, "grade": "-", "failure": (out.stderr[-300:] or "subprocess produced no row").replace("\n", " ")}
 
 
+def _lock() -> None:
+    """One sweep per output directory: a second launch exits instead of racing the first."""
+    import os as _o
+    OUT.mkdir(parents=True, exist_ok=True)
+    lock = OUT / "sweep.lock"
+    if lock.exists():
+        try:
+            pid = int(lock.read_text().strip())
+            _o.kill(pid, 0)
+            raise SystemExit(f"another sweep (pid {pid}) is running on {OUT}; refusing to start a second one")
+        except (ProcessLookupError, ValueError):
+            pass  # stale lock
+    lock.write_text(str(_o.getpid()))
+    import atexit
+    atexit.register(lambda: lock.unlink(missing_ok=True))
+
+
 def main(slugs: list[str]) -> None:
     global GPU, OUT
     if slugs and slugs[0] == "--matched":
@@ -245,7 +273,7 @@ def main(slugs: list[str]) -> None:
             rows.append(row)
             log(f"{slug}: grade {row.get('grade')} claims [{row.get('claims')}] leakage [{row.get('leakage')}] {row.get('failure','')}")
         return
-    OUT.mkdir(parents=True, exist_ok=True)
+    _lock()
     slugs = slugs or list(PAPERS)
     log(f"batch start: {slugs}")
     with ThreadPoolExecutor(max_workers=3) as ex:

@@ -80,7 +80,10 @@ def write(report: Report, spec: Spec, out_dir: Path) -> Path:
     for a in report.ambiguities_used:
         md.append(f"| {a['config_key']} | {a['default']} | {a['source']} | {a['sensitivity']} |")
     md += ["", "## 6. Unexplained", ""] + ([f"- {u}" for u in report.unexplained] or ["- nothing outstanding"])
-    md += ["", "## 7. Reproducibility", "", "```json", json.dumps(report.reproducibility, indent=1, default=str), "```", ""]
+    diag = report.reproducibility.get("diagnostics") or {}
+    md += ["", "## 7. Diagnostics (what the build gate and the runs reported)", "", "```json", json.dumps(diag, indent=1, default=str), "```"]
+    rest = {k: v for k, v in report.reproducibility.items() if k != "diagnostics"}
+    md += ["", "## 8. Reproducibility", "", "```json", json.dumps(rest, indent=1, default=str), "```", ""]
     md += [f"Wall: {report.wall_minutes:.1f} min · Human: {report.human_minutes:.0f} min · Cost: ${report.cost_usd:.2f} · Stages: {', '.join(report.stages_completed)}"]
     p = out_dir / "REPORT.md"
     p.write_text("\n".join(md))

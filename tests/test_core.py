@@ -173,3 +173,14 @@ def test_directional_claims_are_inequalities():
     assert compare.compare_claim(spec, c, -0.01).outcome == Outcome.mismatch
     c2 = c.model_copy(update={"relation": "eq"})
     assert compare.compare_claim(spec, c2, 0.035).outcome == Outcome.mismatch  # the old encoding
+
+
+def test_spec_lint_repairs_directional_and_plot_claims():
+    from replicator.triage import lint_spec
+    spec = Spec.load(ROOT / "papers/momentum_french/spec.yaml")
+    spec.claims.append(Claim(id="bn_beats_baseline", where="Figure 1: the normalized network beats the baseline", metric="accuracy_gap", value=0.0))
+    spec.claims.append(Claim(id="plateau", where="dimensions-per-feature plot, plateau at about 1/2", metric="dimensions_per_feature", value=0.5, reported_precision=0.0))
+    notes = lint_spec(spec)
+    assert spec.claims[-2].relation == "gt"
+    assert spec.claims[-1].reported_precision == 0.01
+    assert len([n for n in notes if n.startswith("lint:")]) >= 2
