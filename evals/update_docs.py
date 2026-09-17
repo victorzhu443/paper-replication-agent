@@ -92,6 +92,37 @@ def rows() -> list[str]:
     return out
 
 
+MATCHED = ROOT / "runs" / "batch_matched"
+
+
+def matched_rows() -> list[str]:
+    """Paper-scale (matched) runs: the CS papers whose own configuration fits this machine."""
+    if not MATCHED.exists():
+        return []
+    out = ["", "### Paper-scale runs on this machine (compute tier 1 attempt)", "",
+           "| Paper | Grade | Headline claims | Leakage | Cost |", "|---|---|---|---|---|"]
+    n = 0
+    for d in sorted(MATCHED.glob("*/")):
+        slug = d.name
+        if slug not in TITLES:
+            continue
+        rp = d / "report.json"
+        cost = _cost(d)
+        if not rp.exists():
+            out.append(f"| {TITLES[slug][0]} | in progress | — | — | ${cost:.2f} |"); n += 1; continue
+        r = json.loads(rp.read_text())
+        g = (r.get("grade") or {}).get("letter", "-")
+        claims = [c for c in r.get("claims", []) if c["outcome"] != "Untested"][:4]
+        cl = "; ".join(f"{c['claim_id']} {c['outcome']}" + (f" ({c['our_value']:.3g} vs {c['paper_value']:.3g})" if c.get("our_value") is not None else "")
+                       for c in claims) or "all Untested"
+        leak = ", ".join(f"{l['test'].replace('_', '-')} {'P' if l['passed'] else ('F' if l['passed'] is False else 'n/a')}"
+                         for l in r.get("leakage", []) if l["test"] != "contamination_scan") or "—"
+        fail = f" · failed: {r['failure'][:60]}" if r.get("failure") else ""
+        out.append(f"| {TITLES[slug][0]} | {'**A**' if g == 'A' else g} | {cl}{fail} | {leak} | ${cost:.2f} |")
+        n += 1
+    return out if n else []
+
+
 def splice(path: Path, block: str) -> None:
     s = path.read_text()
     if "<!-- RESULTS:BEGIN -->" not in s:
@@ -103,6 +134,18 @@ def splice(path: Path, block: str) -> None:
 
 def copy_reports() -> None:
     for slug in TITLES:
+        md = MATCHED / slug
+        if md.exists() and (md / "report.json").exists():
+            mdest = ROOT / "papers" / "batch_matched" / slug
+            mdest.mkdir(parents=True, exist_ok=True)
+            for f in ("REPORT.md", "report.json", "spec.yaml"):
+                if (md / f).exists():
+                    shutil.copy(md / f, mdest / f)
+            if (md / "work").exists():
+                (mdest / "work").mkdir(exist_ok=True)
+                for f in (md / "work").iterdir():
+                    if f.is_file() and f.suffix in (".py", ".sh", ".md", ".json") and f.name not in ("build_result.json", "setup.json") and f.stat().st_size < 400_000:
+                        shutil.copy(f, mdest / "work" / f.name)
         d = BATCH / slug
         dest = ROOT / "papers" / "batch" / slug
         dest.mkdir(parents=True, exist_ok=True)
@@ -119,7 +162,7 @@ def copy_reports() -> None:
 
 
 def main() -> None:
-    block = "\n".join(rows())
+    block = "\n".join(rows() + matched_rows())
     splice(ROOT / "README.md", block)
     splice(ROOT / "PROJECT_SUMMARY.md", block)
     copy_reports()

@@ -31,7 +31,14 @@ obtained, under which conventions, whether it could have leaked, and what remain
 | Elhage 2021 Transformer Circuits | CS | re implementation | A/2 | C | induction heads emerge in the 2-layer model: second-half loss 0.018 vs 3.3 first half (gap 3.28); 1-layer gap only 0.92 | shuffle n/a | $2.59 |
 | Meng 2022 ROME | CS | re implementation | A/2 | C | GPT-2 causal tracing: MLP restoration at the last subject token carries the effect (18.9 vs 0.77 for attention), peaking at an early layer | shuffle n/a | $9.80 |
 
-Sweep total: $78.70 in model calls for 14 papers. Reports: `papers/batch/<slug>/REPORT.md`. Updated 2026-09-16 16:35.
+Sweep total: $78.70 in model calls for 14 papers. Reports: `papers/batch/<slug>/REPORT.md`. Updated 2026-09-17 01:26.
+
+### Paper-scale runs on this machine (compute tier 1 attempt)
+
+| Paper | Grade | Headline claims | Leakage | Cost |
+|---|---|---|---|---|
+| Frankle 2019 Lottery Ticket | in progress | — | — | $2.57 |
+| Elhage 2022 Toy Models of Superposition | in progress | — | — | $6.90 |
 <!-- RESULTS:END -->
 
 **Reading a grade.** The letter is a fixed function of four axes (data fidelity, procedure fidelity,
