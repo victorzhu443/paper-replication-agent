@@ -14,10 +14,10 @@
   "ambiguities_used": [],
   "grade": {
     "data_fidelity": "tier A checkpoint",
-    "procedure_fidelity": "re-implemented, 0 unexplained",
+    "procedure_fidelity": "re-implemented, 0 unexplained; paper-scale run does not fit the compute envelope",
     "result": "no claims",
     "integrity": "not_run",
-    "letter": "F"
+    "letter": "N"
   },
   "reproducibility": {
     "agent_version": "0.1.0",

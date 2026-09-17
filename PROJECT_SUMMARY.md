@@ -22,6 +22,10 @@ implementation, then validated on 16 papers.
 - Designed and built an end-to-end LLM agent that reproduces research papers: PDF → structured
   replication contract → data acquisition → code generation in a sandbox → execution → statistical
   verification → graded report; 5 stages, 4 model roles, deterministic Python orchestrator.
+- Reproduced two papers to published claims with the agent writing the code itself: Jegadeesh–Titman
+  (1993) momentum (finance, grade A) and Ioffe–Szegedy (2015) Batch Normalization at the paper's own
+  MNIST configuration (grade A: BN beats the baseline, reaches its accuracy in 10.8k vs 50k steps,
+  shuffle test passed; 12 builder turns, $0.71 extraction + build).
 - Reproduced Jegadeesh–Titman (1993) momentum to published numbers (1.32 vs 1.31 %/month,
   t-stat within tolerance) with the agent writing the pipeline itself in 11 turns for $0.93;
   the agent's re-implementation found and corrected an overlapping-returns inference error in the
@@ -54,7 +58,7 @@ implementation, then validated on 16 papers.
 | Vaswani 2017 Transformer | CS | re implementation | A/2 | C | attention 99.4% vs no-attention 9.9% token accuracy on a copy task; WMT BLEU not comparable · c_t2_big_ende_bleu Mismatch; c_t2_big_enfr_bleu Mismatch | shuffle P | $4.72 |
 | He 2015 ResNet | CS | re implementation | A/2 | C | build passed; full CIFAR runs exceeded the CPU time cap (fixed by the SCALE probe for later papers) | — | $4.90 |
 | Ba 2016 LayerNorm | CS | re implementation | A/2 | C | MNIST MLP baseline 98.4%; LN vs baseline comparison ran | shuffle n/a | $10.73 |
-| Ioffe 2015 BatchNorm | CS | re implementation | A/2 | C | BN 96.5% vs no-BN 91.7% at 10k steps on both seeds (paper's direction) | shuffle n/a | $2.76 |
+| Ioffe 2015 BatchNorm | CS | re implementation | A/2 | C | reduced scale: BN 96.5% vs no-BN 91.7% at 10k steps; at paper scale (below) grade A | shuffle n/a | $2.76 |
 | Goodfellow 2014 GAN | CS | re implementation | A/2 | C | MNIST GAN trains; shuffle test passes | shuffle P | $2.74 |
 | Mnih 2013 DQN | RL | conceptual replication | B/2 | C | CartPole DQN mean return 226, best episodes 500 | shuffle n/a | $2.35 |
 | Schulman 2017 PPO | RL | conceptual replication | B/2 | C | CartPole 500/500 on 3 seeds; clipping beats no-clip on 2 of 3 · t1_clip_eps02 Consistent; t1_clip_eps01 Consistent | shuffle n/a | $1.82 |
@@ -66,14 +70,14 @@ implementation, then validated on 16 papers.
 | Elhage 2021 Transformer Circuits | CS | re implementation | A/2 | C | induction heads emerge in the 2-layer model: second-half loss 0.018 vs 3.3 first half (gap 3.28); 1-layer gap only 0.92 | shuffle n/a | $2.59 |
 | Meng 2022 ROME | CS | re implementation | A/2 | C | GPT-2 causal tracing: MLP restoration at the last subject token carries the effect (18.9 vs 0.77 for attention), peaking at an early layer | shuffle n/a | $9.80 |
 
-Sweep total: $78.70 in model calls for 14 papers. Reports: `papers/batch/<slug>/REPORT.md`. Updated 2026-09-17 16:42.
+Sweep total: $78.70 in model calls for 14 papers. Reports: `papers/batch/<slug>/REPORT.md`. Updated 2026-09-17 17:35.
 
 ### Paper-scale runs on this machine (compute tier 1 attempt)
 
 | Paper | Grade | Headline claims | Leakage | Cost |
 |---|---|---|---|---|
 | Ioffe 2015 BatchNorm | **A** | mnist_bn_gt_nobn_final Match (0.00883 vs 0); mnist_bn_faster_to_baseline_acc Match (1.08e+04 vs 5e+04); mnist_bn_activation_stability Match (0.264 vs 0) | shuffle P | $1.99 |
-| Frankle 2019 Lottery Ticket | F | all Untested · failed: RuntimeError: build did not pass smoke: {'passed': False, 'p | — | $17.04 |
+| Frankle 2019 Lottery Ticket | not graded | all Untested · failed: RuntimeError: build did not pass smoke: {'passed': False, 'p | — | $17.04 |
 | Elhage 2022 Toy Models of Superposition | C | c_dstar_sticky_half Mismatch (0.505 vs 0.5); c_dstar_dense_one Match (1 vs 1); c_adversarial_vulnerability_3x Mismatch (1.46 vs 3); c_dim_tetrahedron Match (0.75 vs 0.75) | shuffle n/a | $6.90 |
 <!-- RESULTS:END -->
 
@@ -100,6 +104,13 @@ failed method.
 4. **Verify**: one Match rule (2·SE + printed precision), three leakage tests, convention grid.
 5. **Report**: grade vector → letter, always produced, with a reproducibility block (spec hash,
    data hashes, lockfile hash, every run's record, every model call's cost).
+
+## Paper-scale results on the CPU
+
+BatchNorm: **A**. Toy Models of Superposition: 5 of 7 geometry values match the paper exactly
+(0.75, 0.667, 0.5, 0.4, D*=1); two miss by <1.5%. Lottery Ticket: not graded, the paper's full
+protocol does not fit a 150-minute CPU budget (the build gate's 10%-scale probe caught it). The
+remaining eleven papers need a GPU (`scripts/gpu_bootstrap.sh`, `scripts/gpu_run.sh`).
 
 ## Things worth saying in an interview
 

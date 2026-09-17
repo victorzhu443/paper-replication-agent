@@ -30,7 +30,7 @@ NOTES = {
     "resnet": "build passed; full CIFAR runs exceeded the CPU time cap (fixed by the SCALE probe for later papers)",
     "gan": "MNIST GAN trains; shuffle test passes",
     "lottery": "winning tickets beat unpruned by 0.25–0.3 pts; early-stop speedup 2–3×",
-    "batchnorm": "BN 96.5% vs no-BN 91.7% at 10k steps on both seeds (paper's direction)",
+    "batchnorm": "reduced scale: BN 96.5% vs no-BN 91.7% at 10k steps; at paper scale (below) grade A",
     "layernorm": "MNIST MLP baseline 98.4%; LN vs baseline comparison ran",
     "dqn": "CartPole DQN mean return 226, best episodes 500",
     "ppo": "CartPole 500/500 on 3 seeds; clipping beats no-clip on 2 of 3",
