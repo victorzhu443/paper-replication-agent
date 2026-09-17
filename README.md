@@ -109,6 +109,25 @@ sensitivity with their source, tier, substitutions) after triage; `--batch` auto
 `runs/*.json` (one per execution), `llm/llm_calls.jsonl` (stage, tokens, cost per call), and
 `work/` (the generated code and the sandbox command log).
 
+## Running at paper scale on a GPU
+
+The CPU sweep grades every CS paper C because their numbers are not comparable at reduced
+scale. On a GPU the agent runs the papers' own configurations (`REPLICATOR_GPU=1`; per-paper
+plans in `evals/batch.py` GPU_HINTS) and the verdicts become real Match/Mismatch.
+
+```bash
+# on a fresh Ubuntu GPU box (Lambda, RunPod, Vast, AWS g5/g6, or your own NVIDIA machine)
+git clone https://github.com/victorzhu443/research-replication-agent && cd research-replication-agent
+bash scripts/gpu_bootstrap.sh            # drivers check, uv, CUDA torch, RL extras, tests
+export ANTHROPIC_API_KEY='sk-ant-api03-...'
+bash scripts/gpu_run.sh                  # all 14 in tmux; or name papers: bash scripts/gpu_run.sh batchnorm lora
+```
+
+Rough single-GPU budget (24 GB card): about 70 GPU-hours for the 14 papers, so on the order of
+$50–100 of GPU time plus ~$60 of model calls. Put `data_cache/` on a persistent volume so
+datasets survive instance restarts. Full WMT14 Transformer training and Atari-scale DQN remain
+multi-GPU or multi-day jobs; their plans compare against the paper's smaller reported points.
+
 ## What a run costs and how long it takes
 
 Measured on the papers above with Claude Opus 5 (extraction, builder) and Claude Sonnet 5
